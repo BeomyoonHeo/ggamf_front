@@ -49,6 +49,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   google_fonts: ^3.0.1
   font_awesome_flutter: ^10.2.1
+  flutter_svg : ^0.17.4
 
 dev_dependencies:
   flutter_test:

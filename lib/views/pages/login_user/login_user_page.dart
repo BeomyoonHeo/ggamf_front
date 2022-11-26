@@ -5,6 +5,18 @@ class LoginUserPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(
+      body: Container(
+        decoration: const BoxDecoration(
+            gradient: LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: [
+            Color(0xffFBC5D8),
+            Color.fromARGB(0, 243, 218, 153),
+          ],
+        )),
+      ),
+    );
   }
 }
