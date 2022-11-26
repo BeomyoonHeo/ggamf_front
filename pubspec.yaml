@@ -49,7 +49,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   google_fonts: ^3.0.1
   font_awesome_flutter: ^10.2.1
-  flutter_svg : ^0.17.4
+  flutter_svg: ^1.1.6
 
 dev_dependencies:
   flutter_test:
@@ -91,7 +91,13 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-  #  fonts:
+  fonts:
+    - family: GowunDodum_Regular
+      fonts:
+        - asset: assets/fonts/GowunDodum-Regular.ttf
+    - family: NanumSquare
+      fonts:
+        - asset: assets/fonts/NanumSquareR.ttf
   #     - family: Hahmlet
   #       fonts:
   #         - asset: assets/fonts/Hahmlet-VariableFont_wght.ttf
