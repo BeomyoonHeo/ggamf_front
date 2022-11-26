@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-
 import 'package:ggamf_front/views/pages/login_user/login_user_page.dart';
+
 void main() {
   runApp(const MyApp());
 }

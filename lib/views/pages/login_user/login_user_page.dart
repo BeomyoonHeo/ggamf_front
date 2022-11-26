@@ -36,7 +36,8 @@ class LoginUserPage extends StatelessWidget {
                         children: [
                           TextFieldContainer(
                             child: TextField(
-                              decoration: InputDecoration(icon: Icons.person),
+                              decoration:
+                                  InputDecoration(icon: Icon(Icons.person)),
                             ),
                           )
                         ],

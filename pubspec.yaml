@@ -30,7 +30,6 @@ environment:
 # versions available, run `flutter pub outdated`.
 dependencies:
 
-
   flutter_riverpod: ^2.1.1
   firebase_core: ^2.3.0
   cloud_firestore: ^4.1.0
@@ -50,6 +49,7 @@ dependencies:
   google_fonts: ^3.0.1
   font_awesome_flutter: ^10.2.1
   flutter_svg: ^1.1.6
+
 
 dev_dependencies:
   flutter_test:
@@ -92,7 +92,6 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-
   fonts:
     - family: GowunDodum_Regular
       fonts:
@@ -100,6 +99,7 @@ flutter:
     - family: NanumSquare
       fonts:
         - asset: assets/fonts/NanumSquareR.ttf
+  #  fonts:
   #     - family: Hahmlet
   #       fonts:
   #         - asset: assets/fonts/Hahmlet-VariableFont_wght.ttf
