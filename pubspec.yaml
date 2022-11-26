@@ -38,7 +38,6 @@ dependencies:
   google_sign_in: ^5.4.2
   sign_in_with_apple: ^4.2.0
 
-
   flutter:
     sdk: flutter
 
@@ -49,6 +48,8 @@ dependencies:
   cupertino_icons: ^1.0.2
   google_fonts: ^3.0.1
   font_awesome_flutter: ^10.2.1
+  flutter_svg: ^1.1.6
+
 
 dev_dependencies:
   flutter_test:
@@ -73,6 +74,7 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
+
   assets:
      - assets/images/
      - assets/icons/
@@ -90,6 +92,13 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
+  fonts:
+    - family: GowunDodum_Regular
+      fonts:
+        - asset: assets/fonts/GowunDodum-Regular.ttf
+    - family: NanumSquare
+      fonts:
+        - asset: assets/fonts/NanumSquareR.ttf
   #  fonts:
   #     - family: Hahmlet
   #       fonts:
