@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:ggamf_front/views/pages/login_user/components/login_box.dart';
 import 'package:ggamf_front/views/pages/login_user/components/login_screen_decoration.dart';
+import 'package:ggamf_front/views/pages/login_user/components/social_icon.dart';
 
 class LoginUserPage extends StatelessWidget {
   const LoginUserPage({Key? key}) : super(key: key);
@@ -57,31 +58,6 @@ class LoginUserPage extends StatelessWidget {
             ),
           ],
         ),
-      ),
-    );
-  }
-}
-
-class SocialIcon extends StatelessWidget {
-  final socialIcon;
-  const SocialIcon({
-    Key? key,
-    this.socialIcon,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.symmetric(horizontal: 10),
-      padding: EdgeInsets.all(20),
-      decoration: BoxDecoration(
-        border: Border.all(width: 1),
-        shape: BoxShape.circle,
-      ),
-      child: SvgPicture.asset(
-        socialIcon,
-        width: 20,
-        height: 20,
       ),
     );
   }
