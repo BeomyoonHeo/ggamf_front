@@ -1,12 +1,8 @@
 import 'package:flutter/material.dart';
 
-class InputBox extends StatelessWidget {
-  final inputText;
-  final hintText;
-  const InputBox({
+class InputEmailBox extends StatelessWidget {
+  const InputEmailBox({
     Key? key,
-    required this.inputText,
-    required this.hintText,
   }) : super(key: key);
 
   @override
@@ -19,26 +15,24 @@ class InputBox extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
-            inputText,
+            "이메일 : ",
             style: TextStyle(fontFamily: 'NanumSquare', fontSize: 15),
           ),
           Container(
-            width: 180,
+            width: 200,
             height: 30,
             decoration: BoxDecoration(
-              border: Border.all(width: 1),
-              color: Colors.white,
-            ),
+                border: Border.all(width: 1), color: Colors.white),
             child: TextField(
               decoration: InputDecoration(
-                hintText: hintText,
-                hintStyle: TextStyle(fontFamily: 'NanumSquare', fontSize: 15),
                 filled: true,
                 fillColor: Colors.white,
                 border: InputBorder.none,
               ),
+              style: TextStyle(fontSize: 12, height: 2.0),
             ),
           ),
+          Text("@", style: TextStyle(fontFamily: 'NanumSquare', fontSize: 15)),
         ],
       ),
     );
