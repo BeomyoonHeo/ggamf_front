@@ -1,52 +1,99 @@
 import 'package:flutter/material.dart';
 
 import '../../../../core/color.dart';
-import '../../../common_components/bottom_navigator.dart';
+import '../../../common_components/custom_icons_icons.dart';
 
-class MyProfilePage extends StatelessWidget {
+class MyProfilePage extends StatefulWidget {
   const MyProfilePage({Key? key}) : super(key: key);
+
+  @override
+  State<MyProfilePage> createState() => _MyProfilePageState();
+}
+
+class _MyProfilePageState extends State<MyProfilePage> {
+  int _selectedIndex = 0;
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: kPrimaryColor,
-      body: Center(
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              SizedBox(height: 50),
-              _buildCircleAvatar(),
-              SizedBox(height: 50),
-              _nickName(),
-              SizedBox(height: 20),
-              _introduce(),
-              SizedBox(height: 20),
-              InkWell(
+      body: Padding(
+        padding: const EdgeInsets.only(left: 20, right: 20),
+        child: ListView(
+          children: [
+            SizedBox(height: 50),
+            _buildCircleAvatar(),
+            SizedBox(height: 50),
+            _nickName(),
+            SizedBox(height: 30),
+            _introduce(),
+            Container(
+              height: 150,
+              child: InkWell(
                 onTap: () async {
                   await showDialog(context: context, builder: (_) => _imageDialog());
                 },
                 child: Image.asset("assets/images/cart1.png"),
               ),
-              SizedBox(height: 50),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  _updataProfile(),
-                  _withdrawal(),
-                ],
-              ),
-            ],
-          ),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                _updataProfile(),
+                _withdrawal(),
+              ],
+            ),
+          ],
         ),
       ),
-      bottomNavigationBar: BottomNavigator(),
+      bottomNavigationBar: _buildBottomNavigationBar(),
     );
   }
 
-  CircleAvatar _buildCircleAvatar() {
-    return CircleAvatar(
-      radius: 70,
-      backgroundImage: AssetImage("assets/images/20.jpg"),
+  BottomNavigationBar _buildBottomNavigationBar() {
+    return BottomNavigationBar(
+      items: const <BottomNavigationBarItem>[
+        BottomNavigationBarItem(
+          icon: Icon(CustomIcons.joinparty, size: 25),
+          label: '파티참가',
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(CustomIcons.myparty),
+          label: '나의 파티',
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(CustomIcons.mygamf),
+          label: '내 껨프',
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(CustomIcons.recomgamf),
+          label: '추천 껨프',
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(CustomIcons.myprofile),
+          label: '내 프로필',
+        ),
+      ],
+      currentIndex: _selectedIndex,
+      unselectedItemColor: Colors.grey[500],
+      selectedItemColor: Colors.black,
+      type: BottomNavigationBarType.fixed,
+      onTap: _onItemTapped,
+    );
+  }
+
+  Widget _buildCircleAvatar() {
+    return Center(
+      child: CircleAvatar(
+        radius: 70,
+        backgroundImage: AssetImage("assets/images/76.jpg"),
+      ),
     );
   }
 
@@ -72,10 +119,9 @@ class MyProfilePage extends StatelessWidget {
 
   Widget _introduce() {
     return Container(
+      padding: EdgeInsets.all(10),
       width: double.infinity,
       height: 100,
-      margin: EdgeInsets.all(20),
-      padding: EdgeInsets.all(15),
       decoration: BoxDecoration(
         boxShadow: [
           BoxShadow(
@@ -98,8 +144,8 @@ class MyProfilePage extends StatelessWidget {
 
   Widget _nickName() {
     return Container(
-      margin: EdgeInsets.all(4),
       padding: EdgeInsets.all(10),
+      width: double.infinity,
       decoration: BoxDecoration(
         boxShadow: [
           BoxShadow(
@@ -115,6 +161,7 @@ class MyProfilePage extends StatelessWidget {
       child: Text(
         "닉네임",
         style: TextStyle(fontSize: 15, color: Colors.black),
+        textAlign: TextAlign.center,
       ),
     );
   }
