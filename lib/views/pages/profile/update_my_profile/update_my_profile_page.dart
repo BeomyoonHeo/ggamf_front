@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
 import '../../../../core/color.dart';
-import '../../../common_components/bottom_navigator.dart';
 
 class UpdateMyProfile extends StatefulWidget {
   const UpdateMyProfile({Key? key}) : super(key: key);

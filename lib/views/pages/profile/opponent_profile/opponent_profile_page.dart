@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 import '../../../../core/color.dart';
-import '../../../common_components/bottom_navigator.dart';
 
 class OpponentProfile extends StatelessWidget {
   const OpponentProfile({Key? key}) : super(key: key);
