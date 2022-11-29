@@ -6,23 +6,34 @@ import 'package:image_picker/image_picker.dart';
 import '../../../../core/color.dart';
 import '../../../common_components/bottom_navigator.dart';
 
-class UpdateMyProfilePage extends StatefulWidget {
-  const UpdateMyProfilePage({Key? key}) : super(key: key);
+class UpdateMyProfile extends StatefulWidget {
+  const UpdateMyProfile({Key? key}) : super(key: key);
 
   @override
-  State<UpdateMyProfilePage> createState() => _UpdateMyProfilePageState();
+  State<UpdateMyProfile> createState() => _UpdateMyProfileState();
 }
 
-class _UpdateMyProfilePageState extends State<UpdateMyProfilePage> {
+class _UpdateMyProfileState extends State<UpdateMyProfile> {
   File? _imageFile;
   final ImagePicker _picker = ImagePicker();
+
+  int _selectedIndex = 0;
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
+      appBar: _AppBar(),
       backgroundColor: kPrimaryColor,
-      body: SingleChildScrollView(
-        child: Column(
+      body: Padding(
+        padding: const EdgeInsets.only(left: 20, right: 20),
+        child: ListView(
           children: [
             SizedBox(height: 50),
             _changePhoto(),
@@ -36,7 +47,20 @@ class _UpdateMyProfilePageState extends State<UpdateMyProfilePage> {
           ],
         ),
       ),
-      bottomNavigationBar: BottomNavigator(),
+    );
+  }
+
+  AppBar _AppBar() {
+    return AppBar(
+      backgroundColor: Colors.white,
+      title: Row(
+        children: [
+          BackButton(
+            color: Colors.black,
+          ),
+          Text("내 프로필 수정", style: TextStyle(color: Colors.black)),
+        ],
+      ),
     );
   }
 
@@ -82,9 +106,9 @@ class _UpdateMyProfilePageState extends State<UpdateMyProfilePage> {
 
   Widget _introduce() {
     return Container(
+      padding: EdgeInsets.all(5),
       height: 150,
-      margin: EdgeInsets.only(left: 20, right: 20),
-      padding: EdgeInsets.all(15),
+      width: double.infinity,
       decoration: BoxDecoration(
         boxShadow: [
           BoxShadow(
@@ -112,8 +136,8 @@ class _UpdateMyProfilePageState extends State<UpdateMyProfilePage> {
 
   Widget _nickName() {
     return Container(
-      padding: EdgeInsets.all(15),
-      width: 200,
+      padding: EdgeInsets.all(5),
+      width: double.infinity,
       decoration: BoxDecoration(
         boxShadow: [
           BoxShadow(
