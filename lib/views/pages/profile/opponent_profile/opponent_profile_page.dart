@@ -4,50 +4,54 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import '../../../../core/color.dart';
 import '../../../common_components/bottom_navigator.dart';
 
-class OpponentProfilePage extends StatelessWidget {
-  const OpponentProfilePage({Key? key}) : super(key: key);
+class OpponentProfile extends StatelessWidget {
+  const OpponentProfile({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: _appbar(),
       backgroundColor: kPrimaryColor,
-      body: Center(
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              SizedBox(height: 50),
-              _buildCircleAvatar(),
-              SizedBox(height: 50),
-              _nickName(),
-              SizedBox(height: 20),
-              _ratedStar(),
-              SizedBox(height: 20),
-              _introduce(),
-              SizedBox(height: 20),
-              InkWell(
+      body: Padding(
+        padding: const EdgeInsets.only(left: 20, right: 20),
+        child: ListView(
+          children: [
+            SizedBox(height: 50),
+            _buildCircleAvatar(),
+            SizedBox(height: 50),
+            _nickName(),
+            SizedBox(height: 30),
+            _ratedStar(),
+            SizedBox(height: 30),
+            _introduce(),
+            Container(
+              height: 150,
+              child: InkWell(
                 onTap: () async {
                   await showDialog(context: context, builder: (_) => _imageDialog());
                 },
                 child: Image.asset("assets/images/cart1.png"),
               ),
-              SizedBox(height: 20),
-              _followButton(),
-              SizedBox(height: 20),
-              _ratingStarButton(context),
-              SizedBox(height: 20),
-            ],
-          ),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                _followButton(),
+                _ratingStarButton(context),
+              ],
+            ),
+          ],
         ),
       ),
-      bottomNavigationBar: BottomNavigator(),
     );
   }
 
-  CircleAvatar _buildCircleAvatar() {
-    return CircleAvatar(
-      radius: 70,
-      backgroundImage: AssetImage("assets/images/41.jpg"),
+  Widget _buildCircleAvatar() {
+    return Center(
+      child: CircleAvatar(
+        radius: 70,
+        backgroundImage: AssetImage("assets/images/41.jpg"),
+      ),
     );
   }
 
@@ -73,10 +77,8 @@ class OpponentProfilePage extends StatelessWidget {
     );
   }
 
-  Container _ratedStar() {
+  Widget _ratedStar() {
     return Container(
-      margin: EdgeInsets.all(10),
-      padding: EdgeInsets.all(10),
       decoration: BoxDecoration(
         boxShadow: [
           BoxShadow(
@@ -86,7 +88,7 @@ class OpponentProfilePage extends StatelessWidget {
             offset: Offset(0, 10),
           ),
         ],
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(10),
         color: Colors.white,
       ),
       child: Row(
@@ -103,7 +105,7 @@ class OpponentProfilePage extends StatelessWidget {
     );
   }
 
-  ElevatedButton _ratingStarButton(BuildContext context) {
+  Widget _ratingStarButton(BuildContext context) {
     return ElevatedButton(
       onPressed: () {
         showDialog(context: context, builder: (_) => _ratingStar(context));
@@ -113,7 +115,7 @@ class OpponentProfilePage extends StatelessWidget {
     );
   }
 
-  ElevatedButton _followButton() {
+  Widget _followButton() {
     return ElevatedButton(
       onPressed: () {},
       child: Text("팔로우하기"),
@@ -123,19 +125,19 @@ class OpponentProfilePage extends StatelessWidget {
 
   Widget _introduce() {
     return Container(
+      padding: EdgeInsets.all(10),
       width: double.infinity,
-      margin: EdgeInsets.all(20),
-      padding: EdgeInsets.all(15),
+      height: 100,
       decoration: BoxDecoration(
         boxShadow: [
           BoxShadow(
             color: Colors.grey.withOpacity(0.7),
             blurRadius: 5,
             spreadRadius: 0,
-            offset: Offset(0, 10),
+            offset: Offset(5, 6),
           ),
         ],
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(10),
         color: Colors.white,
       ),
       child: Text(
@@ -148,8 +150,7 @@ class OpponentProfilePage extends StatelessWidget {
 
   Widget _nickName() {
     return Container(
-      margin: EdgeInsets.all(4),
-      padding: EdgeInsets.all(10),
+      padding: EdgeInsets.all(5),
       decoration: BoxDecoration(
         boxShadow: [
           BoxShadow(
@@ -159,12 +160,13 @@ class OpponentProfilePage extends StatelessWidget {
             offset: Offset(0, 10),
           ),
         ],
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(10),
         color: Colors.white,
       ),
       child: Text(
         "김겐지",
-        style: TextStyle(fontSize: 20, color: Colors.black),
+        style: TextStyle(fontSize: 15, color: Colors.black),
+        textAlign: TextAlign.center,
       ),
     );
   }
@@ -178,7 +180,7 @@ Widget _ratingBar() {
       color: Colors.amber,
     ),
     itemCount: 5,
-    itemSize: 40.0,
+    itemSize: 35.0,
     direction: Axis.horizontal,
   );
 }
