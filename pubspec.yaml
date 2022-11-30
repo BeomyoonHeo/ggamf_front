@@ -102,9 +102,12 @@ flutter:
     - family: NanumSquare
       fonts:
         - asset: assets/fonts/NanumSquareR.ttf
+
+
     - family: CustomIcons
       fonts:
         - asset: assets/fonts/CustomIcons.ttf
+
   #  fonts:
   #     - family: Hahmlet
   #       fonts:
