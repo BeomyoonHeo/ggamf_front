@@ -49,6 +49,9 @@ dependencies:
   google_fonts: ^3.0.1
   font_awesome_flutter: ^10.2.1
   flutter_svg: ^1.1.6
+  flutter_rating_bar: ^4.0.1
+  image_picker: ^0.8.6
+  intl: ^0.17.0
 
 
 dev_dependencies:
@@ -99,6 +102,9 @@ flutter:
     - family: NanumSquare
       fonts:
         - asset: assets/fonts/NanumSquareR.ttf
+    - family: CustomIcons
+      fonts:
+        - asset: assets/fonts/CustomIcons.ttf
   #  fonts:
   #     - family: Hahmlet
   #       fonts:
