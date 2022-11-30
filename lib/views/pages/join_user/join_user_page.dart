@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ggamf_front/core/color.dart';
 import 'package:ggamf_front/views/pages/join_user/components/certification_number_button.dart';
+import 'package:ggamf_front/views/pages/join_user/components/confirm_join_user_button.dart';
 import 'package:ggamf_front/views/pages/join_user/components/email_dropdown_button.dart';
 import 'package:ggamf_front/views/pages/join_user/components/input_box.dart';
 import 'package:ggamf_front/views/pages/join_user/components/input_email_box.dart';
@@ -43,13 +44,20 @@ class JoinUserPage extends StatelessWidget {
                   SizedBox(height: 10),
                   InputEmailBox(),
                   SizedBox(height: 10),
+                  EmailDropdownButton(),
+                  SizedBox(height: 10),
                   Container(
                     decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(9)),
                     padding: EdgeInsets.all(15),
-                    child: EmailDropdownButton(),
-                  )
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [],
+                    ),
+                  ),
+                  SizedBox(height: 10),
+                  ConfirmJoinUserButton(),
                 ],
               ),
             ),

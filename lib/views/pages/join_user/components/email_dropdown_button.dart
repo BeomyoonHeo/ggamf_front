@@ -31,47 +31,52 @@ class _EmailDropdownButtonState extends State<EmailDropdownButton> {
       '직접입력'
     ];
 
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        DropdownButton(
-          value: _dropdownItem,
-          items: emailList.map((item) {
-            return DropdownMenuItem(
-              value: item,
-              child: Text(item),
-            );
-          }).toList(),
-          onChanged: (dynamic value) {
-            setState(() {
-              _dropdownItem = value;
-              if (value == '직접입력') {
-                _enableTextField = true;
-                _emailEditController.text = '';
-              } else if (value == '선택') {
-                _emailEditController.text = '';
-                _enableTextField = false;
-              } else {
-                _enableTextField = true;
-                _emailEditController.text = value;
-                _enableTextField = false;
-              }
-            });
-          },
-        ),
-        Expanded(
-          child: Container(
-            height: 35,
-            child: TextField(
-              controller: _emailEditController,
-              decoration: InputDecoration(
-                hintText: '이메일 입력',
+    return Container(
+      decoration: BoxDecoration(
+          color: Colors.white, borderRadius: BorderRadius.circular(9)),
+      padding: EdgeInsets.all(15),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          DropdownButton(
+            value: _dropdownItem,
+            items: emailList.map((item) {
+              return DropdownMenuItem(
+                value: item,
+                child: Text(item),
+              );
+            }).toList(),
+            onChanged: (dynamic value) {
+              setState(() {
+                _dropdownItem = value;
+                if (value == '직접입력') {
+                  _enableTextField = true;
+                  _emailEditController.text = '';
+                } else if (value == '선택') {
+                  _emailEditController.text = '';
+                  _enableTextField = false;
+                } else {
+                  _enableTextField = true;
+                  _emailEditController.text = value;
+                  _enableTextField = false;
+                }
+              });
+            },
+          ),
+          Expanded(
+            child: Container(
+              height: 35,
+              child: TextField(
+                controller: _emailEditController,
+                decoration: InputDecoration(
+                  hintText: '이메일 입력',
+                ),
+                enabled: _enableTextField,
               ),
-              enabled: _enableTextField,
             ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

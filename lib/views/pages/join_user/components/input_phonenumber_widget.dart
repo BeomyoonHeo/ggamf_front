@@ -24,10 +24,12 @@ class InputPhoneNumberWidget extends StatelessWidget {
             decoration: BoxDecoration(
                 border: Border.all(width: 1), color: Colors.white),
             child: TextField(
+              maxLength: 3,
               decoration: InputDecoration(
                 filled: true,
                 fillColor: Colors.white,
                 border: InputBorder.none,
+                counterText: '',
               ),
               style: TextStyle(fontSize: 12, height: 2.0),
             ),
@@ -42,10 +44,12 @@ class InputPhoneNumberWidget extends StatelessWidget {
             decoration: BoxDecoration(
                 border: Border.all(width: 1), color: Colors.white),
             child: TextField(
+              maxLength: 4,
               decoration: InputDecoration(
                 filled: true,
                 fillColor: Colors.white,
                 border: InputBorder.none,
+                counterText: '',
               ),
               style: TextStyle(fontSize: 12, height: 2.0),
             ),
@@ -60,10 +64,12 @@ class InputPhoneNumberWidget extends StatelessWidget {
             decoration: BoxDecoration(
                 border: Border.all(width: 1), color: Colors.white),
             child: TextField(
+              maxLength: 4,
               decoration: InputDecoration(
                 filled: true,
                 fillColor: Colors.white,
                 border: InputBorder.none,
+                counterText: '',
               ),
               style: TextStyle(fontSize: 12, height: 2.0),
             ),

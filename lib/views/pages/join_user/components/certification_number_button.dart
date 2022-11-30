@@ -12,7 +12,7 @@ class CertificationNumberButton extends StatelessWidget {
           color: Colors.white, borderRadius: BorderRadius.circular(9)),
       padding: EdgeInsets.all(15),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           ElevatedButton(
             child: Text("인증받기"),
@@ -24,11 +24,13 @@ class CertificationNumberButton extends StatelessWidget {
                   EdgeInsets.symmetric(horizontal: 30)),
               shape: MaterialStatePropertyAll(
                 RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(30),
-                    side: BorderSide(width: 1)),
+                  borderRadius: BorderRadius.circular(30),
+                  side: BorderSide(width: 1),
+                ),
               ),
             ),
           ),
+          Text('인증되지 않았습니다.'),
         ],
       ),
     );
