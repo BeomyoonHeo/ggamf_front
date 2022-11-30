@@ -11,13 +11,7 @@ class MyProfilePage extends StatefulWidget {
 }
 
 class _MyProfilePageState extends State<MyProfilePage> {
-  int _selectedIndex = 0;
-
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
+  int _selectedIndex = 4;
 
   @override
   Widget build(BuildContext context) {
@@ -53,8 +47,8 @@ class _MyProfilePageState extends State<MyProfilePage> {
           ],
         ),
       ),
-      bottomNavigationBar: CommonBottomNavigationBar(
-          selectedIndex: _selectedIndex, state: _onItemTapped),
+      bottomNavigationBar:
+          CommonBottomNavigationBar(selectedIndex: _selectedIndex),
     );
   }
 
