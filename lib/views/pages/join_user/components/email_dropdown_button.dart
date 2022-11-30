@@ -12,6 +12,14 @@ class EmailDropdownButton extends StatefulWidget {
 class _EmailDropdownButtonState extends State<EmailDropdownButton> {
   String _dropdownItem = '선택';
   bool _enableTextField = false;
+  final _emailEditController = TextEditingController();
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    _emailEditController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -24,6 +32,7 @@ class _EmailDropdownButtonState extends State<EmailDropdownButton> {
     ];
 
     return Row(
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         DropdownButton(
           value: _dropdownItem,
@@ -38,16 +47,28 @@ class _EmailDropdownButtonState extends State<EmailDropdownButton> {
               _dropdownItem = value;
               if (value == '직접입력') {
                 _enableTextField = true;
+                _emailEditController.text = '';
+              } else if (value == '선택') {
+                _emailEditController.text = '';
+                _enableTextField = false;
               } else {
+                _enableTextField = true;
+                _emailEditController.text = value;
                 _enableTextField = false;
               }
             });
           },
         ),
         Expanded(
-          child: TextField(
-            decoration: InputDecoration(),
-            enabled: _enableTextField,
+          child: Container(
+            height: 35,
+            child: TextField(
+              controller: _emailEditController,
+              decoration: InputDecoration(
+                hintText: '이메일 입력',
+              ),
+              enabled: _enableTextField,
+            ),
           ),
         ),
       ],

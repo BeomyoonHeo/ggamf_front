@@ -24,32 +24,34 @@ class JoinUserPage extends StatelessWidget {
               borderRadius: BorderRadius.circular(30), color: kPrimaryColor),
           child: Padding(
             padding: const EdgeInsets.all(20),
-            child: ListView(
-              children: [
-                InputBox(inputText: "이름 : ", hintText: "이름을 입력하세요"),
-                SizedBox(height: 10),
-                InputBox(inputText: "아이디 : ", hintText: "아이디를 입력하세요"),
-                SizedBox(height: 10),
-                InputBox(inputText: "비밀번호 : ", hintText: "비밀번호를 입력하세요"),
-                SizedBox(height: 10),
-                InputBox(inputText: "비밀번호 확인 : ", hintText: "비밀번호를 입력하세요"),
-                SizedBox(height: 10),
-                InputPhoneNumberWidget(),
-                SizedBox(height: 10),
-                CertificationNumberButton(),
-                SizedBox(height: 10),
-                InputBox(inputText: "닉네임 : ", hintText: "닉네임 입력"),
-                SizedBox(height: 10),
-                InputEmailBox(),
-                SizedBox(height: 10),
-                Container(
-                  decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(9)),
-                  padding: EdgeInsets.all(15),
-                  child: EmailDropdownButton(),
-                )
-              ],
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  InputBox(inputText: "이름 : ", hintText: "이름을 입력하세요"),
+                  SizedBox(height: 10),
+                  InputBox(inputText: "아이디 : ", hintText: "아이디를 입력하세요"),
+                  SizedBox(height: 10),
+                  InputBox(inputText: "비밀번호 : ", hintText: "비밀번호를 입력하세요"),
+                  SizedBox(height: 10),
+                  InputBox(inputText: "비밀번호 확인 : ", hintText: "비밀번호를 입력하세요"),
+                  SizedBox(height: 10),
+                  InputPhoneNumberWidget(),
+                  SizedBox(height: 10),
+                  CertificationNumberButton(),
+                  SizedBox(height: 10),
+                  InputBox(inputText: "닉네임 : ", hintText: "닉네임 입력"),
+                  SizedBox(height: 10),
+                  InputEmailBox(),
+                  SizedBox(height: 10),
+                  Container(
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(9)),
+                    padding: EdgeInsets.all(15),
+                    child: EmailDropdownButton(),
+                  )
+                ],
+              ),
             ),
           ),
         ),
