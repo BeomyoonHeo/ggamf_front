@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ggamf_front/core/color.dart';
-import 'package:ggamf_front/views/pages/join_user/components/agreement_provision_of_personal_information.dart';
+import 'package:ggamf_front/views/pages/join_user/components/agreement_provision_of_personal_information_modal.dart';
 import 'package:ggamf_front/views/pages/join_user/components/certification_number_button.dart';
 import 'package:ggamf_front/views/pages/join_user/components/confirm_join_user_button.dart';
 import 'package:ggamf_front/views/pages/join_user/components/email_dropdown_button.dart';
@@ -47,7 +47,7 @@ class JoinUserPage extends StatelessWidget {
                   SizedBox(height: 10),
                   EmailDropdownButton(),
                   SizedBox(height: 10),
-                  AgreementProvisionOfPersonalInformation(),
+                  AgreementProvisionOfPersonalInformationModal(),
                   SizedBox(height: 10),
                   ConfirmJoinUserButton(),
                 ],
