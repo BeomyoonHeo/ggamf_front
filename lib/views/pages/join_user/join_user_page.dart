@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ggamf_front/core/color.dart';
 import 'package:ggamf_front/views/pages/join_user/components/certification_number_button.dart';
+import 'package:ggamf_front/views/pages/join_user/components/email_dropdown_button.dart';
 import 'package:ggamf_front/views/pages/join_user/components/input_box.dart';
 import 'package:ggamf_front/views/pages/join_user/components/input_email_box.dart';
 import 'package:ggamf_front/views/pages/join_user/components/input_phonenumber_widget.dart';
@@ -46,26 +47,7 @@ class JoinUserPage extends StatelessWidget {
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(9)),
                   padding: EdgeInsets.all(15),
-                  child: DropdownButtonFormField<String?>(
-                    decoration: InputDecoration(
-                      labelText: '이메일',
-                      floatingLabelBehavior: FloatingLabelBehavior.always,
-                      labelStyle:
-                          TextStyle(fontSize: 15, color: Color(0xffcfcfcf)),
-                    ),
-                    // underline: Container(height: 1.4, color: Color(0xffc0c0c0)),
-                    onChanged: (String? newValue) {
-                      print(newValue);
-                    },
-                    items: [null, 'M', 'F']
-                        .map<DropdownMenuItem<String?>>((String? i) {
-                      return DropdownMenuItem<String?>(
-                        value: i,
-                        child: Text(
-                            {'M': '@naver.com', 'F': '@kakao.com'}[i] ?? '비공개'),
-                      );
-                    }).toList(),
-                  ),
+                  child: EmailDropdownButton(),
                 )
               ],
             ),
