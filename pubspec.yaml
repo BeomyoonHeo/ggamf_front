@@ -50,6 +50,7 @@ dependencies:
   font_awesome_flutter: ^10.2.1
   flutter_svg: ^1.1.6
 
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -99,6 +100,8 @@ flutter:
       fonts:
         - asset: assets/fonts/NanumSquareR.ttf
 
+
+  #  fonts:
   #     - family: Hahmlet
   #       fonts:
   #         - asset: assets/fonts/Hahmlet-VariableFont_wght.ttf

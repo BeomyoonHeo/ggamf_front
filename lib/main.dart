@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ggamf_front/views/pages/join_user/join_user_page.dart';
 import 'package:ggamf_front/views/pages/login_user/login_user_page.dart';
 
 void main() {
@@ -16,7 +17,10 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       navigatorKey: navigatorKey,
       home: LoginUserPage(),
-      routes: {},
+      routes: {
+        '/login': (context) => LoginUserPage(),
+        '/join': (context) => JoinUserPage(),
+      },
     );
   }
 }

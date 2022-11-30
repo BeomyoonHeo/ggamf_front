@@ -5,6 +5,7 @@ import 'package:ggamf_front/views/pages/login_user/components/login_screen_decor
 
 class LoginUserPage extends StatelessWidget {
   const LoginUserPage({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
