@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:ggamf_front/core/page_enum.dart';
+import 'package:ggamf_front/views/common_components/common_pages.dart';
 import 'package:ggamf_front/views/pages/join_user/join_user_page.dart';
 import 'package:ggamf_front/views/pages/login_user/login_user_page.dart';
 
@@ -16,10 +18,15 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       navigatorKey: navigatorKey,
-      home: LoginUserPage(),
+      home: AllPages(),
+      initialRoute: PageEnum.getByDisPlayName('login').requestLocation,
       routes: {
-        '/login': (context) => LoginUserPage(),
-        '/join': (context) => JoinUserPage(),
+        PageEnum.getByDisPlayName('login').requestLocation: (context) =>
+            LoginUserPage(),
+        PageEnum.getByDisPlayName('join').requestLocation: (context) =>
+            JoinUserPage(),
+        PageEnum.getByDisPlayName('allpages').requestLocation: (context) =>
+            AllPages(),
       },
     );
   }
