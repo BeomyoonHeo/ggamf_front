@@ -1,55 +1,58 @@
+import 'package:flashy_tab_bar2/flashy_tab_bar2.dart';
 import 'package:flutter/material.dart';
-import 'package:ggamf_front/core/page_enum.dart';
 import 'package:ggamf_front/views/common_components/custom_icons_icons.dart';
 
 class CommonBottomNavigationBar extends StatefulWidget {
   final int selectedIndex;
-  const CommonBottomNavigationBar({Key? key, required this.selectedIndex})
+  final Function widgetState;
+  const CommonBottomNavigationBar(
+      {Key? key, required this.selectedIndex, required this.widgetState})
       : super(key: key);
 
   @override
   State<CommonBottomNavigationBar> createState() =>
-      _CommonBottomNavigationBarState(selectedIndex);
+      _CommonBottomNavigationBarState(
+          selectedIndex: selectedIndex, widgetState: widgetState);
 }
 
 class _CommonBottomNavigationBarState extends State<CommonBottomNavigationBar> {
   int selectedIndex;
-  _CommonBottomNavigationBarState(this.selectedIndex);
+  Function widgetState;
+  _CommonBottomNavigationBarState(
+      {required this.selectedIndex, required this.widgetState});
 
   @override
   Widget build(BuildContext context) {
-    return BottomNavigationBar(
-      items: const <BottomNavigationBarItem>[
-        BottomNavigationBarItem(
+    return FlashyTabBar(
+      items: <FlashyTabBarItem>[
+        FlashyTabBarItem(
           icon: Icon(CustomIcons.joinparty, size: 25),
-          label: '파티참가',
+          title: Text('파티참가'),
         ),
-        BottomNavigationBarItem(
+        FlashyTabBarItem(
           icon: Icon(CustomIcons.myparty),
-          label: '나의 파티',
+          title: Text('나의 파티'),
         ),
-        BottomNavigationBarItem(
+        FlashyTabBarItem(
           icon: Icon(CustomIcons.mygamf),
-          label: '내 껨프',
+          title: Text('내 껨프'),
         ),
-        BottomNavigationBarItem(
+        FlashyTabBarItem(
           icon: Icon(CustomIcons.recomgamf),
-          label: '추천 껨프',
+          title: Text('추천 껨프'),
         ),
-        BottomNavigationBarItem(
+        FlashyTabBarItem(
           icon: Icon(CustomIcons.myprofile),
-          label: '내 프로필',
+          title: Text('내 프로필'),
         ),
       ],
-      currentIndex: selectedIndex,
-      unselectedItemColor: Colors.grey[500],
-      selectedItemColor: Colors.black,
-      type: BottomNavigationBarType.fixed,
-      onTap: (value) {
+      animationCurve: Curves.linear,
+      selectedIndex: selectedIndex,
+      showElevation: true,
+      onItemSelected: (value) {
         setState(() {
+          widgetState(value);
           selectedIndex = value;
-          Navigator.popAndPushNamed(
-              context, PageEnum.getByCode(value).requestLocation);
         });
       },
     );

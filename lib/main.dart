@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:ggamf_front/core/page_enum.dart';
+import 'package:ggamf_front/views/common_components/common_pages.dart';
 import 'package:ggamf_front/views/pages/join_user/join_user_page.dart';
 import 'package:ggamf_front/views/pages/login_user/login_user_page.dart';
-import 'package:ggamf_front/views/pages/profile/my_profile/my_profile_page.dart';
-import 'package:ggamf_front/views/pages/recommend_ggamef/recommend_ggamf_list/recommend_ggamf_list.dart';
 
 void main() {
   runApp(MyApp());
@@ -19,16 +18,15 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       navigatorKey: navigatorKey,
-      home: RecommendGgamfList(),
+      home: AllPages(),
+      initialRoute: PageEnum.getByDisPlayName('login').requestLocation,
       routes: {
         PageEnum.getByDisPlayName('login').requestLocation: (context) =>
             LoginUserPage(),
         PageEnum.getByDisPlayName('join').requestLocation: (context) =>
             JoinUserPage(),
-        PageEnum.getByDisPlayName('myProfile').requestLocation: (context) =>
-            MyProfilePage(),
-        PageEnum.getByDisPlayName('recommendGamf').requestLocation: (context) =>
-            RecommendGgamfList(),
+        PageEnum.getByDisPlayName('allpages').requestLocation: (context) =>
+            AllPages(),
       },
     );
   }

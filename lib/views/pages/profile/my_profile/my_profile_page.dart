@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:ggamf_front/views/common_components/common_bottom_navigation_bar.dart';
 
 import '../../../../core/color.dart';
 
@@ -47,8 +46,6 @@ class _MyProfilePageState extends State<MyProfilePage> {
           ],
         ),
       ),
-      bottomNavigationBar:
-          CommonBottomNavigationBar(selectedIndex: _selectedIndex),
     );
   }
 

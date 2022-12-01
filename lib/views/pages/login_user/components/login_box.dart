@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ggamf_front/core/color.dart';
+import 'package:ggamf_front/core/page_enum.dart';
 import 'package:ggamf_front/views/pages/login_user/components/rounded_input_field.dart';
 import 'package:ggamf_front/views/pages/login_user/components/rounded_input_password_field.dart';
 
@@ -68,9 +69,15 @@ class LoginBox extends StatelessWidget {
               ItemButton(
                   text: "회원가입",
                   function: () {
-                    Navigator.pushNamed(context, '/join');
+                    Navigator.pushNamed(context,
+                        PageEnum.getByDisPlayName('join').requestLocation);
                   }),
-              ItemButton(text: "로그인", function: () {}),
+              ItemButton(
+                  text: "로그인",
+                  function: () {
+                    Navigator.pushNamed(context,
+                        PageEnum.getByDisPlayName('allpages').requestLocation);
+                  }),
             ],
           ),
         )

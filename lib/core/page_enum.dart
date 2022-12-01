@@ -3,15 +3,17 @@ enum PageEnum {
   JOIN(null, '/join', 'join'),
   RECOMMENDGGAMF(3, '/recommendGamf', 'recommendGamf'),
   MYPROFILE(4, '/myProfile', 'myProfile'),
-  UNDEFINED(null, 'undefined', '');
+  UNDEFINED(null, 'undefined', ''),
+  ALLPAGES(null, '/allpages', 'allpages');
 
-  const PageEnum(this.code, this.requestLocation, this.displayName);
-  final int? code;
+  const PageEnum(this.navigatorCode, this.requestLocation, this.displayName);
+  final int? navigatorCode;
   final String requestLocation;
   final String displayName;
 
-  factory PageEnum.getByCode(int code) {
-    return PageEnum.values.firstWhere((value) => value.code == code,
+  factory PageEnum.getByCode(int navigatorCode) {
+    return PageEnum.values.firstWhere(
+        (value) => value.navigatorCode == navigatorCode,
         orElse: () => PageEnum.UNDEFINED);
   }
 
