@@ -18,7 +18,6 @@ class _RecommendGgamfListState extends State<RecommendGgamfList>
     '추천 껨프',
     '껨프 요청',
   ];
-
   late TabController _tabController;
 
   @override
@@ -35,7 +34,6 @@ class _RecommendGgamfListState extends State<RecommendGgamfList>
 
   @override
   bool get wantKeepAlive => true;
-
   @override
   Widget build(BuildContext context) {
     super.build(context);
