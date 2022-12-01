@@ -100,6 +100,7 @@ flutter:
     - family: GowunDodum_Regular
       fonts:
         - asset: assets/fonts/GowunDodum-Regular.ttf
+
     - family: NanumSquare
       fonts:
         - asset: assets/fonts/NanumSquareR.ttf
@@ -109,10 +110,10 @@ flutter:
       fonts:
         - asset: assets/fonts/CustomIcons.ttf
 
-  #  fonts:
-  #     - family: Hahmlet
-  #       fonts:
-  #         - asset: assets/fonts/Hahmlet-VariableFont_wght.ttf
+    - family: Hahmlet
+      fonts:
+        - asset: assets/fonts/Hahmlet-VariableFont_wght.ttf
+
   #   - family: Trajan Pro
   #     fonts:
   #       - asset: fonts/TrajanPro.ttf
