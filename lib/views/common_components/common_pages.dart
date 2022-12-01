@@ -23,8 +23,18 @@ class AllPages extends StatefulWidget {
   State<AllPages> createState() => _AllPagesState();
 }
 
-class _AllPagesState extends State<AllPages> {
+class _AllPagesState extends State<AllPages>
+    with AutomaticKeepAliveClientMixin {
   int _selectedIndex = 3;
+
+  @override
+  // TODO: implement wantKeepAlive
+  bool get wantKeepAlive => true;
+
+  @override
+  void initState() {
+    super.initState();
+  }
 
   void changeState(value) {
     setState(() {
@@ -34,18 +44,24 @@ class _AllPagesState extends State<AllPages> {
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
+
     return Scaffold(
-      body: commonPages.elementAt(_selectedIndex),
+      body: IndexedStack(
+        index: _selectedIndex,
+        children: commonPages,
+      ),
       bottomNavigationBar: _buildFlashyTabBar(),
     );
   }
 
   FlashyTabBar _buildFlashyTabBar() {
     return FlashyTabBar(
+      animationDuration: Duration(milliseconds: 200),
       items: <FlashyTabBarItem>[
         FlashyTabBarItem(
           icon: Icon(CustomIcons.joinparty, size: 25),
-          title: Text('파티참가'),
+          title: Text('파티 참가'),
         ),
         FlashyTabBarItem(
           icon: Icon(CustomIcons.myparty),
