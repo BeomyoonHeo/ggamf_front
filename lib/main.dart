@@ -22,11 +22,11 @@ class MyApp extends StatelessWidget {
       initialRoute: PageEnum.getByDisPlayName('login').requestLocation,
       routes: {
         PageEnum.getByDisPlayName('login').requestLocation: (context) =>
-            LoginUserPage(),
+            const LoginUserPage(),
         PageEnum.getByDisPlayName('join').requestLocation: (context) =>
-            JoinUserPage(),
+            const JoinUserPage(),
         PageEnum.getByDisPlayName('allpages').requestLocation: (context) =>
-            AllPages(),
+            const AllPages(),
       },
     );
   }
