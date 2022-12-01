@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class RecommendGgamfList extends StatefulWidget {
   const RecommendGgamfList({super.key});
   @override
-  _RecommendGgamfListState createState() => _RecommendGgamfListState();
+  State<RecommendGgamfList> createState() => _RecommendGgamfListState();
 }
 
 class _RecommendGgamfListState extends State<RecommendGgamfList>
@@ -19,7 +19,7 @@ class _RecommendGgamfListState extends State<RecommendGgamfList>
   @override
   void dispose() {
     super.dispose();
-    _tabController.dispose();
+    //_tabController.dispose();
   }
 
   @override
@@ -27,8 +27,11 @@ class _RecommendGgamfListState extends State<RecommendGgamfList>
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
+        backgroundColor: Colors.white,
         title: Text(
           '추천 껨프',
+          style: TextStyle(
+              fontSize: 25, fontFamily: 'NanumSquare', color: Colors.black),
         ),
         elevation: 0,
       ),
