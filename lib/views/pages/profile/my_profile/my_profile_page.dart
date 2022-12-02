@@ -123,6 +123,7 @@ class _MyProfilePageState extends State<MyProfilePage> {
       onPressed: () {},
       child: Text("탈퇴"),
       style: ElevatedButton.styleFrom(
+        elevation: 0,
         backgroundColor: Colors.white,
         textStyle: TextStyle(fontFamily: 'NanumSquare', fontSize: 20),
         foregroundColor: Colors.black,
@@ -141,6 +142,7 @@ class _MyProfilePageState extends State<MyProfilePage> {
       },
       child: Text("프로필 수정"),
       style: ElevatedButton.styleFrom(
+        elevation: 0,
         backgroundColor: Colors.white,
         textStyle: TextStyle(fontFamily: 'NanumSquare', fontSize: 20),
         foregroundColor: Colors.black,
