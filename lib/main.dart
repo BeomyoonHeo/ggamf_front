@@ -21,18 +21,14 @@ class MyApp extends StatelessWidget {
       home: AllPages(),
       initialRoute: PageEnum.getByDisPlayName('login').requestLocation,
       routes: {
-        PageEnum.getByDisPlayName('login').requestLocation: (context) =>
-            const LoginUserPage(),
-        PageEnum.getByDisPlayName('join').requestLocation: (context) =>
-            const JoinUserPage(),
-        PageEnum.getByDisPlayName('allpages').requestLocation: (context) =>
-            const AllPages(),
+        PageEnum.getByDisPlayName('login').requestLocation: (context) => const LoginUserPage(),
+        PageEnum.getByDisPlayName('join').requestLocation: (context) => const JoinUserPage(),
+        PageEnum.getByDisPlayName('allpages').requestLocation: (context) => const AllPages(),
       },
       theme: ThemeData(
         fontFamily: 'NanumSquare',
         backgroundColor: Color(0xFFFFFBFE),
-        elevatedButtonTheme: ElevatedButtonThemeData(
-            style: ButtonStyle(elevation: MaterialStatePropertyAll(0))),
+        elevatedButtonTheme: ElevatedButtonThemeData(style: ButtonStyle(elevation: MaterialStatePropertyAll(0))),
         appBarTheme: AppBarTheme(
           elevation: 0,
           backgroundColor: Colors.white,

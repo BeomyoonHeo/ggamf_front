@@ -52,7 +52,6 @@ class OpponentProfile extends StatelessWidget {
       width: 160,
       height: 160,
       decoration: BoxDecoration(
-        color: Colors.white,
         borderRadius: BorderRadius.circular(100),
         gradient: LinearGradient(
           begin: Alignment.topLeft,
@@ -70,28 +69,33 @@ class OpponentProfile extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(top: 100),
       child: Container(
-        padding: EdgeInsets.all(10),
         width: double.infinity,
         height: 250,
         decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-            colors: [
-              Color(0xffFBC5D8),
-              Color.fromARGB(0, 243, 218, 153),
-            ],
+          borderRadius: BorderRadius.circular(20),
+          image: DecorationImage(
+            fit: BoxFit.cover,
+            image: AssetImage("assets/images/rgb.gif"),
           ),
         ),
-        child: Column(
-          children: [
-            SizedBox(height: 50),
-            Text("김겐지"),
-            SizedBox(height: 20),
-            Text("자기소개뭐우런ㅇ루랑ㄹㅇsdsfsdfdsfsfsfsdfdsfsdfsfsdfsdfdsfsdfsdfdsfsdsddsfsfdsdfsfssd"),
-            SizedBox(height: 60),
-            _ratedStar(),
-          ],
+        child: Container(
+          padding: EdgeInsets.symmetric(horizontal: 20),
+          width: double.infinity,
+          height: 300,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(20),
+            color: Color.fromRGBO(255, 255, 255, 0.75),
+          ),
+          child: Column(
+            children: [
+              SizedBox(height: 70),
+              Text("김겐지"),
+              SizedBox(height: 20),
+              Text("자기소개뭐우런ㅇ루랑ㄹㅇsdsfsdfdsfsfsfsdfdsfsdfsfsdfsdfdsfsdfsdfdsfsdsddsfsfdsdfsfssd"),
+              SizedBox(height: 60),
+              _ratedStar(),
+            ],
+          ),
         ),
       ),
     );
@@ -116,7 +120,7 @@ class OpponentProfile extends StatelessWidget {
           BackButton(
             color: Colors.black,
           ),
-          Text("김겐지", style: TextStyle(color: Colors.black)),
+          Text("김한조", style: TextStyle(color: Colors.black, fontFamily: 'NanumSquare', fontSize: 20)),
         ],
       ),
       actions: [
@@ -133,16 +137,8 @@ class OpponentProfile extends StatelessWidget {
   Widget _ratedStar() {
     return Container(
       decoration: BoxDecoration(
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.7),
-            blurRadius: 5,
-            spreadRadius: 0,
-            offset: Offset(0, 10),
-          ),
-        ],
         borderRadius: BorderRadius.circular(10),
-        color: Colors.white,
+        color: Colors.transparent,
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
