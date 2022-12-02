@@ -152,10 +152,9 @@ class _JoinPartyListState extends State<JoinPartyList> {
 
   AppBar _appBar() {
     return AppBar(
-      backgroundColor: Colors.white,
+      automaticallyImplyLeading: false,
       title: Text(
         "파티참가",
-        style: TextStyle(color: Colors.black),
       ),
     );
   }

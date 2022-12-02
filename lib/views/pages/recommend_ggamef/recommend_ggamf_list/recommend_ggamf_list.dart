@@ -11,9 +11,7 @@ class RecommendGgamfList extends StatefulWidget {
 }
 
 class _RecommendGgamfListState extends State<RecommendGgamfList>
-    with
-        AutomaticKeepAliveClientMixin<RecommendGgamfList>,
-        SingleTickerProviderStateMixin {
+    with SingleTickerProviderStateMixin {
   final List<String> textIndex = [
     '추천 껨프',
     '껨프 요청',
@@ -24,6 +22,7 @@ class _RecommendGgamfListState extends State<RecommendGgamfList>
   void initState() {
     _tabController = TabController(length: 2, vsync: this, initialIndex: 0);
     super.initState();
+    print('외부 컨트롤러 ${_tabController}');
   }
 
   @override
@@ -33,22 +32,15 @@ class _RecommendGgamfListState extends State<RecommendGgamfList>
   }
 
   @override
-  bool get wantKeepAlive => true;
-  @override
   Widget build(BuildContext context) {
-    super.build(context);
     return DefaultTabController(
       length: 2,
       child: Scaffold(
         appBar: AppBar(
           automaticallyImplyLeading: false,
-          backgroundColor: Colors.white,
           title: Text(
             textIndex[_tabController.index],
-            style: const TextStyle(
-                fontSize: 25, fontFamily: 'NanumSquare', color: Colors.black),
           ),
-          elevation: 0,
         ),
         body: Padding(
           padding: const EdgeInsets.all(10),
