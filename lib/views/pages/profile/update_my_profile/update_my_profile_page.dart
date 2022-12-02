@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
-import '../../../../core/color.dart';
+import '../my_profile/my_profile_page.dart';
 
 class UpdateMyProfile extends StatefulWidget {
   const UpdateMyProfile({Key? key}) : super(key: key);
@@ -21,7 +21,6 @@ class _UpdateMyProfileState extends State<UpdateMyProfile> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: _AppBar(),
-      backgroundColor: kPrimaryColor,
       body: Padding(
         padding: const EdgeInsets.only(left: 20, right: 20),
         child: ListView(
@@ -43,13 +42,14 @@ class _UpdateMyProfileState extends State<UpdateMyProfile> {
 
   AppBar _AppBar() {
     return AppBar(
+      automaticallyImplyLeading: false,
       backgroundColor: Colors.white,
       title: Row(
         children: [
           BackButton(
             color: Colors.black,
           ),
-          Text("내 프로필 수정", style: TextStyle(color: Colors.black)),
+          Text("내 프로필 수정", style: TextStyle(color: Colors.black, fontFamily: 'NanumSquare', fontSize: 25)),
         ],
       ),
     );
@@ -86,10 +86,18 @@ class _UpdateMyProfileState extends State<UpdateMyProfile> {
     return Container(
       padding: EdgeInsets.only(left: 100, right: 100),
       child: ElevatedButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => MyProfilePage()),
+          );
+        },
         child: Text("수정 완료"),
         style: ElevatedButton.styleFrom(
-          backgroundColor: kSecondaryColor,
+          backgroundColor: Colors.white,
+          textStyle: TextStyle(fontFamily: 'NanumSquare', fontSize: 20),
+          foregroundColor: Colors.black,
+          side: BorderSide(),
         ),
       ),
     );
@@ -101,14 +109,14 @@ class _UpdateMyProfileState extends State<UpdateMyProfile> {
       height: 150,
       width: double.infinity,
       decoration: BoxDecoration(
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.7),
-            blurRadius: 5,
-            spreadRadius: 0,
-            offset: Offset(5, 6),
-          ),
-        ],
+        gradient: LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: [
+            Color(0xffFBC5D8),
+            Color.fromARGB(0, 243, 218, 153),
+          ],
+        ),
         borderRadius: BorderRadius.circular(10),
         color: Colors.white,
       ),
@@ -130,14 +138,14 @@ class _UpdateMyProfileState extends State<UpdateMyProfile> {
       padding: EdgeInsets.all(5),
       width: double.infinity,
       decoration: BoxDecoration(
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.7),
-            blurRadius: 5,
-            spreadRadius: 0,
-            offset: Offset(5, 6),
-          ),
-        ],
+        gradient: LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: [
+            Color(0xffFBC5D8),
+            Color.fromARGB(0, 243, 218, 153),
+          ],
+        ),
         borderRadius: BorderRadius.circular(10),
         color: Colors.white,
       ),
