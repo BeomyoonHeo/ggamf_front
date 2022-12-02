@@ -9,8 +9,8 @@ import 'package:ggamf_front/views/pages/profile/my_profile/my_profile_page.dart'
 import 'package:ggamf_front/views/pages/recommend_ggamef/recommend_ggamf_list/recommend_ggamf_list.dart';
 
 const List<Widget> commonPages = [
-  CreatePartyPage(),
   JoinPartyList(),
+  CreatePartyPage(),
   MyGgamfListPage(),
   RecommendGgamfList(),
   MyProfilePage(),
