@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../core/color.dart';
+import '../update_my_profile/update_my_profile_page.dart';
 
 class MyProfilePage extends StatefulWidget {
   const MyProfilePage({Key? key}) : super(key: key);
@@ -15,19 +16,23 @@ class _MyProfilePageState extends State<MyProfilePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: kPrimaryColor,
+      appBar: _appBar(),
       body: Padding(
         padding: const EdgeInsets.only(left: 20, right: 20),
         child: ListView(
+          padding: EdgeInsets.only(top: 40),
           children: [
-            SizedBox(height: 50),
-            _buildCircleAvatar(),
-            SizedBox(height: 50),
-            _nickName(),
-            SizedBox(height: 30),
-            _introduce(),
+            Stack(
+              alignment: Alignment.topCenter,
+              children: [
+                _profileContext(),
+                _backCircle(),
+                _buildCircleAvatar(),
+              ],
+            ),
+            SizedBox(height: 20),
             Container(
-              height: 150,
+              height: 200,
               child: InkWell(
                 onTap: () async {
                   await showDialog(context: context, builder: (_) => _imageDialog());
@@ -35,6 +40,7 @@ class _MyProfilePageState extends State<MyProfilePage> {
                 child: Image.asset("assets/images/cart1.png"),
               ),
             ),
+            SizedBox(height: 20),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
@@ -48,8 +54,63 @@ class _MyProfilePageState extends State<MyProfilePage> {
     );
   }
 
+  Widget _backCircle() {
+    return Container(
+      width: 160,
+      height: 160,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(100),
+        gradient: LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: [
+            Color(0xffFBC5D8),
+            Color.fromARGB(0, 243, 218, 153),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _profileContext() {
+    return Padding(
+      padding: const EdgeInsets.only(top: 100),
+      child: Container(
+        padding: EdgeInsets.all(10),
+        width: double.infinity,
+        height: 200,
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: [
+              Color(0xffFBC5D8),
+              Color.fromARGB(0, 243, 218, 153),
+            ],
+          ),
+        ),
+        child: Column(
+          children: [
+            SizedBox(height: 60),
+            Text(
+              "김겐지",
+              style: TextStyle(fontFamily: 'NanumSquare', fontSize: 20),
+            ),
+            SizedBox(height: 30),
+            Text(
+              "자기소개뭐우런ㅇ루랑ㄹㅇsdsfsdfdsfsfsfsdfdsfsdfsfsdfsdfdsfsdfsdfdsfsdsddsfsfdsdfsfssd",
+              style: TextStyle(fontFamily: 'NanumSquare', fontSize: 16),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
   Widget _buildCircleAvatar() {
-    return Center(
+    return Padding(
+      padding: const EdgeInsets.only(top: 10),
       child: CircleAvatar(
         radius: 70,
         backgroundImage: AssetImage("assets/images/76.jpg"),
@@ -62,66 +123,28 @@ class _MyProfilePageState extends State<MyProfilePage> {
       onPressed: () {},
       child: Text("탈퇴"),
       style: ElevatedButton.styleFrom(
-        backgroundColor: kSecondaryColor,
+        backgroundColor: Colors.white,
+        textStyle: TextStyle(fontFamily: 'NanumSquare', fontSize: 20),
+        foregroundColor: Colors.black,
+        side: BorderSide(),
       ),
     );
   }
 
   Widget _updataProfile() {
     return ElevatedButton(
-      onPressed: () {},
+      onPressed: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const UpdateMyProfile()),
+        );
+      },
       child: Text("프로필 수정"),
       style: ElevatedButton.styleFrom(
-        backgroundColor: kSecondaryColor,
-      ),
-    );
-  }
-
-  Widget _introduce() {
-    return Container(
-      padding: EdgeInsets.all(10),
-      width: double.infinity,
-      height: 100,
-      decoration: BoxDecoration(
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.7),
-            blurRadius: 5,
-            spreadRadius: 0,
-            offset: Offset(5, 6),
-          ),
-        ],
-        borderRadius: BorderRadius.circular(10),
-        color: Colors.white,
-      ),
-      child: Text(
-        "리그오브레전드 원딜 탑레 다이아 1 같이 듀오하실 서폿분 구합니다",
-        textAlign: TextAlign.center,
-        style: TextStyle(fontSize: 15, color: Colors.black),
-      ),
-    );
-  }
-
-  Widget _nickName() {
-    return Container(
-      padding: EdgeInsets.all(10),
-      width: double.infinity,
-      decoration: BoxDecoration(
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.7),
-            blurRadius: 5,
-            spreadRadius: 0,
-            offset: Offset(5, 6),
-          ),
-        ],
-        borderRadius: BorderRadius.circular(10),
-        color: Colors.white,
-      ),
-      child: Text(
-        "닉네임",
-        style: TextStyle(fontSize: 15, color: Colors.black),
-        textAlign: TextAlign.center,
+        backgroundColor: Colors.white,
+        textStyle: TextStyle(fontFamily: 'NanumSquare', fontSize: 20),
+        foregroundColor: Colors.black,
+        side: BorderSide(),
       ),
     );
   }
@@ -136,5 +159,17 @@ Widget _imageDialog() {
         image: DecorationImage(image: AssetImage('assets/images/cart2.png')),
       ),
     ),
+  );
+}
+
+AppBar _appBar() {
+  return AppBar(
+    automaticallyImplyLeading: false,
+    backgroundColor: Colors.white,
+    title: Text(
+      "내 프로필",
+      style: TextStyle(color: Colors.black, fontFamily: 'NanumSquare', fontSize: 25),
+    ),
+    elevation: 0,
   );
 }
