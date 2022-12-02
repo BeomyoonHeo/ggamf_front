@@ -173,7 +173,7 @@ class OpponentProfile extends StatelessWidget {
 
 Widget _ratingBar() {
   return RatingBarIndicator(
-    rating: 2.75,
+    rating: 1,
     itemBuilder: (context, index) => Icon(
       Icons.star,
       color: Colors.amber,

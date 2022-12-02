@@ -16,14 +16,6 @@ class _UpdateMyProfileState extends State<UpdateMyProfile> {
   File? _imageFile;
   final ImagePicker _picker = ImagePicker();
 
-  int _selectedIndex = 0;
-
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
