@@ -17,87 +17,107 @@ class RecommendGgamfListTabView extends StatefulWidget {
 }
 
 class _RecommendGgamfListTabViewState extends State<RecommendGgamfListTabView>
-    with
-        AutomaticKeepAliveClientMixin<RecommendGgamfListTabView>,
-        SingleTickerProviderStateMixin<RecommendGgamfListTabView> {
+    with SingleTickerProviderStateMixin<RecommendGgamfListTabView> {
   late final TabController _innerTabController;
 
   final List<String> textIndex = [
-    '추천 껨프',
-    '껨프 요청',
+    '받은 껨프 요청',
+    '보낸 껨프 요청',
   ];
 
-  @override
-  bool get wantKeepAlive => true;
+  final List<IconButton> buttonListToReceiveRequestGgamf = [
+    IconButton(
+      onPressed: () {},
+      icon: Icon(CupertinoIcons.person_badge_plus_fill),
+    ),
+    IconButton(
+      onPressed: () {},
+      icon: Icon(Icons.delete),
+    ),
+  ];
+
+  final List<IconButton> buttonListToGiveRequestGgamf = [
+    IconButton(
+      onPressed: () {},
+      icon: Icon(CupertinoIcons.xmark),
+    ),
+  ];
+
+  final List<IconButton> buttonListToRecommendGgamf = [
+    IconButton(
+      onPressed: () {},
+      icon: Icon(Icons.delete),
+    ),
+  ];
 
   @override
   void initState() {
     _innerTabController = TabController(length: 2, vsync: this);
     super.initState();
-    print('내부 컨트롤러 ${_innerTabController}');
   }
 
   @override
   Widget build(BuildContext context) {
-    super.build(context);
     return Expanded(
       child: TabBarView(
         controller: widget._tabController,
         children: [
-          ListView.separated(
-            itemCount: 10,
-            itemBuilder: (context, index) {
-              return ListTile(
-                visualDensity: VisualDensity(horizontal: 3),
-                leading: CircleAvatar(
-                  backgroundImage: NetworkImage(
-                      'https://source.unsplash.com/random/300x200?v=${DateTime.now().millisecondsSinceEpoch}'),
+          _buildListView(buttonListToRecommendGgamf),
+          Container(
+            child: Column(
+              children: [
+                RecommendGgamfListTabBar(
+                  tabController: _innerTabController,
+                  textIndex: textIndex,
                 ),
-                title: Text(
-                  '닉네임',
-                  style: TextStyle(fontFamily: 'NanumSquare'),
-                ),
-                subtitle: Text(
-                  '상태 메시지',
-                  style: TextStyle(fontFamily: 'NanumSquare'),
-                ),
-                trailing: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    IconButton(
-                      onPressed: () {},
-                      icon: Icon(CupertinoIcons.person_badge_plus_fill),
-                    ),
-                    IconButton(
-                      onPressed: () {},
-                      icon: Icon(Icons.delete),
-                    ),
-                  ],
-                ),
-              );
-            },
-            separatorBuilder: (context, index) {
-              return const Divider(
-                height: 10,
-                color: Colors.white,
-              );
-            },
-          ),
-          Scaffold(
-            backgroundColor: Colors.black,
-            body: Container(
-              child: Column(
-                children: [
-                  RecommendGgamfListTabBar(
-                    tabController: _innerTabController,
-                    textIndex: textIndex,
+                const SizedBox(height: 20),
+                Expanded(
+                  child: TabBarView(
+                    controller: _innerTabController,
+                    children: [
+                      _buildListView(buttonListToReceiveRequestGgamf),
+                      _buildListView(buttonListToGiveRequestGgamf),
+                    ],
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
-          ),
+          )
         ],
       ),
+    );
+  }
+
+  Widget _buildListView(List<IconButton> buttons) {
+    return ListView.separated(
+      itemCount: 10,
+      itemBuilder: (context, index) {
+        return ListTile(
+          visualDensity: VisualDensity(horizontal: 3),
+          leading: CircleAvatar(
+            backgroundImage: NetworkImage(
+                'https://source.unsplash.com/random/300x200?v=${DateTime.now().millisecondsSinceEpoch}'),
+          ),
+          title: Text(
+            '닉네임',
+            style: TextStyle(fontFamily: 'NanumSquare'),
+          ),
+          subtitle: Text(
+            '상태 메시지',
+            style: TextStyle(fontFamily: 'NanumSquare'),
+          ),
+          trailing: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: buttons,
+          ),
+        );
+      },
+      separatorBuilder: (context, index) {
+        return const Divider(
+          height: 10,
+          color: Colors.white,
+        );
+      },
     );
   }
 }
