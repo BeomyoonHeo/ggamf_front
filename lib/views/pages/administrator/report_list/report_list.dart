@@ -8,11 +8,12 @@ class ReportList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+    insertReport();
     return Scaffold(
       body: Container(
         width: size.width,
         height: size.height,
-        constraints: BoxConstraints(minWidth: 340),
+        constraints: BoxConstraints(minWidth: 1200),
         child: Column(
           children: [
             Container(
@@ -42,10 +43,12 @@ class ReportList extends StatelessWidget {
                   Expanded(
                     child: Container(
                       padding: EdgeInsets.all(30),
-                      child: DataTable(
-                        border: TableBorder.all(),
-                        columns: reportListColumns,
-                        rows: [],
+                      child: SingleChildScrollView(
+                        child: DataTable(
+                          border: TableBorder.all(),
+                          columns: reportListColumns,
+                          rows: reportListRows,
+                        ),
                       ),
                     ),
                   ),

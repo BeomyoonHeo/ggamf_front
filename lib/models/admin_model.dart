@@ -16,49 +16,48 @@ class Report {
     required this.reportedCount,
     required this.reportState,
   });
+}
 
-  void insertReport() {
-    for (int i = 0; i < 30; i++) {
-      List<DataCell> reportListCell = [];
+void insertReport() {
+  for (int i = 0; i < 30; i++) {
+    List<DataCell> reportListCell = [];
+    reportList.add(
+      Report(
+          reporter: '개발자${i}',
+          reportedReason: '신고 사유 : ${i}',
+          maliciousUserNickname: '악성 유저 닉네임 ${i}',
+          reportedDate: DateTime.now(),
+          reportState: '${i}일 정지',
+          reportedCount: i),
+    );
 
-      reportList.add(
-        Report(
-            reporter: '개발자${i}',
-            reportedReason: '신고 사유 : ${i}',
-            maliciousUserNickname: '악성 유저 닉네임 ${i}',
-            reportedDate: DateTime.now(),
-            reportState: '${i}일 정지',
-            reportedCount: i),
-      );
+    reportListCell.add(
+      DataCell(
+        Text(reportList[i].reportedReason),
+      ),
+    );
+    reportListCell.add(
+      DataCell(
+        Text(reportList[i].reportedDate.toString()),
+      ),
+    );
+    reportListCell.add(
+      DataCell(
+        Text(reportList[i].reporter),
+      ),
+    );
+    reportListCell.add(
+      DataCell(
+        Text(reportList[i].maliciousUserNickname),
+      ),
+    );
+    reportListCell.add(
+      DataCell(
+        Text(reportList[i].reportState),
+      ),
+    );
 
-      reportListCell.add(
-        DataCell(
-          Text(reportedReason),
-        ),
-      );
-      reportListCell.add(
-        DataCell(
-          Text(reportedDate),
-        ),
-      );
-      reportListCell.add(
-        DataCell(
-          Text(reporter),
-        ),
-      );
-      reportListCell.add(
-        DataCell(
-          Text(maliciousUserNickname),
-        ),
-      );
-      reportListCell.add(
-        DataCell(
-          Text(reportState),
-        ),
-      );
-
-      reportListRows.add(DataRow(cells: reportListCell));
-    }
+    reportListRows.add(DataRow(cells: reportListCell));
   }
 }
 
