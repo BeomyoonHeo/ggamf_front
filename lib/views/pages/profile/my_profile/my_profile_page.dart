@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ggamf_front/views/pages/profile/components/profileContext.dart';
 
 import '../../../../core/color.dart';
 import '../update_my_profile/update_my_profile_page.dart';
@@ -25,7 +26,11 @@ class _MyProfilePageState extends State<MyProfilePage> {
             Stack(
               alignment: Alignment.topCenter,
               children: [
-                _profileContext(),
+                ProfileContext(
+                  nickname: "김겐지",
+                  intro: "안녕하세요",
+                  img: "assets/images/rgb.gif",
+                ),
                 _backCircle(),
                 _buildCircleAvatar(),
               ],
@@ -73,40 +78,40 @@ class _MyProfilePageState extends State<MyProfilePage> {
     );
   }
 
-  Widget _profileContext() {
-    return Padding(
-      padding: const EdgeInsets.only(top: 100),
-      child: Container(
-        padding: EdgeInsets.all(10),
-        width: double.infinity,
-        height: 200,
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-            colors: [
-              Color(0xffFBC5D8),
-              Color.fromARGB(0, 243, 218, 153),
-            ],
-          ),
-        ),
-        child: Column(
-          children: [
-            SizedBox(height: 60),
-            Text(
-              "김겐지",
-              style: TextStyle(fontFamily: 'NanumSquare', fontSize: 20),
-            ),
-            SizedBox(height: 30),
-            Text(
-              "자기소개뭐우런ㅇ루랑ㄹㅇsdsfsdfdsfsfsfsdfdsfsdfsfsdfsdfdsfsdfsdfdsfsdsddsfsfdsdfsfssd",
-              style: TextStyle(fontFamily: 'NanumSquare', fontSize: 16),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
+  // Widget _profileContext() {
+  //   return Padding(
+  //     padding: const EdgeInsets.only(top: 100),
+  //     child: Container(
+  //       padding: EdgeInsets.all(10),
+  //       width: double.infinity,
+  //       height: 200,
+  //       decoration: BoxDecoration(
+  //         gradient: LinearGradient(
+  //           begin: Alignment.topLeft,
+  //           end: Alignment.bottomRight,
+  //           colors: [
+  //             Color(0xffFBC5D8),
+  //             Color.fromARGB(0, 243, 218, 153),
+  //           ],
+  //         ),
+  //       ),
+  //       child: Column(
+  //         children: [
+  //           SizedBox(height: 60),
+  //           Text(
+  //             "김겐지",
+  //             style: TextStyle(fontFamily: 'NanumSquare', fontSize: 20),
+  //           ),
+  //           SizedBox(height: 30),
+  //           Text(
+  //             "자기소개뭐우런ㅇ루랑ㄹㅇsdsfsdfdsfsfsfsdfdsfsdfsfsdfsdfdsfsdfsdfdsfsdsddsfsfdsdfsfssd",
+  //             style: TextStyle(fontFamily: 'NanumSquare', fontSize: 16),
+  //           ),
+  //         ],
+  //       ),
+  //     ),
+  //   );
+  // }
 
   Widget _buildCircleAvatar() {
     return Padding(

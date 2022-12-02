@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:ggamf_front/views/pages/profile/components/profileContext.dart';
 
 import '../../../../core/color.dart';
 
@@ -18,7 +19,11 @@ class OpponentProfile extends StatelessWidget {
             Stack(
               alignment: Alignment.topCenter,
               children: [
-                _profileContext(),
+                ProfileContext(
+                  nickname: "김겐지",
+                  intro: "안녕하세요",
+                  img: "assets/images/rgb.gif",
+                ),
                 _backCircle(),
                 _buildCircleAvatar(),
               ],
@@ -65,41 +70,41 @@ class OpponentProfile extends StatelessWidget {
     );
   }
 
-  Padding _profileContext() {
-    return Padding(
-      padding: const EdgeInsets.only(top: 100),
-      child: Container(
-        width: double.infinity,
-        height: 250,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(20),
-          image: DecorationImage(
-            fit: BoxFit.cover,
-            image: AssetImage("assets/images/rgb.gif"),
-          ),
-        ),
-        child: Container(
-          padding: EdgeInsets.symmetric(horizontal: 20),
-          width: double.infinity,
-          height: 300,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20),
-            color: Color.fromRGBO(255, 255, 255, 0.75),
-          ),
-          child: Column(
-            children: [
-              SizedBox(height: 70),
-              Text("김겐지"),
-              SizedBox(height: 20),
-              Text("자기소개뭐우런ㅇ루랑ㄹㅇsdsfsdfdsfsfsfsdfdsfsdfsfsdfsdfdsfsdfsdfdsfsdsddsfsfdsdfsfssd"),
-              SizedBox(height: 60),
-              _ratedStar(),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
+  // Padding _profileContext() {
+  //   return Padding(
+  //     padding: const EdgeInsets.only(top: 100),
+  //     child: Container(
+  //       width: double.infinity,
+  //       height: 250,
+  //       decoration: BoxDecoration(
+  //         borderRadius: BorderRadius.circular(20),
+  //         image: DecorationImage(
+  //           fit: BoxFit.cover,
+  //           image: AssetImage("assets/images/rgb.gif"),
+  //         ),
+  //       ),
+  //       child: Container(
+  //         padding: EdgeInsets.symmetric(horizontal: 20),
+  //         width: double.infinity,
+  //         height: 300,
+  //         decoration: BoxDecoration(
+  //           borderRadius: BorderRadius.circular(20),
+  //           color: Color.fromRGBO(255, 255, 255, 0.75),
+  //         ),
+  //         child: Column(
+  //           children: [
+  //             SizedBox(height: 70),
+  //             Text("김겐지"),
+  //             SizedBox(height: 20),
+  //             Text("자기소개뭐우런ㅇ루랑ㄹㅇsdsfsdfdsfsfsfsdfdsfsdfsfsdfsdfdsfsdfsdfdsfsdsddsfsfdsdfsfssd"),
+  //             SizedBox(height: 60),
+  //             _ratedStar(),
+  //           ],
+  //         ),
+  //       ),
+  //     ),
+  //   );
+  // }
 
   Widget _buildCircleAvatar() {
     return Padding(
@@ -134,25 +139,25 @@ class OpponentProfile extends StatelessWidget {
     );
   }
 
-  Widget _ratedStar() {
-    return Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10),
-        color: Colors.transparent,
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(
-            "평균별점",
-            style: TextStyle(fontSize: 15, color: Colors.black),
-          ),
-          SizedBox(width: 20),
-          _ratingBar(),
-        ],
-      ),
-    );
-  }
+  // Widget _ratedStar() {
+  //   return Container(
+  //     decoration: BoxDecoration(
+  //       borderRadius: BorderRadius.circular(10),
+  //       color: Colors.transparent,
+  //     ),
+  //     child: Row(
+  //       mainAxisAlignment: MainAxisAlignment.center,
+  //       children: [
+  //         Text(
+  //           "평균별점",
+  //           style: TextStyle(fontSize: 15, color: Colors.black),
+  //         ),
+  //         SizedBox(width: 20),
+  //         _ratingBar(),
+  //       ],
+  //     ),
+  //   );
+  // }
 
   Widget _ratingStarButton(BuildContext context) {
     return ElevatedButton(
@@ -181,68 +186,20 @@ class OpponentProfile extends StatelessWidget {
       ),
     );
   }
-
-  Widget _introduce() {
-    return Container(
-      padding: EdgeInsets.all(10),
-      width: double.infinity,
-      height: 100,
-      decoration: BoxDecoration(
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.7),
-            blurRadius: 5,
-            spreadRadius: 0,
-            offset: Offset(5, 6),
-          ),
-        ],
-        borderRadius: BorderRadius.circular(10),
-        color: Colors.white,
-      ),
-      child: Text(
-        "리그오브레전드 원딜 탑레 다이아 1 같이 듀오하실 서폿분 구합니다",
-        textAlign: TextAlign.center,
-        style: TextStyle(fontSize: 15, color: Colors.black),
-      ),
-    );
-  }
-
-  Widget _nickName() {
-    return Container(
-      padding: EdgeInsets.all(5),
-      decoration: BoxDecoration(
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.7),
-            blurRadius: 5,
-            spreadRadius: 0,
-            offset: Offset(0, 10),
-          ),
-        ],
-        borderRadius: BorderRadius.circular(10),
-        color: Colors.white,
-      ),
-      child: Text(
-        "김겐지",
-        style: TextStyle(fontSize: 15, color: Colors.black),
-        textAlign: TextAlign.center,
-      ),
-    );
-  }
 }
 
-Widget _ratingBar() {
-  return RatingBarIndicator(
-    rating: 1,
-    itemBuilder: (context, index) => Icon(
-      Icons.star,
-      color: Colors.amber,
-    ),
-    itemCount: 5,
-    itemSize: 35.0,
-    direction: Axis.horizontal,
-  );
-}
+// Widget _ratingBar() {
+//   return RatingBarIndicator(
+//     rating: 1,
+//     itemBuilder: (context, index) => Icon(
+//       Icons.star,
+//       color: Colors.amber,
+//     ),
+//     itemCount: 5,
+//     itemSize: 35.0,
+//     direction: Axis.horizontal,
+//   );
+// }
 
 // class ImageDialog extends StatelessWidget {
 //   const ImageDialog({Key? key}) : super(key: key);
