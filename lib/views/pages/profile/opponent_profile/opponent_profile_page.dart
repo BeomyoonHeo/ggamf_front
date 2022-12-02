@@ -163,7 +163,12 @@ class OpponentProfile extends StatelessWidget {
         showDialog(context: context, builder: (_) => _ratingStar(context));
       },
       child: Text("별점 주기"),
-      style: ElevatedButton.styleFrom(backgroundColor: kSecondaryColor),
+      style: ElevatedButton.styleFrom(
+        backgroundColor: Colors.white,
+        textStyle: TextStyle(fontFamily: 'NanumSquare', fontSize: 20),
+        foregroundColor: Colors.black,
+        side: BorderSide(),
+      ),
     );
   }
 
@@ -171,7 +176,12 @@ class OpponentProfile extends StatelessWidget {
     return ElevatedButton(
       onPressed: () {},
       child: Text("팔로우하기"),
-      style: ElevatedButton.styleFrom(backgroundColor: kSecondaryColor),
+      style: ElevatedButton.styleFrom(
+        backgroundColor: Colors.white,
+        textStyle: TextStyle(fontFamily: 'NanumSquare', fontSize: 20),
+        foregroundColor: Colors.black,
+        side: BorderSide(),
+      ),
     );
   }
 
