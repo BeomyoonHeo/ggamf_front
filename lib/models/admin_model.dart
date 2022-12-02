@@ -19,22 +19,54 @@ class Report {
 
   void insertReport() {
     for (int i = 0; i < 30; i++) {
-      reportList.add(Report(
-          reporter: '개발자${i}',
-          reportedReason: '신고 사유 : ${i}',
-          maliciousUserNickname: '악성 유저 닉네임 ${i}',
-          reportedDate: DateTime.now(),
-          reportState: '${i}일 정지',
-          reportedCount: i));
+      List<DataCell> reportListCell = [];
 
-      reportListRows.add(DataRow(cells: )
+      reportList.add(
+        Report(
+            reporter: '개발자${i}',
+            reportedReason: '신고 사유 : ${i}',
+            maliciousUserNickname: '악성 유저 닉네임 ${i}',
+            reportedDate: DateTime.now(),
+            reportState: '${i}일 정지',
+            reportedCount: i),
+      );
+
+      reportListCell.add(
+        DataCell(
+          Text(reportedReason),
+        ),
+      );
+      reportListCell.add(
+        DataCell(
+          Text(reportedDate),
+        ),
+      );
+      reportListCell.add(
+        DataCell(
+          Text(reporter),
+        ),
+      );
+      reportListCell.add(
+        DataCell(
+          Text(maliciousUserNickname),
+        ),
+      );
+      reportListCell.add(
+        DataCell(
+          Text(reportState),
+        ),
+      );
+
+      reportListRows.add(DataRow(cells: reportListCell));
     }
   }
-
 }
 
 //dummydata
+
 List<Report> reportList = [];
+
+List<DataRow> reportListRows = [];
 
 List<DataColumn> reportListColumns = [
   DataColumn(label: Text('신고 사유')),
@@ -45,5 +77,3 @@ List<DataColumn> reportListColumns = [
     label: Text('신고상태'),
   ),
 ];
-
-List<DataRow> reportListRows = [];
