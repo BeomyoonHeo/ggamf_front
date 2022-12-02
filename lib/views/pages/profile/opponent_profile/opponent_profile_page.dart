@@ -10,7 +10,6 @@ class OpponentProfile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: _appbar(),
-      backgroundColor: kPrimaryColor,
       body: Padding(
         padding: const EdgeInsets.only(left: 20, right: 20),
         child: ListView(
@@ -24,6 +23,7 @@ class OpponentProfile extends StatelessWidget {
                 _buildCircleAvatar(),
               ],
             ),
+            SizedBox(height: 20),
             Container(
               height: 150,
               child: InkWell(
@@ -33,6 +33,7 @@ class OpponentProfile extends StatelessWidget {
                 child: Image.asset("assets/images/cart1.png"),
               ),
             ),
+            SizedBox(height: 20),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
