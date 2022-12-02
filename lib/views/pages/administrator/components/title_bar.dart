@@ -3,15 +3,13 @@ import 'package:flutter/material.dart';
 class TitleBar extends StatelessWidget {
   const TitleBar({
     Key? key,
-    required this.size,
     required this.title,
   }) : super(key: key);
-
-  final Size size;
   final String title;
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return Container(
       padding: const EdgeInsets.all(10),
       width: size.width * 0.5,
@@ -20,7 +18,7 @@ class TitleBar extends StatelessWidget {
         borderRadius: BorderRadius.circular(20),
         border: Border.all(width: 1),
       ),
-      child: Row(
+      child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(

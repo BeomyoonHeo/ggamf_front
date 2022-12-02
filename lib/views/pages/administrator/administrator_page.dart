@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ggamf_front/main.dart';
 import 'package:ggamf_front/views/pages/administrator/report_list/report_list.dart';
 
 class AdministratorPage extends StatefulWidget {
@@ -12,6 +13,7 @@ class _AdministratorPageState extends State<AdministratorPage> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      navigatorKey: navigatorKey,
       home: const ReportList(),
       theme: ThemeData(
         textTheme: TextTheme(

@@ -1,5 +1,6 @@
+import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
-import 'package:ggamf_front/models/admin_model.dart';
+import 'package:ggamf_front/models/admin_report_model.dart';
 import 'package:ggamf_front/views/pages/administrator/components/title_bar.dart';
 
 class ReportList extends StatelessWidget {
@@ -11,24 +12,23 @@ class ReportList extends StatelessWidget {
     insertReport();
     return Scaffold(
       body: Container(
-        width: size.width,
-        height: size.height,
-        constraints: BoxConstraints(minWidth: 1200),
+        constraints: const BoxConstraints(minWidth: 500, minHeight: 500),
         child: Column(
           children: [
             Container(
               height: size.height * 0.2,
               child: Align(
                 alignment: Alignment.bottomCenter,
-                child: TitleBar(size: size, title: '신고자 목록 페이지'),
+                child: TitleBar(title: '신고자 목록 페이지'),
               ),
             ),
+            SizedBox(height: 20),
             Expanded(
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Container(
-                    width: size.width * 0.15,
+                    width: size.width * 0.13,
                     height: size.height * 0.8,
                     decoration: BoxDecoration(border: Border.all(width: 1)),
                     child: ListView.builder(
@@ -42,13 +42,13 @@ class ReportList extends StatelessWidget {
                   ),
                   Expanded(
                     child: Container(
-                      padding: EdgeInsets.all(30),
-                      child: SingleChildScrollView(
-                        child: DataTable(
-                          border: TableBorder.all(),
-                          columns: reportListColumns,
-                          rows: reportListRows,
-                        ),
+                      padding: EdgeInsets.symmetric(horizontal: 150),
+                      child: DataTable2(
+                        minWidth: 600,
+                        headingRowHeight: 50,
+                        border: TableBorder.all(),
+                        columns: reportListColumns,
+                        rows: reportListRows,
                       ),
                     ),
                   ),
