@@ -18,15 +18,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       navigatorKey: navigatorKey,
-      home: AllPages(),
+      home: const AllPages(),
       initialRoute: PageEnum.getByDisPlayName('login').requestLocation,
       routes: {
-        PageEnum.getByDisPlayName('login').requestLocation: (context) =>
-            const LoginUserPage(),
-        PageEnum.getByDisPlayName('join').requestLocation: (context) =>
-            const JoinUserPage(),
-        PageEnum.getByDisPlayName('allpages').requestLocation: (context) =>
-            const AllPages(),
+        PageEnum.LOGIN.requestLocation: (context) => const LoginUserPage(),
+        PageEnum.JOIN.requestLocation: (context) => const JoinUserPage(),
+        PageEnum.ALLPAGES.requestLocation: (context) => const AllPages(),
       },
       theme: ThemeData(
         fontFamily: 'NanumSquare',
