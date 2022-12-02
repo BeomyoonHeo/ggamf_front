@@ -37,6 +37,7 @@ class _RecommendGgamfListState extends State<RecommendGgamfList>
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
