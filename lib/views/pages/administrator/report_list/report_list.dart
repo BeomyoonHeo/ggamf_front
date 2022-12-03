@@ -12,7 +12,7 @@ class ReportList extends StatelessWidget {
     insertReport();
     return Scaffold(
       body: Container(
-        constraints: const BoxConstraints(minWidth: 500, minHeight: 500),
+        constraints: const BoxConstraints(minWidth: 1500),
         child: Column(
           children: [
             Container(
@@ -28,7 +28,7 @@ class ReportList extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Container(
-                    width: size.width * 0.13,
+                    width: size.width * 0.13 < 1500 ? size.width * 0.13 : 1500,
                     height: size.height * 0.8,
                     decoration: BoxDecoration(border: Border.all(width: 1)),
                     child: ListView.builder(
@@ -42,6 +42,8 @@ class ReportList extends StatelessWidget {
                   ),
                   Expanded(
                     child: Container(
+                      width:
+                          size.width * 0.13 < 1500 ? size.width * 0.13 : 1500,
                       padding: EdgeInsets.symmetric(horizontal: 150),
                       child: DataTable2(
                         minWidth: 600,
