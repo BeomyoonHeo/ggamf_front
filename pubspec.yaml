@@ -38,6 +38,8 @@ dependencies:
   google_sign_in: ^5.4.2
   sign_in_with_apple: ^4.2.0
   data_table_2: ^2.3.8
+  image_picker_web: ^3.0.0+1
+  mime_type: ^1.0.0
 
   flutter:
     sdk: flutter

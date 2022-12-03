@@ -12,17 +12,19 @@ class MatchingStatic {
 }
 
 void insertMatchingStatic() {
-  for (int index = 0; index < 5; index++) {
-    if (matchingStaticList.length > 4) break;
-    matchingStaticList.add(
-      MatchingStatic(
-          rank: index, gameName: '게임 이름 ${index}', matchingCount: index),
-    );
-    matchingStaticRows.add(DataRow(cells: [
-      DataCell(Text('${matchingStaticList[index].rank}')),
-      DataCell(Text('${matchingStaticList[index].gameName}')),
-      DataCell(Text('${matchingStaticList[index].matchingCount}')),
-    ]));
+  if (matchingStaticList.isEmpty) {
+    for (int index = 0; index < 5; index++) {
+      if (matchingStaticList.length > 4) break;
+      matchingStaticList.add(
+        MatchingStatic(
+            rank: index, gameName: '게임 이름 ${index}', matchingCount: index),
+      );
+      matchingStaticRows.add(DataRow(cells: [
+        DataCell(Text('${matchingStaticList[index].rank}')),
+        DataCell(Text('${matchingStaticList[index].gameName}')),
+        DataCell(Text('${matchingStaticList[index].matchingCount}')),
+      ]));
+    }
   }
 }
 

@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 List<String> titleList = [
   '신고자 목록 페이지',
   '게임 매칭 통계 보기 페이지',
-  '방 생성 시 게임 선택 카테고리 수정'
+  '방 생성 시 게임 선택 카테고리 수정',
+  '게임선택 박스 수정',
 ];
 
 class TitleBar extends StatefulWidget {

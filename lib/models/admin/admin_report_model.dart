@@ -24,103 +24,107 @@ class Report {
 }
 
 void insertReport() {
-  for (int i = 0; i < 29; i++) {
-    if (reportList.length >= 29) break;
-    List<DataCell> reportListCell = [];
+  if (reportList.isEmpty) {
+    for (int i = 0; i < 29; i++) {
+      if (reportList.length >= 29) break;
+      List<DataCell> reportListCell = [];
 
-    reportList.add(
-      Report(
-          reporter: '개발자${i + 1}',
-          reportedReason: reportedReasonDetailList[i % 3],
-          reportedReasonDetail: '무엇인가 저질럿습니다. : ${i + 1}',
-          maliciousUserNickname: '악성 유저 닉네임 ${i + 1}',
-          reportedDate: DateTime.now(),
-          reportState: '${i + 1}일 정지',
-          reportedCount: i + 1),
-    );
+      reportList.add(
+        Report(
+            reporter: '개발자${i + 1}',
+            reportedReason: reportedReasonDetailList[i % 3],
+            reportedReasonDetail: '무엇인가 저질럿습니다. : ${i + 1}',
+            maliciousUserNickname: '악성 유저 닉네임 ${i + 1}',
+            reportedDate: DateTime.now(),
+            reportState: '${i + 1}일 정지',
+            reportedCount: i + 1),
+      );
 
-    reportListCell.add(
-      DataCell(
-        Text(reportList[i].reportedReason),
-      ),
-    );
-    reportListCell.add(
-      DataCell(
-        Text(reportList[i].reportedDate.toString()),
-      ),
-    );
-    reportListCell.add(
-      DataCell(
-        Text(reportList[i].reporter),
-      ),
-    );
-    reportListCell.add(
-      DataCell(
-        Text(reportList[i].maliciousUserNickname),
-      ),
-    );
-    reportListCell.add(
-      DataCell(Text(reportList[i].reportState), showEditIcon: true, onTap: () {
-        showDialog(
-            context: navigatorKey.currentState!.context,
-            builder: (context) {
-              return AlertDialog(
-                icon: Row(mainAxisAlignment: MainAxisAlignment.end, children: [
-                  IconButton(
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                    icon: Icon(CupertinoIcons.xmark),
+      reportListCell.add(
+        DataCell(
+          Text(reportList[i].reportedReason),
+        ),
+      );
+      reportListCell.add(
+        DataCell(
+          Text(reportList[i].reportedDate.toString()),
+        ),
+      );
+      reportListCell.add(
+        DataCell(
+          Text(reportList[i].reporter),
+        ),
+      );
+      reportListCell.add(
+        DataCell(
+          Text(reportList[i].maliciousUserNickname),
+        ),
+      );
+      reportListCell.add(
+        DataCell(Text(reportList[i].reportState), showEditIcon: true,
+            onTap: () {
+          showDialog(
+              context: navigatorKey.currentState!.context,
+              builder: (context) {
+                return AlertDialog(
+                  icon:
+                      Row(mainAxisAlignment: MainAxisAlignment.end, children: [
+                    IconButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      icon: Icon(CupertinoIcons.xmark),
+                    ),
+                  ]),
+                  title: Text(
+                    '리포트 내용',
+                    style: theme().textTheme.displayLarge,
                   ),
-                ]),
-                title: Text(
-                  '리포트 내용',
-                  style: theme().textTheme.displayLarge,
-                ),
-                actionsAlignment: MainAxisAlignment.center,
-                actionsPadding: EdgeInsets.only(bottom: 20),
-                actions: [
-                  _buildActionsButton('반려'),
-                  SizedBox(width: 10),
-                  _buildActionsButton('7일정지'),
-                  SizedBox(width: 10),
-                  _buildActionsButton('30일정지'),
-                  SizedBox(width: 10),
-                  _buildActionsButton('영구정지'),
-                ],
-                insetPadding:
-                    EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-                content: Container(
-                  width: 700,
-                  height: 700,
-                  child: Column(
-                    children: [
-                      _buildReportContainer(i),
-                      SizedBox(height: 10),
-                      _buildReportReasonContainer(i),
-                      SizedBox(height: 10),
-                      _buildReasonDetailContainer(i),
-                      SizedBox(height: 10),
-                      Container(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 20, vertical: 20),
-                        decoration: BoxDecoration(border: Border.all()),
-                        child: Row(
-                          children: [
-                            Text(
-                                '해당유저 신고 카운트는 ${reportList[i].reportedCount}번 입니다.')
-                          ],
+                  actionsAlignment: MainAxisAlignment.center,
+                  actionsPadding: EdgeInsets.only(bottom: 20),
+                  actions: [
+                    _buildActionsButton('반려'),
+                    SizedBox(width: 10),
+                    _buildActionsButton('7일정지'),
+                    SizedBox(width: 10),
+                    _buildActionsButton('30일정지'),
+                    SizedBox(width: 10),
+                    _buildActionsButton('영구정지'),
+                  ],
+                  insetPadding:
+                      EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+                  content: Container(
+                    width: 700,
+                    height: 700,
+                    child: Column(
+                      children: [
+                        _buildReportContainer(i),
+                        SizedBox(height: 10),
+                        _buildReportReasonContainer(i),
+                        SizedBox(height: 10),
+                        _buildReasonDetailContainer(i),
+                        SizedBox(height: 10),
+                        Container(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 20, vertical: 20),
+                          decoration: BoxDecoration(border: Border.all()),
+                          child: Row(
+                            children: [
+                              Text(
+                                  '해당유저 신고 카운트는 ${reportList[i].reportedCount}번 입니다.')
+                            ],
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
-                ),
-              );
-            });
-      }),
-    );
+                );
+              });
+        }),
+      );
 
-    reportListRows.add(DataRow(cells: reportListCell));
+      reportListRows.add(DataRow(cells: reportListCell));
+    }
   }
 }
 

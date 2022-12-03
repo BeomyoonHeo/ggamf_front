@@ -19,10 +19,11 @@ void insertUpdateGameCategory(Function setState) {
           DataCell(Text(updateGameCategoryList[index].gameName)),
           DataCell(ElevatedButton(
             style: ButtonStyle(
+                backgroundColor: MaterialStatePropertyAll(Colors.greenAccent),
                 padding: MaterialStatePropertyAll(EdgeInsets.symmetric(
-              vertical: 20,
-              horizontal: 20,
-            ))),
+                  vertical: 20,
+                  horizontal: 20,
+                ))),
             onPressed: () {
               _buildShowDialog(index, setState);
             },

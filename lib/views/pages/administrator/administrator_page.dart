@@ -2,6 +2,7 @@ import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:ggamf_front/main.dart';
 import 'package:ggamf_front/models/admin/admin_game_matching_statics_model.dart';
+import 'package:ggamf_front/models/admin/game_select_box_model.dart';
 import 'package:ggamf_front/models/admin/update_game_category_model.dart';
 import 'package:ggamf_front/views/pages/administrator/components/admin_tabs.dart';
 import 'package:ggamf_front/views/pages/administrator/components/title_bar.dart';
@@ -46,11 +47,13 @@ class _MainPageState extends State<MainPage> {
     reportListColumns,
     matchingStaticColumns,
     updateGameCategoryColumns,
+    gameSelectBoxModelColumns,
   ];
   List<List<DataRow>> globalRows = [
     reportListRows,
     matchingStaticRows,
     updateGameCategoryRows,
+    gameSelectBoxModelRows,
   ];
 
   int _currentIndex = 0;
@@ -77,6 +80,15 @@ class _MainPageState extends State<MainPage> {
           }
 
           insertUpdateGameCategory(mainState);
+        }
+        break;
+      case 3:
+        {
+          void mainState() {
+            setState(() {});
+          }
+
+          insertGameSelectBoxModel(mainState);
         }
         break;
     }
