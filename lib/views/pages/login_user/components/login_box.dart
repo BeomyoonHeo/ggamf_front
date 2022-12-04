@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ggamf_front/core/color.dart';
+import 'package:ggamf_front/core/page_enum.dart';
 import 'package:ggamf_front/views/pages/login_user/components/rounded_input_field.dart';
 import 'package:ggamf_front/views/pages/login_user/components/rounded_input_password_field.dart';
 
@@ -19,12 +20,12 @@ class LoginBox extends StatelessWidget {
         color: Colors.white,
         width: size.width * 0.9,
         padding: EdgeInsets.symmetric(vertical: 10),
-        child: _buildLoginItemColumn(),
+        child: _buildLoginItemColumn(context),
       ),
     );
   }
 
-  Column _buildLoginItemColumn() {
+  Column _buildLoginItemColumn(context) {
     return Column(
       children: [
         const SizedBox(
@@ -61,9 +62,22 @@ class LoginBox extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              ItemButton(text: "아이디|비밀번호찾기"),
-              ItemButton(text: "회원가입"),
-              ItemButton(text: "로그인"),
+              ItemButton(
+                text: "아이디|비밀번호찾기",
+                function: () {},
+              ),
+              ItemButton(
+                  text: "회원가입",
+                  function: () {
+                    Navigator.pushNamed(context,
+                        PageEnum.getByDisPlayName('join').requestLocation);
+                  }),
+              ItemButton(
+                  text: "로그인",
+                  function: () {
+                    Navigator.pushNamed(context,
+                        PageEnum.getByDisPlayName('allpages').requestLocation);
+                  }),
             ],
           ),
         )
@@ -74,27 +88,32 @@ class LoginBox extends StatelessWidget {
 
 class ItemButton extends StatelessWidget {
   final text;
+
+  final Function function;
   const ItemButton({
     Key? key,
     this.text,
+    required this.function,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
       child: ElevatedButton(
-        onPressed: () {},
-        child: Text(
-          text,
-          style: TextStyle(color: Colors.black),
-        ),
+        onPressed: () {
+          function();
+        },
         style: ButtonStyle(
-          backgroundColor: MaterialStatePropertyAll<Color>(kPrimaryColor),
+          backgroundColor: const MaterialStatePropertyAll<Color>(kPrimaryColor),
           shape: MaterialStatePropertyAll<RoundedRectangleBorder>(
             RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(30),
             ),
           ),
+        ),
+        child: Text(
+          text,
+          style: TextStyle(color: Colors.black),
         ),
       ),
     );

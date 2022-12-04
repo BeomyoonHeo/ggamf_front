@@ -69,7 +69,8 @@ class _UpdateMyProfileState extends State<UpdateMyProfile> {
                 right: 0,
                 child: InkWell(
                   onTap: () {
-                    showModalBottomSheet(context: context, builder: (builder) => _bottomSheet());
+                    showModalBottomSheet(
+                        context: context, builder: (builder) => _bottomSheet());
                   },
                   child: Icon(
                     Icons.camera_alt,
