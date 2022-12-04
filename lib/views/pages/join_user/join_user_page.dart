@@ -28,7 +28,7 @@ class JoinUserPage extends StatelessWidget {
             padding: const EdgeInsets.all(20),
             child: SingleChildScrollView(
               child: Column(
-                children: [
+                children: const [
                   InputBox(inputText: "이름 : ", hintText: "이름을 입력하세요"),
                   SizedBox(height: 10),
                   InputBox(inputText: "아이디 : ", hintText: "아이디를 입력하세요"),
