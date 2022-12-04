@@ -32,7 +32,10 @@ class InputEmailBox extends StatelessWidget {
               style: TextStyle(fontSize: 12, height: 2.0),
             ),
           ),
-          Text("@", style: TextStyle(fontFamily: 'NanumSquare', fontSize: 15)),
+          Text(
+            "@",
+            style: TextStyle(fontFamily: 'NanumSquare', fontSize: 15),
+          ),
         ],
       ),
     );

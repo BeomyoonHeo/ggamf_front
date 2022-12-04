@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:ggamf_front/models/user.dart';
 import 'package:ggamf_front/views/pages/recommend_ggamef/recommend_ggamf_list/components/recommend_ggamf_list_tab_bar.dart';
 
 class RecommendGgamfListTabView extends StatefulWidget {
@@ -90,22 +91,15 @@ class _RecommendGgamfListTabViewState extends State<RecommendGgamfListTabView>
 
   Widget _buildListView(List<IconButton> buttons) {
     return ListView.separated(
-      itemCount: 10,
+      itemCount: friends.length,
       itemBuilder: (context, index) {
         return ListTile(
           visualDensity: VisualDensity(horizontal: 3),
           leading: CircleAvatar(
-            backgroundImage: NetworkImage(
-                'https://source.unsplash.com/random/300x200?v=${DateTime.now().millisecondsSinceEpoch}'),
+            backgroundImage: AssetImage(friends[index].backgroundImage),
           ),
-          title: Text(
-            '닉네임',
-            style: TextStyle(fontFamily: 'NanumSquare'),
-          ),
-          subtitle: Text(
-            '상태 메시지',
-            style: TextStyle(fontFamily: 'NanumSquare'),
-          ),
+          title: Text(friends[index].name),
+          subtitle: Text(friends[index].intro),
           trailing: Row(
             mainAxisSize: MainAxisSize.min,
             children: buttons,
