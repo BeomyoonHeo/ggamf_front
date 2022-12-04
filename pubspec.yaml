@@ -55,9 +55,12 @@ dependencies:
   flutter_rating_bar: ^4.0.1
   image_picker: ^0.8.6
   intl: ^0.17.0
+<<<<<<< HEAD
+=======
   flashy_tab_bar2: ^0.0.5
   chips_choice: ^3.0.0
 
+>>>>>>> 6226c8747ee56aa334c23ae9401330aa3d10fbe7
 
 
 dev_dependencies:
@@ -109,6 +112,15 @@ flutter:
     - family: NanumSquare
       fonts:
         - asset: assets/fonts/NanumSquareR.ttf
+<<<<<<< HEAD
+    - family: CustomIcons
+      fonts:
+        - asset: assets/fonts/CustomIcons.ttf
+  #  fonts:
+  #     - family: Hahmlet
+  #       fonts:
+  #         - asset: assets/fonts/Hahmlet-VariableFont_wght.ttf
+=======
 
 
     - family: CustomIcons
@@ -119,6 +131,7 @@ flutter:
       fonts:
         - asset: assets/fonts/Hahmlet-VariableFont_wght.ttf
 
+>>>>>>> 6226c8747ee56aa334c23ae9401330aa3d10fbe7
   #   - family: Trajan Pro
   #     fonts:
   #       - asset: fonts/TrajanPro.ttf
