@@ -18,7 +18,7 @@ class LoginBox extends StatelessWidget {
       child: Container(
         color: Colors.white,
         width: size.width * 0.9,
-        padding: EdgeInsets.symmetric(vertical: 10),
+        padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
         child: _buildLoginItemColumn(context),
       ),
     );
@@ -53,9 +53,11 @@ class LoginBox extends StatelessWidget {
           child: Column(
             children: [
               ItemButton(
-                text: "아이디|비밀번호찾기",
-                function: () {},
-              ),
+                  text: "로그인",
+                  function: () {
+                    Navigator.pushNamed(context,
+                        PageEnum.getByDisPlayName('allpages').requestLocation);
+                  }),
               SizedBox(height: 10),
               ItemButton(
                   text: "회원가입",
@@ -65,11 +67,9 @@ class LoginBox extends StatelessWidget {
                   }),
               SizedBox(height: 10),
               ItemButton(
-                  text: "로그인",
-                  function: () {
-                    Navigator.pushNamed(context,
-                        PageEnum.getByDisPlayName('allpages').requestLocation);
-                  }),
+                text: "아이디|비밀번호찾기",
+                function: () {},
+              ),
             ],
           ),
         )
@@ -78,7 +78,7 @@ class LoginBox extends StatelessWidget {
   }
 }
 
-class ItemButton extends StatelessWidget {
+class ItemButton extends StatefulWidget {
   final text;
 
   final Function function;
@@ -89,30 +89,28 @@ class ItemButton extends StatelessWidget {
   }) : super(key: key);
 
   @override
+  State<ItemButton> createState() => _ItemButtonState();
+}
+
+class _ItemButtonState extends State<ItemButton> {
+  @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.symmetric(vertical: 10),
-      alignment: Alignment.center,
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(30),
-          border: Border.all(width: 1)),
-      width: 300,
+    return Material(
       child: InkWell(
         onTap: () {
-          function();
+          widget.function();
+          setState(() {});
         },
-        overlayColor: MaterialStatePropertyAll(Colors.white),
-        // style: ButtonStyle(
-        //   backgroundColor: const MaterialStatePropertyAll<Color>(kPrimaryColor),
-        //   shape: MaterialStatePropertyAll<RoundedRectangleBorder>(
-        //     RoundedRectangleBorder(
-        //       borderRadius: BorderRadius.circular(30),
-        //     ),
-        //   ),
-        // ),
-        child: Text(
-          text,
-          style: TextStyle(color: Colors.black),
+        child: Container(
+          padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+          alignment: Alignment.center,
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(30),
+              border: Border.all(width: 1)),
+          child: Text(
+            widget.text,
+            style: TextStyle(color: Colors.black),
+          ),
         ),
       ),
     );
