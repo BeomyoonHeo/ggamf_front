@@ -31,7 +31,7 @@ class _AdminTabsState extends State<AdminTabs> {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Container(
-      padding: const EdgeInsets.only(top: 300),
+      padding: const EdgeInsets.only(top: 100),
       width: size.width * 0.13 < 1500 ? size.width * 0.13 : 1500,
       height: size.height * 0.8,
       decoration: BoxDecoration(border: Border.all(width: 1)),
@@ -39,7 +39,7 @@ class _AdminTabsState extends State<AdminTabs> {
         itemBuilder: (context, index) {
           return ElevatedButton(
               style: ButtonStyle(
-                padding: MaterialStatePropertyAll(
+                padding: const MaterialStatePropertyAll(
                     EdgeInsets.symmetric(vertical: 50)),
                 backgroundColor: MaterialStatePropertyAll(
                     widget.currentIndex == index

@@ -338,11 +338,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.6.2"
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
->>>>>>> 14e80539d7bb72a9bbb4171e2c249035643ac346
   image_picker_web:
     dependency: "direct main"
     description:
@@ -350,10 +345,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.0.0+1"
-<<<<<<< HEAD
-=======
->>>>>>> 6226c8747ee56aa334c23ae9401330aa3d10fbe7
->>>>>>> 14e80539d7bb72a9bbb4171e2c249035643ac346
   intl:
     dependency: "direct main"
     description:
