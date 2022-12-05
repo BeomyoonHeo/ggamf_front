@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:ggamf_front/models/data.dart';
 import 'package:ggamf_front/models/user/join_user_model.dart';
 import 'package:retrofit/retrofit.dart';
 
@@ -9,5 +10,8 @@ abstract class RestClient {
   factory RestClient(Dio dio, {String baseUrl}) = _RestClient;
 
   @POST('/users/{id}')
-  Future<JoinUserModel> getUser({@Path() required int id});
+  Future<User> postUser({@Path() required int id});
+
+  @GET('/users/{id}')
+  Future<User> getUser({@Path() required int id});
 }
