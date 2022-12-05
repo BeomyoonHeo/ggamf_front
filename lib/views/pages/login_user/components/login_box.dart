@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:ggamf_front/core/color.dart';
 import 'package:ggamf_front/core/page_enum.dart';
 import 'package:ggamf_front/views/pages/login_user/components/rounded_input_field.dart';
 import 'package:ggamf_front/views/pages/login_user/components/rounded_input_password_field.dart';
@@ -32,7 +31,6 @@ class LoginBox extends StatelessWidget {
           height: 10,
         ),
         Container(
-          height: size.height * 0.2 + 30,
           decoration: BoxDecoration(
               border: Border.all(width: 1),
               borderRadius: BorderRadius.circular(9)),
@@ -46,32 +44,26 @@ class LoginBox extends StatelessWidget {
               ),
               SizedBox(height: 10),
               RoundedInputPasswordField(),
-              SizedBox(height: 5),
-              Container(
-                child: Visibility(
-                  child: Text("아이디를 입력해주세요 | 비밀번호를 입력해주세요"),
-                  visible: false,
-                ),
-              ),
             ],
           ),
         ),
         SizedBox(height: 10),
         Container(
           padding: EdgeInsets.symmetric(horizontal: 5),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          child: Column(
             children: [
               ItemButton(
                 text: "아이디|비밀번호찾기",
                 function: () {},
               ),
+              SizedBox(height: 10),
               ItemButton(
                   text: "회원가입",
                   function: () {
                     Navigator.pushNamed(context,
                         PageEnum.getByDisPlayName('join').requestLocation);
                   }),
+              SizedBox(height: 10),
               ItemButton(
                   text: "로그인",
                   function: () {
@@ -99,18 +91,25 @@ class ItemButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: ElevatedButton(
-        onPressed: () {
+      padding: EdgeInsets.symmetric(vertical: 10),
+      alignment: Alignment.center,
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(30),
+          border: Border.all(width: 1)),
+      width: 300,
+      child: InkWell(
+        onTap: () {
           function();
         },
-        style: ButtonStyle(
-          backgroundColor: const MaterialStatePropertyAll<Color>(kPrimaryColor),
-          shape: MaterialStatePropertyAll<RoundedRectangleBorder>(
-            RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(30),
-            ),
-          ),
-        ),
+        overlayColor: MaterialStatePropertyAll(Colors.white),
+        // style: ButtonStyle(
+        //   backgroundColor: const MaterialStatePropertyAll<Color>(kPrimaryColor),
+        //   shape: MaterialStatePropertyAll<RoundedRectangleBorder>(
+        //     RoundedRectangleBorder(
+        //       borderRadius: BorderRadius.circular(30),
+        //     ),
+        //   ),
+        // ),
         child: Text(
           text,
           style: TextStyle(color: Colors.black),
