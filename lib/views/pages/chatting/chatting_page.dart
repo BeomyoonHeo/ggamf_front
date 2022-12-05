@@ -18,6 +18,7 @@ class ChattingPage extends StatefulWidget {
 class _ChattingPageState extends State<ChattingPage> {
   final List<MyChat> chats = [];
   final TextEditingController _textController = TextEditingController();
+  bool _ischecked = false;
 
   @override
   Widget build(BuildContext context) {
@@ -90,14 +91,14 @@ class _ChattingPageState extends State<ChattingPage> {
     return Container(
       padding: EdgeInsets.only(right: 20),
       height: 60,
-      color: kSecondaryColor,
+      color: Colors.white,
       child: Row(
         children: [
           ChatIconButton(icon: Icon(FontAwesomeIcons.plusSquare)),
           Expanded(
             child: Container(
               decoration: BoxDecoration(
-                color: Colors.white,
+                color: kPrimaryColor,
                 borderRadius: BorderRadius.circular(20),
               ),
               child: TextField(
@@ -119,20 +120,31 @@ class _ChattingPageState extends State<ChattingPage> {
 
   AppBar _AppBar(BuildContext context) {
     return AppBar(
-      backgroundColor: kSecondaryColor,
+      automaticallyImplyLeading: false,
+      backgroundColor: Colors.white,
       title: Row(
         children: [
-          BackButton(
-            color: Colors.black,
-          ),
-          SizedBox(width: 10),
+          BackButton(color: Colors.black),
           Text(
             "채팅",
-            style: Theme.of(context).textTheme.headline6,
+            style: TextStyle(color: Colors.black, fontSize: 25),
           ),
         ],
       ),
       actions: [
+        TextButton(
+          onPressed: () {
+            showDialog(context: context, builder: (_) => _invite());
+          },
+          child: Text(
+            "초대하기",
+            style: TextStyle(fontSize: 12, color: Colors.green),
+          ),
+          style: TextButton.styleFrom(
+            foregroundColor: Colors.black,
+          ),
+        ),
+        SizedBox(width: 20),
         InkWell(
           onTap: () {
             showDialog(
@@ -169,9 +181,65 @@ class _ChattingPageState extends State<ChattingPage> {
       chats.add(
         MyChat(
           text: text,
-          time: DateFormat("a K:m").format(new DateTime.now()).replaceAll("AM", "오전").replaceAll("PM", "오후"),
+          time: DateFormat("a K:m")
+              .format(new DateTime.now())
+              .replaceAll("AM", "오전")
+              .replaceAll("PM", "오후"),
         ),
       );
     });
+  }
+
+  Widget _invite() {
+    return Dialog(
+      child: Container(
+        margin: EdgeInsets.all(20),
+        width: double.infinity,
+        height: 400,
+        child: Column(
+          children: [
+            Text(
+              "초대할 껨프 선택",
+              style: TextStyle(fontSize: 25),
+            ),
+            SizedBox(height: 40),
+            CheckboxListTile(
+              title: Text('껨프 1'),
+              secondary: CircleAvatar(
+                radius: 30,
+                backgroundImage: AssetImage("assets/images/76.jpg"),
+              ),
+              activeColor: Colors.white,
+              checkColor: Colors.black,
+              controlAffinity: ListTileControlAffinity.trailing,
+              value: _ischecked,
+              onChanged: (bool? value) {
+                setState(() {
+                  _ischecked = value!;
+                });
+              },
+            ),
+            Divider(color: Colors.black),
+            CheckboxListTile(
+              title: Text('껨프 2'),
+              secondary: CircleAvatar(
+                radius: 30,
+                backgroundImage: AssetImage("assets/images/20.jpg"),
+              ),
+              activeColor: Colors.white,
+              checkColor: Colors.black,
+              controlAffinity: ListTileControlAffinity.trailing,
+              value: _ischecked,
+              onChanged: (bool? value) {
+                setState(() {
+                  _ischecked = value!;
+                });
+              },
+            ),
+            Divider(color: Colors.black),
+          ],
+        ),
+      ),
+    );
   }
 }
