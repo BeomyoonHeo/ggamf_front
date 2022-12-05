@@ -38,7 +38,7 @@ dependencies:
   google_sign_in: ^5.4.2
   sign_in_with_apple: ^4.2.0
   data_table_2: ^2.3.8
-  image_picker_web: ^3.0.0+1
+  #image_picker_web: ^3.0.0+1
   mime_type: ^1.0.0
 
   flutter:
@@ -53,7 +53,7 @@ dependencies:
   font_awesome_flutter: ^10.2.1
   flutter_svg: ^1.1.6
   flutter_rating_bar: ^4.0.1
-#  image_picker: ^0.8.6
+  image_picker: ^0.8.6
   intl: ^0.17.0
   flashy_tab_bar2: ^0.0.5
   chips_choice: ^3.0.0
