@@ -28,22 +28,32 @@ class _CommonBottomNavigationBarState extends State<CommonBottomNavigationBar> {
         FlashyTabBarItem(
           icon: Icon(CustomIcons.joinparty, size: 25),
           title: Text('파티참가'),
+          activeColor: Colors.black,
+          inactiveColor: Colors.black,
         ),
         FlashyTabBarItem(
           icon: Icon(CustomIcons.myparty),
           title: Text('나의 파티'),
+          activeColor: Colors.black,
+          inactiveColor: Colors.black,
         ),
         FlashyTabBarItem(
           icon: Icon(CustomIcons.mygamf),
           title: Text('내 껨프'),
+          activeColor: Colors.black,
+          inactiveColor: Colors.black,
         ),
         FlashyTabBarItem(
           icon: Icon(CustomIcons.recomgamf),
           title: Text('추천 껨프'),
+          activeColor: Colors.black,
+          inactiveColor: Colors.black,
         ),
         FlashyTabBarItem(
           icon: Icon(CustomIcons.myprofile),
           title: Text('내 프로필'),
+          activeColor: Colors.black,
+          inactiveColor: Colors.black,
         ),
       ],
       animationCurve: Curves.linear,
