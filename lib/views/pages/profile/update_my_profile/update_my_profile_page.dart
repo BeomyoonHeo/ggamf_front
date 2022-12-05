@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
-import '../my_profile/my_profile_page.dart';
+import '../../../../core/color.dart';
 
 class UpdateMyProfile extends StatefulWidget {
   const UpdateMyProfile({Key? key}) : super(key: key);
@@ -21,6 +21,7 @@ class _UpdateMyProfileState extends State<UpdateMyProfile> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: _AppBar(),
+      backgroundColor: kPrimaryColor,
       body: Padding(
         padding: const EdgeInsets.only(left: 20, right: 20),
         child: ListView(
@@ -42,14 +43,13 @@ class _UpdateMyProfileState extends State<UpdateMyProfile> {
 
   AppBar _AppBar() {
     return AppBar(
-      automaticallyImplyLeading: false,
       backgroundColor: Colors.white,
       title: Row(
         children: [
           BackButton(
             color: Colors.black,
           ),
-          Text("내 프로필 수정", style: TextStyle(color: Colors.black, fontFamily: 'NanumSquare', fontSize: 25)),
+          Text("내 프로필 수정", style: TextStyle(color: Colors.black)),
         ],
       ),
     );
@@ -69,7 +69,8 @@ class _UpdateMyProfileState extends State<UpdateMyProfile> {
                 right: 0,
                 child: InkWell(
                   onTap: () {
-                    showModalBottomSheet(context: context, builder: (builder) => _bottomSheet());
+                    showModalBottomSheet(
+                        context: context, builder: (builder) => _bottomSheet());
                   },
                   child: Icon(
                     Icons.camera_alt,
@@ -86,18 +87,10 @@ class _UpdateMyProfileState extends State<UpdateMyProfile> {
     return Container(
       padding: EdgeInsets.only(left: 100, right: 100),
       child: ElevatedButton(
-        onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => MyProfilePage()),
-          );
-        },
+        onPressed: () {},
         child: Text("수정 완료"),
         style: ElevatedButton.styleFrom(
-          backgroundColor: Colors.white,
-          textStyle: TextStyle(fontFamily: 'NanumSquare', fontSize: 20),
-          foregroundColor: Colors.black,
-          side: BorderSide(),
+          backgroundColor: kSecondaryColor,
         ),
       ),
     );
@@ -109,14 +102,14 @@ class _UpdateMyProfileState extends State<UpdateMyProfile> {
       height: 150,
       width: double.infinity,
       decoration: BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-          colors: [
-            Color(0xffFBC5D8),
-            Color.fromARGB(0, 243, 218, 153),
-          ],
-        ),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.7),
+            blurRadius: 5,
+            spreadRadius: 0,
+            offset: Offset(5, 6),
+          ),
+        ],
         borderRadius: BorderRadius.circular(10),
         color: Colors.white,
       ),
@@ -138,14 +131,14 @@ class _UpdateMyProfileState extends State<UpdateMyProfile> {
       padding: EdgeInsets.all(5),
       width: double.infinity,
       decoration: BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-          colors: [
-            Color(0xffFBC5D8),
-            Color.fromARGB(0, 243, 218, 153),
-          ],
-        ),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.7),
+            blurRadius: 5,
+            spreadRadius: 0,
+            offset: Offset(5, 6),
+          ),
+        ],
         borderRadius: BorderRadius.circular(10),
         color: Colors.white,
       ),

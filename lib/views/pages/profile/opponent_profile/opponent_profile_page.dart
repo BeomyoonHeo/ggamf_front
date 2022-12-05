@@ -10,30 +10,29 @@ class OpponentProfile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: _appbar(),
+      backgroundColor: kPrimaryColor,
       body: Padding(
         padding: const EdgeInsets.only(left: 20, right: 20),
         child: ListView(
-          padding: EdgeInsets.only(top: 40),
           children: [
-            Stack(
-              alignment: Alignment.topCenter,
-              children: [
-                _profileContext(),
-                _backCircle(),
-                _buildCircleAvatar(),
-              ],
-            ),
-            SizedBox(height: 20),
+            SizedBox(height: 50),
+            _buildCircleAvatar(),
+            SizedBox(height: 50),
+            _nickName(),
+            SizedBox(height: 30),
+            _ratedStar(),
+            SizedBox(height: 30),
+            _introduce(),
             Container(
               height: 150,
               child: InkWell(
                 onTap: () async {
-                  await showDialog(context: context, builder: (_) => _imageDialog());
+                  await showDialog(
+                      context: context, builder: (_) => _imageDialog());
                 },
                 child: Image.asset("assets/images/cart1.png"),
               ),
             ),
-            SizedBox(height: 20),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
@@ -47,59 +46,8 @@ class OpponentProfile extends StatelessWidget {
     );
   }
 
-  Container _backCircle() {
-    return Container(
-      width: 160,
-      height: 160,
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(100),
-        gradient: LinearGradient(
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-          colors: [
-            Color(0xffFBC5D8),
-            Color.fromARGB(0, 243, 218, 153),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Padding _profileContext() {
-    return Padding(
-      padding: const EdgeInsets.only(top: 100),
-      child: Container(
-        padding: EdgeInsets.all(10),
-        width: double.infinity,
-        height: 250,
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-            colors: [
-              Color(0xffFBC5D8),
-              Color.fromARGB(0, 243, 218, 153),
-            ],
-          ),
-        ),
-        child: Column(
-          children: [
-            SizedBox(height: 50),
-            Text("김겐지"),
-            SizedBox(height: 20),
-            Text("자기소개뭐우런ㅇ루랑ㄹㅇsdsfsdfdsfsfsfsdfdsfsdfsfsdfsdfdsfsdfsdfdsfsdsddsfsfdsdfsfssd"),
-            SizedBox(height: 60),
-            _ratedStar(),
-          ],
-        ),
-      ),
-    );
-  }
-
   Widget _buildCircleAvatar() {
-    return Padding(
-      padding: const EdgeInsets.only(top: 10),
+    return Center(
       child: CircleAvatar(
         radius: 70,
         backgroundImage: AssetImage("assets/images/41.jpg"),
@@ -109,7 +57,6 @@ class OpponentProfile extends StatelessWidget {
 
   AppBar _appbar() {
     return AppBar(
-      automaticallyImplyLeading: false,
       backgroundColor: Colors.white,
       title: Row(
         children: [
@@ -164,12 +111,7 @@ class OpponentProfile extends StatelessWidget {
         showDialog(context: context, builder: (_) => _ratingStar(context));
       },
       child: Text("별점 주기"),
-      style: ElevatedButton.styleFrom(
-        backgroundColor: Colors.white,
-        textStyle: TextStyle(fontFamily: 'NanumSquare', fontSize: 20),
-        foregroundColor: Colors.black,
-        side: BorderSide(),
-      ),
+      style: ElevatedButton.styleFrom(backgroundColor: kSecondaryColor),
     );
   }
 
@@ -177,12 +119,7 @@ class OpponentProfile extends StatelessWidget {
     return ElevatedButton(
       onPressed: () {},
       child: Text("팔로우하기"),
-      style: ElevatedButton.styleFrom(
-        backgroundColor: Colors.white,
-        textStyle: TextStyle(fontFamily: 'NanumSquare', fontSize: 20),
-        foregroundColor: Colors.black,
-        side: BorderSide(),
-      ),
+      style: ElevatedButton.styleFrom(backgroundColor: kSecondaryColor),
     );
   }
 
