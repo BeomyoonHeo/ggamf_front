@@ -24,19 +24,19 @@ AppBarTheme appBarTheme() {
   );
 }
 
-ThemeData theme() {
-  return ThemeData(
-    scaffoldBackgroundColor: Colors.white,
-    textTheme: textTheme(),
-    appBarTheme: appBarTheme(),
-    bottomNavigationBarTheme: BottomNavigationBarThemeData(
-      selectedItemColor: Colors.black87,
-      unselectedItemColor: Colors.black38,
-    ),
-  );
-}
+// ThemeData theme() {
+//   return ThemeData(
+//     scaffoldBackgroundColor: Colors.white,
+//     textTheme: textTheme(),
+//     appBarTheme: appBarTheme(),
+//     bottomNavigationBarTheme: BottomNavigationBarThemeData(
+//       selectedItemColor: Colors.black87,
+//       unselectedItemColor: Colors.black38,
+//     ),
+//   );
+// }
 
-ThemeData buildThemeData() {
+ThemeData theme() {
   return ThemeData(
     fontFamily: 'NanumSquare',
     backgroundColor: Color(0xFFFFFBFE),

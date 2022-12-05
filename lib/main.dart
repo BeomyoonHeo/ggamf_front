@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
         PageEnum.JOIN.requestLocation: (context) => const JoinUserPage(),
         PageEnum.ALLPAGES.requestLocation: (context) => const AllPages(),
       },
-      theme: buildThemeData(),
+      theme: theme(),
     );
   }
 }
