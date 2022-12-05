@@ -1,10 +1,19 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:ggamf_front/models/user/user.dart';
+import 'package:ggamf_front/models/data.dart';
+import 'package:ggamf_front/models/rest_client.dart';
+import 'package:ggamf_front/utils/custom_intercepter.dart';
 import 'package:ggamf_front/views/pages/recommend_ggamef/recommend_ggamf_list/components/recommend_ggamf_list_tab_bar.dart';
 
 class RecommendGgamfListTabView extends StatefulWidget {
-  const RecommendGgamfListTabView({
+  //인터셉터 추가
+  final dio = Dio()
+    ..interceptors.add(
+      //cascade 연산자를 실행하여 바로 add 하였다.
+      CustomLogInterceptor(),
+    );
+  RecommendGgamfListTabView({
     Key? key,
     required TabController tabController,
   })  : _tabController = tabController,
@@ -59,11 +68,14 @@ class _RecommendGgamfListTabViewState extends State<RecommendGgamfListTabView>
 
   @override
   Widget build(BuildContext context) {
+    final _client =
+        RestClient(widget.dio); //RestClient를 등록 - 스프링으로 치면 controller 같은 느낌이다.
+
     return Expanded(
       child: TabBarView(
         controller: widget._tabController,
         children: [
-          _buildListView(buttonListToRecommendGgamf),
+          _buildListView(buttonListToRecommendGgamf, _client),
           Container(
             child: Column(
               children: [
@@ -76,8 +88,8 @@ class _RecommendGgamfListTabViewState extends State<RecommendGgamfListTabView>
                   child: TabBarView(
                     controller: _innerTabController,
                     children: [
-                      _buildListView(buttonListToReceiveRequestGgamf),
-                      _buildListView(buttonListToGiveRequestGgamf),
+                      _buildListView(buttonListToReceiveRequestGgamf, _client),
+                      _buildListView(buttonListToGiveRequestGgamf, _client),
                     ],
                   ),
                 ),
@@ -89,28 +101,33 @@ class _RecommendGgamfListTabViewState extends State<RecommendGgamfListTabView>
     );
   }
 
-  Widget _buildListView(List<IconButton> buttons) {
-    return ListView.separated(
-      itemCount: friends.length,
-      itemBuilder: (context, index) {
-        return ListTile(
-          visualDensity: VisualDensity(horizontal: 3),
-          leading: CircleAvatar(
-            backgroundImage: NetworkImage(friends[index].backgroundImage),
-          ),
-          title: Text(friends[index].name),
-          subtitle: Text(friends[index].intro),
-          trailing: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: buttons,
-          ),
-        );
-      },
-      separatorBuilder: (context, index) {
-        return const Divider(
-          height: 10,
-          color: Colors.white,
-        );
+  Widget _buildListView(List<IconButton> buttons, RestClient client) {
+    return FutureBuilder<User?>(
+      future: client.getUser(page: 1),
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          User usersInfo = snapshot.data!;
+          return ListView.separated(
+              itemBuilder: (context, index) => ListTile(
+                    visualDensity: VisualDensity(horizontal: 3),
+                    leading: CircleAvatar(
+                      backgroundImage:
+                          NetworkImage(usersInfo.data[index].avatar),
+                    ),
+                    title: Text(usersInfo.data[index].firstName),
+                    subtitle: Text(usersInfo.data[index].lastName),
+                    trailing: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: buttons,
+                    ),
+                  ),
+              separatorBuilder: (context, index) => Divider(
+                    height: 10,
+                    color: Colors.white,
+                  ),
+              itemCount: usersInfo.data.length);
+        }
+        return CircularProgressIndicator();
       },
     );
   }
