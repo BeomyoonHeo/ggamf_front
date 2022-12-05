@@ -49,3 +49,17 @@ ThemeData theme() {
     ),
   );
 }
+
+ThemeData buildThemeData() {
+  return ThemeData(
+    fontFamily: 'NanumSquare',
+    backgroundColor: Color(0xFFFFFBFE),
+    elevatedButtonTheme: ElevatedButtonThemeData(
+        style: ButtonStyle(elevation: MaterialStatePropertyAll(0))),
+    appBarTheme: AppBarTheme(
+      elevation: 0,
+      backgroundColor: Colors.white,
+      titleTextStyle: TextStyle(fontSize: 25, color: Colors.black),
+    ),
+  );
+}
