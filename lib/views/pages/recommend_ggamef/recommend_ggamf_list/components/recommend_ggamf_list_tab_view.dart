@@ -96,7 +96,7 @@ class _RecommendGgamfListTabViewState extends State<RecommendGgamfListTabView>
         return ListTile(
           visualDensity: VisualDensity(horizontal: 3),
           leading: CircleAvatar(
-            backgroundImage: AssetImage(friends[index].backgroundImage),
+            backgroundImage: NetworkImage(friends[index].backgroundImage),
           ),
           title: Text(friends[index].name),
           subtitle: Text(friends[index].intro),

@@ -23,13 +23,8 @@ class AllPages extends StatefulWidget {
   State<AllPages> createState() => _AllPagesState();
 }
 
-class _AllPagesState extends State<AllPages>
-    with AutomaticKeepAliveClientMixin {
-  int _selectedIndex = 3;
-
-  @override
-  // TODO: implement wantKeepAlive
-  bool get wantKeepAlive => true;
+class _AllPagesState extends State<AllPages> {
+  int _selectedIndex = 2;
 
   @override
   void initState() {
@@ -44,8 +39,6 @@ class _AllPagesState extends State<AllPages>
 
   @override
   Widget build(BuildContext context) {
-    super.build(context);
-
     return Scaffold(
       body: IndexedStack(
         index: _selectedIndex,
@@ -62,22 +55,32 @@ class _AllPagesState extends State<AllPages>
         FlashyTabBarItem(
           icon: Icon(CustomIcons.joinparty, size: 25),
           title: Text('파티 참가'),
+          activeColor: Colors.black,
+          inactiveColor: Colors.black,
         ),
         FlashyTabBarItem(
           icon: Icon(CustomIcons.myparty),
           title: Text('나의 파티'),
+          activeColor: Colors.black,
+          inactiveColor: Colors.black,
         ),
         FlashyTabBarItem(
           icon: Icon(CustomIcons.mygamf),
           title: Text('내 껨프'),
+          activeColor: Colors.black,
+          inactiveColor: Colors.black,
         ),
         FlashyTabBarItem(
           icon: Icon(CustomIcons.recomgamf),
           title: Text('추천 껨프'),
+          activeColor: Colors.black,
+          inactiveColor: Colors.black,
         ),
         FlashyTabBarItem(
           icon: Icon(CustomIcons.myprofile),
           title: Text('내 프로필'),
+          activeColor: Colors.black,
+          inactiveColor: Colors.black,
         ),
       ],
       animationCurve: Curves.linear,

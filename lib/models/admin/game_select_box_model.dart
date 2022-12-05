@@ -3,8 +3,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ggamf_front/core/theme.dart';
 import 'package:ggamf_front/main.dart';
-import 'package:image_picker_web/image_picker_web.dart';
-import 'package:mime_type/mime_type.dart';
 
 class GameSelectBoxModel {
   Image gameIcon;
@@ -152,12 +150,12 @@ Future<dynamic> _buildShowDialog(int index, Function setState) {
                         child: IconButton(
                           iconSize: 120,
                           onPressed: () async {
-                            var result = await ImagePickerWeb.getImageInfo;
-                            String? mimeType = mime((result!.fileName));
-                            // File mediaFile = File(result.data!,
-                            //     result.fileName!, {'type': mimeType});
-                            gameSelectBoxModelList[index].gameIcon =
-                                Image.memory(result.data!);
+                            // var result = await ImagePickerWeb.getImageInfo;
+                            // String? mimeType = mime((result!.fileName));
+                            // // File mediaFile = File(result.data!,
+                            // //     result.fileName!, {'type': mimeType});
+                            // gameSelectBoxModelList[index].gameIcon =
+                            //     Image.memory(result.data!);
                             setState();
                           },
                           icon: gameSelectBoxModelList[index].gameIcon,

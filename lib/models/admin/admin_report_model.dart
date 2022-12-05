@@ -148,7 +148,7 @@ ElevatedButton _buildActionsButton(String text) {
 
 Container _buildReasonDetailContainer(int i) {
   return Container(
-    height: 300,
+    height: 200,
     width: 700,
     decoration: BoxDecoration(border: Border.all()),
     padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),

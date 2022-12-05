@@ -26,12 +26,11 @@ class _RoundedInputPasswordFieldState extends State<RoundedInputPasswordField> {
                 icon: visible,
                 onPressed: () {
                   if (obscureText) {
-                    obscureText = !obscureText;
                     visible = Icon(Icons.visibility_off);
                   } else {
-                    obscureText = !obscureText;
                     visible = Icon(Icons.visibility);
                   }
+                  obscureText = !obscureText;
                   setState(() {});
                 },
               ),

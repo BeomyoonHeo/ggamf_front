@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:ggamf_front/core/page_enum.dart';
+import 'package:ggamf_front/core/theme.dart';
+import 'package:ggamf_front/views/common_components/common_pages.dart';
+import 'package:ggamf_front/views/pages/join_user/join_user_page.dart';
 import 'package:ggamf_front/views/pages/login_user/login_user_page.dart';
-import 'package:ggamf_front/views/pages/my_ggamf/my_ggamf_list_page/my_ggamf_list_page.dart';
-import 'package:ggamf_front/views/pages/profile/my_profile/my_profile_page.dart';
-import 'package:ggamf_front/views/pages/profile/opponent_profile/opponent_profile_page.dart';
 
 void main() {
   runApp(MyApp());
@@ -18,8 +19,14 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       navigatorKey: navigatorKey,
-      home: OpponentProfile(),
-      routes: {},
+      home: const AllPages(),
+      initialRoute: PageEnum.getByDisPlayName('login').requestLocation,
+      routes: {
+        PageEnum.LOGIN.requestLocation: (context) => const LoginUserPage(),
+        PageEnum.JOIN.requestLocation: (context) => const JoinUserPage(),
+        PageEnum.ALLPAGES.requestLocation: (context) => const AllPages(),
+      },
+      theme: buildThemeData(),
     );
   }
 }
