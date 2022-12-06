@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -9,7 +10,8 @@ import 'chatting_components/my_chat.dart';
 import 'chatting_components/other_chat.dart';
 
 class ChattingPage extends StatefulWidget {
-  const ChattingPage({Key? key}) : super(key: key);
+  final dio = Dio();
+  ChattingPage({Key? key}) : super(key: key);
 
   @override
   State<ChattingPage> createState() => _ChattingPageState();
