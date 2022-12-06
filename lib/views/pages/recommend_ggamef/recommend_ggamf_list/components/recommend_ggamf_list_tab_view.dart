@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:ggamf_front/data/data.dart';
+import 'package:ggamf_front/domain/data.dart';
 import 'package:ggamf_front/views/pages/recommend_ggamef/recommend_ggamf_list/components/recommend_ggamf_list_tab_bar.dart';
 
 class RecommendGgamfListTabView extends StatefulWidget {

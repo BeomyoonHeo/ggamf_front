@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:ggamf_front/core/page_enum.dart';
-import 'package:ggamf_front/data/user/model/login_user.dart';
+import 'package:ggamf_front/domain/user/model/login_user.dart';
 import 'package:retrofit/http.dart';
 
 part 'login_user_http_repository.g.dart';

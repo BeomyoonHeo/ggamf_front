@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:ggamf_front/data/data.dart';
-import 'package:ggamf_front/data/rest_client.dart';
+import 'package:ggamf_front/domain/data.dart';
+import 'package:ggamf_front/domain/rest_client.dart';
 
 final recommendGgamfListViewModel =
     StateNotifierProvider<RecommendGgamfListViewModel, List<Data>>((ref) {
@@ -14,6 +14,7 @@ class RecommendGgamfListViewModel extends StateNotifier<List<Data>> {
 
   //final dio = Dio()..interceptors.add(CustomLogInterceptor());
   void init() {
+    // 최초 init 시에만 repository에 의존
     RestClient restApi = RestClient(Dio());
     restApi
         .getUser(page: 1)
