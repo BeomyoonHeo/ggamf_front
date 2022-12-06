@@ -79,15 +79,8 @@ class OpponentProfile extends StatelessWidget {
   Widget _ratedStar() {
     return Container(
       decoration: BoxDecoration(
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.7),
-            blurRadius: 5,
-            spreadRadius: 0,
-            offset: Offset(0, 10),
-          ),
-        ],
         borderRadius: BorderRadius.circular(10),
+        border: Border.all(width: 1),
         color: Colors.white,
       ),
       child: Row(
