@@ -1,9 +1,9 @@
 import 'package:json_annotation/json_annotation.dart';
 
-part 'join_user_model.g.dart';
+part 'join_user.g.dart';
 
 @JsonSerializable()
-class JoinUserModel {
+class JoinUser {
   String name;
   String loginId;
   String password;
@@ -13,7 +13,7 @@ class JoinUserModel {
   String email;
   bool isAgree;
 
-  JoinUserModel({
+  JoinUser({
     required this.name,
     required this.loginId,
     required this.password,
@@ -24,8 +24,8 @@ class JoinUserModel {
     required this.isAgree,
   });
 
-  factory JoinUserModel.fromJson(Map<String, dynamic> json) =>
-      _$JoinUserModelFromJson(json);
+  factory JoinUser.fromJson(Map<String, dynamic> json) =>
+      _$JoinUserFromJson(json);
 
-  Map<String, dynamic> toJson() => _$JoinUserModelToJson(this);
+  Map<String, dynamic> toJson() => _$JoinUserToJson(this);
 }

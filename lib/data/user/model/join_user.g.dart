@@ -1,13 +1,12 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'join_user_model.dart';
+part of 'join_user.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-JoinUserModel _$JoinUserModelFromJson(Map<String, dynamic> json) =>
-    JoinUserModel(
+JoinUser _$JoinUserFromJson(Map<String, dynamic> json) => JoinUser(
       name: json['name'] as String,
       loginId: json['loginId'] as String,
       password: json['password'] as String,
@@ -18,8 +17,7 @@ JoinUserModel _$JoinUserModelFromJson(Map<String, dynamic> json) =>
       isAgree: json['isAgree'] as bool,
     );
 
-Map<String, dynamic> _$JoinUserModelToJson(JoinUserModel instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$JoinUserToJson(JoinUser instance) => <String, dynamic>{
       'name': instance.name,
       'loginId': instance.loginId,
       'password': instance.password,

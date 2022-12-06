@@ -1,8 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:ggamf_front/models/data.dart';
-import 'package:ggamf_front/models/rest_client.dart';
+import 'package:ggamf_front/data/data.dart';
+import 'package:ggamf_front/data/rest_client.dart';
 import 'package:ggamf_front/utils/custom_intercepter.dart';
 import 'package:ggamf_front/views/pages/recommend_ggamef/recommend_ggamf_list/components/recommend_ggamf_list_tab_bar.dart';
 

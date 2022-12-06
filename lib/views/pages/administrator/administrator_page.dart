@@ -1,14 +1,14 @@
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
+import 'package:ggamf_front/data/admin/admin_game_matching_statics_model.dart';
+import 'package:ggamf_front/data/admin/game_select_box_model.dart';
+import 'package:ggamf_front/data/admin/manage_room_model.dart';
+import 'package:ggamf_front/data/admin/update_game_category_model.dart';
 import 'package:ggamf_front/main.dart';
-import 'package:ggamf_front/models/admin/admin_game_matching_statics_model.dart';
-import 'package:ggamf_front/models/admin/game_select_box_model.dart';
-import 'package:ggamf_front/models/admin/manage_room_model.dart';
-import 'package:ggamf_front/models/admin/update_game_category_model.dart';
 import 'package:ggamf_front/views/pages/administrator/components/admin_tabs.dart';
 import 'package:ggamf_front/views/pages/administrator/components/title_bar.dart';
 
-import '../../../models/admin/admin_report_model.dart';
+import '../../../data/admin/admin_report_model.dart';
 
 class AdministratorPage extends StatelessWidget {
   const AdministratorPage({Key? key}) : super(key: key);

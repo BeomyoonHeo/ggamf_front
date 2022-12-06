@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../core/color.dart';
-import '../../../../models/user/user.dart';
+import '../../../../data/user/model/user.dart';
 
 class OtherChat extends StatefulWidget {
   const OtherChat(
