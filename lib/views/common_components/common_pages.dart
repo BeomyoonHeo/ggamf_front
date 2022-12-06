@@ -5,12 +5,13 @@ import 'package:ggamf_front/views/common_components/custom_icons_icons.dart';
 import 'package:ggamf_front/views/pages/join_party/join_party_list/join_party_list.dart';
 import 'package:ggamf_front/views/pages/my_ggamf/my_ggamf_list_page/my_ggamf_list_page.dart';
 import 'package:ggamf_front/views/pages/my_party/create_party/create_party_page.dart';
+import 'package:ggamf_front/views/pages/my_party/my_recruitment_party_list/my_recruitment_party_list.dart';
 import 'package:ggamf_front/views/pages/profile/my_profile/my_profile_page.dart';
 import 'package:ggamf_front/views/pages/recommend_ggamef/recommend_ggamf_list/recommend_ggamf_list.dart';
 
 const List<Widget> commonPages = [
   JoinPartyList(),
-  CreatePartyPage(),
+  MyRecruitmentPartyList(),
   MyGgamfListPage(),
   RecommendGgamfList(),
   MyProfilePage(),
@@ -23,13 +24,8 @@ class AllPages extends StatefulWidget {
   State<AllPages> createState() => _AllPagesState();
 }
 
-class _AllPagesState extends State<AllPages>
-    with AutomaticKeepAliveClientMixin {
-  int _selectedIndex = 3;
-
-  @override
-  // TODO: implement wantKeepAlive
-  bool get wantKeepAlive => true;
+class _AllPagesState extends State<AllPages> {
+  int _selectedIndex = 2;
 
   @override
   void initState() {
@@ -44,8 +40,6 @@ class _AllPagesState extends State<AllPages>
 
   @override
   Widget build(BuildContext context) {
-    super.build(context);
-
     return Scaffold(
       body: IndexedStack(
         index: _selectedIndex,
@@ -62,22 +56,32 @@ class _AllPagesState extends State<AllPages>
         FlashyTabBarItem(
           icon: Icon(CustomIcons.joinparty, size: 25),
           title: Text('파티 참가'),
+          activeColor: Colors.black,
+          inactiveColor: Colors.black,
         ),
         FlashyTabBarItem(
           icon: Icon(CustomIcons.myparty),
           title: Text('나의 파티'),
+          activeColor: Colors.black,
+          inactiveColor: Colors.black,
         ),
         FlashyTabBarItem(
           icon: Icon(CustomIcons.mygamf),
           title: Text('내 껨프'),
+          activeColor: Colors.black,
+          inactiveColor: Colors.black,
         ),
         FlashyTabBarItem(
           icon: Icon(CustomIcons.recomgamf),
           title: Text('추천 껨프'),
+          activeColor: Colors.black,
+          inactiveColor: Colors.black,
         ),
         FlashyTabBarItem(
           icon: Icon(CustomIcons.myprofile),
           title: Text('내 프로필'),
+          activeColor: Colors.black,
+          inactiveColor: Colors.black,
         ),
       ],
       animationCurve: Curves.linear,

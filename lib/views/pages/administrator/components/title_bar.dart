@@ -5,6 +5,7 @@ List<String> titleList = [
   '게임 매칭 통계 보기 페이지',
   '방 생성 시 게임 선택 카테고리 수정',
   '게임선택 박스 수정',
+  '매칭 방 관리'
 ];
 
 class TitleBar extends StatefulWidget {

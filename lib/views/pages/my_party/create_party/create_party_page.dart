@@ -10,10 +10,10 @@ class CreatePartyPage extends StatefulWidget {
 
 class _CreatePartyPageState extends State<CreatePartyPage> {
   List<String> _valueList = ['리그 오브 레전드', '오버워치', '로스트아크', '발로란트', '기타'];
-  var _selectedValue = '리그 오브 레전드';
+  var _selectedValue;
 
-  List<String> _numList = ['모집인원선택', '2', '3', '4', '5', '6', '7', '8'];
-  var _selectedNum = '모집인원선택';
+  List<String> _numList = ['2', '3', '4', '5', '6', '7', '8'];
+  var _selectedNum;
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +21,7 @@ class _CreatePartyPageState extends State<CreatePartyPage> {
       appBar: _appBar(),
       body: Padding(
         padding: const EdgeInsets.all(20),
-        child: Column(
+        child: ListView(
           children: [
             _title(),
             SizedBox(height: 40),
@@ -30,7 +30,7 @@ class _CreatePartyPageState extends State<CreatePartyPage> {
             _partyName(),
             SizedBox(height: 40),
             _partyNumber(),
-            SizedBox(height: 100),
+            SizedBox(height: 70),
             _recruitmentButton(context),
           ],
         ),
@@ -40,6 +40,7 @@ class _CreatePartyPageState extends State<CreatePartyPage> {
 
   DropdownButton<String> _partyNumber() {
     return DropdownButton(
+      hint: Text("인원을 선택하세요"),
       value: _selectedNum,
       items: _numList.map((String item) {
         return DropdownMenuItem<String>(
@@ -50,7 +51,7 @@ class _CreatePartyPageState extends State<CreatePartyPage> {
       onChanged: (dynamic value) {
         setState(
           () {
-            _selectedValue = value;
+            _selectedNum = value;
           },
         );
       },
@@ -106,45 +107,46 @@ class _CreatePartyPageState extends State<CreatePartyPage> {
     );
   }
 
-  Container _selectGame() {
-    return Container(
-      padding: EdgeInsets.all(20),
-      width: double.infinity,
-      height: 100,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(20),
-        border: Border.all(width: 1),
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
-          DropdownButton(
-            value: _selectedValue,
-            items: _valueList.map((String item) {
-              return DropdownMenuItem<String>(
-                child: Text('$item'),
-                value: item,
-              );
-            }).toList(),
-            onChanged: (dynamic value) {
-              setState(
-                () {
-                  _selectedValue = value;
-                },
-              );
-            },
-          ),
-          SizedBox(width: 40),
-          SizedBox(
-            width: 150,
-            height: 40,
-            child: TextFormField(
-              decoration: InputDecoration(
-                hintText: '기타 선택시 입력창',
+  Widget _selectGame() {
+    return Expanded(
+      child: Container(
+        padding: EdgeInsets.all(5),
+        width: double.infinity,
+        height: 100,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(20),
+          border: Border.all(width: 1),
+        ),
+        child: Column(
+          children: [
+            DropdownButton(
+              hint: Text("게임을 선택하세요"),
+              value: _selectedValue,
+              items: _valueList.map((String item) {
+                return DropdownMenuItem<String>(
+                  child: Text('$item'),
+                  value: item,
+                );
+              }).toList(),
+              onChanged: (dynamic value) {
+                setState(
+                  () {
+                    _selectedValue = value;
+                  },
+                );
+              },
+            ),
+            SizedBox(
+              width: 150,
+              height: 40,
+              child: TextFormField(
+                decoration: InputDecoration(
+                  hintText: '기타 선택시 입력창',
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

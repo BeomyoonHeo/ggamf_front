@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:ggamf_front/core/color.dart';
 import 'package:ggamf_front/core/page_enum.dart';
 import 'package:ggamf_front/views/pages/login_user/components/rounded_input_field.dart';
 import 'package:ggamf_front/views/pages/login_user/components/rounded_input_password_field.dart';
@@ -19,7 +18,7 @@ class LoginBox extends StatelessWidget {
       child: Container(
         color: Colors.white,
         width: size.width * 0.9,
-        padding: EdgeInsets.symmetric(vertical: 10),
+        padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
         child: _buildLoginItemColumn(context),
       ),
     );
@@ -32,7 +31,6 @@ class LoginBox extends StatelessWidget {
           height: 10,
         ),
         Container(
-          height: size.height * 0.2 + 30,
           decoration: BoxDecoration(
               border: Border.all(width: 1),
               borderRadius: BorderRadius.circular(9)),
@@ -46,38 +44,32 @@ class LoginBox extends StatelessWidget {
               ),
               SizedBox(height: 10),
               RoundedInputPasswordField(),
-              SizedBox(height: 5),
-              Container(
-                child: Visibility(
-                  child: Text("아이디를 입력해주세요 | 비밀번호를 입력해주세요"),
-                  visible: false,
-                ),
-              ),
             ],
           ),
         ),
         SizedBox(height: 10),
         Container(
           padding: EdgeInsets.symmetric(horizontal: 5),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          child: Column(
             children: [
-              ItemButton(
-                text: "아이디|비밀번호찾기",
-                function: () {},
-              ),
-              ItemButton(
-                  text: "회원가입",
-                  function: () {
-                    Navigator.pushNamed(context,
-                        PageEnum.getByDisPlayName('join').requestLocation);
-                  }),
               ItemButton(
                   text: "로그인",
                   function: () {
                     Navigator.pushNamed(context,
                         PageEnum.getByDisPlayName('allpages').requestLocation);
                   }),
+              SizedBox(height: 10),
+              ItemButton(
+                  text: "회원가입",
+                  function: () {
+                    Navigator.pushNamed(context,
+                        PageEnum.getByDisPlayName('join').requestLocation);
+                  }),
+              SizedBox(height: 10),
+              ItemButton(
+                text: "아이디|비밀번호찾기",
+                function: () {},
+              ),
             ],
           ),
         )
@@ -86,7 +78,7 @@ class LoginBox extends StatelessWidget {
   }
 }
 
-class ItemButton extends StatelessWidget {
+class ItemButton extends StatefulWidget {
   final text;
 
   final Function function;
@@ -97,23 +89,28 @@ class ItemButton extends StatelessWidget {
   }) : super(key: key);
 
   @override
+  State<ItemButton> createState() => _ItemButtonState();
+}
+
+class _ItemButtonState extends State<ItemButton> {
+  @override
   Widget build(BuildContext context) {
-    return Container(
-      child: ElevatedButton(
-        onPressed: () {
-          function();
+    return Material(
+      child: InkWell(
+        onTap: () {
+          widget.function();
+          setState(() {});
         },
-        style: ButtonStyle(
-          backgroundColor: const MaterialStatePropertyAll<Color>(kPrimaryColor),
-          shape: MaterialStatePropertyAll<RoundedRectangleBorder>(
-            RoundedRectangleBorder(
+        child: Container(
+          padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+          alignment: Alignment.center,
+          decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(30),
-            ),
+              border: Border.all(width: 1)),
+          child: Text(
+            widget.text,
+            style: TextStyle(color: Colors.black),
           ),
-        ),
-        child: Text(
-          text,
-          style: TextStyle(color: Colors.black),
         ),
       ),
     );
