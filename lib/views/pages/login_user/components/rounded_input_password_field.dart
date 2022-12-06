@@ -20,7 +20,7 @@ class _RoundedInputPasswordFieldState extends State<RoundedInputPasswordField> {
           onChanged: (value) {},
           obscureText: obscureText,
           decoration: InputDecoration(
-              hintText: "password",
+              hintText: "비밀번호 입력",
               icon: Icon(Icons.lock),
               suffixIcon: IconButton(
                 icon: visible,

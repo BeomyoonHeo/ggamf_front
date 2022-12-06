@@ -2,10 +2,15 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../core/color.dart';
-import '../../../../models/user.dart';
 
 class OtherChat extends StatefulWidget {
-  const OtherChat({Key? key, required this.name, required this.text, required this.time, required this.num}) : super(key: key);
+  const OtherChat(
+      {Key? key,
+      required this.name,
+      required this.text,
+      required this.time,
+      required this.num})
+      : super(key: key);
 
   final String name;
   final String text;
@@ -27,11 +32,13 @@ class _OtherChatState extends State<OtherChat> {
             children: [
               InkWell(
                 onTap: () {
-                  showDialog(context: context, builder: (_) => _showDetailOpponent());
+                  showDialog(
+                      context: context, builder: (_) => _showDetailOpponent());
                 },
                 child: CircleAvatar(
-                  backgroundImage: NetworkImage(friends[this.widget.num].backgroundImage), // 1
-                ),
+                    // backgroundImage: NetworkImage(
+                    //     friends[this.widget.num].backgroundImage), // 1
+                    ),
               ),
               SizedBox(width: 10),
               Flexible(
@@ -86,7 +93,8 @@ class _OtherChatState extends State<OtherChat> {
             ),
             CircleAvatar(
               radius: 50,
-              backgroundImage: NetworkImage(friends[this.widget.num].backgroundImage), // 1
+              // backgroundImage:
+              // NetworkImage(friends[this.widget.num].backgroundImage), // 1
             ),
             SizedBox(height: 10),
             Text(this.widget.name),
@@ -97,12 +105,14 @@ class _OtherChatState extends State<OtherChat> {
                 ElevatedButton(
                   onPressed: () {},
                   child: Text("프로필보기"),
-                  style: ElevatedButton.styleFrom(backgroundColor: kSecondaryColor),
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor: kSecondaryColor),
                 ),
                 ElevatedButton(
                   onPressed: () {},
                   child: Text("추방하기"),
-                  style: ElevatedButton.styleFrom(backgroundColor: kSecondaryColor),
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor: kSecondaryColor),
                 ),
               ],
             ),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:ggamf_front/core/page_enum.dart';
 import 'package:ggamf_front/core/theme.dart';
 import 'package:ggamf_front/views/common_components/common_pages.dart';
+import 'package:ggamf_front/views/pages/administrator/administrator_page.dart';
 import 'package:ggamf_front/views/pages/join_user/join_user_page.dart';
 import 'package:ggamf_front/views/pages/login_user/login_user_page.dart';
 
@@ -23,10 +24,10 @@ class MyApp extends StatelessWidget {
       initialRoute: PageEnum.getByDisPlayName('login').requestLocation,
       routes: {
         PageEnum.LOGIN.requestLocation: (context) => const LoginUserPage(),
-        PageEnum.JOIN.requestLocation: (context) => const JoinUserPage(),
+        PageEnum.JOIN.requestLocation: (context) => JoinUserPage(),
         PageEnum.ALLPAGES.requestLocation: (context) => const AllPages(),
       },
-      theme: buildThemeData(),
+      theme: theme(),
     );
   }
 }

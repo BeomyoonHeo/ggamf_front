@@ -1,10 +1,19 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:ggamf_front/models/user.dart';
+import 'package:ggamf_front/data/data.dart';
+import 'package:ggamf_front/data/rest_client.dart';
+import 'package:ggamf_front/utils/custom_intercepter.dart';
 import 'package:ggamf_front/views/pages/recommend_ggamef/recommend_ggamf_list/components/recommend_ggamf_list_tab_bar.dart';
 
 class RecommendGgamfListTabView extends StatefulWidget {
-  const RecommendGgamfListTabView({
+  //인터셉터 추가
+  final dio = Dio()
+    ..interceptors.add(
+      //cascade 연산자를 실행하여 바로 add 하였다.
+      CustomLogInterceptor(),
+    );
+  RecommendGgamfListTabView({
     Key? key,
     required TabController tabController,
   })  : _tabController = tabController,
@@ -59,58 +68,64 @@ class _RecommendGgamfListTabViewState extends State<RecommendGgamfListTabView>
 
   @override
   Widget build(BuildContext context) {
+    final client =
+        RestClient(widget.dio); //RestClient를 등록 - 스프링으로 치면 controller 같은 느낌이다.
+
     return Expanded(
       child: TabBarView(
         controller: widget._tabController,
         children: [
-          _buildListView(buttonListToRecommendGgamf),
-          Container(
-            child: Column(
-              children: [
-                RecommendGgamfListTabBar(
-                  tabController: _innerTabController,
-                  textIndex: textIndex,
+          _buildListView(buttonListToRecommendGgamf, client),
+          Column(
+            children: [
+              RecommendGgamfListTabBar(
+                tabController: _innerTabController,
+                textIndex: textIndex,
+              ),
+              const SizedBox(height: 20),
+              Expanded(
+                child: TabBarView(
+                  controller: _innerTabController,
+                  children: [
+                    _buildListView(buttonListToReceiveRequestGgamf, client),
+                    _buildListView(buttonListToGiveRequestGgamf, client),
+                  ],
                 ),
-                const SizedBox(height: 20),
-                Expanded(
-                  child: TabBarView(
-                    controller: _innerTabController,
-                    children: [
-                      _buildListView(buttonListToReceiveRequestGgamf),
-                      _buildListView(buttonListToGiveRequestGgamf),
-                    ],
-                  ),
-                ),
-              ],
-            ),
+              ),
+            ],
           )
         ],
       ),
     );
   }
 
-  Widget _buildListView(List<IconButton> buttons) {
-    return ListView.separated(
-      itemCount: friends.length,
-      itemBuilder: (context, index) {
-        return ListTile(
-          visualDensity: VisualDensity(horizontal: 3),
-          leading: CircleAvatar(
-            backgroundImage: NetworkImage(friends[index].backgroundImage),
-          ),
-          title: Text(friends[index].name),
-          subtitle: Text(friends[index].intro),
-          trailing: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: buttons,
-          ),
-        );
-      },
-      separatorBuilder: (context, index) {
-        return const Divider(
-          height: 10,
-          color: Colors.white,
-        );
+  Widget _buildListView(List<IconButton> buttons, RestClient client) {
+    return FutureBuilder<User?>(
+      future: client.getUser(page: 2),
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          User usersInfo = snapshot.data!;
+          return ListView.separated(
+              itemBuilder: (context, index) => ListTile(
+                    visualDensity: const VisualDensity(horizontal: 3),
+                    leading: CircleAvatar(
+                      backgroundImage:
+                          NetworkImage(usersInfo.data[index].avatar),
+                    ),
+                    title: Text(usersInfo.data[index].firstName),
+                    subtitle: Text(usersInfo.data[index].lastName),
+                    trailing: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: buttons,
+                    ),
+                  ),
+              separatorBuilder: (context, index) => const Divider(
+                    height: 10,
+                    color: Colors.white,
+                  ),
+              itemCount: usersInfo.data.length);
+        }
+        return const CircularProgressIndicator();
       },
     );
   }
