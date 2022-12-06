@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../core/color.dart';
-import '../../../../data/user/model/user.dart';
 
 class OtherChat extends StatefulWidget {
   const OtherChat(
@@ -37,9 +36,9 @@ class _OtherChatState extends State<OtherChat> {
                       context: context, builder: (_) => _showDetailOpponent());
                 },
                 child: CircleAvatar(
-                  backgroundImage: NetworkImage(
-                      friends[this.widget.num].backgroundImage), // 1
-                ),
+                    // backgroundImage: NetworkImage(
+                    //     friends[this.widget.num].backgroundImage), // 1
+                    ),
               ),
               SizedBox(width: 10),
               Flexible(
@@ -94,8 +93,8 @@ class _OtherChatState extends State<OtherChat> {
             ),
             CircleAvatar(
               radius: 50,
-              backgroundImage:
-                  NetworkImage(friends[this.widget.num].backgroundImage), // 1
+              // backgroundImage:
+              // NetworkImage(friends[this.widget.num].backgroundImage), // 1
             ),
             SizedBox(height: 10),
             Text(this.widget.name),

@@ -101,7 +101,7 @@ class _RecommendGgamfListTabViewState extends State<RecommendGgamfListTabView>
 
   Widget _buildListView(List<IconButton> buttons, RestClient client) {
     return FutureBuilder<User?>(
-      future: client.getUser(page: 1),
+      future: client.getUser(page: 2),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           User usersInfo = snapshot.data!;
