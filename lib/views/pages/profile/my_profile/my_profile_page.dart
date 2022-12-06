@@ -28,9 +28,8 @@ class _MyProfilePageState extends State<MyProfilePage> {
         backgroundColor: Colors.white,
         title: Text("내 프로필"),
       ),
-      backgroundColor: kPrimaryColor,
       body: Padding(
-        padding: const EdgeInsets.only(left: 20, right: 20),
+        padding: const EdgeInsets.symmetric(horizontal: 20),
         child: ListView(
           children: [
             SizedBox(height: 50),
@@ -72,7 +71,7 @@ class _MyProfilePageState extends State<MyProfilePage> {
   }
 
   Widget _withdrawal() {
-    return ElevatedButton(
+    return OutlinedButton(
       onPressed: () {
         Navigator.push(
           context,
@@ -80,14 +79,15 @@ class _MyProfilePageState extends State<MyProfilePage> {
         );
       },
       child: Text("탈퇴"),
-      style: ElevatedButton.styleFrom(
-        backgroundColor: kSecondaryColor,
+      style: OutlinedButton.styleFrom(
+        foregroundColor: Colors.black,
+        minimumSize: Size(150, 50),
       ),
     );
   }
 
   Widget _updataProfile() {
-    return ElevatedButton(
+    return OutlinedButton(
       onPressed: () {
         Navigator.push(
           context,
@@ -95,26 +95,21 @@ class _MyProfilePageState extends State<MyProfilePage> {
         );
       },
       child: Text("프로필 수정"),
-      style: ElevatedButton.styleFrom(
-        backgroundColor: kSecondaryColor,
+      style: OutlinedButton.styleFrom(
+        foregroundColor: Colors.black,
+        minimumSize: Size(150, 50),
       ),
     );
   }
 
   Widget _introduce() {
     return Container(
+      margin: EdgeInsets.symmetric(horizontal: 50),
       padding: EdgeInsets.all(10),
       width: double.infinity,
       height: 100,
       decoration: BoxDecoration(
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.7),
-            blurRadius: 5,
-            spreadRadius: 0,
-            offset: Offset(5, 6),
-          ),
-        ],
+        border: Border.all(width: 1),
         borderRadius: BorderRadius.circular(10),
         color: Colors.white,
       ),
@@ -128,17 +123,11 @@ class _MyProfilePageState extends State<MyProfilePage> {
 
   Widget _nickName() {
     return Container(
+      margin: EdgeInsets.symmetric(horizontal: 50),
       padding: EdgeInsets.all(10),
       width: double.infinity,
       decoration: BoxDecoration(
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.7),
-            blurRadius: 5,
-            spreadRadius: 0,
-            offset: Offset(5, 6),
-          ),
-        ],
+        border: Border.all(width: 1),
         borderRadius: BorderRadius.circular(10),
         color: Colors.white,
       ),
