@@ -20,7 +20,7 @@ class _UpdateMyProfileState extends State<UpdateMyProfile> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      appBar: _AppBar(),
+      appBar: _appBar(),
       backgroundColor: kPrimaryColor,
       body: Padding(
         padding: const EdgeInsets.only(left: 20, right: 20),
@@ -95,7 +95,7 @@ class _UpdateMyProfileState extends State<UpdateMyProfile> {
     );
   }
 
-  AppBar _AppBar() {
+  AppBar _appBar() {
     return AppBar(
       automaticallyImplyLeading: false,
       backgroundColor: Colors.white,
@@ -122,8 +122,7 @@ class _UpdateMyProfileState extends State<UpdateMyProfile> {
                 right: 0,
                 child: InkWell(
                   onTap: () {
-                    showModalBottomSheet(
-                        context: context, builder: (builder) => _bottomSheet());
+                    showModalBottomSheet(context: context, builder: (builder) => _bottomSheet());
                   },
                   child: Icon(
                     Icons.camera_alt,

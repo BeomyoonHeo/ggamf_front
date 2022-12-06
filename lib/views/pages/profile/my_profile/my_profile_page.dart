@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ggamf_front/views/pages/profile/update_my_profile/update_my_profile_page.dart';
+import 'package:ggamf_front/views/pages/profile/withdrawal/withdrawal_page.dart';
 
 import '../../../../core/color.dart';
 
@@ -42,8 +43,7 @@ class _MyProfilePageState extends State<MyProfilePage> {
               height: 150,
               child: InkWell(
                 onTap: () async {
-                  await showDialog(
-                      context: context, builder: (_) => _imageDialog());
+                  await showDialog(context: context, builder: (_) => _imageDialog());
                 },
                 child: Image.asset("assets/images/cart1.png"),
               ),
@@ -73,7 +73,12 @@ class _MyProfilePageState extends State<MyProfilePage> {
 
   Widget _withdrawal() {
     return ElevatedButton(
-      onPressed: () {},
+      onPressed: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => WithdrawalPage()),
+        );
+      },
       child: Text("탈퇴"),
       style: ElevatedButton.styleFrom(
         backgroundColor: kSecondaryColor,
