@@ -19,6 +19,8 @@ class JoinUserPage extends ConsumerWidget {
   TextEditingController nickNameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
 
+  String validation = '';
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
@@ -57,7 +59,9 @@ class JoinUserPage extends ConsumerWidget {
                   const SizedBox(height: 10),
                   InputPhoneNumberWidget(),
                   SizedBox(height: 10),
-                  CertificationNumberButton(),
+                  CertificationNumberButton(
+                      certificationText: '인증되지 않음',
+                      phoneNumber: phoneNumberController.text),
                   SizedBox(height: 10),
                   InputBox(
                     inputText: "닉네임 : ",

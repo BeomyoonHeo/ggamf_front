@@ -33,6 +33,7 @@ class InputBox extends StatelessWidget {
             ),
             child: TextFormField(
               controller: controller,
+              validator: (value) {},
               decoration: InputDecoration(
                 hintText: hintText,
                 hintStyle: TextStyle(fontFamily: 'NanumSquare', fontSize: 15),

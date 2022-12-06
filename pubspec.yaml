@@ -62,6 +62,7 @@ dependencies:
   intl: ^0.17.0
   flashy_tab_bar2: ^0.0.5
   chips_choice: ^3.0.0
+  fluttertoast: ^8.1.1
 
 
 

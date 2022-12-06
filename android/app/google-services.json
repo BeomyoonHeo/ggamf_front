@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "392355264503-1ku7h2hfic25v0istisspgulc2mjbnhj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "shop.ggamf.ggamf_front",
+            "certificate_hash": "40c5568f96b70dcb8e09db945a2ff9fcfeb065ab"
+          }
+        },
+        {
           "client_id": "392355264503-bhkqifllmomsa75lqfk9emjm69q9q4va.apps.googleusercontent.com",
           "client_type": 3
         }

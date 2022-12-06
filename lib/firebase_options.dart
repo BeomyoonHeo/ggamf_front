@@ -69,6 +69,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '392355264503',
     projectId: 'ggamf-chat-front',
     storageBucket: 'ggamf-chat-front.appspot.com',
+    androidClientId: '392355264503-1ku7h2hfic25v0istisspgulc2mjbnhj.apps.googleusercontent.com',
     iosClientId: '392355264503-h6rjegrohu03vnlvb23gmii2vioj9cdf.apps.googleusercontent.com',
     iosBundleId: 'shop.ggamf.ggamfFront',
   );
