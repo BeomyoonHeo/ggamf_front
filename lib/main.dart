@@ -7,7 +7,7 @@ import 'package:ggamf_front/views/pages/join_user/join_user_page.dart';
 import 'package:ggamf_front/views/pages/login_user/login_user_page.dart';
 
 void main() {
-  runApp(AdministratorPage());
+  runApp(MyApp());
 }
 
 // 페이지 context를 global로 가지고 있을 NavigatorKey 적용
