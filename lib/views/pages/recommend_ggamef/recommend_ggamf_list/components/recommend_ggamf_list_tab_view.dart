@@ -68,33 +68,31 @@ class _RecommendGgamfListTabViewState extends State<RecommendGgamfListTabView>
 
   @override
   Widget build(BuildContext context) {
-    final _client =
+    final client =
         RestClient(widget.dio); //RestClient를 등록 - 스프링으로 치면 controller 같은 느낌이다.
 
     return Expanded(
       child: TabBarView(
         controller: widget._tabController,
         children: [
-          _buildListView(buttonListToRecommendGgamf, _client),
-          Container(
-            child: Column(
-              children: [
-                RecommendGgamfListTabBar(
-                  tabController: _innerTabController,
-                  textIndex: textIndex,
+          _buildListView(buttonListToRecommendGgamf, client),
+          Column(
+            children: [
+              RecommendGgamfListTabBar(
+                tabController: _innerTabController,
+                textIndex: textIndex,
+              ),
+              const SizedBox(height: 20),
+              Expanded(
+                child: TabBarView(
+                  controller: _innerTabController,
+                  children: [
+                    _buildListView(buttonListToReceiveRequestGgamf, client),
+                    _buildListView(buttonListToGiveRequestGgamf, client),
+                  ],
                 ),
-                const SizedBox(height: 20),
-                Expanded(
-                  child: TabBarView(
-                    controller: _innerTabController,
-                    children: [
-                      _buildListView(buttonListToReceiveRequestGgamf, _client),
-                      _buildListView(buttonListToGiveRequestGgamf, _client),
-                    ],
-                  ),
-                ),
-              ],
-            ),
+              ),
+            ],
           )
         ],
       ),
@@ -109,7 +107,7 @@ class _RecommendGgamfListTabViewState extends State<RecommendGgamfListTabView>
           User usersInfo = snapshot.data!;
           return ListView.separated(
               itemBuilder: (context, index) => ListTile(
-                    visualDensity: VisualDensity(horizontal: 3),
+                    visualDensity: const VisualDensity(horizontal: 3),
                     leading: CircleAvatar(
                       backgroundImage:
                           NetworkImage(usersInfo.data[index].avatar),
@@ -121,13 +119,13 @@ class _RecommendGgamfListTabViewState extends State<RecommendGgamfListTabView>
                       children: buttons,
                     ),
                   ),
-              separatorBuilder: (context, index) => Divider(
+              separatorBuilder: (context, index) => const Divider(
                     height: 10,
                     color: Colors.white,
                   ),
               itemCount: usersInfo.data.length);
         }
-        return CircularProgressIndicator();
+        return const CircularProgressIndicator();
       },
     );
   }

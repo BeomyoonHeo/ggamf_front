@@ -4,14 +4,14 @@ part 'join_user_model.g.dart';
 
 @JsonSerializable()
 class JoinUserModel {
-  final String name;
-  final String loginId;
-  final String password;
-  final String phoneNumber;
-  final bool isSigned;
-  final String nickname;
-  final String email;
-  final bool isAgree;
+  String name;
+  String loginId;
+  String password;
+  String phoneNumber;
+  bool isSigned;
+  String nickname;
+  String email;
+  bool isAgree;
 
   JoinUserModel({
     required this.name,

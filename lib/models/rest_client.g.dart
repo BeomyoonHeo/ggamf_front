@@ -21,16 +21,23 @@ class _RestClient implements RestClient {
   String? baseUrl;
 
   @override
-  Future<User> postUser({required id}) async {
+  Future<User> postUser({
+    required id,
+    required body,
+  }) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{};
-    final _data = <String, dynamic>{};
+    final _headers = <String, dynamic>{
+      r'Content-Type': 'application/json; charset=utf-8'
+    };
+    _headers.removeWhere((k, v) => v == null);
+    final _data = body;
     final _result =
         await _dio.fetch<Map<String, dynamic>>(_setStreamType<User>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
+      contentType: 'application/json; charset=utf-8',
     )
             .compose(
               _dio.options,

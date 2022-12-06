@@ -7,7 +7,6 @@ class User {
   User({
     required this.data,
   });
-
   List<Data> data;
 
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);

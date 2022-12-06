@@ -23,3 +23,26 @@ class CustomLogInterceptor extends Interceptor {
     super.onError(err, handler);
   }
 }
+
+// 인터셉터 사용시 예시
+// dio.interceptors.add(InterceptorsWrapper(
+// onRequest: (Options options, handler) async {
+// print('send request：path:${options.path}，baseURL:${options.baseUrl}');
+// if (csrfToken == null) {
+// print('no token，request token firstly...');
+// //lock the dio.
+// dio.lock();
+// tokenDio.get('/token').then((d) {
+// options.headers['csrfToken'] = csrfToken = d.data['data']['token'];
+// print('request token succeed, value: ' + d.data['data']['token']);
+// print( 'continue to perform request：path:${options.path}，baseURL:${options.path}');
+// handler.next(options);
+// }).catchError((error, stackTrace) {
+// handler.reject(error, true);
+// }) .whenComplete(() => dio.unlock()); // unlock the dio
+// } else {
+// options.headers['csrfToken'] = csrfToken;
+// handler.next(options);
+// }
+// }
+// ));
