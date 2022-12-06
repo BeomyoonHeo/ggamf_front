@@ -21,7 +21,6 @@ class _UpdateMyProfileState extends State<UpdateMyProfile> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: _appBar(),
-      backgroundColor: kPrimaryColor,
       body: Padding(
         padding: const EdgeInsets.only(left: 20, right: 20),
         child: ListView(
@@ -30,15 +29,15 @@ class _UpdateMyProfileState extends State<UpdateMyProfile> {
             _changePhoto(),
             SizedBox(height: 50),
             _nickName(),
-            SizedBox(height: 50),
+            SizedBox(height: 30),
             _password(),
-            SizedBox(height: 50),
+            SizedBox(height: 30),
             _email(),
-            SizedBox(height: 50),
+            SizedBox(height: 30),
             _introduce(),
-            SizedBox(height: 50),
+            SizedBox(height: 30),
             _updateProfileButton(),
-            SizedBox(height: 50),
+            SizedBox(height: 30),
           ],
         ),
       ),
@@ -50,14 +49,7 @@ class _UpdateMyProfileState extends State<UpdateMyProfile> {
       padding: EdgeInsets.all(5),
       width: double.infinity,
       decoration: BoxDecoration(
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.7),
-            blurRadius: 5,
-            spreadRadius: 0,
-            offset: Offset(5, 6),
-          ),
-        ],
+        border: Border.all(width: 1),
         borderRadius: BorderRadius.circular(10),
         color: Colors.white,
       ),
@@ -75,14 +67,7 @@ class _UpdateMyProfileState extends State<UpdateMyProfile> {
       padding: EdgeInsets.all(5),
       width: double.infinity,
       decoration: BoxDecoration(
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.7),
-            blurRadius: 5,
-            spreadRadius: 0,
-            offset: Offset(5, 6),
-          ),
-        ],
+        border: Border.all(width: 1),
         borderRadius: BorderRadius.circular(10),
         color: Colors.white,
       ),
@@ -138,11 +123,12 @@ class _UpdateMyProfileState extends State<UpdateMyProfile> {
   Widget _updateProfileButton() {
     return Container(
       padding: EdgeInsets.only(left: 100, right: 100),
-      child: ElevatedButton(
+      child: OutlinedButton(
         onPressed: () {},
         child: Text("수정 완료"),
-        style: ElevatedButton.styleFrom(
-          backgroundColor: kSecondaryColor,
+        style: OutlinedButton.styleFrom(
+          foregroundColor: Colors.black,
+          minimumSize: Size(150, 50),
         ),
       ),
     );
@@ -154,14 +140,7 @@ class _UpdateMyProfileState extends State<UpdateMyProfile> {
       height: 150,
       width: double.infinity,
       decoration: BoxDecoration(
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.7),
-            blurRadius: 5,
-            spreadRadius: 0,
-            offset: Offset(5, 6),
-          ),
-        ],
+        border: Border.all(width: 1),
         borderRadius: BorderRadius.circular(10),
         color: Colors.white,
       ),
@@ -183,14 +162,7 @@ class _UpdateMyProfileState extends State<UpdateMyProfile> {
       padding: EdgeInsets.all(5),
       width: double.infinity,
       decoration: BoxDecoration(
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.7),
-            blurRadius: 5,
-            spreadRadius: 0,
-            offset: Offset(5, 6),
-          ),
-        ],
+        border: Border.all(width: 1),
         borderRadius: BorderRadius.circular(10),
         color: Colors.white,
       ),
