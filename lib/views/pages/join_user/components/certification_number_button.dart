@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 
 class CertificationNumberButton extends StatelessWidget {
-  const CertificationNumberButton({
+  CertificationNumberButton({
     Key? key,
   }) : super(key: key);
+
+  bool authOk = false;
 
   @override
   Widget build(BuildContext context) {
