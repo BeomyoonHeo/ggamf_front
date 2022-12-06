@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:ggamf_front/views/pages/profile/update_my_profile/update_my_profile_page.dart';
+import 'package:ggamf_front/views/pages/profile/withdrawal/withdrawal_page.dart';
 
 import '../../../../core/color.dart';
 
@@ -21,9 +23,13 @@ class _MyProfilePageState extends State<MyProfilePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: kPrimaryColor,
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        backgroundColor: Colors.white,
+        title: Text("내 프로필"),
+      ),
       body: Padding(
-        padding: const EdgeInsets.only(left: 20, right: 20),
+        padding: const EdgeInsets.symmetric(horizontal: 20),
         child: ListView(
           children: [
             SizedBox(height: 50),
@@ -36,12 +42,12 @@ class _MyProfilePageState extends State<MyProfilePage> {
               height: 150,
               child: InkWell(
                 onTap: () async {
-                  await showDialog(
-                      context: context, builder: (_) => _imageDialog());
+                  await showDialog(context: context, builder: (_) => _imageDialog());
                 },
                 child: Image.asset("assets/images/cart1.png"),
               ),
             ),
+            SizedBox(height: 30),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
@@ -65,39 +71,45 @@ class _MyProfilePageState extends State<MyProfilePage> {
   }
 
   Widget _withdrawal() {
-    return ElevatedButton(
-      onPressed: () {},
+    return OutlinedButton(
+      onPressed: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => WithdrawalPage()),
+        );
+      },
       child: Text("탈퇴"),
-      style: ElevatedButton.styleFrom(
-        backgroundColor: kSecondaryColor,
+      style: OutlinedButton.styleFrom(
+        foregroundColor: Colors.black,
+        minimumSize: Size(150, 50),
       ),
     );
   }
 
   Widget _updataProfile() {
-    return ElevatedButton(
-      onPressed: () {},
+    return OutlinedButton(
+      onPressed: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => UpdateMyProfile()),
+        );
+      },
       child: Text("프로필 수정"),
-      style: ElevatedButton.styleFrom(
-        backgroundColor: kSecondaryColor,
+      style: OutlinedButton.styleFrom(
+        foregroundColor: Colors.black,
+        minimumSize: Size(150, 50),
       ),
     );
   }
 
   Widget _introduce() {
     return Container(
+      margin: EdgeInsets.symmetric(horizontal: 50),
       padding: EdgeInsets.all(10),
       width: double.infinity,
       height: 100,
       decoration: BoxDecoration(
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.7),
-            blurRadius: 5,
-            spreadRadius: 0,
-            offset: Offset(5, 6),
-          ),
-        ],
+        border: Border.all(width: 1),
         borderRadius: BorderRadius.circular(10),
         color: Colors.white,
       ),
@@ -111,17 +123,11 @@ class _MyProfilePageState extends State<MyProfilePage> {
 
   Widget _nickName() {
     return Container(
+      margin: EdgeInsets.symmetric(horizontal: 50),
       padding: EdgeInsets.all(10),
       width: double.infinity,
       decoration: BoxDecoration(
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.7),
-            blurRadius: 5,
-            spreadRadius: 0,
-            offset: Offset(5, 6),
-          ),
-        ],
+        border: Border.all(width: 1),
         borderRadius: BorderRadius.circular(10),
         color: Colors.white,
       ),

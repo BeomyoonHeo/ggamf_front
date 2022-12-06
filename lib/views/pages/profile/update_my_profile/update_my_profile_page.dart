@@ -20,8 +20,7 @@ class _UpdateMyProfileState extends State<UpdateMyProfile> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      appBar: _AppBar(),
-      backgroundColor: kPrimaryColor,
+      appBar: _appBar(),
       body: Padding(
         padding: const EdgeInsets.only(left: 20, right: 20),
         child: ListView(
@@ -30,25 +29,64 @@ class _UpdateMyProfileState extends State<UpdateMyProfile> {
             _changePhoto(),
             SizedBox(height: 50),
             _nickName(),
-            SizedBox(height: 50),
+            SizedBox(height: 30),
+            _password(),
+            SizedBox(height: 30),
+            _email(),
+            SizedBox(height: 30),
             _introduce(),
-            SizedBox(height: 50),
+            SizedBox(height: 30),
             _updateProfileButton(),
-            SizedBox(height: 50),
+            SizedBox(height: 30),
           ],
         ),
       ),
     );
   }
 
-  AppBar _AppBar() {
+  Container _email() {
+    return Container(
+      padding: EdgeInsets.all(5),
+      width: double.infinity,
+      decoration: BoxDecoration(
+        border: Border.all(width: 1),
+        borderRadius: BorderRadius.circular(10),
+        color: Colors.white,
+      ),
+      child: TextField(
+        decoration: InputDecoration(
+          border: InputBorder.none,
+          hintText: "이메일을 입력하세요",
+        ),
+      ),
+    );
+  }
+
+  Container _password() {
+    return Container(
+      padding: EdgeInsets.all(5),
+      width: double.infinity,
+      decoration: BoxDecoration(
+        border: Border.all(width: 1),
+        borderRadius: BorderRadius.circular(10),
+        color: Colors.white,
+      ),
+      child: TextField(
+        decoration: InputDecoration(
+          border: InputBorder.none,
+          hintText: "비밀번호를 입력하세요",
+        ),
+      ),
+    );
+  }
+
+  AppBar _appBar() {
     return AppBar(
+      automaticallyImplyLeading: false,
       backgroundColor: Colors.white,
       title: Row(
         children: [
-          BackButton(
-            color: Colors.black,
-          ),
+          BackButton(color: Colors.black),
           Text("내 프로필 수정", style: TextStyle(color: Colors.black)),
         ],
       ),
@@ -69,8 +107,7 @@ class _UpdateMyProfileState extends State<UpdateMyProfile> {
                 right: 0,
                 child: InkWell(
                   onTap: () {
-                    showModalBottomSheet(
-                        context: context, builder: (builder) => _bottomSheet());
+                    showModalBottomSheet(context: context, builder: (builder) => _bottomSheet());
                   },
                   child: Icon(
                     Icons.camera_alt,
@@ -86,11 +123,12 @@ class _UpdateMyProfileState extends State<UpdateMyProfile> {
   Widget _updateProfileButton() {
     return Container(
       padding: EdgeInsets.only(left: 100, right: 100),
-      child: ElevatedButton(
+      child: OutlinedButton(
         onPressed: () {},
         child: Text("수정 완료"),
-        style: ElevatedButton.styleFrom(
-          backgroundColor: kSecondaryColor,
+        style: OutlinedButton.styleFrom(
+          foregroundColor: Colors.black,
+          minimumSize: Size(150, 50),
         ),
       ),
     );
@@ -102,14 +140,7 @@ class _UpdateMyProfileState extends State<UpdateMyProfile> {
       height: 150,
       width: double.infinity,
       decoration: BoxDecoration(
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.7),
-            blurRadius: 5,
-            spreadRadius: 0,
-            offset: Offset(5, 6),
-          ),
-        ],
+        border: Border.all(width: 1),
         borderRadius: BorderRadius.circular(10),
         color: Colors.white,
       ),
@@ -131,14 +162,7 @@ class _UpdateMyProfileState extends State<UpdateMyProfile> {
       padding: EdgeInsets.all(5),
       width: double.infinity,
       decoration: BoxDecoration(
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.7),
-            blurRadius: 5,
-            spreadRadius: 0,
-            offset: Offset(5, 6),
-          ),
-        ],
+        border: Border.all(width: 1),
         borderRadius: BorderRadius.circular(10),
         color: Colors.white,
       ),
