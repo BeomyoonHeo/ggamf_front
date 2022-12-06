@@ -160,7 +160,7 @@ class _CreatePartyPageState extends State<CreatePartyPage> {
         color: Colors.amber,
       ),
       child: Text(
-        "내가 참가 중인 방",
+        "Create the Party",
         style: TextStyle(fontSize: 30),
       ),
       alignment: Alignment.center,
