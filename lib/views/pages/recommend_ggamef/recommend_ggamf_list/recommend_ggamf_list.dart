@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ggamf_front/views/pages/recommend_ggamef/recommend_ggamf_list/components/recommend_ggamf_list_tab_bar.dart';
+import 'package:ggamf_front/views/pages/recommend_ggamef/recommend_ggamf_list/recommend_ggamf_list_view_model.dart';
 
 import 'components/recommend_ggamf_list_tab_view.dart';
 
@@ -18,6 +20,7 @@ class _RecommendGgamfListState extends State<RecommendGgamfList>
     '추천 껨프',
     '껨프 요청',
   ];
+
   late TabController _tabController;
 
   @override
@@ -38,24 +41,30 @@ class _RecommendGgamfListState extends State<RecommendGgamfList>
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    return Scaffold(
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        title: Text(
-          textIndex[0],
-        ),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(10),
-        child: Column(
-          children: [
-            RecommendGgamfListTabBar(
-                tabController: _tabController, textIndex: textIndex),
-            const SizedBox(height: 20),
-            RecommendGgamfListTabView(tabController: _tabController),
-          ],
-        ),
-      ),
+    return Consumer(
+      builder: (context, ref, child) {
+        final ggamfViewModel = ref.watch(recommendGgamfListViewModel);
+        return Scaffold(
+          appBar: AppBar(
+            automaticallyImplyLeading: false,
+            title: Text(
+              textIndex[0],
+            ),
+          ),
+          body: Padding(
+            padding: const EdgeInsets.all(10),
+            child: Column(
+              children: [
+                RecommendGgamfListTabBar(
+                    tabController: _tabController, textIndex: textIndex),
+                const SizedBox(height: 20),
+                RecommendGgamfListTabView(
+                    tabController: _tabController, ggamfList: ggamfViewModel),
+              ],
+            ),
+          ),
+        );
+      },
     );
   }
 }

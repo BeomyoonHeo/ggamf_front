@@ -6,6 +6,7 @@ part 'login_user.g.dart';
 // flutter pub run build_runner build 로 build 하거나 flutter pub run build_runner watch 로 리스팅 할 수 있음
 @JsonSerializable()
 class LoginUser {
+  @JsonKey(name: 'username')
   final String loginId;
   final String password;
 
