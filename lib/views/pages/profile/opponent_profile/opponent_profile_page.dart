@@ -10,9 +10,8 @@ class OpponentProfile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: _appbar(),
-      backgroundColor: kPrimaryColor,
       body: Padding(
-        padding: const EdgeInsets.only(left: 20, right: 20),
+        padding: const EdgeInsets.symmetric(horizontal: 20),
         child: ListView(
           children: [
             SizedBox(height: 50),
@@ -56,6 +55,7 @@ class OpponentProfile extends StatelessWidget {
 
   AppBar _appbar() {
     return AppBar(
+      automaticallyImplyLeading: false,
       backgroundColor: Colors.white,
       title: Row(
         children: [
@@ -98,20 +98,26 @@ class OpponentProfile extends StatelessWidget {
   }
 
   Widget _ratingStarButton(BuildContext context) {
-    return ElevatedButton(
+    return OutlinedButton(
       onPressed: () {
         showDialog(context: context, builder: (_) => _ratingStar(context));
       },
-      child: Text("별점 주기"),
-      style: ElevatedButton.styleFrom(backgroundColor: kSecondaryColor),
+      child: Text("별점 주기", style: TextStyle(fontSize: 20)),
+      style: OutlinedButton.styleFrom(
+        foregroundColor: Colors.black,
+        minimumSize: Size(150, 50),
+      ),
     );
   }
 
   Widget _followButton() {
-    return ElevatedButton(
+    return OutlinedButton(
       onPressed: () {},
-      child: Text("팔로우하기"),
-      style: ElevatedButton.styleFrom(backgroundColor: kSecondaryColor),
+      child: Text("팔로우하기", style: TextStyle(fontSize: 20)),
+      style: OutlinedButton.styleFrom(
+        foregroundColor: Colors.black,
+        minimumSize: Size(150, 50),
+      ),
     );
   }
 
@@ -119,23 +125,17 @@ class OpponentProfile extends StatelessWidget {
     return Container(
       padding: EdgeInsets.all(10),
       width: double.infinity,
-      height: 100,
       decoration: BoxDecoration(
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.7),
-            blurRadius: 5,
-            spreadRadius: 0,
-            offset: Offset(5, 6),
-          ),
-        ],
+        border: Border.all(width: 1),
         borderRadius: BorderRadius.circular(10),
         color: Colors.white,
       ),
-      child: Text(
-        "리그오브레전드 원딜 탑레 다이아 1 같이 듀오하실 서폿분 구합니다",
-        textAlign: TextAlign.center,
-        style: TextStyle(fontSize: 15, color: Colors.black),
+      child: Expanded(
+        child: Text(
+          "리그오브레전드 원딜 탑레 다이아 1 같이 듀오하실 서폿분 구합니다",
+          textAlign: TextAlign.center,
+          style: TextStyle(fontSize: 15, color: Colors.black),
+        ),
       ),
     );
   }
@@ -144,14 +144,7 @@ class OpponentProfile extends StatelessWidget {
     return Container(
       padding: EdgeInsets.all(5),
       decoration: BoxDecoration(
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.7),
-            blurRadius: 5,
-            spreadRadius: 0,
-            offset: Offset(0, 10),
-          ),
-        ],
+        border: Border.all(width: 1),
         borderRadius: BorderRadius.circular(10),
         color: Colors.white,
       ),

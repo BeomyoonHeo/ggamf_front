@@ -106,7 +106,6 @@ class _MyProfilePageState extends State<MyProfilePage> {
 
   Widget _introduce() {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 30),
       padding: EdgeInsets.all(10),
       width: double.infinity,
       decoration: BoxDecoration(
@@ -126,7 +125,6 @@ class _MyProfilePageState extends State<MyProfilePage> {
 
   Widget _nickName() {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 30),
       padding: EdgeInsets.all(10),
       width: double.infinity,
       decoration: BoxDecoration(
@@ -158,7 +156,6 @@ Widget _imageDialog() {
 Widget _ratedStar() {
   return Container(
     padding: EdgeInsets.all(10),
-    margin: EdgeInsets.symmetric(horizontal: 30),
     decoration: BoxDecoration(
       border: Border.all(width: 1),
       borderRadius: BorderRadius.circular(10),
