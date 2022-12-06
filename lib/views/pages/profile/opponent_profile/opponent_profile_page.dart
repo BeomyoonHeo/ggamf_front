@@ -3,8 +3,16 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 import '../../../../core/color.dart';
 
-class OpponentProfile extends StatelessWidget {
-  const OpponentProfile({Key? key}) : super(key: key);
+class OpponentProfilePage extends StatefulWidget {
+  const OpponentProfilePage({Key? key}) : super(key: key);
+
+  @override
+  State<OpponentProfilePage> createState() => _OpponentProfilePageState();
+}
+
+class _OpponentProfilePageState extends State<OpponentProfilePage> {
+  List<String> _valueList = ['욕설', '비방', '광고', '괴롭힘', '기타'];
+  var _selectedValue;
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +43,7 @@ class OpponentProfile extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 _followButton(),
-                _ratingStarButton(context),
+                _ratingStarButton(),
               ],
             ),
           ],
@@ -66,10 +74,12 @@ class OpponentProfile extends StatelessWidget {
         ],
       ),
       actions: [
-        Icon(
-          Icons.report_gmailerrorred,
+        IconButton(
+          onPressed: () {
+            showDialog(context: context, builder: (_) => _reportPage());
+          },
+          icon: Icon(Icons.error_outline, size: 40),
           color: Colors.red,
-          size: 40,
         ),
         SizedBox(width: 15),
       ],
@@ -97,10 +107,10 @@ class OpponentProfile extends StatelessWidget {
     );
   }
 
-  Widget _ratingStarButton(BuildContext context) {
+  Widget _ratingStarButton() {
     return OutlinedButton(
       onPressed: () {
-        showDialog(context: context, builder: (_) => _ratingStar(context));
+        showDialog(context: context, builder: (_) => _ratingStar());
       },
       child: Text("별점 주기", style: TextStyle(fontSize: 20)),
       style: OutlinedButton.styleFrom(
@@ -155,19 +165,173 @@ class OpponentProfile extends StatelessWidget {
       ),
     );
   }
-}
 
-Widget _ratingBar() {
-  return RatingBarIndicator(
-    rating: 1,
-    itemBuilder: (context, index) => Icon(
-      Icons.star,
-      color: Colors.amber,
-    ),
-    itemCount: 5,
-    itemSize: 35.0,
-    direction: Axis.horizontal,
-  );
+  Widget _ratingBar() {
+    return RatingBarIndicator(
+      rating: 1,
+      itemBuilder: (context, index) => Icon(
+        Icons.star,
+        color: Colors.amber,
+      ),
+      itemCount: 5,
+      itemSize: 35.0,
+      direction: Axis.horizontal,
+    );
+  }
+
+  Widget _imageDialog() {
+    return Dialog(
+      child: Container(
+        width: 300,
+        height: 200,
+        decoration: BoxDecoration(
+          image: DecorationImage(image: AssetImage('assets/images/cart2.png')),
+        ),
+      ),
+    );
+  }
+
+  Widget _ratingStar() {
+    return Dialog(
+      child: Container(
+        padding: EdgeInsets.all(20),
+        width: 350,
+        height: 250,
+        child: Column(
+          children: [
+            SizedBox(height: 20),
+            Text("별점주기"),
+            SizedBox(height: 20),
+            RatingBar.builder(
+              initialRating: 3,
+              minRating: 1,
+              direction: Axis.horizontal,
+              allowHalfRating: true,
+              itemCount: 5,
+              itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
+              itemBuilder: (context, _) => Icon(
+                Icons.star,
+                color: Colors.amber,
+              ),
+              onRatingUpdate: (rating) {
+                print(rating);
+              },
+            ),
+            SizedBox(height: 20),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                ElevatedButton(onPressed: () {}, child: Text("별점쾅!")),
+                ElevatedButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    child: Text("취소")),
+              ],
+            )
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _reportPage() {
+    return Dialog(
+      child: Padding(
+        padding: const EdgeInsets.all(15.0),
+        child: Container(
+          width: double.infinity,
+          height: 400,
+          child: Column(
+            children: [
+              Text(
+                ("신고하기"),
+                style: TextStyle(fontSize: 20),
+              ),
+              SizedBox(height: 20),
+              TextFormField(
+                decoration: InputDecoration(
+                  hintText: '악성 유저 이름',
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                      color: Colors.black,
+                    ),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                      color: Colors.black,
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(height: 20),
+              DropdownButton(
+                hint: Text("신고사유"),
+                value: _selectedValue,
+                isExpanded: true,
+                items: _valueList.map((String item) {
+                  return DropdownMenuItem<String>(
+                    child: Text('$item'),
+                    value: item,
+                  );
+                }).toList(),
+                onChanged: (dynamic value) {
+                  setState(
+                    () {
+                      _selectedValue = value;
+                    },
+                  );
+                },
+              ),
+              SizedBox(height: 20),
+              Expanded(
+                child: TextFormField(
+                  keyboardType: TextInputType.multiline,
+                  maxLines: 5,
+                  minLines: 1,
+                  textInputAction: TextInputAction.done,
+                  decoration: InputDecoration(
+                    hintText: '상세내용',
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Colors.black,
+                      ),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Colors.black,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  OutlinedButton(
+                    onPressed: () {},
+                    child: Text("리포트하기"),
+                    style: OutlinedButton.styleFrom(
+                      foregroundColor: Colors.black,
+                    ),
+                  ),
+                  OutlinedButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    child: Text("취소"),
+                    style: OutlinedButton.styleFrom(
+                      foregroundColor: Colors.black,
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
 }
 
 // class ImageDialog extends StatelessWidget {
@@ -186,59 +350,3 @@ Widget _ratingBar() {
 //     );
 //   }
 // }
-
-Widget _imageDialog() {
-  return Dialog(
-    child: Container(
-      width: 300,
-      height: 200,
-      decoration: BoxDecoration(
-        image: DecorationImage(image: AssetImage('assets/images/cart2.png')),
-      ),
-    ),
-  );
-}
-
-Widget _ratingStar(context) {
-  return Dialog(
-    child: Container(
-      padding: EdgeInsets.all(20),
-      width: 350,
-      height: 250,
-      child: Column(
-        children: [
-          SizedBox(height: 20),
-          Text("별점주기"),
-          SizedBox(height: 20),
-          RatingBar.builder(
-            initialRating: 3,
-            minRating: 1,
-            direction: Axis.horizontal,
-            allowHalfRating: true,
-            itemCount: 5,
-            itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
-            itemBuilder: (context, _) => Icon(
-              Icons.star,
-              color: Colors.amber,
-            ),
-            onRatingUpdate: (rating) {
-              print(rating);
-            },
-          ),
-          SizedBox(height: 20),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              ElevatedButton(onPressed: () {}, child: Text("별점쾅!")),
-              ElevatedButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  child: Text("취소")),
-            ],
-          )
-        ],
-      ),
-    ),
-  );
-}
