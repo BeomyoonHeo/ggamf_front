@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 
 class InputBox extends StatelessWidget {
-  final inputText;
-  final hintText;
+  final String inputText;
+  final String hintText;
+  final TextEditingController? controller;
   const InputBox({
     Key? key,
     required this.inputText,
     required this.hintText,
+    required this.controller,
   }) : super(key: key);
 
   @override
@@ -29,7 +31,8 @@ class InputBox extends StatelessWidget {
               border: Border.all(width: 1),
               color: Colors.white,
             ),
-            child: TextField(
+            child: TextFormField(
+              controller: controller,
               decoration: InputDecoration(
                 hintText: hintText,
                 hintStyle: TextStyle(fontFamily: 'NanumSquare', fontSize: 15),
