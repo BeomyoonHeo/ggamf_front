@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:ggamf_front/views/pages/profile/update_my_profile/update_my_profile_page.dart';
+import 'package:ggamf_front/views/pages/profile/withdrawal/withdrawal_page.dart';
 
 import '../../../../core/color.dart';
 
@@ -10,28 +13,39 @@ class MyProfilePage extends StatefulWidget {
 }
 
 class _MyProfilePageState extends State<MyProfilePage> {
-  int _selectedIndex = 4;
+  int _selectedIndex = 0;
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: kPrimaryColor,
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        backgroundColor: Colors.white,
+        title: Text("내 프로필"),
+      ),
       body: Padding(
-        padding: const EdgeInsets.only(left: 20, right: 20),
+        padding: const EdgeInsets.symmetric(horizontal: 20),
         child: ListView(
           children: [
-            SizedBox(height: 50),
-            _buildCircleAvatar(),
-            SizedBox(height: 50),
-            _nickName(),
             SizedBox(height: 30),
+            _buildCircleAvatar(),
+            SizedBox(height: 30),
+            _nickName(),
+            SizedBox(height: 10),
+            _ratedStar(),
+            SizedBox(height: 10),
             _introduce(),
             Container(
               height: 150,
               child: InkWell(
                 onTap: () async {
-                  await showDialog(
-                      context: context, builder: (_) => _imageDialog());
+                  await showDialog(context: context, builder: (_) => _imageDialog());
                 },
                 child: Image.asset("assets/images/cart1.png"),
               ),
@@ -59,21 +73,33 @@ class _MyProfilePageState extends State<MyProfilePage> {
   }
 
   Widget _withdrawal() {
-    return ElevatedButton(
-      onPressed: () {},
+    return OutlinedButton(
+      onPressed: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => WithdrawalPage()),
+        );
+      },
       child: Text("탈퇴"),
-      style: ElevatedButton.styleFrom(
-        backgroundColor: kSecondaryColor,
+      style: OutlinedButton.styleFrom(
+        foregroundColor: Colors.black,
+        minimumSize: Size(150, 50),
       ),
     );
   }
 
   Widget _updataProfile() {
-    return ElevatedButton(
-      onPressed: () {},
+    return OutlinedButton(
+      onPressed: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => UpdateMyProfile()),
+        );
+      },
       child: Text("프로필 수정"),
-      style: ElevatedButton.styleFrom(
-        backgroundColor: kSecondaryColor,
+      style: OutlinedButton.styleFrom(
+        foregroundColor: Colors.black,
+        minimumSize: Size(150, 50),
       ),
     );
   }
@@ -82,23 +108,17 @@ class _MyProfilePageState extends State<MyProfilePage> {
     return Container(
       padding: EdgeInsets.all(10),
       width: double.infinity,
-      height: 100,
       decoration: BoxDecoration(
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.7),
-            blurRadius: 5,
-            spreadRadius: 0,
-            offset: Offset(5, 6),
-          ),
-        ],
+        border: Border.all(width: 1),
         borderRadius: BorderRadius.circular(10),
         color: Colors.white,
       ),
-      child: Text(
-        "리그오브레전드 원딜 탑레 다이아 1 같이 듀오하실 서폿분 구합니다",
-        textAlign: TextAlign.center,
-        style: TextStyle(fontSize: 15, color: Colors.black),
+      child: Expanded(
+        child: Text(
+          "리그오브레전드 원딜 탑레 다이아 1 같이 듀오하실 서폿분 구합니다",
+          textAlign: TextAlign.center,
+          style: TextStyle(fontSize: 15, color: Colors.black),
+        ),
       ),
     );
   }
@@ -108,14 +128,7 @@ class _MyProfilePageState extends State<MyProfilePage> {
       padding: EdgeInsets.all(10),
       width: double.infinity,
       decoration: BoxDecoration(
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.7),
-            blurRadius: 5,
-            spreadRadius: 0,
-            offset: Offset(5, 6),
-          ),
-        ],
+        border: Border.all(width: 1),
         borderRadius: BorderRadius.circular(10),
         color: Colors.white,
       ),
@@ -137,5 +150,40 @@ Widget _imageDialog() {
         image: DecorationImage(image: AssetImage('assets/images/cart2.png')),
       ),
     ),
+  );
+}
+
+Widget _ratedStar() {
+  return Container(
+    padding: EdgeInsets.all(10),
+    decoration: BoxDecoration(
+      border: Border.all(width: 1),
+      borderRadius: BorderRadius.circular(10),
+      color: Colors.white,
+    ),
+    child: Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text(
+          "평균별점",
+          style: TextStyle(fontSize: 15, color: Colors.black),
+        ),
+        SizedBox(width: 20),
+        _ratingBar(),
+      ],
+    ),
+  );
+}
+
+Widget _ratingBar() {
+  return RatingBarIndicator(
+    rating: 1,
+    itemBuilder: (context, index) => Icon(
+      Icons.star,
+      color: Colors.amber,
+    ),
+    itemCount: 5,
+    itemSize: 35.0,
+    direction: Axis.horizontal,
   );
 }

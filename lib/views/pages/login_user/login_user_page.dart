@@ -45,7 +45,7 @@ class LoginUserPage extends StatelessWidget {
                   SizedBox(height: 10),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
+                    children: const [
                       SocialIcon(socialIcon: 'assets/icons/kakaotalk.svg'),
                       SocialIcon(socialIcon: 'assets/icons/google_plus.svg'),
                       SocialIcon(

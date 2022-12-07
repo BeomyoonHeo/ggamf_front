@@ -28,29 +28,33 @@ class _JoinPartyListState extends State<JoinPartyList> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: _appBar(),
-      body: CustomScrollView(
-        slivers: [
-          SliverAppBar(
-            backgroundColor: Colors.white,
-            expandedHeight: 150,
-            floating: true,
-            flexibleSpace: FlexibleSpaceBar(
-              titlePadding: EdgeInsets.zero,
-              title: SingleChildScrollView(
-                child: Column(
-                  children: [
-                    _searchBar(),
-                    _gameCategory(),
-                  ],
-                ),
+      body: _sliverAppbar(),
+    );
+  }
+
+  CustomScrollView _sliverAppbar() {
+    return CustomScrollView(
+      slivers: [
+        SliverAppBar(
+          backgroundColor: Colors.white,
+          expandedHeight: 150,
+          floating: true,
+          flexibleSpace: FlexibleSpaceBar(
+            titlePadding: EdgeInsets.zero,
+            title: SingleChildScrollView(
+              child: Column(
+                children: [
+                  _searchBar(),
+                  _gameCategory(),
+                ],
               ),
             ),
           ),
-          SliverList(
-            delegate: _partyWindow(),
-          ),
-        ],
-      ),
+        ),
+        SliverList(
+          delegate: _partyWindow(),
+        ),
+      ],
     );
   }
 
@@ -62,7 +66,7 @@ class _JoinPartyListState extends State<JoinPartyList> {
         height: 150,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
-          color: kPrimaryColor,
+          border: Border.all(width: 1),
         ),
         child: InkWell(
           onTap: () {
@@ -152,10 +156,9 @@ class _JoinPartyListState extends State<JoinPartyList> {
 
   AppBar _appBar() {
     return AppBar(
-      backgroundColor: Colors.white,
+      automaticallyImplyLeading: false,
       title: Text(
         "파티참가",
-        style: TextStyle(color: Colors.black),
       ),
     );
   }
@@ -165,7 +168,6 @@ class _JoinPartyListState extends State<JoinPartyList> {
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
-          color: kPrimaryColor,
         ),
         padding: EdgeInsets.all(10),
         width: double.infinity,
@@ -189,6 +191,7 @@ class _JoinPartyListState extends State<JoinPartyList> {
                       Text("2/5"),
                     ],
                   ),
+                  SizedBox(height: 10),
                   ElevatedButton(
                     onPressed: () {},
                     child: Text(

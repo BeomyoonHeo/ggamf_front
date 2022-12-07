@@ -1,65 +1,61 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:ggamf_front/views/pages/recommend_ggamef/recommend_ggamf_list/components/recommend_ggamf_list_tab_bar.dart';
+
+import 'components/recommend_ggamf_list_tab_view.dart';
 
 class RecommendGgamfList extends StatefulWidget {
-  const RecommendGgamfList({Key? key}) : super(key: key);
-
+  const RecommendGgamfList({super.key});
   @override
   State<RecommendGgamfList> createState() => _RecommendGgamfListState();
 }
 
 class _RecommendGgamfListState extends State<RecommendGgamfList>
-    with TickerProviderStateMixin {
+    with
+        SingleTickerProviderStateMixin<RecommendGgamfList>,
+        AutomaticKeepAliveClientMixin<RecommendGgamfList> {
+  final List<String> textIndex = [
+    '추천 껨프',
+    '껨프 요청',
+  ];
   late TabController _tabController;
 
   @override
+  bool get wantKeepAlive => true;
+
+  @override
   void initState() {
+    _tabController = TabController(length: 2, vsync: this, initialIndex: 0);
     super.initState();
-    _tabController = TabController(length: 2, vsync: this);
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _tabController.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return Scaffold(
-      body: Column(children: [
-        Container(
-          child: TabBar(controller: _tabController, tabs: [
-            Container(
-              height: 80,
-              child: Text('추천 껨프'),
-            ),
-            Container(
-              height: 80,
-              child: Text('껨프 요청'),
-            ),
-          ]),
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        title: Text(
+          textIndex[0],
         ),
-        Expanded(
-            child: TabBarView(
-          controller: _tabController,
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(10),
+        child: Column(
           children: [
-            Container(
-              color: Colors.yellow[200],
-              alignment: Alignment.center,
-              child: Text(
-                'Tab1 View',
-                style: TextStyle(
-                  fontSize: 30,
-                ),
-              ),
-            ),
-            Container(
-              color: Colors.green[200],
-              alignment: Alignment.center,
-              child: Text(
-                'Tab2 View',
-                style: TextStyle(
-                  fontSize: 30,
-                ),
-              ),
-            ),
+            RecommendGgamfListTabBar(
+                tabController: _tabController, textIndex: textIndex),
+            const SizedBox(height: 20),
+            RecommendGgamfListTabView(tabController: _tabController),
           ],
-        ))
-      ]),
+        ),
+      ),
     );
   }
 }
