@@ -20,19 +20,12 @@ class InputBox extends StatelessWidget {
           color: Colors.white, borderRadius: BorderRadius.circular(9)),
       padding: EdgeInsets.all(15),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
             inputText,
             style: TextStyle(fontFamily: 'NanumSquare', fontSize: 15),
           ),
-          Container(
-            width: 180,
-            height: 30,
-            decoration: BoxDecoration(
-              border: Border.all(width: 1),
-              color: Colors.white,
-            ),
+          Expanded(
             child: TextFormField(
               autovalidateMode: AutovalidateMode.always,
               controller: controller,

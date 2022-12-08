@@ -140,6 +140,7 @@ class JoinUserView extends StatelessWidget {
                         certificationText: '인증되지 않음',
                         phoneNumber: phoneNumberController.text),
                     const SizedBox(height: 10),
+                    const SizedBox(height: 10),
                     InputBox(
                       validator: nickNameValidator,
                       inputText: "닉네임 : ",
