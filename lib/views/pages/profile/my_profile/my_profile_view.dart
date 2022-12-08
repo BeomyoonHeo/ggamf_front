@@ -88,6 +88,7 @@ class MyProfileView extends ConsumerWidget {
       onPressed: () {
         Navigator.push(
           navigatorKey.currentState!.context,
+
           MaterialPageRoute(builder: (context) => UpdateMyProfileView()),
         );
       },
