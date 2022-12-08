@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 
 class InputPhoneNumberWidget extends StatelessWidget {
+  final TextEditingController controller;
   const InputPhoneNumberWidget({
     Key? key,
+    required this.controller,
   }) : super(key: key);
 
   @override
@@ -10,7 +12,7 @@ class InputPhoneNumberWidget extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
           color: Colors.white, borderRadius: BorderRadius.circular(9)),
-      padding: EdgeInsets.all(15),
+      padding: const EdgeInsets.all(15),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -23,7 +25,7 @@ class InputPhoneNumberWidget extends StatelessWidget {
             height: 30,
             decoration: BoxDecoration(
                 border: Border.all(width: 1), color: Colors.white),
-            child: TextField(
+            child: TextFormField(
               maxLength: 3,
               decoration: InputDecoration(
                 filled: true,
@@ -43,7 +45,7 @@ class InputPhoneNumberWidget extends StatelessWidget {
             height: 30,
             decoration: BoxDecoration(
                 border: Border.all(width: 1), color: Colors.white),
-            child: TextField(
+            child: TextFormField(
               maxLength: 4,
               decoration: InputDecoration(
                 filled: true,
@@ -63,15 +65,15 @@ class InputPhoneNumberWidget extends StatelessWidget {
             height: 30,
             decoration: BoxDecoration(
                 border: Border.all(width: 1), color: Colors.white),
-            child: TextField(
+            child: TextFormField(
               maxLength: 4,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 filled: true,
                 fillColor: Colors.white,
                 border: InputBorder.none,
                 counterText: '',
               ),
-              style: TextStyle(fontSize: 12, height: 2.0),
+              style: const TextStyle(fontSize: 12, height: 2.0),
             ),
           ),
         ],

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 class InputBox extends StatelessWidget {
+  final FormFieldValidator validator;
   final String inputText;
   final String hintText;
   final TextEditingController? controller;
@@ -9,6 +10,7 @@ class InputBox extends StatelessWidget {
     required this.inputText,
     required this.hintText,
     required this.controller,
+    required this.validator,
   }) : super(key: key);
 
   @override
@@ -32,8 +34,9 @@ class InputBox extends StatelessWidget {
               color: Colors.white,
             ),
             child: TextFormField(
+              autovalidateMode: AutovalidateMode.always,
               controller: controller,
-              validator: (value) {},
+              validator: validator,
               decoration: InputDecoration(
                 hintText: hintText,
                 hintStyle: TextStyle(fontFamily: 'NanumSquare', fontSize: 15),
