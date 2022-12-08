@@ -46,7 +46,7 @@ class _MyGgamfListPageState extends State<MyGgamfListPage> {
                 height: 120,
                 child: InkWell(
                   onTap: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => OpponentProfile()));
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => OpponentProfilePage()));
                   },
                   child: Row(
                     children: [
@@ -103,7 +103,7 @@ class _MyGgamfListPageState extends State<MyGgamfListPage> {
                 height: 120,
                 child: InkWell(
                   onTap: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => OpponentProfile()));
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => OpponentProfilePage()));
                   },
                   child: Row(
                     children: [
@@ -160,7 +160,7 @@ class _MyGgamfListPageState extends State<MyGgamfListPage> {
                 height: 120,
                 child: InkWell(
                   onTap: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => OpponentProfile()));
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => OpponentProfilePage()));
                   },
                   child: Row(
                     children: [
@@ -217,7 +217,7 @@ class _MyGgamfListPageState extends State<MyGgamfListPage> {
                 height: 120,
                 child: InkWell(
                   onTap: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => OpponentProfile()));
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => OpponentProfilePage()));
                   },
                   child: Row(
                     children: [
@@ -274,7 +274,7 @@ class _MyGgamfListPageState extends State<MyGgamfListPage> {
                 height: 120,
                 child: InkWell(
                   onTap: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => OpponentProfile()));
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => OpponentProfilePage()));
                   },
                   child: Row(
                     children: [
@@ -331,7 +331,7 @@ class _MyGgamfListPageState extends State<MyGgamfListPage> {
                 height: 120,
                 child: InkWell(
                   onTap: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => OpponentProfile()));
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => OpponentProfilePage()));
                   },
                   child: Row(
                     children: [
