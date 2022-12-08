@@ -5,12 +5,13 @@ import 'package:ggamf_front/views/common_components/custom_icons_icons.dart';
 import 'package:ggamf_front/views/pages/join_party/join_party_list/join_party_list.dart';
 import 'package:ggamf_front/views/pages/my_ggamf/my_ggamf_list_page/my_ggamf_list_page.dart';
 import 'package:ggamf_front/views/pages/my_party/create_party/create_party_page.dart';
+import 'package:ggamf_front/views/pages/my_party/my_recruitment_party_list/my_recruitment_party_list.dart';
 import 'package:ggamf_front/views/pages/profile/my_profile/my_profile_page.dart';
 import 'package:ggamf_front/views/pages/recommend_ggamef/recommend_ggamf_list/recommend_ggamf_list.view.dart';
 
 const List<Widget> commonPages = [
   JoinPartyList(),
-  CreatePartyPage(),
+  MyRecruitmentPartyList(),
   MyGgamfListPage(),
   RecommendGgamfList(),
   MyProfilePage(),
