@@ -20,7 +20,7 @@ class CertificationNumberButton extends StatefulWidget {
 class _CertificationNumberButtonState extends State<CertificationNumberButton> {
   bool authOk = false;
   final TextEditingController _credentialController = TextEditingController();
-  String verificationId = '';
+  String _verificationId = '';
   final FirebaseAuth _auth = FirebaseAuth.instance;
   @override
   Widget build(BuildContext context) {
@@ -68,8 +68,10 @@ class _CertificationNumberButtonState extends State<CertificationNumberButton> {
                         onPressed: () async {
                           PhoneAuthCredential phoneAuthCredential =
                               PhoneAuthProvider.credential(
-                                  verificationId: verificationId,
+                                  verificationId: _verificationId,
                                   smsCode: _credentialController.text);
+                          print(_credentialController.text);
+                          print(_verificationId);
                           signInWithPhoneAuthCredential(phoneAuthCredential);
                         },
                         style: ButtonStyle(
@@ -118,7 +120,7 @@ class _CertificationNumberButtonState extends State<CertificationNumberButton> {
           widget.certificationText = '인증번호가 발송되었습니다.';
           Fluttertoast.showToast(msg: '인증번호가 발송 되었습니다');
           widget.showCertificationBar = true;
-          verificationId = verificationId;
+          _verificationId = verificationId;
         });
       },
       codeAutoRetrievalTimeout: (String verificationId) {},
