@@ -4,7 +4,7 @@ import 'package:ggamf_front/core/page_enum.dart';
 import 'package:ggamf_front/core/theme.dart';
 import 'package:ggamf_front/views/common_components/common_pages.dart';
 import 'package:ggamf_front/views/pages/join_user/join_user_view.dart';
-import 'package:ggamf_front/views/pages/login_user/login_user_page.dart';
+import 'package:ggamf_front/views/pages/login_user/login_user_view.dart';
 import 'package:ggamf_front/views/pages/splash_page.dart';
 
 void main() async {
@@ -33,7 +33,7 @@ class MyApp extends StatelessWidget {
       home: const AllPages(),
       initialRoute: PageEnum.getByDisPlayName('login').requestLocation,
       routes: {
-        PageEnum.LOGIN.requestLocation: (context) => const LoginUserPage(),
+        PageEnum.LOGIN.requestLocation: (context) => const LoginUserView(),
         PageEnum.JOIN.requestLocation: (context) => JoinUserView(),
         PageEnum.ALLPAGES.requestLocation: (context) => const AllPages(),
       },

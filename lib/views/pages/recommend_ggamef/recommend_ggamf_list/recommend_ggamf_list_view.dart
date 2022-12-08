@@ -6,16 +6,14 @@ import 'package:ggamf_front/views/pages/recommend_ggamef/recommend_ggamf_list/re
 
 import 'components/recommend_ggamf_list_tab_view.dart';
 
-class RecommendGgamfList extends StatefulWidget {
-  const RecommendGgamfList({super.key});
+class RecommendGgamfListView extends StatefulWidget {
+  const RecommendGgamfListView({super.key});
   @override
-  State<RecommendGgamfList> createState() => _RecommendGgamfListState();
+  State<RecommendGgamfListView> createState() => _RecommendGgamfListViewState();
 }
 
-class _RecommendGgamfListState extends State<RecommendGgamfList>
-    with
-        SingleTickerProviderStateMixin<RecommendGgamfList>,
-        AutomaticKeepAliveClientMixin<RecommendGgamfList> {
+class _RecommendGgamfListViewState extends State<RecommendGgamfListView>
+    with SingleTickerProviderStateMixin<RecommendGgamfListView>, AutomaticKeepAliveClientMixin<RecommendGgamfListView> {
   final List<String> textIndex = [
     '추천 껨프',
     '껨프 요청',
@@ -55,11 +53,9 @@ class _RecommendGgamfListState extends State<RecommendGgamfList>
             padding: const EdgeInsets.all(10),
             child: Column(
               children: [
-                RecommendGgamfListTabBar(
-                    tabController: _tabController, textIndex: textIndex),
+                RecommendGgamfListTabBar(tabController: _tabController, textIndex: textIndex),
                 const SizedBox(height: 20),
-                RecommendGgamfListTabView(
-                    tabController: _tabController, ggamfList: ggamfViewModel),
+                RecommendGgamfListTabView(tabController: _tabController, ggamfList: ggamfViewModel),
               ],
             ),
           ),

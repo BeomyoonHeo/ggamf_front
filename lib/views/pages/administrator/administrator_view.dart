@@ -9,8 +9,8 @@ import 'package:ggamf_front/main.dart';
 import 'package:ggamf_front/views/pages/administrator/components/admin_tabs.dart';
 import 'package:ggamf_front/views/pages/administrator/components/title_bar.dart';
 
-class AdministratorPage extends StatelessWidget {
-  const AdministratorPage({Key? key}) : super(key: key);
+class AdministratorView extends StatelessWidget {
+  const AdministratorView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -125,8 +125,7 @@ class _MainPageState extends State<MainPage> {
                   AdminTabs(currentIndex: _currentIndex, state: mainState),
                   Expanded(
                     child: Container(
-                      width:
-                          size.width * 0.13 < 1500 ? size.width * 0.13 : 1500,
+                      width: size.width * 0.13 < 1500 ? size.width * 0.13 : 1500,
                       padding: const EdgeInsets.symmetric(horizontal: 150),
                       child: DataTable2(
                         minWidth: 600,
