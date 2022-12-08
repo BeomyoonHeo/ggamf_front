@@ -5,10 +5,11 @@ part 'join_user.g.dart';
 @JsonSerializable()
 class JoinUser {
   String name;
+  @JsonKey(name: 'username')
   String loginId;
   String password;
+  @JsonKey(name: 'phone')
   String phoneNumber;
-  bool isSigned;
   String nickname;
   String email;
   bool isAgree;
@@ -18,7 +19,6 @@ class JoinUser {
     required this.loginId,
     required this.password,
     required this.phoneNumber,
-    required this.isSigned,
     required this.nickname,
     required this.email,
     required this.isAgree,

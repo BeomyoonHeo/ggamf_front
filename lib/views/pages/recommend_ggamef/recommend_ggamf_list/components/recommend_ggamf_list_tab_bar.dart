@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class RecommendGgamfListTabBar extends StatefulWidget {
+class RecommendGgamfListTabBar extends StatelessWidget {
   const RecommendGgamfListTabBar({
     Key? key,
     required TabController tabController,
@@ -12,12 +12,6 @@ class RecommendGgamfListTabBar extends StatefulWidget {
   final List<String> textIndex;
 
   @override
-  State<RecommendGgamfListTabBar> createState() =>
-      _RecommendGgamfListTabBarState();
-}
-
-class _RecommendGgamfListTabBarState extends State<RecommendGgamfListTabBar> {
-  @override
   Widget build(BuildContext context) {
     return Container(
       height: 45,
@@ -28,7 +22,7 @@ class _RecommendGgamfListTabBarState extends State<RecommendGgamfListTabBar> {
         ),
       ),
       child: TabBar(
-        controller: widget._tabController,
+        controller: _tabController,
         // give the indicator a decoration (color and border radius)
         indicator: BoxDecoration(
           borderRadius: BorderRadius.circular(
@@ -40,10 +34,10 @@ class _RecommendGgamfListTabBarState extends State<RecommendGgamfListTabBar> {
         unselectedLabelColor: Colors.black,
         tabs: [
           Tab(
-            text: widget.textIndex[0],
+            text: textIndex[0],
           ),
           Tab(
-            text: widget.textIndex[1],
+            text: textIndex[1],
           ),
         ],
       ),

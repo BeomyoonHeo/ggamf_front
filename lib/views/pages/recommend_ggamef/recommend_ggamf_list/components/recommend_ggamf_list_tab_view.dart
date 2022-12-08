@@ -1,33 +1,24 @@
-import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:ggamf_front/data/data.dart';
-import 'package:ggamf_front/data/rest_client.dart';
-import 'package:ggamf_front/utils/custom_intercepter.dart';
+import 'package:ggamf_front/domain/data.dart';
 import 'package:ggamf_front/views/pages/recommend_ggamef/recommend_ggamf_list/components/recommend_ggamf_list_tab_bar.dart';
 
 class RecommendGgamfListTabView extends StatefulWidget {
-  //인터셉터 추가
-  final dio = Dio()
-    ..interceptors.add(
-      //cascade 연산자를 실행하여 바로 add 하였다.
-      CustomLogInterceptor(),
-    );
   RecommendGgamfListTabView({
     Key? key,
     required TabController tabController,
+    required List<Data> ggamfList,
   })  : _tabController = tabController,
+        _ggamfList = ggamfList,
         super(key: key);
 
   final TabController _tabController;
-
+  final List<Data> _ggamfList;
   @override
-  State<RecommendGgamfListTabView> createState() =>
-      _RecommendGgamfListTabViewState();
+  State<RecommendGgamfListTabView> createState() => _RecommendGgamfListTabViewState();
 }
 
-class _RecommendGgamfListTabViewState extends State<RecommendGgamfListTabView>
-    with SingleTickerProviderStateMixin<RecommendGgamfListTabView> {
+class _RecommendGgamfListTabViewState extends State<RecommendGgamfListTabView> with SingleTickerProviderStateMixin<RecommendGgamfListTabView> {
   late final TabController _innerTabController;
 
   final List<String> textIndex = [
@@ -68,14 +59,11 @@ class _RecommendGgamfListTabViewState extends State<RecommendGgamfListTabView>
 
   @override
   Widget build(BuildContext context) {
-    final client =
-        RestClient(widget.dio); //RestClient를 등록 - 스프링으로 치면 controller 같은 느낌이다.
-
     return Expanded(
       child: TabBarView(
         controller: widget._tabController,
         children: [
-          _buildListView(buttonListToRecommendGgamf, client),
+          _buildListView(buttonListToRecommendGgamf, widget._ggamfList),
           Column(
             children: [
               RecommendGgamfListTabBar(
@@ -87,8 +75,8 @@ class _RecommendGgamfListTabViewState extends State<RecommendGgamfListTabView>
                 child: TabBarView(
                   controller: _innerTabController,
                   children: [
-                    _buildListView(buttonListToReceiveRequestGgamf, client),
-                    _buildListView(buttonListToGiveRequestGgamf, client),
+                    _buildListView(buttonListToReceiveRequestGgamf, widget._ggamfList),
+                    _buildListView(buttonListToGiveRequestGgamf, widget._ggamfList),
                   ],
                 ),
               ),
@@ -99,34 +87,24 @@ class _RecommendGgamfListTabViewState extends State<RecommendGgamfListTabView>
     );
   }
 
-  Widget _buildListView(List<IconButton> buttons, RestClient client) {
-    return FutureBuilder<User?>(
-      future: client.getUser(page: 2),
-      builder: (context, snapshot) {
-        if (snapshot.hasData) {
-          User usersInfo = snapshot.data!;
-          return ListView.separated(
-              itemBuilder: (context, index) => ListTile(
-                    visualDensity: const VisualDensity(horizontal: 3),
-                    leading: CircleAvatar(
-                      backgroundImage:
-                          NetworkImage(usersInfo.data[index].avatar),
-                    ),
-                    title: Text(usersInfo.data[index].firstName),
-                    subtitle: Text(usersInfo.data[index].lastName),
-                    trailing: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: buttons,
-                    ),
-                  ),
-              separatorBuilder: (context, index) => const Divider(
-                    height: 10,
-                    color: Colors.white,
-                  ),
-              itemCount: usersInfo.data.length);
-        }
-        return const CircularProgressIndicator();
-      },
-    );
+  Widget _buildListView(List<IconButton> buttons, List<Data> recommendGgamfList) {
+    return ListView.separated(
+        itemBuilder: (context, index) => ListTile(
+              visualDensity: const VisualDensity(horizontal: 3),
+              leading: CircleAvatar(
+                backgroundImage: NetworkImage(recommendGgamfList[index].avatar),
+              ),
+              title: Text(recommendGgamfList[index].firstName),
+              subtitle: Text(recommendGgamfList[index].lastName),
+              trailing: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: buttons,
+              ),
+            ),
+        separatorBuilder: (context, index) => const Divider(
+              height: 10,
+              color: Colors.white,
+            ),
+        itemCount: recommendGgamfList.length);
   }
 }

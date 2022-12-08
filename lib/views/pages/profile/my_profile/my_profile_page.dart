@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:ggamf_front/views/pages/profile/update_my_profile/update_my_profile_page.dart';
 import 'package:ggamf_front/views/pages/profile/withdrawal/withdrawal_page.dart';
 
@@ -32,11 +33,13 @@ class _MyProfilePageState extends State<MyProfilePage> {
         padding: const EdgeInsets.symmetric(horizontal: 20),
         child: ListView(
           children: [
-            SizedBox(height: 50),
-            _buildCircleAvatar(),
-            SizedBox(height: 50),
-            _nickName(),
             SizedBox(height: 30),
+            _buildCircleAvatar(),
+            SizedBox(height: 30),
+            _nickName(),
+            SizedBox(height: 10),
+            _ratedStar(),
+            SizedBox(height: 10),
             _introduce(),
             Container(
               height: 150,
@@ -47,7 +50,6 @@ class _MyProfilePageState extends State<MyProfilePage> {
                 child: Image.asset("assets/images/cart1.png"),
               ),
             ),
-            SizedBox(height: 30),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
@@ -104,26 +106,25 @@ class _MyProfilePageState extends State<MyProfilePage> {
 
   Widget _introduce() {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 50),
       padding: EdgeInsets.all(10),
       width: double.infinity,
-      height: 100,
       decoration: BoxDecoration(
         border: Border.all(width: 1),
         borderRadius: BorderRadius.circular(10),
         color: Colors.white,
       ),
-      child: Text(
-        "리그오브레전드 원딜 탑레 다이아 1 같이 듀오하실 서폿분 구합니다",
-        textAlign: TextAlign.center,
-        style: TextStyle(fontSize: 15, color: Colors.black),
+      child: Expanded(
+        child: Text(
+          "리그오브레전드 원딜 탑레 다이아 1 같이 듀오하실 서폿분 구합니다",
+          textAlign: TextAlign.center,
+          style: TextStyle(fontSize: 15, color: Colors.black),
+        ),
       ),
     );
   }
 
   Widget _nickName() {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 50),
       padding: EdgeInsets.all(10),
       width: double.infinity,
       decoration: BoxDecoration(
@@ -149,5 +150,40 @@ Widget _imageDialog() {
         image: DecorationImage(image: AssetImage('assets/images/cart2.png')),
       ),
     ),
+  );
+}
+
+Widget _ratedStar() {
+  return Container(
+    padding: EdgeInsets.all(10),
+    decoration: BoxDecoration(
+      border: Border.all(width: 1),
+      borderRadius: BorderRadius.circular(10),
+      color: Colors.white,
+    ),
+    child: Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text(
+          "평균별점",
+          style: TextStyle(fontSize: 15, color: Colors.black),
+        ),
+        SizedBox(width: 20),
+        _ratingBar(),
+      ],
+    ),
+  );
+}
+
+Widget _ratingBar() {
+  return RatingBarIndicator(
+    rating: 1,
+    itemBuilder: (context, index) => Icon(
+      Icons.star,
+      color: Colors.amber,
+    ),
+    itemCount: 5,
+    itemSize: 35.0,
+    direction: Axis.horizontal,
   );
 }
