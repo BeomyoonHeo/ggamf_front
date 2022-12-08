@@ -32,7 +32,8 @@ class _CertificationNumberButtonState extends State<CertificationNumberButton> {
             child: Text("인증받기"),
             onPressed: () async {
               await _auth.verifyPhoneNumber(
-                phoneNumber: '+82 010 4699 9771', //${widget.phoneNumber}
+                phoneNumber:
+                    '+82 ${widget.phoneNumber}', //${widget.phoneNumber}
                 verificationCompleted: (PhoneAuthCredential credential) {
                   _auth.signInWithCredential(credential);
                 },

@@ -26,6 +26,13 @@ class JoinUserView extends ConsumerWidget {
       //resizeToAvoidBottomInset: false,
       appBar: AppBar(
         automaticallyImplyLeading: true,
+        leading: IconButton(
+          color: Colors.black,
+          icon: Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
         title: const Text('회원가입 페이지'),
       ),
       body: Container(
