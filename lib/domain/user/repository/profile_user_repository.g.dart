@@ -43,6 +43,33 @@ class _ProfileUserRepository implements ProfileUserRepository {
     return value;
   }
 
+  @override
+  Future<ProfileUser> putUserProfile({
+    required id,
+    required profileUser,
+  }) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(profileUser.toJson());
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<ProfileUser>(Options(
+      method: 'PUT',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/profileUser/${id}',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = ProfileUser.fromJson(_result.data!);
+    return value;
+  }
+
   RequestOptions _setStreamType<T>(RequestOptions requestOptions) {
     if (T != dynamic &&
         !(requestOptions.responseType == ResponseType.bytes ||

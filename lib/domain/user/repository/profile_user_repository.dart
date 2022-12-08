@@ -10,4 +10,7 @@ abstract class ProfileUserRepository {
 
   @GET('/profileUser/{id}')
   Future<ProfileUser> getUserProfile({@Path('id') required int id});
+
+  @PUT('/profileUser/{id}')
+  Future<ProfileUser> putUserProfile({@Path('id') required int id, @Body() required ProfileUser profileUser});
 }
