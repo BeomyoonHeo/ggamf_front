@@ -3,14 +3,14 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 import '../../../../core/color.dart';
 
-class OpponentProfilePage extends StatefulWidget {
-  const OpponentProfilePage({Key? key}) : super(key: key);
+class OpponentProfileView extends StatefulWidget {
+  const OpponentProfileView({Key? key}) : super(key: key);
 
   @override
-  State<OpponentProfilePage> createState() => _OpponentProfilePageState();
+  State<OpponentProfileView> createState() => _OpponentProfileViewState();
 }
 
-class _OpponentProfilePageState extends State<OpponentProfilePage> {
+class _OpponentProfileViewState extends State<OpponentProfileView> {
   List<String> _valueList = ['욕설', '비방', '광고', '괴롭힘', '기타'];
   var _selectedValue;
 

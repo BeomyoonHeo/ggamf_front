@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:ggamf_front/views/pages/profile/update_my_profile/update_my_profile_page.dart';
-import 'package:ggamf_front/views/pages/profile/withdrawal/withdrawal_page.dart';
+import 'package:ggamf_front/views/pages/profile/update_my_profile/update_my_profile_view.dart';
+import 'package:ggamf_front/views/pages/profile/withdrawal/withdrawal_view.dart';
 
 import '../../../../core/color.dart';
 
-class MyProfilePage extends StatefulWidget {
-  const MyProfilePage({Key? key}) : super(key: key);
+class MyProfileView extends StatefulWidget {
+  const MyProfileView({Key? key}) : super(key: key);
 
   @override
-  State<MyProfilePage> createState() => _MyProfilePageState();
+  State<MyProfileView> createState() => _MyProfileViewState();
 }
 
-class _MyProfilePageState extends State<MyProfilePage> {
+class _MyProfileViewState extends State<MyProfileView> {
   int _selectedIndex = 0;
 
   void _onItemTapped(int index) {
@@ -77,7 +77,7 @@ class _MyProfilePageState extends State<MyProfilePage> {
       onPressed: () {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => WithdrawalPage()),
+          MaterialPageRoute(builder: (context) => WithdrawalView()),
         );
       },
       child: Text("탈퇴"),
@@ -93,7 +93,7 @@ class _MyProfilePageState extends State<MyProfilePage> {
       onPressed: () {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => UpdateMyProfile()),
+          MaterialPageRoute(builder: (context) => UpdateMyProfileView()),
         );
       },
       child: Text("프로필 수정"),

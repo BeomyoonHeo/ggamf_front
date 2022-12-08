@@ -3,8 +3,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ggamf_front/core/page_enum.dart';
 import 'package:ggamf_front/core/theme.dart';
 import 'package:ggamf_front/views/common_components/common_pages.dart';
-import 'package:ggamf_front/views/pages/join_user/join_user_page.dart';
-import 'package:ggamf_front/views/pages/login_user/login_user_page.dart';
+import 'package:ggamf_front/views/pages/join_user/join_user_view.dart';
+import 'package:ggamf_front/views/pages/login_user/login_user_view.dart';
 
 void main() {
   runApp(const ProviderScope(child: MyApp()));
@@ -23,8 +23,8 @@ class MyApp extends StatelessWidget {
       home: const AllPages(),
       initialRoute: PageEnum.getByDisPlayName('login').requestLocation,
       routes: {
-        PageEnum.LOGIN.requestLocation: (context) => const LoginUserPage(),
-        PageEnum.JOIN.requestLocation: (context) => JoinUserPage(),
+        PageEnum.LOGIN.requestLocation: (context) => const LoginUserView(),
+        PageEnum.JOIN.requestLocation: (context) => JoinUserView(),
         PageEnum.ALLPAGES.requestLocation: (context) => const AllPages(),
       },
       theme: theme(),

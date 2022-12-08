@@ -9,8 +9,8 @@ import 'package:ggamf_front/main.dart';
 import 'package:ggamf_front/views/pages/administrator/components/admin_tabs.dart';
 import 'package:ggamf_front/views/pages/administrator/components/title_bar.dart';
 
-class AdministratorPage extends StatelessWidget {
-  const AdministratorPage({Key? key}) : super(key: key);
+class AdministratorView extends StatelessWidget {
+  const AdministratorView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

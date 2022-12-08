@@ -2,19 +2,19 @@ import 'package:flashy_tab_bar2/flashy_tab_bar2.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ggamf_front/views/common_components/custom_icons_icons.dart';
-import 'package:ggamf_front/views/pages/join_party/join_party_list/join_party_list.dart';
-import 'package:ggamf_front/views/pages/my_ggamf/my_ggamf_list_page/my_ggamf_list_page.dart';
-import 'package:ggamf_front/views/pages/my_party/create_party/create_party_page.dart';
-import 'package:ggamf_front/views/pages/my_party/my_recruitment_party_list/my_recruitment_party_list.dart';
-import 'package:ggamf_front/views/pages/profile/my_profile/my_profile_page.dart';
-import 'package:ggamf_front/views/pages/recommend_ggamef/recommend_ggamf_list/recommend_ggamf_list.view.dart';
+import 'package:ggamf_front/views/pages/join_party/join_party_list/join_party_list_view.dart';
+import 'package:ggamf_front/views/pages/my_ggamf/my_ggamf_list_page/my_ggamf_list_view.dart';
+import 'package:ggamf_front/views/pages/my_party/create_party/create_party_view.dart';
+import 'package:ggamf_front/views/pages/my_party/my_recruitment_party_list/my_recruitment_party_list_view.dart';
+import 'package:ggamf_front/views/pages/profile/my_profile/my_profile_view.dart';
+import 'package:ggamf_front/views/pages/recommend_ggamef/recommend_ggamf_list/recommend_ggamf_list_view.dart';
 
 const List<Widget> commonPages = [
-  JoinPartyList(),
-  MyRecruitmentPartyList(),
-  MyGgamfListPage(),
-  RecommendGgamfList(),
-  MyProfilePage(),
+  JoinPartyListView(),
+  MyRecruitmentPartyListView(),
+  MyGgamfListView(),
+  RecommendGgamfListView(),
+  MyProfileView(),
 ];
 
 class AllPages extends StatefulWidget {

@@ -1,20 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:ggamf_front/views/pages/my_party/create_party/create_party_page.dart';
+import 'package:ggamf_front/views/pages/my_party/create_party/create_party_view.dart';
 import 'package:ggamf_front/views/pages/my_party/my_recruitment_party_list/components/my_recruitment_party_list_tab_bar.dart';
 import 'package:ggamf_front/views/pages/my_party/my_recruitment_party_list/components/my_recruitment_party_list_tab_view.dart';
 
-class MyRecruitmentPartyList extends StatefulWidget {
-  const MyRecruitmentPartyList({Key? key}) : super(key: key);
+class MyRecruitmentPartyListView extends StatefulWidget {
+  const MyRecruitmentPartyListView({Key? key}) : super(key: key);
 
   @override
-  State<MyRecruitmentPartyList> createState() => _MyRecruitmentPartyListState();
+  State<MyRecruitmentPartyListView> createState() => _MyRecruitmentPartyListViewState();
 }
 
-class _MyRecruitmentPartyListState extends State<MyRecruitmentPartyList>
-    with
-        SingleTickerProviderStateMixin<MyRecruitmentPartyList>,
-        AutomaticKeepAliveClientMixin<MyRecruitmentPartyList> {
+class _MyRecruitmentPartyListViewState extends State<MyRecruitmentPartyListView>
+    with SingleTickerProviderStateMixin<MyRecruitmentPartyListView>, AutomaticKeepAliveClientMixin<MyRecruitmentPartyListView> {
   final List<String> textIndex = [
     '나의 파티',
     '참가중인 방',
@@ -46,8 +44,7 @@ class _MyRecruitmentPartyListState extends State<MyRecruitmentPartyList>
         actions: [
           IconButton(
             onPressed: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => CreatePartyPage()));
+              Navigator.push(context, MaterialPageRoute(builder: (context) => CreatePartyView()));
             },
             icon: Icon(
               FontAwesomeIcons.personCirclePlus,
@@ -61,8 +58,7 @@ class _MyRecruitmentPartyListState extends State<MyRecruitmentPartyList>
         padding: const EdgeInsets.all(10),
         child: Column(
           children: [
-            MyRecruitmentPartyListTabBar(
-                tabController: _tabController, textIndex: textIndex),
+            MyRecruitmentPartyListTabBar(tabController: _tabController, textIndex: textIndex),
             const SizedBox(height: 20),
             MyRecruitmentPartyListTabView(tabController: _tabController),
           ],
