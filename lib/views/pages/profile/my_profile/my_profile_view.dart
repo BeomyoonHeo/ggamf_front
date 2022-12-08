@@ -1,28 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:ggamf_front/controller/user/my_profile_controller.dart';
+import 'package:ggamf_front/main.dart';
+import 'package:ggamf_front/views/pages/profile/my_profile/my_profile_view_model.dart';
 import 'package:ggamf_front/views/pages/profile/update_my_profile/update_my_profile_view.dart';
 import 'package:ggamf_front/views/pages/profile/withdrawal/withdrawal_view.dart';
 
 import '../../../../core/color.dart';
 
-class MyProfileView extends StatefulWidget {
+class MyProfileView extends ConsumerWidget {
   const MyProfileView({Key? key}) : super(key: key);
 
   @override
-  State<MyProfileView> createState() => _MyProfileViewState();
-}
-
-class _MyProfileViewState extends State<MyProfileView> {
-  int _selectedIndex = 0;
-
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    //mpc = myProfileController
+    final mpc = ref.read(myProfileController);
+    //mpvm = myProfileViewModel
+    final mpvm = ref.watch(myProfileViewModel);
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -76,7 +71,7 @@ class _MyProfileViewState extends State<MyProfileView> {
     return OutlinedButton(
       onPressed: () {
         Navigator.push(
-          context,
+          navigatorKey.currentState!.context,
           MaterialPageRoute(builder: (context) => WithdrawalView()),
         );
       },
@@ -92,7 +87,7 @@ class _MyProfileViewState extends State<MyProfileView> {
     return OutlinedButton(
       onPressed: () {
         Navigator.push(
-          context,
+          navigatorKey.currentState!.context,
           MaterialPageRoute(builder: (context) => UpdateMyProfileView()),
         );
       },
