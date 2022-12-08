@@ -1,19 +1,19 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:ggamf_front/domain/data.dart';
+import 'package:ggamf_front/domain/recommend_ggamf_list/model/recommend_ggamf_list.dart';
 import 'package:ggamf_front/views/pages/recommend_ggamef/recommend_ggamf_list/components/recommend_ggamf_list_tab_bar.dart';
 
 class RecommendGgamfListTabView extends StatefulWidget {
   RecommendGgamfListTabView({
     Key? key,
     required TabController tabController,
-    required List<Data> ggamfList,
+    required List<RecommendGgamf> ggamfList,
   })  : _tabController = tabController,
         _ggamfList = ggamfList,
         super(key: key);
 
   final TabController _tabController;
-  final List<Data> _ggamfList;
+  final List<RecommendGgamf> _ggamfList;
   @override
   State<RecommendGgamfListTabView> createState() =>
       _RecommendGgamfListTabViewState();
@@ -92,15 +92,16 @@ class _RecommendGgamfListTabViewState extends State<RecommendGgamfListTabView>
   }
 
   Widget _buildListView(
-      List<IconButton> buttons, List<Data> recommendGgamfList) {
+      List<IconButton> buttons, List<RecommendGgamf> recommendGgamfList) {
     return ListView.separated(
         itemBuilder: (context, index) => ListTile(
               visualDensity: const VisualDensity(horizontal: 3),
               leading: CircleAvatar(
-                backgroundImage: NetworkImage(recommendGgamfList[index].avatar),
+                backgroundImage:
+                    NetworkImage(recommendGgamfList[index].profilePicture),
               ),
-              title: Text(recommendGgamfList[index].firstName),
-              subtitle: Text(recommendGgamfList[index].lastName),
+              title: Text(recommendGgamfList[index].nickname),
+              subtitle: Text(recommendGgamfList[index].stateMessage),
               trailing: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: buttons,

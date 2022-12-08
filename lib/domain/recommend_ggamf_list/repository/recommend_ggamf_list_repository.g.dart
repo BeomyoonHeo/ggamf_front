@@ -51,13 +51,13 @@ class _RecommendGgamfListRepository implements RecommendGgamfListRepository {
   }
 
   @override
-  Future<User> getUser({required page}) async {
+  Future<RecommendGgamfList> getUser({required page}) async {
     const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{r'page': page};
+    final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    final _result =
-        await _dio.fetch<Map<String, dynamic>>(_setStreamType<User>(Options(
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<RecommendGgamfList>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -69,7 +69,7 @@ class _RecommendGgamfListRepository implements RecommendGgamfListRepository {
               data: _data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = User.fromJson(_result.data!);
+    final value = RecommendGgamfList.fromJson(_result.data!);
     return value;
   }
 

@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart' hide Headers;
 import 'package:ggamf_front/domain/data.dart';
+import 'package:ggamf_front/domain/recommend_ggamf_list/model/recommend_ggamf_list.dart';
 import 'package:retrofit/retrofit.dart';
 
 part 'recommend_ggamf_list_repository.g.dart';
@@ -19,5 +20,5 @@ abstract class RecommendGgamfListRepository {
       {@Path() required int id, @Body() required dynamic body});
 
   @GET('/users')
-  Future<User> getUser({@Query("page") required int page});
+  Future<RecommendGgamfList> getUser({@Path("page") required int page});
 }
