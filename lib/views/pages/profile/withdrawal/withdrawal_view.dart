@@ -1,14 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class WithdrawalPage extends StatefulWidget {
-  const WithdrawalPage({Key? key}) : super(key: key);
+class WithdrawalView extends StatefulWidget {
+  const WithdrawalView({Key? key}) : super(key: key);
 
   @override
-  State<WithdrawalPage> createState() => _WithdrawalPageState();
+  State<WithdrawalView> createState() => _WithdrawalViewState();
 }
 
-class _WithdrawalPageState extends State<WithdrawalPage> {
+class _WithdrawalViewState extends State<WithdrawalView> {
   bool _isChecked = false;
 
   @override

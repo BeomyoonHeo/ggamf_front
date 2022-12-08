@@ -4,14 +4,14 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:ggamf_front/core/color.dart';
 
-class JoinPartyList extends StatefulWidget {
-  const JoinPartyList({Key? key}) : super(key: key);
+class JoinPartyListView extends StatefulWidget {
+  const JoinPartyListView({Key? key}) : super(key: key);
 
   @override
-  State<JoinPartyList> createState() => _JoinPartyListState();
+  State<JoinPartyListView> createState() => _JoinPartyListViewState();
 }
 
-class _JoinPartyListState extends State<JoinPartyList> {
+class _JoinPartyListViewState extends State<JoinPartyListView> {
   int tag = 1;
   List<String> options = [
     '전체',

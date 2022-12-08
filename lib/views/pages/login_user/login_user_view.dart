@@ -3,8 +3,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:ggamf_front/views/pages/login_user/components/login_box.dart';
 import 'package:ggamf_front/views/pages/login_user/components/login_screen_decoration.dart';
 
-class LoginUserPage extends StatelessWidget {
-  const LoginUserPage({Key? key}) : super(key: key);
+class LoginUserView extends StatelessWidget {
+  const LoginUserView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -28,8 +28,7 @@ class LoginUserPage extends StatelessWidget {
                       ),
                       const Text(
                         '매칭해줘! 껨프',
-                        style:
-                            TextStyle(fontFamily: 'NanumSquare', fontSize: 25),
+                        style: TextStyle(fontFamily: 'NanumSquare', fontSize: 25),
                       ),
                       const SizedBox(height: 10),
                       LoginBox(size: size),
@@ -48,8 +47,7 @@ class LoginUserPage extends StatelessWidget {
                     children: const [
                       SocialIcon(socialIcon: 'assets/icons/kakaotalk.svg'),
                       SocialIcon(socialIcon: 'assets/icons/google_plus.svg'),
-                      SocialIcon(
-                          socialIcon: 'assets/icons/apple_logo_black.svg'),
+                      SocialIcon(socialIcon: 'assets/icons/apple_logo_black.svg'),
                     ],
                   )
                 ],

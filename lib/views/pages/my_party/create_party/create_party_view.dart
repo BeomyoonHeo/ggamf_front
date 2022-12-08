@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:ggamf_front/views/pages/chatting/chatting_page.dart';
+import 'package:ggamf_front/views/pages/chatting/chatting_view.dart';
 
-class CreatePartyPage extends StatefulWidget {
-  const CreatePartyPage({Key? key}) : super(key: key);
+class CreatePartyView extends StatefulWidget {
+  const CreatePartyView({Key? key}) : super(key: key);
 
   @override
-  State<CreatePartyPage> createState() => _CreatePartyPageState();
+  State<CreatePartyView> createState() => _CreatePartyViewState();
 }
 
-class _CreatePartyPageState extends State<CreatePartyPage> {
+class _CreatePartyViewState extends State<CreatePartyView> {
   List<String> _valueList = ['리그 오브 레전드', '오버워치', '로스트아크', '발로란트', '기타'];
   var _selectedValue;
 
@@ -74,7 +74,7 @@ class _CreatePartyPageState extends State<CreatePartyPage> {
           onPressed: () {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => ChattingPage()),
+              MaterialPageRoute(builder: (context) => ChattingView()),
             );
           },
           child: Text(
