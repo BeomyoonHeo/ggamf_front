@@ -1,16 +1,23 @@
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ggamf_front/core/page_enum.dart';
 import 'package:ggamf_front/core/theme.dart';
 import 'package:ggamf_front/views/common_components/common_pages.dart';
-import 'package:ggamf_front/views/pages/join_user/join_user_page.dart';
+import 'package:ggamf_front/views/pages/join_user/join_user_view.dart';
 import 'package:ggamf_front/views/pages/login_user/login_user_page.dart';
+import 'package:ggamf_front/views/pages/splash_page.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
-  runApp(const ProviderScope(child: MyApp()));
+  runApp(SplashPage(
+    key: UniqueKey(),
+    onInitializationComplete: () {
+      runApp(const ProviderScope(child: MyApp()));
+    },
+  ));
+  // WidgetsFlutterBinding.ensureInitialized();
+  // await Firebase.initializeApp().then((value) {
+  //   runApp(const ProviderScope(child: MyApp()));
+  // });
 }
 
 // 페이지 context를 global로 가지고 있을 NavigatorKey 적용
@@ -27,7 +34,7 @@ class MyApp extends StatelessWidget {
       initialRoute: PageEnum.getByDisPlayName('login').requestLocation,
       routes: {
         PageEnum.LOGIN.requestLocation: (context) => const LoginUserPage(),
-        PageEnum.JOIN.requestLocation: (context) => JoinUserPage(),
+        PageEnum.JOIN.requestLocation: (context) => JoinUserView(),
         PageEnum.ALLPAGES.requestLocation: (context) => const AllPages(),
       },
       theme: theme(),

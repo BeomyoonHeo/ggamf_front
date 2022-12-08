@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:ggamf_front/core/color.dart';
 import 'package:ggamf_front/views/pages/join_user/components/agreement_provision_of_personal_information_modal.dart';
 import 'package:ggamf_front/views/pages/join_user/components/certification_number_button.dart';
 import 'package:ggamf_front/views/pages/join_user/components/confirm_join_user_button.dart';
@@ -9,8 +8,8 @@ import 'package:ggamf_front/views/pages/join_user/components/input_box.dart';
 import 'package:ggamf_front/views/pages/join_user/components/input_email_box.dart';
 import 'package:ggamf_front/views/pages/join_user/components/input_phonenumber_widget.dart';
 
-class JoinUserPage extends ConsumerWidget {
-  JoinUserPage({Key? key}) : super(key: key);
+class JoinUserView extends ConsumerWidget {
+  JoinUserView({Key? key}) : super(key: key);
 
   TextEditingController nameController = TextEditingController();
   TextEditingController idController = TextEditingController();
@@ -25,13 +24,18 @@ class JoinUserPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       //resizeToAvoidBottomInset: false,
+      appBar: AppBar(
+        automaticallyImplyLeading: true,
+        title: const Text('회원가입 페이지'),
+      ),
       body: Container(
         padding: const EdgeInsets.all(20),
         width: double.infinity,
         color: const Color(0xFFFFFBFE),
         child: Container(
           decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(30), color: kPrimaryColor),
+              borderRadius: BorderRadius.circular(30),
+              color: const Color(0xFFFFFBFE)),
           child: Padding(
             padding: const EdgeInsets.all(20),
             child: SingleChildScrollView(

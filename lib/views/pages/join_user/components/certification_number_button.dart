@@ -5,6 +5,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 class CertificationNumberButton extends StatefulWidget {
   String certificationText;
   String phoneNumber;
+
   CertificationNumberButton(
       {Key? key, required this.certificationText, required this.phoneNumber})
       : super(key: key);
@@ -41,7 +42,6 @@ class _CertificationNumberButtonState extends State<CertificationNumberButton> {
                   });
                 },
                 codeSent: (String verificationId, int? resendToken) {
-                  print(verificationId);
                   setState(() {
                     widget.certificationText = '인증번호가 발송되었습니다.';
                     Fluttertoast.showToast(msg: '인증번호가 발송 되었습니다');
