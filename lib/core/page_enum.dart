@@ -1,4 +1,7 @@
+const String baseUrl = 'http://localhost:8000';
+
 enum PageEnum {
+  BASEURL(null, 'http://localhost:8000', 'baseUrl'),
   LOGIN(1, '/login', 'login'),
   JOIN(null, '/join', 'join'),
   RECOMMENDGGAMF(3, '/recommendGamf', 'recommendGamf'),
