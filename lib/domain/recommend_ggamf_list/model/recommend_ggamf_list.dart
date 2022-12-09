@@ -1,7 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
 
-part 'recommend_ggamf_list.g.dart';
-
 @JsonSerializable()
 class RecommendGgamfList {
   List<RecommendGgamf> data;
