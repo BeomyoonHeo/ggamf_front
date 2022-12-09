@@ -18,4 +18,8 @@ class MyProfileController {
   void findById(int id) async {
     ProfileUser userdata = await repo.getUserProfile(id: 1);
   }
+
+  void updateById(int id, ProfileUser profileUser) async {
+    ProfileUser userdata = await repo.putUserProfile(id: 1, profileUser: profileUser);
+  }
 }
