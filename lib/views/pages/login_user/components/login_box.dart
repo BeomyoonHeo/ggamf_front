@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ggamf_front/core/page_enum.dart';
+import 'package:ggamf_front/utils/page_enum.dart';
 import 'package:ggamf_front/views/pages/login_user/components/rounded_input_field.dart';
 import 'package:ggamf_front/views/pages/login_user/components/rounded_input_password_field.dart';
 

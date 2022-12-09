@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:ggamf_front/core/page_enum.dart';
 import 'package:ggamf_front/core/theme.dart';
+import 'package:ggamf_front/utils/page_enum.dart';
 import 'package:ggamf_front/views/common_components/common_pages.dart';
 import 'package:ggamf_front/views/pages/join_user/join_user_view.dart';
 import 'package:ggamf_front/views/pages/login_user/login_user_view.dart';
