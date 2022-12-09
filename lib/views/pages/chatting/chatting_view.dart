@@ -9,15 +9,15 @@ import 'chatting_components/chat_icon_button.dart';
 import 'chatting_components/my_chat.dart';
 import 'chatting_components/other_chat.dart';
 
-class ChattingPage extends StatefulWidget {
+class ChattingView extends StatefulWidget {
   final dio = Dio();
-  ChattingPage({Key? key}) : super(key: key);
+  ChattingView({Key? key}) : super(key: key);
 
   @override
-  State<ChattingPage> createState() => _ChattingPageState();
+  State<ChattingView> createState() => _ChattingViewState();
 }
 
-class _ChattingPageState extends State<ChattingPage> {
+class _ChattingViewState extends State<ChattingView> {
   final List<MyChat> chats = [];
   final TextEditingController _textController = TextEditingController();
   bool _ischecked = false;
@@ -183,10 +183,7 @@ class _ChattingPageState extends State<ChattingPage> {
       chats.add(
         MyChat(
           text: text,
-          time: DateFormat("a K:m")
-              .format(new DateTime.now())
-              .replaceAll("AM", "오전")
-              .replaceAll("PM", "오후"),
+          time: DateFormat("a K:m").format(new DateTime.now()).replaceAll("AM", "오전").replaceAll("PM", "오후"),
         ),
       );
     });

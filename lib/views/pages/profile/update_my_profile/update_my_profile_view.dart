@@ -5,14 +5,14 @@ import 'package:image_picker/image_picker.dart';
 
 import '../../../../core/color.dart';
 
-class UpdateMyProfile extends StatefulWidget {
-  const UpdateMyProfile({Key? key}) : super(key: key);
+class UpdateMyProfileView extends StatefulWidget {
+  const UpdateMyProfileView({Key? key}) : super(key: key);
 
   @override
-  State<UpdateMyProfile> createState() => _UpdateMyProfileState();
+  State<UpdateMyProfileView> createState() => _UpdateMyProfileViewState();
 }
 
-class _UpdateMyProfileState extends State<UpdateMyProfile> {
+class _UpdateMyProfileViewState extends State<UpdateMyProfileView> {
   File? _imageFile;
   final ImagePicker _picker = ImagePicker();
 

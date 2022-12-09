@@ -1,28 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:ggamf_front/views/pages/profile/update_my_profile/update_my_profile_page.dart';
-import 'package:ggamf_front/views/pages/profile/withdrawal/withdrawal_page.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:ggamf_front/controller/user/my_profile_controller.dart';
+import 'package:ggamf_front/main.dart';
+import 'package:ggamf_front/views/pages/profile/my_profile/my_profile_view_model.dart';
+import 'package:ggamf_front/views/pages/profile/update_my_profile/update_my_profile_view.dart';
+import 'package:ggamf_front/views/pages/profile/withdrawal/withdrawal_view.dart';
 
 import '../../../../core/color.dart';
 
-class MyProfilePage extends StatefulWidget {
-  const MyProfilePage({Key? key}) : super(key: key);
+class MyProfileView extends ConsumerWidget {
+  const MyProfileView({Key? key}) : super(key: key);
 
   @override
-  State<MyProfilePage> createState() => _MyProfilePageState();
-}
-
-class _MyProfilePageState extends State<MyProfilePage> {
-  int _selectedIndex = 0;
-
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    //mpc = myProfileController
+    final mpc = ref.read(myProfileController);
+    //mpvm = myProfileViewModel
+    final mpvm = ref.watch(myProfileViewModel);
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -76,8 +71,8 @@ class _MyProfilePageState extends State<MyProfilePage> {
     return OutlinedButton(
       onPressed: () {
         Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => WithdrawalPage()),
+          navigatorKey.currentState!.context,
+          MaterialPageRoute(builder: (context) => WithdrawalView()),
         );
       },
       child: Text("탈퇴"),
@@ -92,8 +87,9 @@ class _MyProfilePageState extends State<MyProfilePage> {
     return OutlinedButton(
       onPressed: () {
         Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => UpdateMyProfile()),
+          navigatorKey.currentState!.context,
+
+          MaterialPageRoute(builder: (context) => UpdateMyProfileView()),
         );
       },
       child: Text("프로필 수정"),
