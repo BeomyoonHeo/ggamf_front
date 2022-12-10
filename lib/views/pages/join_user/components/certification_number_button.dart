@@ -54,6 +54,7 @@ class _CertificationNumberButtonState extends State<CertificationNumberButton> {
                           child: const Text("인증받기"),
                         ),
                         onTap: () async {
+                          FocusScope.of(context).unfocus();
                           String phoneNumber = widget.juc.combinePhoneNumber();
                           await _buildVerifyPhoneNumber(phoneNumber);
                         },
@@ -87,11 +88,13 @@ class _CertificationNumberButtonState extends State<CertificationNumberButton> {
                               ),
                               child: const Text("입력하기")),
                           onTap: () async {
+                            FocusScope.of(context).unfocus();
                             PhoneAuthCredential phoneAuthCredential =
                                 PhoneAuthProvider.credential(
                                     verificationId: _verificationId,
                                     smsCode: _credentialController.text);
                             signInWithPhoneAuthCredential(phoneAuthCredential);
+                            setState(() {});
                           },
                         ),
                       ),
@@ -143,10 +146,13 @@ class _CertificationNumberButtonState extends State<CertificationNumberButton> {
       final authCredential =
           await _auth.signInWithCredential(phoneAuthCredential);
       if (authCredential.user != null) {
-        setState(() {
-          widget.juc.authOk = true;
-          widget.showCertificationBar = false;
-        });
+        setState(
+          () {
+            widget.juc.authOk = true;
+            widget.showCertificationBar = false;
+            widget.juc.checkAuth();
+          },
+        );
         await _auth.currentUser!.delete();
         _auth.signOut();
       }

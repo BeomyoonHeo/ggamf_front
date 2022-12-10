@@ -3,10 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ggamf_front/domain/user/model/join_user.dart';
 import 'package:ggamf_front/domain/user/repository/join_user_repository.dart';
+import 'package:ggamf_front/views/pages/join_user/components/join_user_view_model.dart';
 
-final joinUserController = Provider((ref) => JoinUserController());
+final joinUserController = Provider((ref) => JoinUserController(ref));
 
 class JoinUserController {
+  final _ref;
+  JoinUserController(this._ref);
   bool authOk = false;
   bool isAgree = false;
   final formKey = GlobalKey<FormState>();
@@ -24,6 +27,7 @@ class JoinUserController {
   String combinePhoneNumber() {
     // 비지니스 로직
     String phoneNumber = '';
+
     phoneNumberController.forEach((_controller) {
       phoneNumber += '${_controller.text} ';
     });
@@ -31,6 +35,10 @@ class JoinUserController {
     phoneNumber = phoneNumber.trim();
 
     return phoneNumber;
+  }
+
+  void checkAuth() {
+    authOk ? _ref.read(joinUserViewModel.notifier).updateState() : null;
   }
 
   void requestJoin() {
@@ -44,6 +52,17 @@ class JoinUserController {
       isAgree: isAgree,
     );
     JoinUserRepository joinUserRepository = JoinUserRepository(Dio());
-    joinUserRepository.insert(joinUser);
+    joinUserRepository.insert(joinUser).then((value) => null);
+  }
+
+  void dispose() {
+    idController.dispose();
+    passwordController.dispose();
+    emailController.dispose();
+    nameController.dispose();
+    nickNameController.dispose();
+    phoneNumberController.forEach((_controller) {
+      _controller.dispose();
+    });
   }
 }

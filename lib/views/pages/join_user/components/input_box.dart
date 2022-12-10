@@ -5,13 +5,15 @@ class InputBox extends StatelessWidget {
   final String inputText;
   final String hintText;
   final TextEditingController? controller;
-  const InputBox({
-    Key? key,
-    required this.inputText,
-    required this.hintText,
-    required this.controller,
-    required this.validator,
-  }) : super(key: key);
+  AutovalidateMode? autoValidateMode;
+  InputBox(
+      {Key? key,
+      required this.inputText,
+      required this.hintText,
+      required this.controller,
+      required this.validator,
+      this.autoValidateMode})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -32,6 +34,7 @@ class InputBox extends StatelessWidget {
           SizedBox(
             width: 200,
             child: TextFormField(
+              autovalidateMode: autoValidateMode ?? AutovalidateMode.disabled,
               controller: controller,
               validator: validator(),
               decoration: InputDecoration(

@@ -25,6 +25,16 @@ class JoinUserView extends StatelessWidget {
 
   Widget _buildUI(WidgetRef ref) {
     final juc = ref.read(joinUserController);
+    Function passwordRepeatValidation() {
+      return (String? value) {
+        if (juc.passwordController.text != value) {
+          return '기존 패스워드와 같지 않습니다.';
+        } else {
+          return null;
+        }
+      };
+    }
+
     return Scaffold(
       //resizeToAvoidBottomInset: false,
       appBar: AppBar(
@@ -67,23 +77,22 @@ class JoinUserView extends StatelessWidget {
                       controller: juc.passwordController),
                   const SizedBox(height: 10),
                   InputBox(
-                      validator: passwordValidator,
+                      autoValidateMode: AutovalidateMode.always,
+                      validator: passwordRepeatValidation,
                       inputText: "비밀번호 확인   : ",
                       hintText: "비밀번호를 입력하세요",
-                      controller: juc.passwordController),
+                      controller: null),
                   const SizedBox(height: 10),
-                  juc.authOk
-                      ? SizedBox()
-                      : InputPhoneNumberWidget(
-                          controller: juc.phoneNumberController,
-                        ),
+                  InputPhoneNumberWidget(
+                    controller: juc.phoneNumberController,
+                  ),
                   const SizedBox(height: 10),
                   CertificationNumberButton(
                       certificationText: '인증되지 않음', juc: juc),
                   const SizedBox(height: 10),
                   InputBox(
                     validator: nickNameValidator,
-                    inputText: "닉네임 : ",
+                    inputText: "닉네임   : ",
                     hintText: "닉네임 입력",
                     controller: juc.nickNameController,
                   ),
@@ -97,7 +106,7 @@ class JoinUserView extends StatelessWidget {
                   const SizedBox(height: 10),
                   const AgreementProvisionOfPersonalInformationModal(),
                   const SizedBox(height: 10),
-                  ConfirmJoinUserButton(formKey: juc.formKey),
+                  const ConfirmJoinUserButton(),
                 ],
               ),
             ),

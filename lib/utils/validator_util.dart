@@ -39,16 +39,6 @@ Function passwordValidator() {
   };
 }
 
-Function passwordRepeatValidator(String password) {
-  return (String? value) {
-    if (password != value) {
-      return '기존 패스워드와 같지 않습니다.';
-    } else {
-      return null;
-    }
-  };
-}
-
 Function nickNameValidator() {
   return (String? value) {
     if (value!.isEmpty) {

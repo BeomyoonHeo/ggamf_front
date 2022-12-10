@@ -1,28 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:ggamf_front/controller/user/join_user_controller.dart';
 
-class EmailDropdownButton extends StatefulWidget {
+class EmailDropdownButton extends ConsumerStatefulWidget {
   const EmailDropdownButton({
     Key? key,
   }) : super(key: key);
 
   @override
-  State<EmailDropdownButton> createState() => _EmailDropdownButtonState();
+  ConsumerState<EmailDropdownButton> createState() =>
+      _EmailDropdownButtonState();
 }
 
-class _EmailDropdownButtonState extends State<EmailDropdownButton> {
+class _EmailDropdownButtonState extends ConsumerState<EmailDropdownButton> {
   String _dropdownItem = '선택';
   bool _enableTextField = false;
-  final _emailEditController = TextEditingController();
-
-  @override
-  void dispose() {
-    // TODO: implement dispose
-    _emailEditController.dispose();
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
+    TextEditingController emailEditController =
+        ref.read(joinUserController).emailController;
     final List<String> emailList = [
       '선택',
       'naver.com',
@@ -51,13 +48,13 @@ class _EmailDropdownButtonState extends State<EmailDropdownButton> {
                 _dropdownItem = value;
                 if (value == '직접입력') {
                   _enableTextField = true;
-                  _emailEditController.text = '';
+                  emailEditController.text = '';
                 } else if (value == '선택') {
-                  _emailEditController.text = '';
+                  emailEditController.text = '';
                   _enableTextField = false;
                 } else {
                   _enableTextField = true;
-                  _emailEditController.text = value;
+                  emailEditController.text = value;
                   _enableTextField = false;
                 }
               });
@@ -67,7 +64,7 @@ class _EmailDropdownButtonState extends State<EmailDropdownButton> {
             child: Container(
               height: 35,
               child: TextField(
-                controller: _emailEditController,
+                controller: emailEditController,
                 decoration: InputDecoration(
                   hintText: '이메일 입력',
                 ),
