@@ -14,7 +14,7 @@ class InputEmailBox extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
           color: Colors.white, borderRadius: BorderRadius.circular(9)),
-      padding: EdgeInsets.all(15),
+      padding: const EdgeInsets.all(15),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
@@ -22,7 +22,7 @@ class InputEmailBox extends StatelessWidget {
             "이메일 : ",
             style: TextStyle(fontFamily: 'NanumSquare', fontSize: 15),
           ),
-          Container(
+          SizedBox(
             width: 200,
             child: TextFormField(
               validator: validator(),
@@ -31,7 +31,7 @@ class InputEmailBox extends StatelessWidget {
                 filled: true,
                 fillColor: Colors.white,
               ),
-              style: TextStyle(fontSize: 12, height: 2.0),
+              style: const TextStyle(fontSize: 12, height: 2.0),
             ),
           ),
           const Text(

@@ -96,7 +96,7 @@ class _CertificationNumberButtonState extends State<CertificationNumberButton> {
                         ),
                       ),
                       Expanded(
-                        child: Container(
+                        child: SizedBox(
                           width: 50,
                           child: TextFormField(
                             controller: _credentialController,
