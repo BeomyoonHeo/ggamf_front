@@ -39,7 +39,6 @@ class JoinUserView extends StatelessWidget {
         title: const Text('회원가입 페이지'),
       ),
       body: Container(
-        padding: const EdgeInsets.all(20),
         width: double.infinity,
         color: const Color(0xFFFFFBFE),
         child: Form(
@@ -77,10 +76,7 @@ class JoinUserView extends StatelessWidget {
                     controller: juc.phoneNumberController,
                   ),
                   const SizedBox(height: 10),
-                  CertificationNumberButton(
-                      certificationText: '인증되지 않음',
-                      phoneNumber: juc.phoneNumberController.text),
-                  const SizedBox(height: 10),
+                  CertificationNumberButton(certificationText: '인증되지 않음'),
                   const SizedBox(height: 10),
                   InputBox(
                     validator: nickNameValidator,
@@ -88,15 +84,16 @@ class JoinUserView extends StatelessWidget {
                     hintText: "닉네임 입력",
                     controller: juc.nickNameController,
                   ),
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
                   InputEmailBox(
-                      controller: juc.emailController,
-                      validator: emailValidator),
-                  SizedBox(height: 10),
+                    controller: juc.emailController,
+                    validator: emailValidator(),
+                  ),
+                  const SizedBox(height: 10),
                   EmailDropdownButton(),
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
                   AgreementProvisionOfPersonalInformationModal(),
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
                   ConfirmJoinUserButton(formKey: juc.formKey),
                 ],
               ),

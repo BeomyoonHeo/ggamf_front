@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:ggamf_front/controller/user/join_user_controller.dart';
 
-class ConfirmJoinUserButton extends StatefulWidget {
+class ConfirmJoinUserButton extends ConsumerWidget {
   final GlobalKey<FormState> formKey;
   ConfirmJoinUserButton({
     Key? key,
@@ -8,12 +10,8 @@ class ConfirmJoinUserButton extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State<ConfirmJoinUserButton> createState() => _ConfirmJoinUserButtonState();
-}
-
-class _ConfirmJoinUserButtonState extends State<ConfirmJoinUserButton> {
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final juc = ref.read(joinUserController);
     return Container(
       decoration: BoxDecoration(
           color: Colors.white, borderRadius: BorderRadius.circular(9)),
@@ -24,9 +22,8 @@ class _ConfirmJoinUserButtonState extends State<ConfirmJoinUserButton> {
           Container(
             child: ElevatedButton(
               onPressed: () {
-                if (widget.formKey.currentState!.validate()) {
-                  print('에러발생');
-                }
+                if (formKey.currentState!.validate()) {}
+                print(juc.phoneNumberController[0].text);
               },
               child: Text('회원가입'),
               style: ButtonStyle(

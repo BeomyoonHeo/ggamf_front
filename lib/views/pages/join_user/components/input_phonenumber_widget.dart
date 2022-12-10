@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class InputPhoneNumberWidget extends StatelessWidget {
-  final TextEditingController controller;
+  final List<TextEditingController> controller;
   const InputPhoneNumberWidget({
     Key? key,
     required this.controller,
@@ -16,67 +17,43 @@ class InputPhoneNumberWidget extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(
+          const Text(
             "전화번호 : ",
-            style: TextStyle(fontFamily: 'NanumSquare', fontSize: 15),
+            style: TextStyle(fontSize: 15),
           ),
-          Container(
-            width: 50,
-            height: 30,
-            decoration: BoxDecoration(
-                border: Border.all(width: 1), color: Colors.white),
-            child: TextFormField(
-              maxLength: 3,
-              decoration: InputDecoration(
-                filled: true,
-                fillColor: Colors.white,
-                border: InputBorder.none,
-                counterText: '',
-              ),
-              style: TextStyle(fontSize: 12, height: 2.0),
-            ),
-          ),
-          Text(
+          _buildCustomTextFormField(controller[0], 3),
+          const Text(
             " - ",
-            style: TextStyle(fontFamily: 'NanumSquare', fontSize: 15),
+            style: TextStyle(fontSize: 15),
           ),
-          Container(
-            width: 60,
-            height: 30,
-            decoration: BoxDecoration(
-                border: Border.all(width: 1), color: Colors.white),
-            child: TextFormField(
-              maxLength: 4,
-              decoration: InputDecoration(
-                filled: true,
-                fillColor: Colors.white,
-                border: InputBorder.none,
-                counterText: '',
-              ),
-              style: TextStyle(fontSize: 12, height: 2.0),
-            ),
-          ),
-          Text(
+          _buildCustomTextFormField(controller[1], 4),
+          const Text(
             " - ",
-            style: TextStyle(fontFamily: 'NanumSquare', fontSize: 15),
+            style: TextStyle(fontSize: 15),
           ),
-          Container(
-            width: 60,
-            height: 30,
-            decoration: BoxDecoration(
-                border: Border.all(width: 1), color: Colors.white),
-            child: TextFormField(
-              maxLength: 4,
-              decoration: const InputDecoration(
-                filled: true,
-                fillColor: Colors.white,
-                border: InputBorder.none,
-                counterText: '',
-              ),
-              style: const TextStyle(fontSize: 12, height: 2.0),
-            ),
-          ),
+          _buildCustomTextFormField(controller[2], 4),
         ],
+      ),
+    );
+  }
+
+  Widget _buildCustomTextFormField(
+      TextEditingController controller, int maxLength) {
+    return Container(
+      height: 30,
+      width: 70,
+      child: TextFormField(
+        keyboardType: TextInputType.number,
+        controller: controller,
+        maxLength: maxLength,
+        decoration: const InputDecoration(
+          filled: true,
+          contentPadding: EdgeInsets.symmetric(horizontal: 15),
+          fillColor: Colors.white,
+          border: OutlineInputBorder(borderSide: BorderSide(width: 1)),
+          counterText: '',
+        ),
+        style: const TextStyle(fontSize: 15),
       ),
     );
   }

@@ -25,17 +25,18 @@ class InputBox extends StatelessWidget {
             inputText,
             style: TextStyle(fontFamily: 'NanumSquare', fontSize: 15),
           ),
-          Expanded(
-            child: TextFormField(
-              autovalidateMode: AutovalidateMode.always,
-              controller: controller,
-              validator: validator(),
-              decoration: InputDecoration(
-                hintText: hintText,
-                hintStyle: TextStyle(fontFamily: 'NanumSquare', fontSize: 15),
-                filled: true,
-                fillColor: Colors.white,
-                border: InputBorder.none,
+          Container(
+            child: Expanded(
+              child: TextFormField(
+                controller: controller,
+                validator: validator(),
+                decoration: InputDecoration(
+                  hintText: hintText,
+                  hintStyle: TextStyle(fontFamily: 'NanumSquare', fontSize: 15),
+                  filled: true,
+                  fillColor: Colors.white,
+                  border: InputBorder.none,
+                ),
               ),
             ),
           ),

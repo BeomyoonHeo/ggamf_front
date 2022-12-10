@@ -8,7 +8,22 @@ class JoinUserController {
   TextEditingController nameController = TextEditingController();
   TextEditingController idController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
-  TextEditingController phoneNumberController = TextEditingController();
+  List<TextEditingController> phoneNumberController = [
+    TextEditingController(),
+    TextEditingController(),
+    TextEditingController(),
+  ];
   TextEditingController nickNameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
+
+  String combinePhoneNumber() {
+    String phoneNumber = '';
+    phoneNumberController.forEach((_controller) {
+      phoneNumber += '${_controller.text} ';
+    });
+
+    phoneNumber = phoneNumber.trim();
+
+    return phoneNumber;
+  }
 }

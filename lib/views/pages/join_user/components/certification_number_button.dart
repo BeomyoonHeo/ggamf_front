@@ -1,23 +1,24 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:ggamf_front/controller/user/join_user_controller.dart';
 
-class CertificationNumberButton extends StatefulWidget {
+class CertificationNumberButton extends ConsumerStatefulWidget {
   String certificationText;
-  String phoneNumber;
   bool authOk = false;
   bool showCertificationBar = false;
 
-  CertificationNumberButton(
-      {Key? key, required this.certificationText, required this.phoneNumber})
+  CertificationNumberButton({Key? key, required this.certificationText})
       : super(key: key);
 
   @override
-  State<CertificationNumberButton> createState() =>
+  ConsumerState<CertificationNumberButton> createState() =>
       _CertificationNumberButtonState();
 }
 
-class _CertificationNumberButtonState extends State<CertificationNumberButton> {
+class _CertificationNumberButtonState
+    extends ConsumerState<CertificationNumberButton> {
   bool authOk = false;
   final TextEditingController _credentialController = TextEditingController();
   String _verificationId = '';
@@ -36,13 +37,17 @@ class _CertificationNumberButtonState extends State<CertificationNumberButton> {
               ElevatedButton(
                 child: Text("인증받기"),
                 onPressed: () async {
-                  await _buildVerifyPhoneNumber();
+                  String phoneNumber =
+                      ref.read(joinUserController).combinePhoneNumber();
+                  print(phoneNumber);
+                  //await _buildVerifyPhoneNumber();
                 },
                 style: ButtonStyle(
                   foregroundColor: const MaterialStatePropertyAll(Colors.black),
                   backgroundColor: const MaterialStatePropertyAll(Colors.white),
                   padding: const MaterialStatePropertyAll(
-                      EdgeInsets.symmetric(horizontal: 30)),
+                    EdgeInsets.symmetric(horizontal: 30),
+                  ),
                   shape: MaterialStatePropertyAll(
                     RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(30),
@@ -107,7 +112,8 @@ class _CertificationNumberButtonState extends State<CertificationNumberButton> {
 
   Future<void> _buildVerifyPhoneNumber() {
     return _auth.verifyPhoneNumber(
-      phoneNumber: '+82 010 4699 9771', //${widget.phoneNumber}
+      phoneNumber:
+          '+82 ${ref.read(joinUserController).combinePhoneNumber()}', //${widget.phoneNumber}
       timeout: const Duration(seconds: 60),
       verificationCompleted: (PhoneAuthCredential credential) {},
       verificationFailed: (FirebaseAuthException e) {
