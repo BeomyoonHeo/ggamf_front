@@ -18,24 +18,30 @@ class InputBox extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
           color: Colors.white, borderRadius: BorderRadius.circular(9)),
-      padding: EdgeInsets.all(15),
+      padding: const EdgeInsets.all(15),
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(
-            inputText,
-            style: TextStyle(fontFamily: 'NanumSquare', fontSize: 15),
+          Padding(
+            padding: const EdgeInsets.only(left: 10),
+            child: Text(
+              inputText,
+              style: const TextStyle(fontFamily: 'NanumSquare', fontSize: 15),
+            ),
           ),
-          Container(
-            child: Expanded(
-              child: TextFormField(
-                controller: controller,
-                validator: validator(),
-                decoration: InputDecoration(
-                  hintText: hintText,
-                  hintStyle: TextStyle(fontFamily: 'NanumSquare', fontSize: 15),
-                  filled: true,
-                  fillColor: Colors.white,
-                  border: InputBorder.none,
+          SizedBox(
+            width: 200,
+            child: TextFormField(
+              controller: controller,
+              validator: validator(),
+              decoration: InputDecoration(
+                hintText: hintText,
+                hintStyle:
+                    const TextStyle(fontFamily: 'NanumSquare', fontSize: 15),
+                filled: true,
+                fillColor: Colors.white,
+                border: const UnderlineInputBorder(
+                  borderSide: BorderSide(color: Colors.white, width: 0.3),
                 ),
               ),
             ),

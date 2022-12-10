@@ -40,7 +40,7 @@ class JoinUserView extends StatelessWidget {
       ),
       body: Container(
         width: double.infinity,
-        color: const Color(0xFFFFFBFE),
+        color: const Color(0xFFFFF1EE),
         child: Form(
           key: juc.formKey,
           child: Padding(
@@ -50,33 +50,36 @@ class JoinUserView extends StatelessWidget {
                 children: [
                   InputBox(
                       validator: nameValidator,
-                      inputText: "이름 : ",
+                      inputText: "이름   : ",
                       hintText: "이름을 입력하세요",
                       controller: juc.nameController),
                   const SizedBox(height: 10),
                   InputBox(
                       validator: idValidator,
-                      inputText: "아이디 : ",
+                      inputText: "아이디   : ",
                       hintText: "아이디를 입력하세요",
                       controller: juc.idController),
                   const SizedBox(height: 10),
                   InputBox(
                       validator: passwordValidator,
-                      inputText: "비밀번호 : ",
+                      inputText: "비밀번호   : ",
                       hintText: "비밀번호를 입력하세요",
                       controller: juc.passwordController),
                   const SizedBox(height: 10),
                   InputBox(
                       validator: passwordValidator,
-                      inputText: "비밀번호 확인 : ",
+                      inputText: "비밀번호 확인   : ",
                       hintText: "비밀번호를 입력하세요",
                       controller: juc.passwordController),
                   const SizedBox(height: 10),
-                  InputPhoneNumberWidget(
-                    controller: juc.phoneNumberController,
-                  ),
+                  juc.authOk
+                      ? SizedBox()
+                      : InputPhoneNumberWidget(
+                          controller: juc.phoneNumberController,
+                        ),
                   const SizedBox(height: 10),
-                  CertificationNumberButton(certificationText: '인증되지 않음'),
+                  CertificationNumberButton(
+                      certificationText: '인증되지 않음', juc: juc),
                   const SizedBox(height: 10),
                   InputBox(
                     validator: nickNameValidator,
@@ -87,12 +90,12 @@ class JoinUserView extends StatelessWidget {
                   const SizedBox(height: 10),
                   InputEmailBox(
                     controller: juc.emailController,
-                    validator: emailValidator(),
+                    validator: emailValidator,
                   ),
                   const SizedBox(height: 10),
-                  EmailDropdownButton(),
+                  const EmailDropdownButton(),
                   const SizedBox(height: 10),
-                  AgreementProvisionOfPersonalInformationModal(),
+                  const AgreementProvisionOfPersonalInformationModal(),
                   const SizedBox(height: 10),
                   ConfirmJoinUserButton(formKey: juc.formKey),
                 ],

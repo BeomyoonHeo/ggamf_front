@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 final joinUserController = Provider((ref) => JoinUserController());
 
 class JoinUserController {
+  bool authOk = false;
   final formKey = GlobalKey<FormState>();
   TextEditingController nameController = TextEditingController();
   TextEditingController idController = TextEditingController();

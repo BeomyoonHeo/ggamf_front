@@ -1,119 +1,123 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:ggamf_front/controller/user/join_user_controller.dart';
 
-class CertificationNumberButton extends ConsumerStatefulWidget {
+class CertificationNumberButton extends StatefulWidget {
   String certificationText;
-  bool authOk = false;
   bool showCertificationBar = false;
+  final juc;
 
-  CertificationNumberButton({Key? key, required this.certificationText})
+  CertificationNumberButton(
+      {Key? key, required this.certificationText, required this.juc})
       : super(key: key);
 
   @override
-  ConsumerState<CertificationNumberButton> createState() =>
+  State<CertificationNumberButton> createState() =>
       _CertificationNumberButtonState();
 }
 
-class _CertificationNumberButtonState
-    extends ConsumerState<CertificationNumberButton> {
-  bool authOk = false;
+class _CertificationNumberButtonState extends State<CertificationNumberButton> {
   final TextEditingController _credentialController = TextEditingController();
+
   String _verificationId = '';
   final FirebaseAuth _auth = FirebaseAuth.instance;
+
   @override
   Widget build(BuildContext context) {
+    return _buildUI();
+  }
+
+  Widget _buildUI() {
     return Container(
       decoration: BoxDecoration(
-          color: Colors.white, borderRadius: BorderRadius.circular(9)),
-      padding: EdgeInsets.all(15),
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(9),
+      ),
+      padding: const EdgeInsets.all(15),
       child: Column(
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              ElevatedButton(
-                child: Text("인증받기"),
-                onPressed: () async {
-                  String phoneNumber =
-                      ref.read(joinUserController).combinePhoneNumber();
-                  print(phoneNumber);
-                  //await _buildVerifyPhoneNumber();
-                },
-                style: ButtonStyle(
-                  foregroundColor: const MaterialStatePropertyAll(Colors.black),
-                  backgroundColor: const MaterialStatePropertyAll(Colors.white),
-                  padding: const MaterialStatePropertyAll(
-                    EdgeInsets.symmetric(horizontal: 30),
-                  ),
-                  shape: MaterialStatePropertyAll(
-                    RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30),
-                      side: const BorderSide(width: 1),
+          widget.juc.authOk
+              ? const SizedBox(child: Text('휴대폰 인증이 완료되었습니다.'))
+              : Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Material(
+                      child: InkWell(
+                        borderRadius: BorderRadius.circular(30),
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 15, vertical: 5),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(30),
+                            border: Border.all(color: Colors.black, width: 0.7),
+                          ),
+                          child: const Text("인증받기"),
+                        ),
+                        onTap: () async {
+                          String phoneNumber = widget.juc.combinePhoneNumber();
+                          await _buildVerifyPhoneNumber(phoneNumber);
+                        },
+                      ),
                     ),
-                  ),
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 30),
+                        child: Text(widget.certificationText),
+                      ),
+                    ),
+                  ],
                 ),
-              ),
-              Expanded(
-                child: Text(widget.certificationText),
-              ),
-            ],
-          ),
-          authOk
-              ? SizedBox()
+          widget.juc.authOk
+              ? const SizedBox()
               : Visibility(
                   visible: widget.showCertificationBar,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      ElevatedButton(
-                        child: Text("입력하기"),
-                        onPressed: () async {
-                          PhoneAuthCredential phoneAuthCredential =
-                              PhoneAuthProvider.credential(
-                                  verificationId: _verificationId,
-                                  smsCode: _credentialController.text);
-                          print(_credentialController.text);
-                          print(_verificationId);
-                          signInWithPhoneAuthCredential(phoneAuthCredential);
-                        },
-                        style: ButtonStyle(
-                          foregroundColor:
-                              const MaterialStatePropertyAll(Colors.black),
-                          backgroundColor:
-                              const MaterialStatePropertyAll(Colors.white),
-                          padding: const MaterialStatePropertyAll(
-                              EdgeInsets.symmetric(horizontal: 30)),
-                          shape: MaterialStatePropertyAll(
-                            RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(30),
-                              side: const BorderSide(width: 1),
-                            ),
-                          ),
+                      Material(
+                        child: InkWell(
+                          borderRadius: BorderRadius.circular(30),
+                          child: Container(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 15, vertical: 5),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(30),
+                                border:
+                                    Border.all(color: Colors.black, width: 0.5),
+                              ),
+                              child: const Text("입력하기")),
+                          onTap: () async {
+                            PhoneAuthCredential phoneAuthCredential =
+                                PhoneAuthProvider.credential(
+                                    verificationId: _verificationId,
+                                    smsCode: _credentialController.text);
+                            signInWithPhoneAuthCredential(phoneAuthCredential);
+                          },
                         ),
                       ),
                       Expanded(
-                        child: TextFormField(
-                          controller: _credentialController,
-                          autovalidateMode: AutovalidateMode.always,
-                          maxLength: 6,
-                          decoration:
-                              InputDecoration(hintText: '인증번호 6자리를 입력해주세요'),
+                        child: Container(
+                          width: 50,
+                          child: TextFormField(
+                            controller: _credentialController,
+                            autovalidateMode: AutovalidateMode.always,
+                            maxLength: 6,
+                            decoration: const InputDecoration(
+                                hintText: '인증번호 6자리를 입력해주세요'),
+                          ),
                         ),
                       ),
                     ],
-                  )),
+                  ),
+                ),
         ],
       ),
     );
   }
 
-  Future<void> _buildVerifyPhoneNumber() {
+  Future<void> _buildVerifyPhoneNumber(String phoneNumber) {
     return _auth.verifyPhoneNumber(
-      phoneNumber:
-          '+82 ${ref.read(joinUserController).combinePhoneNumber()}', //${widget.phoneNumber}
+      phoneNumber: '+82 ${phoneNumber}', //${widget.phoneNumber}
       timeout: const Duration(seconds: 60),
       verificationCompleted: (PhoneAuthCredential credential) {},
       verificationFailed: (FirebaseAuthException e) {
@@ -140,19 +144,13 @@ class _CertificationNumberButtonState
           await _auth.signInWithCredential(phoneAuthCredential);
       if (authCredential.user != null) {
         setState(() {
-          print("인증완료 및 로그인성공");
-          authOk = true;
+          widget.juc.authOk = true;
+          widget.showCertificationBar = false;
         });
         await _auth.currentUser!.delete();
-        print("auth정보삭제");
         _auth.signOut();
-        print("phone로그인된것 로그아웃");
       }
     } on FirebaseAuthException catch (e) {
-      setState(() {
-        print("인증실패..로그인실패");
-      });
-
       await Fluttertoast.showToast(
           msg: e.message as String,
           toastLength: Toast.LENGTH_SHORT,

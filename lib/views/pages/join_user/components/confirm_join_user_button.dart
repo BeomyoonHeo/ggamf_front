@@ -23,7 +23,6 @@ class ConfirmJoinUserButton extends ConsumerWidget {
             child: ElevatedButton(
               onPressed: () {
                 if (formKey.currentState!.validate()) {}
-                print(juc.phoneNumberController[0].text);
               },
               child: Text('회원가입'),
               style: ButtonStyle(
