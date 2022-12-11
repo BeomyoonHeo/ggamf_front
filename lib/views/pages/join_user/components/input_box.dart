@@ -1,41 +1,50 @@
 import 'package:flutter/material.dart';
 
 class InputBox extends StatelessWidget {
-  final FormFieldValidator validator;
+  final Function validator;
   final String inputText;
   final String hintText;
   final TextEditingController? controller;
-  const InputBox({
-    Key? key,
-    required this.inputText,
-    required this.hintText,
-    required this.controller,
-    required this.validator,
-  }) : super(key: key);
+  AutovalidateMode? autoValidateMode;
+  InputBox(
+      {Key? key,
+      required this.inputText,
+      required this.hintText,
+      required this.controller,
+      required this.validator,
+      this.autoValidateMode})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
           color: Colors.white, borderRadius: BorderRadius.circular(9)),
-      padding: EdgeInsets.all(15),
+      padding: const EdgeInsets.all(15),
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(
-            inputText,
-            style: TextStyle(fontFamily: 'NanumSquare', fontSize: 15),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10),
+            child: Text(
+              inputText,
+              style: const TextStyle(fontFamily: 'NanumSquare', fontSize: 15),
+            ),
           ),
           Expanded(
             child: TextFormField(
-              autovalidateMode: AutovalidateMode.always,
+              autovalidateMode: autoValidateMode ?? AutovalidateMode.disabled,
               controller: controller,
-              validator: validator,
+              validator: validator(),
               decoration: InputDecoration(
                 hintText: hintText,
-                hintStyle: TextStyle(fontFamily: 'NanumSquare', fontSize: 15),
+                hintStyle:
+                    const TextStyle(fontFamily: 'NanumSquare', fontSize: 15),
                 filled: true,
                 fillColor: Colors.white,
-                border: InputBorder.none,
+                border: const UnderlineInputBorder(
+                  borderSide: BorderSide(color: Colors.white, width: 0.3),
+                ),
               ),
             ),
           ),

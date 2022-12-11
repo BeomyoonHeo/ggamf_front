@@ -28,26 +28,26 @@ class LoginUserView extends StatelessWidget {
                       ),
                       const Text(
                         '매칭해줘! 껨프',
-                        style: TextStyle(fontFamily: 'NanumSquare', fontSize: 25),
+                        style:
+                            TextStyle(fontFamily: 'NanumSquare', fontSize: 25),
                       ),
                       const SizedBox(height: 10),
                       LoginBox(size: size),
                     ],
                   ),
-                  SizedBox(height: 10),
-                  Container(
-                    child: Text(
-                      "다른 계정으로 가입하기!",
-                      style: TextStyle(fontFamily: 'NanumSquare'),
-                    ),
+                  const SizedBox(height: 10),
+                  const Text(
+                    "다른 계정으로 가입하기!",
+                    style: TextStyle(fontFamily: 'NanumSquare'),
                   ),
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: const [
                       SocialIcon(socialIcon: 'assets/icons/kakaotalk.svg'),
                       SocialIcon(socialIcon: 'assets/icons/google_plus.svg'),
-                      SocialIcon(socialIcon: 'assets/icons/apple_logo_black.svg'),
+                      SocialIcon(
+                          socialIcon: 'assets/icons/apple_logo_black.svg'),
                     ],
                   )
                 ],

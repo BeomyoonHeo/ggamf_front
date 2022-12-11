@@ -1,44 +1,38 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:ggamf_front/controller/user/join_user_controller.dart';
 
-class ConfirmJoinUserButton extends StatefulWidget {
-  final GlobalKey<FormState> formKey;
-  ConfirmJoinUserButton({
+class ConfirmJoinUserButton extends ConsumerWidget {
+  const ConfirmJoinUserButton({
     Key? key,
-    required this.formKey,
   }) : super(key: key);
 
   @override
-  State<ConfirmJoinUserButton> createState() => _ConfirmJoinUserButtonState();
-}
-
-class _ConfirmJoinUserButtonState extends State<ConfirmJoinUserButton> {
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final juc = ref.read(joinUserController);
     return Container(
       decoration: BoxDecoration(
           color: Colors.white, borderRadius: BorderRadius.circular(9)),
-      padding: EdgeInsets.all(15),
+      padding: const EdgeInsets.all(15),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Container(
-            child: ElevatedButton(
-              onPressed: () {
-                if (widget.formKey.currentState!.validate()) {
-                  print('에러발생');
+          Material(
+            child: InkWell(
+              borderRadius: BorderRadius.circular(30),
+              onTap: () {
+                if (juc.formKey.currentState!.validate()) {
+                  Navigator.pop(context);
                 }
+                juc.requestJoin();
               },
-              child: Text('회원가입'),
-              style: ButtonStyle(
-                foregroundColor: MaterialStatePropertyAll(Colors.black),
-                backgroundColor: MaterialStatePropertyAll(Colors.white),
-                shape: MaterialStatePropertyAll(
-                  RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(30),
-                    side: BorderSide(width: 1),
-                  ),
-                ),
-              ),
+              child: Container(
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(30),
+                      border: Border.all(width: 0.7)),
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                  child: const Text('회원가입')),
             ),
           )
         ],

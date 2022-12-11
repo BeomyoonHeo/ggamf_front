@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:ggamf_front/controller/user/join_user_controller.dart';
+import 'package:ggamf_front/main.dart';
+import 'package:ggamf_front/utils/validator_util.dart';
 import 'package:ggamf_front/views/pages/join_user/components/agreement_provision_of_personal_information_modal.dart';
 import 'package:ggamf_front/views/pages/join_user/components/certification_number_button.dart';
 import 'package:ggamf_front/views/pages/join_user/components/confirm_join_user_button.dart';
@@ -7,79 +11,47 @@ import 'package:ggamf_front/views/pages/join_user/components/input_box.dart';
 import 'package:ggamf_front/views/pages/join_user/components/input_email_box.dart';
 import 'package:ggamf_front/views/pages/join_user/components/input_phonenumber_widget.dart';
 
-class JoinUserView extends StatelessWidget {
-  JoinUserView({Key? key}) : super(key: key);
+class JoinUserView extends ConsumerStatefulWidget {
+  const JoinUserView({Key? key}) : super(key: key);
 
-  final _formKey = GlobalKey<FormState>();
+  @override
+  ConsumerState<JoinUserView> createState() => _JoinUserViewState();
+}
 
-  TextEditingController nameController = TextEditingController();
-  FormFieldValidator nameValidator = (value) {
-    if (value.length < 1) {
-      return '이름은 필수사항입니다.';
-    }
-    if (value.length < 2) {
-      return '이름은 두글자 이상 입력 해주셔야합니다.';
-    }
-    return null;
-  };
-  TextEditingController idController = TextEditingController();
-  FormFieldValidator idValidator = (value) {
-    if (value.length < 1) {
-      return '이메일은 필수사항입니다.';
-    }
+class _JoinUserViewState extends ConsumerState<JoinUserView> {
+  @override
+  void initState() {
+    ref.refresh(joinUserController);
+    super.initState();
+  }
 
-    if (!RegExp(
-            r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$')
-        .hasMatch(value)) {
-      return '잘못된 이메일 형식입니다.';
-    }
-    return null;
-  };
-  TextEditingController passwordController = TextEditingController();
-  FormFieldValidator passwordValidator = (value) {
-    if (value.length < 1) {
-      return '비밀번호는 필수사항입니다.';
-    }
-
-    if (value.length < 8) {
-      return '8자 이상 입력해주세요!';
-    }
-    return null;
-  };
-  FormFieldValidator passwordRepeatValidator = (value) {
-    if (value.length < 1) {
-      return '비밀번호는 필수사항입니다.';
-    }
-
-    if (value.length < 8) {
-      return '8자 이상 입력해주세요!';
-    }
-    return null;
-  };
-  TextEditingController phoneNumberController = TextEditingController();
-  TextEditingController nickNameController = TextEditingController();
-  FormFieldValidator nickNameValidator = (value) {
-    if (value.length < 1) {
-      return '닉네임은 필수사항입니다.';
-    }
-    if (value.length < 8) {
-      return '닉네임은 8자 이상 입력해주세요!';
-    }
-    return null;
-  };
-  TextEditingController emailController = TextEditingController();
-  FormFieldValidator emailValidator = (value) {
-    if (value.length < 1) {
-      return '이름은 필수사항입니다.';
-    }
-    if (value.length < 2) {
-      return '이름은 두글자 이상 입력 해주셔야합니다.';
-    }
-    return null;
-  };
+  @override
+  void didChangeDependencies() {
+    ref.read(joinUserController).keepAlive.close();
+    super.didChangeDependencies();
+  }
 
   @override
   Widget build(BuildContext context) {
+    return Consumer(
+      builder: (context, ref, child) {
+        return _buildUI(ref);
+      },
+    );
+  }
+
+  Widget _buildUI(WidgetRef ref) {
+    final juc = ref.read(joinUserController);
+    Function passwordRepeatValidation() {
+      return (String? value) {
+        if (juc.passwordController.text != value) {
+          return '기존 패스워드와 같지 않습니다.';
+        } else {
+          return null;
+        }
+      };
+    }
+
     return Scaffold(
       //resizeToAvoidBottomInset: false,
       appBar: AppBar(
@@ -88,76 +60,70 @@ class JoinUserView extends StatelessWidget {
           color: Colors.black,
           icon: const Icon(Icons.arrow_back),
           onPressed: () {
-            Navigator.pop(context);
+            Navigator.pop(navigatorKey.currentState!.context);
           },
         ),
         title: const Text('회원가입 페이지'),
       ),
       body: Container(
-        padding: const EdgeInsets.all(20),
         width: double.infinity,
-        color: const Color(0xFFFFFBFE),
+        color: const Color(0xFFFFF1EE),
         child: Form(
-          key: _formKey,
-          child: Container(
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(30),
-                color: const Color(0xFFFFFBFE)),
-            child: Padding(
-              padding: const EdgeInsets.all(20),
-              child: SingleChildScrollView(
-                child: Column(
-                  children: [
-                    InputBox(
-                        validator: nameValidator,
-                        inputText: "이름 : ",
-                        hintText: "이름을 입력하세요",
-                        controller: nameController),
-                    const SizedBox(height: 10),
-                    InputBox(
-                        validator: idValidator,
-                        inputText: "아이디 : ",
-                        hintText: "아이디를 입력하세요",
-                        controller: idController),
-                    const SizedBox(height: 10),
-                    InputBox(
-                        validator: passwordValidator,
-                        inputText: "비밀번호 : ",
-                        hintText: "비밀번호를 입력하세요",
-                        controller: passwordController),
-                    const SizedBox(height: 10),
-                    InputBox(
-                        validator: passwordValidator,
-                        inputText: "비밀번호 확인 : ",
-                        hintText: "비밀번호를 입력하세요",
-                        controller: passwordController),
-                    const SizedBox(height: 10),
-                    InputPhoneNumberWidget(
-                      controller: phoneNumberController,
-                    ),
-                    const SizedBox(height: 10),
-                    CertificationNumberButton(
-                        certificationText: '인증되지 않음',
-                        phoneNumber: phoneNumberController.text),
-                    const SizedBox(height: 10),
-                    const SizedBox(height: 10),
-                    InputBox(
-                      validator: nickNameValidator,
-                      inputText: "닉네임 : ",
-                      hintText: "닉네임 입력",
-                      controller: nickNameController,
-                    ),
-                    SizedBox(height: 10),
-                    InputEmailBox(
-                        controller: emailController, validator: emailValidator),
-                    SizedBox(height: 10),
-                    EmailDropdownButton(),
-                    SizedBox(height: 10),
-                    AgreementProvisionOfPersonalInformationModal(),
-                    SizedBox(height: 10),
-                    ConfirmJoinUserButton(formKey: _formKey),
-                  ],
-                ),
+          key: juc.formKey,
+          child: Padding(
+            padding: const EdgeInsets.all(20),
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  InputBox(
+                      validator: nameValidator,
+                      inputText: "이름   : ",
+                      hintText: "이름을 입력하세요",
+                      controller: juc.nameController),
+                  const SizedBox(height: 10),
+                  InputBox(
+                      validator: idValidator,
+                      inputText: "아이디   : ",
+                      hintText: "아이디를 입력하세요",
+                      controller: juc.idController),
+                  const SizedBox(height: 10),
+                  InputBox(
+                      validator: passwordValidator,
+                      inputText: "비밀번호   : ",
+                      hintText: "비밀번호를 입력하세요",
+                      controller: juc.passwordController),
+                  const SizedBox(height: 10),
+                  InputBox(
+                      autoValidateMode: AutovalidateMode.always,
+                      validator: passwordRepeatValidation,
+                      inputText: "비밀번호 확인   : ",
+                      hintText: "비밀번호를 입력하세요",
+                      controller: null),
+                  const SizedBox(height: 10),
+                  InputPhoneNumberWidget(
+                    controller: juc.phoneNumberController,
+                  ),
+                  const SizedBox(height: 10),
+                  CertificationNumberButton(certificationText: '인증되지 않음'),
+                  const SizedBox(height: 10),
+                  InputBox(
+                    validator: nickNameValidator,
+                    inputText: "닉네임   : ",
+                    hintText: "닉네임 입력",
+                    controller: juc.nickNameController,
+                  ),
+                  const SizedBox(height: 10),
+                  InputEmailBox(
+                    controller: juc.emailController,
+                    validator: emailValidator,
+                  ),
+                  const SizedBox(height: 10),
+                  const EmailDropdownButton(),
+                  const SizedBox(height: 10),
+                  const AgreementProvisionOfPersonalInformationModal(),
+                  const SizedBox(height: 10),
+                  const ConfirmJoinUserButton(),
+                ],
               ),
             ),
           ),
