@@ -1,6 +1,5 @@
 import 'package:dio/dio.dart';
 import 'package:ggamf_front/core/page_enum.dart';
-import 'package:ggamf_front/domain/ggamf/model/accept_ggamf.dart';
 import 'package:ggamf_front/domain/ggamf/model/report_ggamf.dart';
 import 'package:retrofit/http.dart';
 
