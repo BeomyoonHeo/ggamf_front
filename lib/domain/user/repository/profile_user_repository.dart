@@ -6,13 +6,11 @@ part 'profile_user_repository.g.dart';
 
 @RestApi(baseUrl: 'https://reqres.in/api')
 abstract class ProfileUserRepository {
-  factory ProfileUserRepository(Dio dio, {String baseUrl}) =
-      _ProfileUserRepository;
+  factory ProfileUserRepository(Dio dio) = _ProfileUserRepository;
 
   @GET('/profileUser/{id}')
   Future<ProfileUser> getUserProfile({@Path('id') required int id});
 
   @PUT('/profileUser/{id}')
-  Future<ProfileUser> putUserProfile(
-      {@Path('id') required int id, @Body() required ProfileUser profileUser});
+  Future<ProfileUser> putUserProfile({@Path('id') required int id, @Body() required ProfileUser profileUser});
 }
