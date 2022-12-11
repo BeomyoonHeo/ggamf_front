@@ -1,22 +1,23 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:ggamf_front/controller/user/join_user_controller.dart';
 
-class CertificationNumberButton extends StatefulWidget {
+class CertificationNumberButton extends ConsumerStatefulWidget {
   String certificationText;
   bool showCertificationBar = false;
-  final juc;
 
-  CertificationNumberButton(
-      {Key? key, required this.certificationText, required this.juc})
+  CertificationNumberButton({Key? key, required this.certificationText})
       : super(key: key);
 
   @override
-  State<CertificationNumberButton> createState() =>
+  ConsumerState<CertificationNumberButton> createState() =>
       _CertificationNumberButtonState();
 }
 
-class _CertificationNumberButtonState extends State<CertificationNumberButton> {
+class _CertificationNumberButtonState
+    extends ConsumerState<CertificationNumberButton> {
   final TextEditingController _credentialController = TextEditingController();
 
   String _verificationId = '';
@@ -24,10 +25,16 @@ class _CertificationNumberButtonState extends State<CertificationNumberButton> {
 
   @override
   Widget build(BuildContext context) {
-    return _buildUI();
+    return _buildUI(ref);
   }
 
-  Widget _buildUI() {
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  Widget _buildUI(WidgetRef ref) {
+    final juc = ref.read(joinUserController);
     return Container(
       decoration: BoxDecoration(
         color: Colors.white,
@@ -36,7 +43,7 @@ class _CertificationNumberButtonState extends State<CertificationNumberButton> {
       padding: const EdgeInsets.all(15),
       child: Column(
         children: [
-          widget.juc.authOk
+          juc.authOk
               ? const SizedBox(child: Text('휴대폰 인증이 완료되었습니다.'))
               : Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -55,7 +62,8 @@ class _CertificationNumberButtonState extends State<CertificationNumberButton> {
                         ),
                         onTap: () async {
                           FocusScope.of(context).unfocus();
-                          String phoneNumber = widget.juc.combinePhoneNumber();
+                          String phoneNumber = juc.combinePhoneNumber();
+
                           await _buildVerifyPhoneNumber(phoneNumber);
                         },
                       ),
@@ -68,7 +76,7 @@ class _CertificationNumberButtonState extends State<CertificationNumberButton> {
                     ),
                   ],
                 ),
-          widget.juc.authOk
+          juc.authOk
               ? const SizedBox()
               : Visibility(
                   visible: widget.showCertificationBar,
@@ -93,8 +101,8 @@ class _CertificationNumberButtonState extends State<CertificationNumberButton> {
                                 PhoneAuthProvider.credential(
                                     verificationId: _verificationId,
                                     smsCode: _credentialController.text);
-                            signInWithPhoneAuthCredential(phoneAuthCredential);
-                            setState(() {});
+                            signInWithPhoneAuthCredential(
+                                phoneAuthCredential, juc);
                           },
                         ),
                       ),
@@ -141,17 +149,16 @@ class _CertificationNumberButtonState extends State<CertificationNumberButton> {
   }
 
   void signInWithPhoneAuthCredential(
-      PhoneAuthCredential phoneAuthCredential) async {
+      PhoneAuthCredential phoneAuthCredential, juc) async {
     try {
       final authCredential =
           await _auth.signInWithCredential(phoneAuthCredential);
       if (authCredential.user != null) {
+        juc.authOk = true;
+        widget.showCertificationBar = false;
+        juc.checkAuth();
         setState(
-          () {
-            widget.juc.authOk = true;
-            widget.showCertificationBar = false;
-            widget.juc.checkAuth();
-          },
+          () {},
         );
         await _auth.currentUser!.delete();
         _auth.signOut();

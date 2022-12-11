@@ -6,12 +6,15 @@ import 'package:ggamf_front/domain/user/repository/join_user_repository.dart';
 import 'package:ggamf_front/views/pages/join_user/join_user_view_model.dart';
 
 // 회원가입은 한번만 하면 되기 때문에 회원가입 후 Autodispose를 실행하여 페이지에서 참조가 더이상 일어나지 않는다면 메모리에서 제거 해주기
-final joinUserController =
-    Provider.autoDispose((ref) => JoinUserController(ref));
+final joinUserController = Provider.autoDispose((ref) {
+  final keepAlive = ref.keepAlive();
+  return JoinUserController(ref, keepAlive);
+});
 
 class JoinUserController {
   final _ref;
-  JoinUserController(this._ref);
+  final KeepAliveLink keepAlive;
+  JoinUserController(this._ref, this.keepAlive);
 
   bool authOk = false;
   bool isAgree = false;
@@ -36,7 +39,6 @@ class JoinUserController {
     });
 
     phoneNumber = phoneNumber.trim();
-
     return phoneNumber;
   }
 

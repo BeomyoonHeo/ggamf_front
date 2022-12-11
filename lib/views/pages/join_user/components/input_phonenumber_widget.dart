@@ -19,7 +19,8 @@ class InputPhoneNumberWidget extends ConsumerWidget {
         : Container(
             decoration: BoxDecoration(
                 color: Colors.white, borderRadius: BorderRadius.circular(9)),
-            padding: const EdgeInsets.all(15),
+            padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+            height: 60,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -45,9 +46,7 @@ class InputPhoneNumberWidget extends ConsumerWidget {
 
   Widget _buildCustomTextFormField(
       TextEditingController controller, int maxLength) {
-    return SizedBox(
-      height: 30,
-      width: 70,
+    return Expanded(
       child: TextFormField(
         keyboardType: TextInputType.number,
         controller: controller,

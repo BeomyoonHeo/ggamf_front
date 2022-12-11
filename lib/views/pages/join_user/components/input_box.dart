@@ -25,14 +25,13 @@ class InputBox extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Padding(
-            padding: const EdgeInsets.only(left: 10),
+            padding: const EdgeInsets.symmetric(horizontal: 10),
             child: Text(
               inputText,
               style: const TextStyle(fontFamily: 'NanumSquare', fontSize: 15),
             ),
           ),
-          SizedBox(
-            width: 200,
+          Expanded(
             child: TextFormField(
               autovalidateMode: autoValidateMode ?? AutovalidateMode.disabled,
               controller: controller,

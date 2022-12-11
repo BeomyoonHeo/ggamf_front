@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:fullscreen/fullscreen.dart';
 import 'package:ggamf_front/core/page_enum.dart';
 import 'package:ggamf_front/core/theme.dart';
 import 'package:ggamf_front/utils/full_screen_util.dart';
@@ -11,6 +11,12 @@ import 'package:ggamf_front/views/pages/login_user/login_user_view.dart';
 import 'package:ggamf_front/views/pages/splash_page.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+  ]); //세로화면 고정
+  SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);
   runApp(SplashPage(
     key: UniqueKey(),
     onInitializationComplete: () {
@@ -36,7 +42,6 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     fullScreen = FullscreenService();
-    enterFullScreen(FullScreenMode.EMERSIVE_STICKY);
     secureStorage.read(key: 'jwtToken').then((value) => jwtToken = value);
     super.initState();
   }
@@ -45,7 +50,6 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       navigatorKey: navigatorKey,
-      home: const AllPages(),
       initialRoute: jwtToken != null
           ? PageEnum.ALLPAGES.requestLocation
           : PageEnum.getByDisPlayName('login').requestLocation,

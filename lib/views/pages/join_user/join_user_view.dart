@@ -11,8 +11,25 @@ import 'package:ggamf_front/views/pages/join_user/components/input_box.dart';
 import 'package:ggamf_front/views/pages/join_user/components/input_email_box.dart';
 import 'package:ggamf_front/views/pages/join_user/components/input_phonenumber_widget.dart';
 
-class JoinUserView extends StatelessWidget {
+class JoinUserView extends ConsumerStatefulWidget {
   const JoinUserView({Key? key}) : super(key: key);
+
+  @override
+  ConsumerState<JoinUserView> createState() => _JoinUserViewState();
+}
+
+class _JoinUserViewState extends ConsumerState<JoinUserView> {
+  @override
+  void initState() {
+    ref.refresh(joinUserController);
+    super.initState();
+  }
+
+  @override
+  void didChangeDependencies() {
+    ref.read(joinUserController).keepAlive.close();
+    super.didChangeDependencies();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -87,8 +104,7 @@ class JoinUserView extends StatelessWidget {
                     controller: juc.phoneNumberController,
                   ),
                   const SizedBox(height: 10),
-                  CertificationNumberButton(
-                      certificationText: '인증되지 않음', juc: juc),
+                  CertificationNumberButton(certificationText: '인증되지 않음'),
                   const SizedBox(height: 10),
                   InputBox(
                     validator: nickNameValidator,
