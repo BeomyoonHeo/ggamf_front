@@ -53,7 +53,7 @@ class InputPhoneNumberWidget extends ConsumerWidget {
         maxLength: maxLength,
         decoration: const InputDecoration(
           filled: true,
-          contentPadding: EdgeInsets.symmetric(horizontal: 15),
+          contentPadding: EdgeInsets.symmetric(horizontal: 12),
           fillColor: Colors.white,
           border: OutlineInputBorder(borderSide: BorderSide(width: 1)),
           counterText: '',

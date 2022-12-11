@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ggamf_front/controller/user/join_user_controller.dart';
+import 'package:ggamf_front/utils/validator_util.dart';
 
 class EmailDropdownButton extends ConsumerStatefulWidget {
   const EmailDropdownButton({
@@ -19,6 +20,7 @@ class _EmailDropdownButtonState extends ConsumerState<EmailDropdownButton> {
   @override
   Widget build(BuildContext context) {
     final juc = ref.read(joinUserController);
+    const Function validator = emailDomainValidator;
     final emailEditController = juc.emailDomainController;
     final List<String> emailList = [
       '선택',
@@ -61,14 +63,15 @@ class _EmailDropdownButtonState extends ConsumerState<EmailDropdownButton> {
             },
           ),
           Expanded(
-            child: Container(
+            child: SizedBox(
               height: 35,
-              child: TextField(
+              child: TextFormField(
                 controller: emailEditController,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   hintText: '이메일 입력',
                 ),
                 enabled: _enableTextField,
+                validator: _enableTextField ? validator() : null,
               ),
             ),
           ),

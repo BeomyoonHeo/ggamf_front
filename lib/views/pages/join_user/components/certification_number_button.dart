@@ -63,7 +63,6 @@ class _CertificationNumberButtonState
                         onTap: () async {
                           FocusScope.of(context).unfocus();
                           String phoneNumber = juc.combinePhoneNumber();
-
                           await _buildVerifyPhoneNumber(phoneNumber);
                         },
                       ),

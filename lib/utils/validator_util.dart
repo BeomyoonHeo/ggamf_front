@@ -17,7 +17,21 @@ Function emailValidator() {
   return (String? value) {
     if (value!.isEmpty) {
       return "이메일은 공백이 들어갈 수 없습니다.";
-    } else if (contains(value, RegExp(r'[!@#$%^&*(),.?":{}|<>]'))) {
+    } else if (RegExp(r'[!@#$%^&*(),.?":{}|<>]').hasMatch(value)) {
+      return "이메일 형식에 맞지 않습니다.";
+    } else {
+      return null;
+    }
+  };
+}
+
+Function emailDomainValidator() {
+  return (String? value) {
+    if (value!.isEmpty) {
+      return "이메일은 공백이 들어갈 수 없습니다.";
+    } else if (!RegExp(
+            r'^((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$')
+        .hasMatch(value)) {
       return "이메일 형식에 맞지 않습니다.";
     } else {
       return null;
