@@ -415,6 +415,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.2.0"
+  fullscreen:
+    dependency: "direct main"
+    description:
+      name: fullscreen
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.3"
   glob:
     dependency: transitive
     description:
@@ -569,6 +576,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.0.1"
+  logger:
+    dependency: "direct main"
+    description:
+      name: logger
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.1.0"
   logging:
     dependency: transitive
     description:

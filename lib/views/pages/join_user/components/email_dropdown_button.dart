@@ -18,8 +18,8 @@ class _EmailDropdownButtonState extends ConsumerState<EmailDropdownButton> {
 
   @override
   Widget build(BuildContext context) {
-    TextEditingController emailEditController =
-        ref.read(joinUserController).emailController;
+    final juc = ref.read(joinUserController);
+    final emailEditController = juc.emailDomainController;
     final List<String> emailList = [
       '선택',
       'naver.com',

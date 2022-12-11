@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:fullscreen/fullscreen.dart';
 import 'package:ggamf_front/core/page_enum.dart';
 import 'package:ggamf_front/core/theme.dart';
+import 'package:ggamf_front/utils/full_screen_util.dart';
 import 'package:ggamf_front/views/common_components/common_pages.dart';
 import 'package:ggamf_front/views/pages/join_user/join_user_view.dart';
 import 'package:ggamf_front/views/pages/login_user/login_user_view.dart';
@@ -28,9 +30,14 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  static final secureStorage = FlutterSecureStorage();
+  static FlutterSecureStorage secureStorage = const FlutterSecureStorage();
+  dynamic jwtToken;
+  late final fullScreen;
   @override
   void initState() {
+    fullScreen = FullscreenService();
+    enterFullScreen(FullScreenMode.EMERSIVE_STICKY);
+    secureStorage.read(key: 'jwtToken').then((value) => jwtToken = value);
     super.initState();
   }
 
@@ -39,7 +46,9 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       navigatorKey: navigatorKey,
       home: const AllPages(),
-      initialRoute: PageEnum.getByDisPlayName('login').requestLocation,
+      initialRoute: jwtToken != null
+          ? PageEnum.ALLPAGES.requestLocation
+          : PageEnum.getByDisPlayName('login').requestLocation,
       routes: {
         PageEnum.LOGIN.requestLocation: (context) => const LoginUserView(),
         PageEnum.JOIN.requestLocation: (context) => const JoinUserView(),

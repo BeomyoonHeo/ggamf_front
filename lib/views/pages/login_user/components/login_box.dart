@@ -96,10 +96,12 @@ class _ItemButtonState extends State<ItemButton> {
   @override
   Widget build(BuildContext context) {
     return Material(
+      borderRadius: BorderRadius.circular(30),
       child: InkWell(
+        borderRadius: BorderRadius.circular(30),
         onTap: () {
-          widget.function();
-          setState(() {});
+          Future.delayed(const Duration(milliseconds: 500))
+              .then((value) => widget.function());
         },
         child: Container(
           padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),

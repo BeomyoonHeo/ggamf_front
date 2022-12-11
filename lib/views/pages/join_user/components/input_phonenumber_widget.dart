@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ggamf_front/controller/user/join_user_controller.dart';
-import 'package:ggamf_front/views/pages/join_user/components/join_user_view_model.dart';
+import 'package:ggamf_front/views/pages/join_user/join_user_view_model.dart';
 
 class InputPhoneNumberWidget extends ConsumerWidget {
   final List<TextEditingController> controller;
