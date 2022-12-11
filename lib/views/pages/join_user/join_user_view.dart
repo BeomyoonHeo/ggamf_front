@@ -10,6 +10,7 @@ import 'package:ggamf_front/views/pages/join_user/components/email_dropdown_butt
 import 'package:ggamf_front/views/pages/join_user/components/input_box.dart';
 import 'package:ggamf_front/views/pages/join_user/components/input_email_box.dart';
 import 'package:ggamf_front/views/pages/join_user/components/input_phonenumber_widget.dart';
+import 'package:ggamf_front/views/pages/join_user/join_user_view_model.dart';
 
 class JoinUserView extends ConsumerStatefulWidget {
   const JoinUserView({Key? key}) : super(key: key);
@@ -21,6 +22,7 @@ class JoinUserView extends ConsumerStatefulWidget {
 class _JoinUserViewState extends ConsumerState<JoinUserView> {
   @override
   void initState() {
+    ref.refresh(joinUserViewModel);
     ref.refresh(joinUserController);
     super.initState();
   }
@@ -28,6 +30,7 @@ class _JoinUserViewState extends ConsumerState<JoinUserView> {
   @override
   void didChangeDependencies() {
     ref.read(joinUserController).keepAlive.close();
+    ref.read(joinUserViewModel.notifier).keepAlive.close();
     super.didChangeDependencies();
   }
 

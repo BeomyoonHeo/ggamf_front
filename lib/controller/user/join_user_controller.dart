@@ -2,7 +2,9 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ggamf_front/domain/user/model/join_user.dart';
+import 'package:ggamf_front/utils/custom_intercepter.dart';
 import 'package:ggamf_front/views/pages/join_user/join_user_view_model.dart';
+import 'package:logger/logger.dart';
 
 import '../../domain/user/repository/join_user_repository.dart';
 
@@ -13,8 +15,12 @@ final joinUserController = Provider.autoDispose((ref) {
 });
 
 class JoinUserController {
+  var logger = Logger(
+    printer: PrettyPrinter(),
+  );
   final _ref;
   final KeepAliveLink keepAlive;
+  final dio = Dio()..interceptors.add(CustomLogInterceptor());
   JoinUserController(this._ref, this.keepAlive);
 
   bool authOk = false;
@@ -57,7 +63,7 @@ class JoinUserController {
       email: '${emailController.text}@${emailDomainController.text}',
       isAgree: isAgree,
     );
-    JoinUserRepository joinUserRepository = JoinUserRepository(Dio());
-    joinUserRepository.insert(joinUser).then((value) => null);
+    JoinUserRepository joinUserRepository = JoinUserRepository(dio);
+    joinUserRepository.insert(joinUser).then((value) => logger.d(value));
   }
 }

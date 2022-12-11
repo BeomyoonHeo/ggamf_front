@@ -9,6 +9,7 @@ class CustomLogInterceptor extends Interceptor {
 
   @override
   void onResponse(Response response, ResponseInterceptorHandler handler) {
+    print('RESPONSE HEADERS = ${response.headers}');
     print(
       'RESPONSE[${response.statusCode}] => PATH: ${response.requestOptions.path}',
     );

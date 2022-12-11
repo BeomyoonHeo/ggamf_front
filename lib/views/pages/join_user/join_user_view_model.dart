@@ -3,9 +3,11 @@ import 'package:ggamf_front/controller/user/join_user_controller.dart';
 import 'package:ggamf_front/domain/user/model/join_user.dart';
 
 final joinUserViewModel =
-    StateNotifierProvider<JoinUserViewModel, JoinUser>((ref) {
+    StateNotifierProvider.autoDispose<JoinUserViewModel, JoinUser>((ref) {
+  final KeepAliveLink keepAlive = ref.keepAlive();
   final juc = ref.read(joinUserController);
   return JoinUserViewModel(
+      keepAlive,
       JoinUser(
         name: juc.nameController.text,
         loginId: juc.idController.text,
@@ -20,7 +22,8 @@ final joinUserViewModel =
 
 class JoinUserViewModel extends StateNotifier<JoinUser> {
   final _ref;
-  JoinUserViewModel(super.state, this._ref);
+  final KeepAliveLink keepAlive;
+  JoinUserViewModel(this.keepAlive, super.state, this._ref);
 
   void updateState() {
     final juc = _ref.read(joinUserController);

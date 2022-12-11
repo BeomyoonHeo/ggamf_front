@@ -10,6 +10,9 @@ part 'join_user_repository.g.dart';
 abstract class JoinUserRepository {
   factory JoinUserRepository(Dio dio) = _JoinUserRepository;
 
-  @PUT('/user/join')
+  @POST('/s/api/join')
   Future<dynamic> insert(@Body() JoinUser joinUser);
+
+  @GET('/')
+  Future<dynamic> test();
 }

@@ -13,7 +13,9 @@ class RecommendGgamfListView extends StatefulWidget {
 }
 
 class _RecommendGgamfListViewState extends State<RecommendGgamfListView>
-    with SingleTickerProviderStateMixin<RecommendGgamfListView>, AutomaticKeepAliveClientMixin<RecommendGgamfListView> {
+    with
+        SingleTickerProviderStateMixin<RecommendGgamfListView>,
+        AutomaticKeepAliveClientMixin<RecommendGgamfListView> {
   final List<String> textIndex = [
     '추천 껨프',
     '껨프 요청',
@@ -41,7 +43,7 @@ class _RecommendGgamfListViewState extends State<RecommendGgamfListView>
     super.build(context);
     return Consumer(
       builder: (context, ref, child) {
-        final ggamfViewModel = ref.watch(recommendGgamfListViewModel);
+        final ggamfViewModel = ref.watch(recommendGgamfListViewModel.notifier);
         return Scaffold(
           appBar: AppBar(
             automaticallyImplyLeading: false,
@@ -53,9 +55,12 @@ class _RecommendGgamfListViewState extends State<RecommendGgamfListView>
             padding: const EdgeInsets.all(10),
             child: Column(
               children: [
-                RecommendGgamfListTabBar(tabController: _tabController, textIndex: textIndex),
+                RecommendGgamfListTabBar(
+                    tabController: _tabController, textIndex: textIndex),
                 const SizedBox(height: 20),
-                RecommendGgamfListTabView(tabController: _tabController, ggamfList: ggamfViewModel),
+                RecommendGgamfListTabView(
+                    tabController: _tabController,
+                    ggamfList: ggamfViewModel.state),
               ],
             ),
           ),

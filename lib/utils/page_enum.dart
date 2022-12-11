@@ -1,4 +1,4 @@
-const String baseUrl = 'http://localhost:8000';
+const String baseUrl = 'http://172.30.96.1:8080';
 
 enum PageEnum {
   BASEURL(null, 'http://localhost:8000', 'baseUrl'),
