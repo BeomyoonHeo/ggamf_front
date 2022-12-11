@@ -18,6 +18,7 @@ class MyProfileView extends ConsumerWidget {
     final mpc = ref.read(myProfileController);
     //mpvm = myProfileViewModel
     final mpvm = ref.watch(myProfileViewModel);
+
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -85,10 +86,9 @@ class MyProfileView extends ConsumerWidget {
 
   Widget _updataProfile() {
     return OutlinedButton(
-      onPressed: () {
+      onPressed: () async {
         Navigator.push(
           navigatorKey.currentState!.context,
-
           MaterialPageRoute(builder: (context) => UpdateMyProfileView()),
         );
       },

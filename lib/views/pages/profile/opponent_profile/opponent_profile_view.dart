@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../../core/color.dart';
-
-class OpponentProfileView extends StatefulWidget {
+class OpponentProfileView extends ConsumerStatefulWidget {
   const OpponentProfileView({Key? key}) : super(key: key);
 
   @override
-  State<OpponentProfileView> createState() => _OpponentProfileViewState();
+  ConsumerState createState() => _OpponentProfileViewState();
 }
 
-class _OpponentProfileViewState extends State<OpponentProfileView> {
+class _OpponentProfileViewState extends ConsumerState<OpponentProfileView> {
   List<String> _valueList = ['욕설', '비방', '광고', '괴롭힘', '기타'];
   var _selectedValue;
 
@@ -333,20 +332,3 @@ class _OpponentProfileViewState extends State<OpponentProfileView> {
     );
   }
 }
-
-// class ImageDialog extends StatelessWidget {
-//   const ImageDialog({Key? key}) : super(key: key);
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return Dialog(
-//       child: Container(
-//         width: 300,
-//         height: 200,
-//         decoration: BoxDecoration(
-//           image: DecorationImage(image: AssetImage('assets/images/cart2.png')),
-//         ),
-//       ),
-//     );
-//   }
-// }
