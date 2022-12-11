@@ -5,7 +5,16 @@ import 'package:ggamf_front/domain/user/repository/profile_user_repository.dart'
 import 'package:ggamf_front/utils/custom_intercepter.dart';
 
 final updateMyProfileViewModel = StateNotifierProvider<UpdateMyProfileViewModel, ProfileUser>((ref) {
-  return UpdateMyProfileViewModel(ProfileUser(intro: null, nickname: null, photo: null), ref)..init();
+  return UpdateMyProfileViewModel(
+      ProfileUser(
+        intro: null,
+        nickname: null,
+        photo: null,
+        password: null,
+        email: null,
+      ),
+      ref)
+    ..init();
 });
 
 class UpdateMyProfileViewModel extends StateNotifier<ProfileUser> {

@@ -5,7 +5,7 @@ import 'package:ggamf_front/domain/user/repository/profile_user_repository.dart'
 import 'package:ggamf_front/utils/custom_intercepter.dart';
 
 final opponentProfileViewModel = StateNotifierProvider<OpponentProfileViewModel, ProfileUser>((ref) {
-  return OpponentProfileViewModel(ProfileUser(intro: null, nickname: null, photo: null), ref)..init();
+  return OpponentProfileViewModel(ProfileUser(intro: null, nickname: null, photo: null, password: null), ref)..init();
 });
 
 class OpponentProfileViewModel extends StateNotifier<ProfileUser> {

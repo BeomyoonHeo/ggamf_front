@@ -13,7 +13,7 @@ class _ProfileUserRepository implements ProfileUserRepository {
     this._dio, {
     this.baseUrl,
   }) {
-    baseUrl ??= 'https://reqres.in/api';
+    baseUrl ??= 'http://localhost:8000';
   }
 
   final Dio _dio;
@@ -34,7 +34,7 @@ class _ProfileUserRepository implements ProfileUserRepository {
     )
             .compose(
               _dio.options,
-              '/profileUser/${id}',
+              '/user/${id}/detail',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -61,7 +61,7 @@ class _ProfileUserRepository implements ProfileUserRepository {
     )
             .compose(
               _dio.options,
-              '/profileUser/${id}',
+              '/user/${id}/update',
               queryParameters: queryParameters,
               data: _data,
             )
