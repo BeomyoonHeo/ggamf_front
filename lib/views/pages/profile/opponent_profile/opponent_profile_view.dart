@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:ggamf_front/controller/user/opponent_profile_controller.dart';
+
+import 'opponent_profile_view_model.dart';
 
 class OpponentProfileView extends ConsumerStatefulWidget {
   const OpponentProfileView({Key? key}) : super(key: key);
@@ -15,6 +18,11 @@ class _OpponentProfileViewState extends ConsumerState<OpponentProfileView> {
 
   @override
   Widget build(BuildContext context) {
+    //opc = opponentProfileController
+    final opc = ref.read(opponentProfileController);
+    //opvm = opponentProfileViewModel
+    final opvm = ref.watch(opponentProfileViewModel);
+
     return Scaffold(
       appBar: _appbar(),
       body: Padding(
