@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ggamf_front/controller/user/opponent_profile_controller.dart';
+import 'package:ggamf_front/domain/user/model/profile_user.dart';
 
 import 'opponent_profile_view_model.dart';
 
@@ -30,13 +31,13 @@ class _OpponentProfileViewState extends ConsumerState<OpponentProfileView> {
         child: ListView(
           children: [
             SizedBox(height: 50),
-            _buildCircleAvatar(),
+            _buildCircleAvatar(opvm),
             SizedBox(height: 50),
-            _nickName(),
+            _nickName(opvm),
             SizedBox(height: 30),
             _ratedStar(),
             SizedBox(height: 30),
-            _introduce(),
+            _introduce(opvm),
             Container(
               height: 150,
               child: InkWell(
@@ -59,7 +60,7 @@ class _OpponentProfileViewState extends ConsumerState<OpponentProfileView> {
     );
   }
 
-  Widget _buildCircleAvatar() {
+  Widget _buildCircleAvatar(ProfileUser opvm) {
     return Center(
       child: CircleAvatar(
         radius: 70,
@@ -138,7 +139,7 @@ class _OpponentProfileViewState extends ConsumerState<OpponentProfileView> {
     );
   }
 
-  Widget _introduce() {
+  Widget _introduce(ProfileUser opvm) {
     return Container(
       padding: EdgeInsets.all(10),
       width: double.infinity,
@@ -149,7 +150,7 @@ class _OpponentProfileViewState extends ConsumerState<OpponentProfileView> {
       ),
       child: Expanded(
         child: Text(
-          "리그오브레전드 원딜 탑레 다이아 1 같이 듀오하실 서폿분 구합니다",
+          "${opvm.intro}",
           textAlign: TextAlign.center,
           style: TextStyle(fontSize: 15, color: Colors.black),
         ),
@@ -157,7 +158,7 @@ class _OpponentProfileViewState extends ConsumerState<OpponentProfileView> {
     );
   }
 
-  Widget _nickName() {
+  Widget _nickName(ProfileUser opvm) {
     return Container(
       padding: EdgeInsets.all(5),
       decoration: BoxDecoration(
@@ -166,7 +167,7 @@ class _OpponentProfileViewState extends ConsumerState<OpponentProfileView> {
         color: Colors.white,
       ),
       child: Text(
-        "김겐지",
+        "${opvm.nickname}",
         style: TextStyle(fontSize: 15, color: Colors.black),
         textAlign: TextAlign.center,
       ),
