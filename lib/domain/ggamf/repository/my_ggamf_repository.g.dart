@@ -21,13 +21,13 @@ class _MyGgamfRepository implements MyGgamfRepository {
   String? baseUrl;
 
   @override
-  Future<MyGgamf> myGgamf({required page}) async {
+  Future<MyGgamfList> myGgamf({required page}) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{r'page': page};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    final _result =
-        await _dio.fetch<Map<String, dynamic>>(_setStreamType<MyGgamf>(Options(
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<MyGgamfList>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -39,7 +39,7 @@ class _MyGgamfRepository implements MyGgamfRepository {
               data: _data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = MyGgamf.fromJson(_result.data!);
+    final value = MyGgamfList.fromJson(_result.data!);
     return value;
   }
 

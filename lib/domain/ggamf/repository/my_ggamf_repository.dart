@@ -10,5 +10,5 @@ abstract class MyGgamfRepository {
   factory MyGgamfRepository(Dio dio) = _MyGgamfRepository;
 
   @GET("ggamf/list")
-  Future<MyGgamf> myGgamf({@Query('page') required int page});
+  Future<MyGgamfList> myGgamf({@Query('page') required int page});
 }
