@@ -4,7 +4,7 @@ part 'room.g.dart';
 
 @JsonSerializable()
 class RoomList {
-  List<RoomList> roomList;
+  List<Room> roomList;
 
   RoomList({required this.roomList});
 

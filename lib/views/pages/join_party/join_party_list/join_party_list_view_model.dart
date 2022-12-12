@@ -5,11 +5,11 @@ import 'package:ggamf_front/domain/ggamf/repository/my_ggamf_repository.dart';
 import 'package:ggamf_front/domain/party/model/room.dart';
 import 'package:ggamf_front/domain/party/repository/room_repository.dart';
 
-final joinPartyListViewModel = StateNotifierProvider<JoinPartyListViewModel, List<RoomList>>((ref) {
+final joinPartyListViewModel = StateNotifierProvider<JoinPartyListViewModel, List<Room>>((ref) {
   return JoinPartyListViewModel([], ref)..init();
 });
 
-class JoinPartyListViewModel extends StateNotifier<List<RoomList>> {
+class JoinPartyListViewModel extends StateNotifier<List<Room>> {
   final Ref _ref;
   JoinPartyListViewModel(super.state, this._ref);
 

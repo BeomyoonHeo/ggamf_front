@@ -8,7 +8,7 @@ part of 'room.dart';
 
 RoomList _$RoomListFromJson(Map<String, dynamic> json) => RoomList(
       roomList: (json['roomList'] as List<dynamic>)
-          .map((e) => RoomList.fromJson(e as Map<String, dynamic>))
+          .map((e) => Room.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 
