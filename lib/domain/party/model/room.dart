@@ -3,6 +3,16 @@ import 'package:json_annotation/json_annotation.dart';
 part 'room.g.dart';
 
 @JsonSerializable()
+class RoomList {
+  List<RoomList> roomList;
+
+  RoomList({required this.roomList});
+
+  factory RoomList.fromJson(Map<String, dynamic> json) => _$RoomListFromJson(json);
+  Map<String, dynamic> toJson() => _$RoomListToJson(this);
+}
+
+@JsonSerializable()
 class Room {
   int id;
   String gameName;

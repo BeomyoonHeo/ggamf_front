@@ -70,13 +70,13 @@ class _RoomRepository implements RoomRepository {
   }
 
   @override
-  Future<Room> findAllRoom({required userId}) async {
+  Future<RoomList> findAllRoom({required userId}) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     final _result =
-        await _dio.fetch<Map<String, dynamic>>(_setStreamType<Room>(Options(
+        await _dio.fetch<Map<String, dynamic>>(_setStreamType<RoomList>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -88,7 +88,7 @@ class _RoomRepository implements RoomRepository {
               data: _data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = Room.fromJson(_result.data!);
+    final value = RoomList.fromJson(_result.data!);
     return value;
   }
 

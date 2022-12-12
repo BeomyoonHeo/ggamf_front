@@ -20,7 +20,7 @@ abstract class RoomRepository {
 
   // 전체 파티방 목록 보기
   @GET("/party/user/{userId}/list")
-  Future<Room> findAllRoom({@Path('userId') required int userId});
+  Future<RoomList> findAllRoom({@Path('userId') required int userId});
 
   // 참가중인 파티방 목록 보기
   @GET("/party/user/{userId}/joins")
