@@ -18,9 +18,9 @@ Map<String, dynamic> _$MyGgamfListToJson(MyGgamfList instance) =>
     };
 
 MyGgamf _$MyGgamfFromJson(Map<String, dynamic> json) => MyGgamf(
-      photo: json['photo'] as String?,
-      nickname: json['nickname'] as String?,
-      intro: json['intro'] as String?,
+      photo: json['photo'] as String,
+      nickname: json['nickname'] as String,
+      intro: json['intro'] as String,
     );
 
 Map<String, dynamic> _$MyGgamfToJson(MyGgamf instance) => <String, dynamic>{

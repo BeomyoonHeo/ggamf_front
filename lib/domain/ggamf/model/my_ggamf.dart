@@ -14,9 +14,9 @@ class MyGgamfList {
 
 @JsonSerializable()
 class MyGgamf {
-  String? photo;
-  String? nickname;
-  String? intro;
+  String photo;
+  String nickname;
+  String intro;
 
   MyGgamf({
     required this.photo,

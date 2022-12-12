@@ -1,361 +1,91 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:ggamf_front/domain/ggamf/model/my_ggamf.dart';
+import 'package:ggamf_front/views/pages/my_ggamf/my_ggamf_list_page/my_ggamf_list_view_model.dart';
 import 'package:ggamf_front/views/pages/profile/opponent_profile/opponent_profile_view.dart';
 
 import '../../../common_components/custom_icons_icons.dart';
 
-class MyGgamfListView extends StatefulWidget {
-  const MyGgamfListView({Key? key}) : super(key: key);
+class MyGgamfListView extends ConsumerWidget {
+  const MyGgamfListView({Key? key, required List<MyGgamf> myGgamfList})
+      : _myGgamfList = myGgamfList,
+        super(key: key);
 
+  final List<MyGgamf> _myGgamfList;
   @override
-  State<MyGgamfListView> createState() => _MyGgamfListViewState();
-}
-
-class _MyGgamfListViewState extends State<MyGgamfListView> {
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    //mglv = myGgamfListViewModel
+    final mglv = ref.watch(myGgamfListViewModel);
     return Scaffold(
       appBar: _appBar(),
       backgroundColor: Colors.white,
       body: Padding(
         padding: const EdgeInsets.only(right: 5, left: 5, top: 20),
-        child: ListView(
-          children: [
-            Container(
+        child: ListView.builder(
+          itemCount: 5,
+          itemBuilder: (context, index) => Container(
+            padding: EdgeInsets.all(10),
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                fit: BoxFit.cover,
+                image: AssetImage("assets/images/rgb.gif"),
+              ),
+              border: Border.all(width: 1),
+            ),
+            child: Container(
               padding: EdgeInsets.all(10),
               decoration: BoxDecoration(
-                image: DecorationImage(
-                  fit: BoxFit.cover,
-                  image: AssetImage("assets/images/rgb.gif"),
-                ),
-                border: Border.all(width: 1),
+                borderRadius: BorderRadius.circular(20),
+                color: Color.fromRGBO(255, 255, 255, 0.75),
               ),
-              child: Container(
-                padding: EdgeInsets.all(10),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
-                  color: Color.fromRGBO(255, 255, 255, 0.75),
-                ),
-                height: 120,
-                child: InkWell(
-                  onTap: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => OpponentProfileView()));
-                  },
-                  child: Row(
-                    children: [
-                      CircleAvatar(
-                        radius: 40,
-                        backgroundImage: AssetImage("assets/images/76.jpg"),
-                      ),
-                      SizedBox(width: 20),
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            SizedBox(height: 5),
-                            Text(
-                              "김겐지",
-                              style: TextStyle(fontSize: 25, color: Colors.black, fontWeight: FontWeight.w600),
-                            ),
-                            SizedBox(height: 10),
-                            Text(
-                              "나는 오늘밤 사냥에 나선다아dkkkkkkkkkkkkkkkkkkk",
-                              style: TextStyle(fontSize: 15, color: Colors.black),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
+              height: 120,
+              child: InkWell(
+                onTap: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => OpponentProfileView()));
+                },
+                child: Row(
+                  children: [
+                    _profileImage(),
+                    SizedBox(width: 20),
+                    _context(),
+                  ],
                 ),
               ),
             ),
-            Container(
-              padding: EdgeInsets.all(10),
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  fit: BoxFit.cover,
-                  image: AssetImage("assets/images/rgbround.gif"),
-                ),
-                // gradient: LinearGradient(
-                //   begin: Alignment.topLeft,
-                //   end: Alignment.bottomRight,
-                //   colors: [
-                //     Color(0xffFBC5D8),
-                //     Color.fromARGB(0, 243, 218, 153),
-                //   ],
-                // ),
-                border: Border.all(width: 1),
-              ),
-              child: Container(
-                padding: EdgeInsets.all(10),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
-                  color: Color.fromRGBO(255, 255, 255, 0.75),
-                ),
-                height: 120,
-                child: InkWell(
-                  onTap: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => OpponentProfileView()));
-                  },
-                  child: Row(
-                    children: [
-                      CircleAvatar(
-                        radius: 40,
-                        backgroundImage: AssetImage("assets/images/20.jpg"),
-                      ),
-                      SizedBox(width: 20),
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            SizedBox(height: 5),
-                            Text(
-                              "홍길동",
-                              style: TextStyle(fontSize: 25, color: Colors.black, fontWeight: FontWeight.w600),
-                            ),
-                            SizedBox(height: 10),
-                            Text(
-                              "가나다라마바사아자차카타파하",
-                              style: TextStyle(fontSize: 15, color: Colors.black),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-            Container(
-              padding: EdgeInsets.all(10),
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  fit: BoxFit.cover,
-                  image: AssetImage("assets/images/sunset.gif"),
-                ),
-                // gradient: LinearGradient(
-                //   begin: Alignment.topLeft,
-                //   end: Alignment.bottomRight,
-                //   colors: [
-                //     Color(0xffFBC5D8),
-                //     Color.fromARGB(0, 243, 218, 153),
-                //   ],
-                // ),
-                border: Border.all(width: 1),
-              ),
-              child: Container(
-                padding: EdgeInsets.all(10),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
-                  color: Color.fromRGBO(255, 255, 255, 0.75),
-                ),
-                height: 120,
-                child: InkWell(
-                  onTap: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => OpponentProfileView()));
-                  },
-                  child: Row(
-                    children: [
-                      CircleAvatar(
-                        radius: 40,
-                        backgroundImage: AssetImage("assets/images/41.jpg"),
-                      ),
-                      SizedBox(width: 20),
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            SizedBox(height: 5),
-                            Text(
-                              "홍무당",
-                              style: TextStyle(fontSize: 25, color: Colors.black, fontWeight: FontWeight.w600),
-                            ),
-                            SizedBox(height: 10),
-                            Text(
-                              "마하반야다라밀다심경 공즉시색 색즉시공",
-                              style: TextStyle(fontSize: 15, color: Colors.black),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-            Container(
-              padding: EdgeInsets.all(10),
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  fit: BoxFit.cover,
-                  image: AssetImage("assets/images/sakura.gif"),
-                ),
-                // gradient: LinearGradient(
-                //   begin: Alignment.topLeft,
-                //   end: Alignment.bottomRight,
-                //   colors: [
-                //     Color(0xffFBC5D8),
-                //     Color.fromARGB(0, 243, 218, 153),
-                //   ],
-                // ),
-                border: Border.all(width: 1),
-              ),
-              child: Container(
-                padding: EdgeInsets.all(10),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
-                  color: Color.fromRGBO(255, 255, 255, 0.75),
-                ),
-                height: 120,
-                child: InkWell(
-                  onTap: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => OpponentProfileView()));
-                  },
-                  child: Row(
-                    children: [
-                      CircleAvatar(
-                        radius: 40,
-                        backgroundImage: AssetImage("assets/images/20.jpg"),
-                      ),
-                      SizedBox(width: 20),
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            SizedBox(height: 5),
-                            Text(
-                              "김겐지",
-                              style: TextStyle(fontSize: 25, color: Colors.black, fontWeight: FontWeight.w600),
-                            ),
-                            SizedBox(height: 10),
-                            Text(
-                              "나는 오늘밤 사냥에 나선다아dkkkkkkkkkkkkkkkkkkk",
-                              style: TextStyle(fontSize: 15, color: Colors.black),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-            Container(
-              padding: EdgeInsets.all(10),
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  fit: BoxFit.cover,
-                  image: AssetImage("assets/images/rgb.gif"),
-                ),
-                // gradient: LinearGradient(
-                //   begin: Alignment.topLeft,
-                //   end: Alignment.bottomRight,
-                //   colors: [
-                //     Color(0xffFBC5D8),
-                //     Color.fromARGB(0, 243, 218, 153),
-                //   ],
-                // ),
-                border: Border.all(width: 1),
-              ),
-              child: Container(
-                padding: EdgeInsets.all(10),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
-                  color: Color.fromRGBO(255, 255, 255, 0.75),
-                ),
-                height: 120,
-                child: InkWell(
-                  onTap: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => OpponentProfileView()));
-                  },
-                  child: Row(
-                    children: [
-                      CircleAvatar(
-                        radius: 40,
-                        backgroundImage: AssetImage("assets/images/76.jpg"),
-                      ),
-                      SizedBox(width: 20),
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            SizedBox(height: 5),
-                            Text(
-                              "김겐지",
-                              style: TextStyle(fontSize: 25, color: Colors.black, fontWeight: FontWeight.w600),
-                            ),
-                            SizedBox(height: 10),
-                            Text(
-                              "나는 오늘밤 사냥에 나선다아dkkkkkkkkkkkkkkkkkkk",
-                              style: TextStyle(fontSize: 15, color: Colors.black),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-            Container(
-              padding: EdgeInsets.all(10),
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  fit: BoxFit.cover,
-                  image: AssetImage("assets/images/rgb.gif"),
-                ),
-                // gradient: LinearGradient(
-                //   begin: Alignment.topLeft,
-                //   end: Alignment.bottomRight,
-                //   colors: [
-                //     Color(0xffFBC5D8),
-                //     Color.fromARGB(0, 243, 218, 153),
-                //   ],
-                // ),
-                border: Border.all(width: 1),
-              ),
-              child: Container(
-                padding: EdgeInsets.all(10),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
-                  color: Color.fromRGBO(255, 255, 255, 0.75),
-                ),
-                height: 120,
-                child: InkWell(
-                  onTap: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => OpponentProfileView()));
-                  },
-                  child: Row(
-                    children: [
-                      CircleAvatar(
-                        radius: 40,
-                        backgroundImage: AssetImage("assets/images/76.jpg"),
-                      ),
-                      SizedBox(width: 20),
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            SizedBox(height: 5),
-                            Text(
-                              "김겐지",
-                              style: TextStyle(fontSize: 25, color: Colors.black, fontWeight: FontWeight.w600),
-                            ),
-                            SizedBox(height: 10),
-                            Text(
-                              "나는 오늘밤 사냥에 나선다아dkkkkkkkkkkkkkkkkkkk",
-                              style: TextStyle(fontSize: 15, color: Colors.black),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-          ],
+          ),
         ),
+      ),
+    );
+  }
+
+  Expanded _context() {
+    return Expanded(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          SizedBox(height: 5),
+          Text(
+            //_myGgamfList[index].nickname
+            "김겐지",
+            style: TextStyle(fontSize: 25, color: Colors.black, fontWeight: FontWeight.w600),
+          ),
+          SizedBox(height: 10),
+          Text(
+            //_myGgamfList[index].intro
+            "안녕하세요",
+            style: TextStyle(fontSize: 15, color: Colors.black),
+          ),
+        ],
+      ),
+    );
+  }
+
+  CircleAvatar _profileImage() {
+    return CircleAvatar(
+      radius: 40,
+      backgroundImage: AssetImage(
+        //_myGgamfList[index].photo,
+        "assets/images/76.jpg",
       ),
     );
   }

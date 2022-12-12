@@ -12,7 +12,7 @@ import '../pages/recommend_ggamef/recommend_ggamf_list/recommend_ggamf_list_view
 const List<Widget> commonPages = [
   JoinPartyListView(),
   MyRecruitmentPartyListView(),
-  MyGgamfListView(),
+  MyGgamfListView(myGgamfList: []),
   RecommendGgamfListView(),
   MyProfileView(),
 ];
