@@ -1,7 +1,7 @@
 const String baseUrl = 'http://localhost:8000';
 
 enum PageEnum {
-  BASEURL(null, 'http://localhost:8000', 'baseUrl'),
+  BASEURL(null, 'http://localhost:8080', 'baseUrl'),
   LOGIN(1, '/login', 'login'),
   JOIN(null, '/join', 'join'),
   RECOMMENDGGAMF(3, '/recommendGamf', 'recommendGamf'),
@@ -15,14 +15,10 @@ enum PageEnum {
   final String displayName;
 
   factory PageEnum.getByCode(int navigatorCode) {
-    return PageEnum.values.firstWhere(
-        (value) => value.navigatorCode == navigatorCode,
-        orElse: () => PageEnum.UNDEFINED);
+    return PageEnum.values.firstWhere((value) => value.navigatorCode == navigatorCode, orElse: () => PageEnum.UNDEFINED);
   }
 
   factory PageEnum.getByDisPlayName(String displayName) {
-    return PageEnum.values.firstWhere(
-        (value) => value.displayName == displayName,
-        orElse: () => PageEnum.UNDEFINED);
+    return PageEnum.values.firstWhere((value) => value.displayName == displayName, orElse: () => PageEnum.UNDEFINED);
   }
 }
