@@ -12,9 +12,5 @@ class MyRecruitmentPartyListViewModel extends StateNotifier<List<RoomList>> {
   MyRecruitmentPartyListViewModel(super.state, this._ref);
 
   //final dio = Dio()..interceptors.add(CustomLogInterceptor());
-  void init() {
-    //전체 파티방 목록보기
-    RoomRepository restApi = RoomRepository(Dio());
-    restApi.findAllRoom(userId: 1).then((value) => value.roomList.isEmpty ? null : state = value.roomList);
-  }
+  void init() {}
 }
