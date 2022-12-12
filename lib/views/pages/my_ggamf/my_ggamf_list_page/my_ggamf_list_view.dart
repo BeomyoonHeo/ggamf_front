@@ -27,14 +27,6 @@ class _MyGgamfListViewState extends State<MyGgamfListView> {
                   fit: BoxFit.cover,
                   image: AssetImage("assets/images/rgb.gif"),
                 ),
-                // gradient: LinearGradient(
-                //   begin: Alignment.topLeft,
-                //   end: Alignment.bottomRight,
-                //   colors: [
-                //     Color(0xffFBC5D8),
-                //     Color.fromARGB(0, 243, 218, 153),
-                //   ],
-                // ),
                 border: Border.all(width: 1),
               ),
               child: Container(
