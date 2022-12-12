@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ggamf_front/controller/user/my_profile_controller.dart';
+import 'package:ggamf_front/domain/user/model/profile_user.dart';
 import 'package:ggamf_front/views/pages/profile/my_profile/my_profile_view_model.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -138,7 +139,7 @@ class _UpdateMyProfileViewState extends ConsumerState<UpdateMyProfileView> {
     return Container(
       padding: EdgeInsets.only(left: 100, right: 100),
       child: OutlinedButton(
-        onPressed: () {},
+        onPressed: () async {},
         child: Text("수정 완료"),
         style: OutlinedButton.styleFrom(
           foregroundColor: Colors.black,
