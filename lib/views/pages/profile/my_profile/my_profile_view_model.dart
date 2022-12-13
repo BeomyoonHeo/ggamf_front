@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ggamf_front/domain/user/model/profile_user.dart';
+import 'package:ggamf_front/domain/user/model/user.dart';
 import 'package:ggamf_front/domain/user/repository/user_repository.dart';
 import 'package:ggamf_front/utils/custom_intercepter.dart';
 
@@ -20,11 +21,11 @@ class MyProfileViewModel extends StateNotifier<ProfileUser> {
 
   void init() {
     ProfileUserRepository restApi = ProfileUserRepository(dio);
-    restApi.getUserProfile(userId: 3).then((value) {
+    restApi.getUserProfile(userId: UserSession.user.id).then((value) {
       ProfileUser? profileUser;
       Map<String, dynamic> data = value;
       data.forEach((key, value) =>
-          key == 'data' ? profileUser = ProfileUser.fromJson(value) : null);
+          key == 'data' ? profileUser = ProfileUser.fromJson(value) : '');
       state = profileUser!;
     });
   }

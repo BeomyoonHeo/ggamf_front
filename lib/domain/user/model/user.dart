@@ -1,6 +1,5 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:ggamf_front/domain/user/model/login_user.dart';
 import 'package:ggamf_front/utils/validator_util.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:jwt_decode/jwt_decode.dart';
@@ -11,13 +10,15 @@ const storage = FlutterSecureStorage();
 
 @JsonSerializable()
 class User {
-  final int userId;
-  final String backgroundImage;
-  final String name;
-  final String intro;
+  final int id;
+  final String? username;
+  final String? backgroundImage;
+  final String? name;
+  final String? intro;
 
   User({
-    required this.userId,
+    required this.username,
+    required this.id,
     required this.backgroundImage,
     required this.name,
     required this.intro,
@@ -29,7 +30,7 @@ class User {
 }
 
 class UserSession {
-  static LoginUser? _user;
+  static User? _user;
   static String? _jwtToken;
   static bool _isLogin = false;
 
@@ -37,7 +38,7 @@ class UserSession {
   static get jwtToken => _jwtToken;
   static get isLogin => _isLogin;
 
-  static void successAuthentication(LoginUser? userParam, String jwtToken) {
+  static void successAuthentication(User? userParam, String jwtToken) {
     _user = userParam;
     _isLogin = true;
     _jwtToken = jwtToken;
