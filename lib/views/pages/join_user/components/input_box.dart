@@ -6,13 +6,15 @@ class InputBox extends StatelessWidget {
   final String hintText;
   final TextEditingController? controller;
   AutovalidateMode? autoValidateMode;
+  bool? obsText;
   InputBox(
       {Key? key,
       required this.inputText,
       required this.hintText,
       required this.controller,
       required this.validator,
-      this.autoValidateMode})
+      this.autoValidateMode,
+      this.obsText})
       : super(key: key);
 
   @override
@@ -33,6 +35,8 @@ class InputBox extends StatelessWidget {
           ),
           Expanded(
             child: TextFormField(
+              obscureText: obsText ?? false,
+              obscuringCharacter: '*',
               autovalidateMode: autoValidateMode ?? AutovalidateMode.disabled,
               controller: controller,
               validator: validator(),

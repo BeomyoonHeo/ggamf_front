@@ -29,7 +29,7 @@ class _JoinUserViewState extends ConsumerState<JoinUserView> {
 
   @override
   void didChangeDependencies() {
-    ref.read(joinUserController).keepAlive.close();
+    ref.invalidate(joinUserController);
     ref.read(joinUserViewModel.notifier).keepAlive.close();
     super.didChangeDependencies();
   }
@@ -91,12 +91,14 @@ class _JoinUserViewState extends ConsumerState<JoinUserView> {
                       controller: juc.idController),
                   const SizedBox(height: 10),
                   InputBox(
+                      obsText: true,
                       validator: passwordValidator,
                       inputText: "비밀번호   : ",
                       hintText: "비밀번호를 입력하세요",
                       controller: juc.passwordController),
                   const SizedBox(height: 10),
                   InputBox(
+                      obsText: true,
                       autoValidateMode: AutovalidateMode.always,
                       validator: passwordRepeatValidation,
                       inputText: "비밀번호 확인   : ",
