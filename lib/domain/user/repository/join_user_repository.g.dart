@@ -13,7 +13,7 @@ class _JoinUserRepository implements JoinUserRepository {
     this._dio, {
     this.baseUrl,
   }) {
-    baseUrl ??= 'http://localhost:8000';
+    baseUrl ??= 'http://192.168.50.17:8080';
   }
 
   final Dio _dio;
@@ -21,25 +21,26 @@ class _JoinUserRepository implements JoinUserRepository {
   String? baseUrl;
 
   @override
-  Future<void> insert(joinUser) async {
+  Future<dynamic> insert(joinUser) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(joinUser.toJson());
-    await _dio.fetch<void>(_setStreamType<void>(Options(
-      method: 'PUT',
+    final _result = await _dio.fetch(_setStreamType<dynamic>(Options(
+      method: 'POST',
       headers: _headers,
       extra: _extra,
     )
         .compose(
           _dio.options,
-          '/user/join',
+          '/s/api/join',
           queryParameters: queryParameters,
           data: _data,
         )
         .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    return null;
+    final value = _result.data;
+    return value;
   }
 
   RequestOptions _setStreamType<T>(RequestOptions requestOptions) {

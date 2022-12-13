@@ -13,7 +13,7 @@ class _LoginUserHttpRepository implements LoginUserHttpRepository {
     this._dio, {
     this.baseUrl,
   }) {
-    baseUrl ??= 'http://localhost:8000';
+    baseUrl ??= 'http://192.168.50.17:8080';
   }
 
   final Dio _dio;
