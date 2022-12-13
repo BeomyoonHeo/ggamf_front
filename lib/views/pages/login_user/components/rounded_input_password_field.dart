@@ -4,7 +4,7 @@ import 'package:ggamf_front/views/pages/login_user/components/text_field_contain
 class RoundedInputPasswordField extends StatefulWidget {
   final TextEditingController controller;
   final Function validator;
-  RoundedInputPasswordField(
+  const RoundedInputPasswordField(
       {Key? key, required this.controller, required this.validator})
       : super(key: key);
 

@@ -49,7 +49,8 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       navigatorKey: navigatorKey,
       initialRoute: UserSession.jwtToken != null
-          ? PageEnum.ALLPAGES.requestLocation
+          ? PageEnum.getByDisPlayName('login')
+              .requestLocation //PageEnum.ALLPAGES.requestLocation
           : PageEnum.getByDisPlayName('login').requestLocation,
       routes: {
         PageEnum.LOGIN.requestLocation: (context) => LoginUserView(),

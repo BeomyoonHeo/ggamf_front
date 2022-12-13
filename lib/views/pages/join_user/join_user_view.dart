@@ -29,7 +29,7 @@ class _JoinUserViewState extends ConsumerState<JoinUserView> {
 
   @override
   void didChangeDependencies() {
-    ref.read(joinUserController).keepAlive.close();
+    ref.invalidate(joinUserController);
     ref.read(joinUserViewModel.notifier).keepAlive.close();
     super.didChangeDependencies();
   }
