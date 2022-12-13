@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ggamf_front/domain/party/model/generate_room_party.dart';
 import 'package:ggamf_front/domain/party/repository/room_repository.dart';
@@ -13,9 +14,19 @@ class CreatePartyController {
 
   CreatePartyController(this._ref);
 
+  final TextEditingController partyNameController = TextEditingController();
+  final TextEditingController selectGameController = TextEditingController();
+  final TextEditingController totalPeopleController = TextEditingController();
+
   final repo = RoomRepository(Dio()..interceptors.add(CustomLogInterceptor()));
 
-  void createRoom(GenerateRoomParty generateRoomParty) async {
-    GenerateRoomParty createRoom = await repo.createRoom(userId: 1, roomId: 1, generateRoomParty: generateRoomParty);
+  void requestCreateRoom() {
+    GenerateRoomParty generateRoomParty = GenerateRoomParty(
+      gameName: selectGameController.text,
+      gameCodeId: int.parse(selectGameController.text),
+      roomName: partyNameController.text,
+      totalPeople: int.parse(totalPeopleController.text),
+      userId: 1,
+    );
   }
 }
