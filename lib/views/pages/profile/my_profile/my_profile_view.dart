@@ -8,8 +8,6 @@ import 'package:ggamf_front/views/pages/profile/my_profile/my_profile_view_model
 import 'package:ggamf_front/views/pages/profile/update_my_profile/update_my_profile_view.dart';
 import 'package:ggamf_front/views/pages/profile/withdrawal/withdrawal_view.dart';
 
-import '../../../../core/color.dart';
-
 class MyProfileView extends ConsumerWidget {
   const MyProfileView({Key? key}) : super(key: key);
 
@@ -42,7 +40,8 @@ class MyProfileView extends ConsumerWidget {
               height: 150,
               child: InkWell(
                 onTap: () async {
-                  await showDialog(context: context, builder: (_) => _imageDialog());
+                  await showDialog(
+                      context: context, builder: (_) => _imageDialog());
                 },
                 child: Image.asset("assets/images/cart1.png"),
               ),

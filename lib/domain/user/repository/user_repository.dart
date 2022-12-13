@@ -15,7 +15,7 @@ abstract class UserRepository {
   @POST('/s/api/join')
   Future<dynamic> insert({@Body() required JoinUser joinUser});
 
-  @POST('/s/api/login')
+  @POST('/login')
   Future<dynamic> login({@Body() required LoginUser loginUser});
 }
 

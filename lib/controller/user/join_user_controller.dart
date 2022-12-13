@@ -1,7 +1,9 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:ggamf_front/core/page_enum.dart';
 import 'package:ggamf_front/domain/user/model/join_user.dart';
+import 'package:ggamf_front/main.dart';
 import 'package:ggamf_front/views/pages/join_user/join_user_view_model.dart';
 
 import '../../domain/user/repository/user_repository.dart';
@@ -64,6 +66,8 @@ class JoinUserController {
     );
     UserRepository joinUserRepository =
         UserRepository(Dio()..interceptors.add(LogInterceptor()));
-    joinUserRepository.insert(joinUser: joinUser).then((value) => null);
+    joinUserRepository.insert(joinUser: joinUser).then((value) =>
+        Navigator.popAndPushNamed(navigatorKey.currentState!.context,
+            PageEnum.LOGIN.requestLocation));
   }
 }

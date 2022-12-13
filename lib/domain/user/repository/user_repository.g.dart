@@ -57,7 +57,7 @@ class _UserRepository implements UserRepository {
     )
         .compose(
           _dio.options,
-          '/s/api/login',
+          '/login',
           queryParameters: queryParameters,
           data: _data,
         )

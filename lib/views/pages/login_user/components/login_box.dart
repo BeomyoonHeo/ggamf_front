@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ggamf_front/controller/user/user_controller.dart';
 import 'package:ggamf_front/core/page_enum.dart';
+import 'package:ggamf_front/utils/validator_util.dart';
 import 'package:ggamf_front/views/pages/login_user/components/rounded_input_field.dart';
 import 'package:ggamf_front/views/pages/login_user/components/rounded_input_password_field.dart';
 
@@ -45,13 +46,15 @@ class LoginBox extends ConsumerWidget {
           child: Column(
             children: [
               RoundedInputField(
+                validator: idValidator,
                 controller: usernameController,
                 icon: Icons.person,
                 hintText: "아이디입력",
                 onChanged: (value) {},
               ),
               const SizedBox(height: 10),
-              RoundedInputPasswordField(controller: passwordController),
+              RoundedInputPasswordField(
+                  controller: passwordController, validator: passwordValidator),
             ],
           ),
         ),
