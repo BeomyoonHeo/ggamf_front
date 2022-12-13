@@ -1,13 +1,14 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:ggamf_front/domain/data.dart';
-import 'package:ggamf_front/domain/recommend_ggamf_list/repository/recommend_ggamf_list_repository.dart';
+import 'package:ggamf_front/domain/user/model/user.dart';
+import 'package:ggamf_front/domain/user/repository/user_repository.dart';
 
-final recommendGgamfListViewModel = StateNotifierProvider<RecommendGgamfListViewModel, List<Data>>((ref) {
+final recommendGgamfListViewModel =
+    StateNotifierProvider<RecommendGgamfListViewModel, List<User>>((ref) {
   return RecommendGgamfListViewModel([], ref)..init();
 });
 
-class RecommendGgamfListViewModel extends StateNotifier<List<Data>> {
+class RecommendGgamfListViewModel extends StateNotifier<List<User>> {
   final Ref _ref;
   RecommendGgamfListViewModel(super.state, this._ref);
 
@@ -15,6 +16,15 @@ class RecommendGgamfListViewModel extends StateNotifier<List<Data>> {
   void init() {
     // 최초 init 시에만 repository에 의존
     RecommendGgamfListRepository restApi = RecommendGgamfListRepository(Dio());
-    restApi.getUser(page: 1).then((value) => value.data.isEmpty ? null : state = value.data);
+    List<User> recommendGgamfList = [];
+    restApi.getUserList(id: 1).then(
+          (value) => recommendGgamfList.add(
+            User(
+                userId: value.userId,
+                backgroundImage: value.backgroundImage,
+                name: value.name,
+                intro: value.intro),
+          ),
+        );
   }
 }

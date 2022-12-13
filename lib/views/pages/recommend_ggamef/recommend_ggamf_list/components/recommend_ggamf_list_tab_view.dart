@@ -1,24 +1,27 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:ggamf_front/domain/data.dart';
 import 'package:ggamf_front/views/pages/recommend_ggamef/recommend_ggamf_list/components/recommend_ggamf_list_tab_bar.dart';
 
+import '../../../../../domain/user/model/user.dart';
+
 class RecommendGgamfListTabView extends StatefulWidget {
-  RecommendGgamfListTabView({
+  const RecommendGgamfListTabView({
     Key? key,
     required TabController tabController,
-    required List<Data> ggamfList,
+    required List<User> ggamfList,
   })  : _tabController = tabController,
         _ggamfList = ggamfList,
         super(key: key);
 
   final TabController _tabController;
-  final List<Data> _ggamfList;
+  final List<User> _ggamfList;
   @override
-  State<RecommendGgamfListTabView> createState() => _RecommendGgamfListTabViewState();
+  State<RecommendGgamfListTabView> createState() =>
+      _RecommendGgamfListTabViewState();
 }
 
-class _RecommendGgamfListTabViewState extends State<RecommendGgamfListTabView> with SingleTickerProviderStateMixin<RecommendGgamfListTabView> {
+class _RecommendGgamfListTabViewState extends State<RecommendGgamfListTabView>
+    with SingleTickerProviderStateMixin<RecommendGgamfListTabView> {
   late final TabController _innerTabController;
 
   final List<String> textIndex = [
@@ -75,8 +78,10 @@ class _RecommendGgamfListTabViewState extends State<RecommendGgamfListTabView> w
                 child: TabBarView(
                   controller: _innerTabController,
                   children: [
-                    _buildListView(buttonListToReceiveRequestGgamf, widget._ggamfList),
-                    _buildListView(buttonListToGiveRequestGgamf, widget._ggamfList),
+                    _buildListView(
+                        buttonListToReceiveRequestGgamf, widget._ggamfList),
+                    _buildListView(
+                        buttonListToGiveRequestGgamf, widget._ggamfList),
                   ],
                 ),
               ),
@@ -87,15 +92,17 @@ class _RecommendGgamfListTabViewState extends State<RecommendGgamfListTabView> w
     );
   }
 
-  Widget _buildListView(List<IconButton> buttons, List<Data> recommendGgamfList) {
+  Widget _buildListView(
+      List<IconButton> buttons, List<User> recommendGgamfList) {
     return ListView.separated(
         itemBuilder: (context, index) => ListTile(
               visualDensity: const VisualDensity(horizontal: 3),
               leading: CircleAvatar(
-                backgroundImage: NetworkImage(recommendGgamfList[index].avatar),
+                backgroundImage:
+                    NetworkImage(recommendGgamfList[index].backgroundImage),
               ),
-              title: Text(recommendGgamfList[index].firstName),
-              subtitle: Text(recommendGgamfList[index].lastName),
+              title: Text(recommendGgamfList[index].name),
+              subtitle: Text(recommendGgamfList[index].intro),
               trailing: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: buttons,
