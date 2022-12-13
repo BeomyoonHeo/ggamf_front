@@ -16,10 +16,10 @@ class MyProfileController {
   final repo = ProfileUserRepository(Dio()..interceptors.add(CustomLogInterceptor()));
 
   void findById(int id) async {
-    ProfileUser userdata = await repo.getUserProfile(id: 1);
+    ProfileUser userdata = await repo.getUserProfile(id: 15);
   }
 
   void updateById(int id, ProfileUser profileUser) async {
-    ProfileUser userdata = await repo.putUserProfile(id: 1, profileUser: profileUser);
+    ProfileUser userdata = await repo.putUserProfile(id: 15, profileUser: profileUser);
   }
 }
