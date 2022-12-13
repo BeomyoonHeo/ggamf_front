@@ -120,24 +120,25 @@ class _RecommendGgamfListRepository implements RecommendGgamfListRepository {
   }
 
   @override
-  Future<dynamic> getRecommendGgamfList({required id}) async {
+  Future<GgamfList> getRecommendGgamfList({required id}) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    final _result = await _dio.fetch(_setStreamType<dynamic>(Options(
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<GgamfList>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
     )
-        .compose(
-          _dio.options,
-          '/s/api/ggamf/users/${id}/recommend',
-          queryParameters: queryParameters,
-          data: _data,
-        )
-        .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = _result.data;
+            .compose(
+              _dio.options,
+              '/s/api/ggamf/users/${id}/recommend',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = GgamfList.fromJson(_result.data!);
     return value;
   }
 

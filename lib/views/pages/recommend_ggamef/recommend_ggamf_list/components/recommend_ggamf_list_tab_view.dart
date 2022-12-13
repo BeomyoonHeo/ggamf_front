@@ -1,23 +1,22 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:ggamf_front/domain/user/model/ggamf.dart';
 import 'package:ggamf_front/views/pages/recommend_ggamef/recommend_ggamf_list/components/recommend_ggamf_list_tab_bar.dart';
 import 'package:ggamf_front/views/pages/recommend_ggamef/recommend_ggamf_list/receive_ggamf_list_view_model.dart';
 import 'package:ggamf_front/views/pages/recommend_ggamef/recommend_ggamf_list/send_ggamf_list_view_model.dart';
-
-import '../../../../../domain/user/model/user.dart';
 
 class RecommendGgamfListTabView extends StatefulWidget {
   const RecommendGgamfListTabView({
     Key? key,
     required TabController tabController,
-    required List<User> ggamfList,
+    required List<Ggamf> ggamfList,
   })  : _tabController = tabController,
         _ggamfList = ggamfList,
         super(key: key);
 
   final TabController _tabController;
-  final List<User> _ggamfList;
+  final List<Ggamf> _ggamfList;
   @override
   State<RecommendGgamfListTabView> createState() =>
       _RecommendGgamfListTabViewState();
@@ -102,7 +101,7 @@ class _RecommendGgamfListTabViewState extends State<RecommendGgamfListTabView>
   }
 
   Widget _buildListView(
-      List<IconButton> buttons, List<User> recommendGgamfList) {
+      List<IconButton> buttons, List<Ggamf> recommendGgamfList) {
     return recommendGgamfList.isEmpty
         ? Center(
             child: Text('현재 추전껨프가 없습니다.'),
@@ -111,10 +110,10 @@ class _RecommendGgamfListTabViewState extends State<RecommendGgamfListTabView>
             itemBuilder: (context, index) => ListTile(
                   visualDensity: const VisualDensity(horizontal: 3),
                   leading: CircleAvatar(
-                    backgroundImage: NetworkImage(
-                        recommendGgamfList[index].backgroundImage ?? ''),
+                    backgroundImage:
+                        NetworkImage(recommendGgamfList[index].photo ?? ''),
                   ),
-                  title: Text(recommendGgamfList[index].name ?? ''),
+                  title: Text(recommendGgamfList[index].nickName ?? ''),
                   subtitle: Text(recommendGgamfList[index].intro ?? ''),
                   trailing: Row(
                     mainAxisSize: MainAxisSize.min,

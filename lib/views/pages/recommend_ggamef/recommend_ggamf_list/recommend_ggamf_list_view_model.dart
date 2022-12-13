@@ -1,15 +1,16 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:ggamf_front/domain/user/model/ggamf.dart';
 import 'package:ggamf_front/domain/user/model/user.dart';
 import 'package:ggamf_front/domain/user/repository/user_repository.dart';
 import 'package:ggamf_front/utils/custom_intercepter.dart';
 
 final recommendGgamfListViewModel =
-    StateNotifierProvider<RecommendGgamfListViewModel, List<User>>((ref) {
+    StateNotifierProvider<RecommendGgamfListViewModel, List<Ggamf>>((ref) {
   return RecommendGgamfListViewModel([], ref)..init();
 });
 
-class RecommendGgamfListViewModel extends StateNotifier<List<User>> {
+class RecommendGgamfListViewModel extends StateNotifier<List<Ggamf>> {
   final Ref _ref;
   RecommendGgamfListViewModel(super.state, this._ref);
 
@@ -19,18 +20,19 @@ class RecommendGgamfListViewModel extends StateNotifier<List<User>> {
   void init() {
     // 최초 init 시에만 repository에 의존
     RecommendGgamfListRepository repo = RecommendGgamfListRepository(dio);
-    List<User> recommendGgamfList = [];
+    List<Ggamf> recommendGgamfList = [];
     repo.getRecommendGgamfList(id: UserSession.user.id).then(
       (value) {
-        recommendGgamfList.add(
-          User(
-            id: value.id,
-            backgroundImage: value.backgroundImage,
-            name: value.name,
-            intro: value.intro ?? '자기소개가 없습니다.',
-            username: value.username,
-          ),
-        );
+        value.data.forEach((_ggamf) {
+          recommendGgamfList.add(
+            Ggamf(
+              friendId: _ggamf.friendId,
+              photo: _ggamf.photo,
+              nickName: _ggamf.nickName,
+              intro: _ggamf.intro,
+            ),
+          );
+        });
         state = recommendGgamfList;
       },
     );

@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:ggamf_front/domain/user/model/ggamf.dart';
 import 'package:ggamf_front/domain/user/model/join_user.dart';
 import 'package:ggamf_front/domain/user/model/login_user.dart';
 import 'package:ggamf_front/domain/user/model/update_user.dart';
@@ -46,7 +47,7 @@ abstract class RecommendGgamfListRepository {
 
   //추천 겜프 리스트 불러오기
   @GET('/s/api/ggamf/users/{id}/recommend')
-  Future<dynamic> getRecommendGgamfList({@Path("id") required int id});
+  Future<GgamfList> getRecommendGgamfList({@Path("id") required int id});
 
   //보낸 겜프 요청 목록 보기
   @GET('/s/api/ggamf/user/{id}/sendggamf')
