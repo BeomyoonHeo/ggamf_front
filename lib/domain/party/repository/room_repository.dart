@@ -1,8 +1,13 @@
 import 'package:dio/dio.dart';
+import 'package:ggamf_front/domain/party/model/end_room_party.dart';
+import 'package:ggamf_front/domain/party/model/exit_room_party.dart';
+import 'package:ggamf_front/domain/party/model/kick_user_party.dart';
 import 'package:ggamf_front/domain/party/model/room.dart';
 import 'package:retrofit/http.dart';
 
 import '../../../core/page_enum.dart';
+import '../model/generate_room_party.dart';
+import '../model/join_room_party.dart';
 
 part 'room_repository.g.dart';
 
@@ -25,4 +30,29 @@ abstract class RoomRepository {
   // 참가중인 파티방 목록 보기
   @GET("/party/user/{userId}/joins")
   Future<Room> findJoinRooms({@Path('userId') required int userId});
+
+  //파티원 추방(방장)
+  @PUT("/party/user/{userId}/kick/{roomId}")
+  Future<KickUserParty> kickUser(
+      {@Path('userId') required int userId, @Path('roomId') required int roomId, @Body() required KickUserParty kickUserParty});
+
+  //파티방 종료(방장)
+  @PUT("/party/user/{userId}/end/{roomId}")
+  Future<EndRoomParty> endRoom(
+      {@Path('userId') required int userId, @Path('roomId') required int roomId, @Body() required EndRoomParty endRoomParty});
+
+  //파티방 나가기
+  @PUT("/party/user/{userId}/exit/{roomId}")
+  Future<ExitRoomParty> exitRoom(
+      {@Path('userId') required int userId, @Path('roomId') required int roomId, @Body() required ExitRoomParty exitRoomParty});
+
+  //파티방 생성하기
+  @POST("/party/user/{userId}/create/{roomId}")
+  Future<GenerateRoomParty> createRoom(
+      {@Path('userId') required int userId, @Path('roomId') required int roomId, @Body() required GenerateRoomParty generateRoomParty});
+
+  //파티방 참여하기
+  @POST("/party/user/{userId}/join/{roomId}")
+  Future<JoinRoomParty> joinRoom(
+      {@Path('userId') required int userId, @Path('roomId') required int roomId, @Body() required JoinRoomParty joinRoomParty});
 }

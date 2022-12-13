@@ -115,6 +115,146 @@ class _RoomRepository implements RoomRepository {
     return value;
   }
 
+  @override
+  Future<KickUserParty> kickUser({
+    required userId,
+    required roomId,
+    required kickUserParty,
+  }) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(kickUserParty.toJson());
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<KickUserParty>(Options(
+      method: 'PUT',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/party/user/${userId}/kick/${roomId}',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = KickUserParty.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<EndRoomParty> endRoom({
+    required userId,
+    required roomId,
+    required endRoomParty,
+  }) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(endRoomParty.toJson());
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<EndRoomParty>(Options(
+      method: 'PUT',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/party/user/${userId}/end/${roomId}',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = EndRoomParty.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<ExitRoomParty> exitRoom({
+    required userId,
+    required roomId,
+    required exitRoomParty,
+  }) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(exitRoomParty.toJson());
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<ExitRoomParty>(Options(
+      method: 'PUT',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/party/user/${userId}/exit/${roomId}',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = ExitRoomParty.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<GenerateRoomParty> createRoom({
+    required userId,
+    required roomId,
+    required generateRoomParty,
+  }) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(generateRoomParty.toJson());
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<GenerateRoomParty>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/party/user/${userId}/create/${roomId}',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = GenerateRoomParty.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<JoinRoomParty> joinRoom({
+    required userId,
+    required roomId,
+    required joinRoomParty,
+  }) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(joinRoomParty.toJson());
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<JoinRoomParty>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/party/user/${userId}/join/${roomId}',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = JoinRoomParty.fromJson(_result.data!);
+    return value;
+  }
+
   RequestOptions _setStreamType<T>(RequestOptions requestOptions) {
     if (T != dynamic &&
         !(requestOptions.responseType == ResponseType.bytes ||
