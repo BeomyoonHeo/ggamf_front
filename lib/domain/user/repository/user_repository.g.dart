@@ -222,30 +222,29 @@ class _ProfileUserRepository implements ProfileUserRepository {
   String? baseUrl;
 
   @override
-  Future<ProfileUser> getUserProfile({required userId}) async {
+  Future<dynamic> getUserProfile({required userId}) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<ProfileUser>(Options(
+    final _result = await _dio.fetch(_setStreamType<dynamic>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
     )
-            .compose(
-              _dio.options,
-              '/s/api/user/${userId}/detail',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = ProfileUser.fromJson(_result.data!);
+        .compose(
+          _dio.options,
+          '/s/api/user/${userId}/detail',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = _result.data;
     return value;
   }
 
   @override
-  Future<ProfileUser> putUserProfile({
+  Future<dynamic> putUserProfile({
     required userId,
     required updateUser,
   }) async {
@@ -254,20 +253,19 @@ class _ProfileUserRepository implements ProfileUserRepository {
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(updateUser.toJson());
-    final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<ProfileUser>(Options(
+    final _result = await _dio.fetch(_setStreamType<dynamic>(Options(
       method: 'PUT',
       headers: _headers,
       extra: _extra,
     )
-            .compose(
-              _dio.options,
-              '/s/api/user/${userId}/update',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = ProfileUser.fromJson(_result.data!);
+        .compose(
+          _dio.options,
+          '/s/api/user/${userId}/update',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = _result.data;
     return value;
   }
 

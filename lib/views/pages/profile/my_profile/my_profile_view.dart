@@ -12,8 +12,8 @@ class MyProfileView extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    //mpc = myProfileController
-    final mpc = ref.read(myProfileController);
+    // //mpc = myProfileController
+    // final mpc = ref.read(myProfileController);
     //mpvm = myProfileViewModel
     final mpvm = ref.watch(myProfileViewModel);
 

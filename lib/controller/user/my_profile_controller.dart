@@ -17,8 +17,8 @@ class MyProfileController {
 
   final repo = ProfileUserRepository(Dio()..interceptors.add(CustomLogInterceptor()));
 
-  void findById(int id) async {
-    logger.d("로그찍기5");
-    ProfileUser profileUser = await repo.getUserProfile(userId: 15);
-  }
+  // void findById(int id) async {
+  //   logger.d("로그찍기5");
+  //   ProfileUser profileUser = await repo.getUserProfile(userId: 3);
+  // }
 }

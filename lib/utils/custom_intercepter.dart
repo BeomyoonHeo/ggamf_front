@@ -1,4 +1,6 @@
 import 'package:dio/dio.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:ggamf_front/utils/validator_util.dart';
 
 class CustomLogInterceptor extends Interceptor {
   @override
@@ -22,6 +24,8 @@ class CustomLogInterceptor extends Interceptor {
     print(
       'ERROR[${err.response?.statusCode}] => PATH: ${err.requestOptions.path}',
     );
+    logger.d('opponent 터짐${err.response}');
+    Fluttertoast.showToast(msg: '에러남');
     super.onError(err, handler);
   }
 }

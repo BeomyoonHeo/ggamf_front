@@ -1,5 +1,8 @@
+import 'dart:async';
+
 import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:ggamf_front/domain/user/model/profile_user.dart';
 import 'package:ggamf_front/domain/user/repository/user_repository.dart';
 import 'package:ggamf_front/utils/custom_intercepter.dart';
@@ -7,7 +10,7 @@ import 'package:ggamf_front/utils/custom_intercepter.dart';
 import '../../../../utils/validator_util.dart';
 
 final opponentProfileViewModel = StateNotifierProvider<OpponentProfileViewModel, ProfileUser>((ref) {
-  return OpponentProfileViewModel(ProfileUser(intro: null, nickname: null, photo: null, password: null), ref)..init();
+  return OpponentProfileViewModel(ProfileUser(intro: null, nickname: null, photo: null, password: null, phone: null, email: null), ref)..init();
 });
 
 class OpponentProfileViewModel extends StateNotifier<ProfileUser> {
@@ -18,8 +21,12 @@ class OpponentProfileViewModel extends StateNotifier<ProfileUser> {
 
   void init() {
     ProfileUserRepository restApi = ProfileUserRepository(dio);
-    logger.d("로그찍기66");
-    restApi.getUserProfile(userId: 1).then((value) => state = ProfileUser(photo: value.photo, nickname: value.nickname, intro: value.intro));
+    restApi.getUserProfile(userId: 3).then((value) {
+      ProfileUser? profileUser;
+      Map<String, dynamic> data = value;
+      data.forEach((key, value) => key == 'data' ? profileUser = ProfileUser.fromJson(value) : null);
+      state = profileUser!;
+    });
   }
 
   void showProfile(ProfileUser profileUser) {
