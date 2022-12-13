@@ -13,7 +13,7 @@ class _MyGgamfRepository implements MyGgamfRepository {
     this._dio, {
     this.baseUrl,
   }) {
-    baseUrl ??= 'http://192.168.0.187:8080';
+    baseUrl ??= 'http://172.30.96.1:8080';
   }
 
   final Dio _dio;

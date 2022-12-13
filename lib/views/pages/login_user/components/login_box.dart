@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ggamf_front/controller/user/user_controller.dart';
-import 'package:ggamf_front/core/page_enum.dart';
+import 'package:ggamf_front/utils/page_enum.dart';
+import 'package:ggamf_front/utils/validator_util.dart';
 import 'package:ggamf_front/views/pages/login_user/components/rounded_input_field.dart';
 import 'package:ggamf_front/views/pages/login_user/components/rounded_input_password_field.dart';
 
@@ -38,18 +39,22 @@ class LoginBox extends ConsumerWidget {
           height: 10,
         ),
         Container(
-          decoration: BoxDecoration(border: Border.all(width: 1), borderRadius: BorderRadius.circular(9)),
+          decoration: BoxDecoration(
+              border: Border.all(width: 1),
+              borderRadius: BorderRadius.circular(9)),
           padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 15),
           child: Column(
             children: [
               RoundedInputField(
+                validator: idValidator,
                 controller: usernameController,
                 icon: Icons.person,
                 hintText: "아이디입력",
                 onChanged: (value) {},
               ),
               const SizedBox(height: 10),
-              RoundedInputPasswordField(controller: passwordController),
+              RoundedInputPasswordField(
+                  controller: passwordController, validator: passwordValidator),
             ],
           ),
         ),
@@ -61,14 +66,14 @@ class LoginBox extends ConsumerWidget {
               ItemButton(
                   text: "로그인",
                   function: () {
-                    Navigator.pushNamed(context, PageEnum.getByDisPlayName('allpages').requestLocation);
-                    //luc.login(usernameController.text, passwordController.text);
+                    luc.login(usernameController.text, passwordController.text);
                   }),
               const SizedBox(height: 10),
               ItemButton(
                   text: "회원가입",
                   function: () {
-                    Navigator.pushNamed(context, PageEnum.getByDisPlayName('join').requestLocation);
+                    Navigator.pushNamed(context,
+                        PageEnum.getByDisPlayName('join').requestLocation);
                   }),
               const SizedBox(height: 10),
               ItemButton(
@@ -105,12 +110,15 @@ class _ItemButtonState extends State<ItemButton> {
       child: InkWell(
         borderRadius: BorderRadius.circular(30),
         onTap: () {
-          Future.delayed(const Duration(milliseconds: 500)).then((value) => widget.function());
+          Future.delayed(const Duration(milliseconds: 500))
+              .then((value) => widget.function());
         },
         child: Container(
           padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
           alignment: Alignment.center,
-          decoration: BoxDecoration(borderRadius: BorderRadius.circular(30), border: Border.all(width: 1)),
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(30),
+              border: Border.all(width: 1)),
           child: Text(
             widget.text,
             style: const TextStyle(color: Colors.black),

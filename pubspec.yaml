@@ -40,6 +40,7 @@ dependencies:
   dio: ^4.0.6
   validators: ^3.0.0
   flutter_secure_storage: ^7.0.0
+  jwt_decode: ^0.3.1
 
   #retrofit 라이브러리 사용하는데 필요 한 것
   json_serializable: ^6.5.4

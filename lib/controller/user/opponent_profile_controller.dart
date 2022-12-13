@@ -15,7 +15,8 @@ class OpponentProfileController {
 
   OpponentProfileController(this._ref);
 
-  final repo = ProfileUserRepository(Dio()..interceptors.add(CustomLogInterceptor()));
+  final repo =
+      ProfileUserRepository(Dio()..interceptors.add(CustomLogInterceptor()));
 
   // void findById(int id) async {
   //   logger.d("로그찍기2");

@@ -3,7 +3,9 @@ import 'package:ggamf_front/views/pages/login_user/components/text_field_contain
 
 class RoundedInputPasswordField extends StatefulWidget {
   final TextEditingController controller;
-  RoundedInputPasswordField({Key? key, required this.controller})
+  final Function validator;
+  RoundedInputPasswordField(
+      {Key? key, required this.controller, required this.validator})
       : super(key: key);
 
   @override
@@ -22,6 +24,7 @@ class _RoundedInputPasswordFieldState extends State<RoundedInputPasswordField> {
         onChanged: (value) {},
         obscureText: obscureText,
         controller: widget.controller,
+        validator: widget.validator(),
         decoration: InputDecoration(
             hintText: "비밀번호 입력",
             icon: const Icon(Icons.lock),
