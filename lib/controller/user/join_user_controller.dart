@@ -4,7 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ggamf_front/domain/user/model/join_user.dart';
 import 'package:ggamf_front/views/pages/join_user/join_user_view_model.dart';
 
-import '../../domain/user/repository/join_user_repository.dart';
+import '../../domain/user/repository/user_repository.dart';
 
 // 회원가입은 한번만 하면 되기 때문에 회원가입 후 Autodispose를 실행하여 페이지에서 참조가 더이상 일어나지 않는다면 메모리에서 제거 해주기
 final joinUserController = Provider.autoDispose((ref) {
@@ -43,6 +43,11 @@ class JoinUserController {
     return phoneNumber;
   }
 
+  void changeIsAgree() {
+    isAgree = !isAgree;
+    _ref.read(joinUserViewModel.notifier).updateState();
+  }
+
   void checkAuth() {
     authOk ? _ref.read(joinUserViewModel.notifier).updateState() : null;
   }
@@ -57,7 +62,8 @@ class JoinUserController {
       email: '${emailController.text}@${emailDomainController.text}',
       isAgree: isAgree,
     );
-    JoinUserRepository joinUserRepository = JoinUserRepository(Dio());
-    joinUserRepository.insert(joinUser).then((value) => null);
+    UserRepository joinUserRepository =
+        UserRepository(Dio()..interceptors.add(LogInterceptor()));
+    joinUserRepository.insert(joinUser: joinUser).then((value) => null);
   }
 }
