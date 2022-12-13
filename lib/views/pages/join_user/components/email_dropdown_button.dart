@@ -9,8 +9,7 @@ class EmailDropdownButton extends ConsumerStatefulWidget {
   }) : super(key: key);
 
   @override
-  ConsumerState<EmailDropdownButton> createState() =>
-      _EmailDropdownButtonState();
+  ConsumerState<EmailDropdownButton> createState() => _EmailDropdownButtonState();
 }
 
 class _EmailDropdownButtonState extends ConsumerState<EmailDropdownButton> {
@@ -22,17 +21,10 @@ class _EmailDropdownButtonState extends ConsumerState<EmailDropdownButton> {
     final juc = ref.read(joinUserController);
     const Function validator = emailDomainValidator;
     final emailEditController = juc.emailDomainController;
-    final List<String> emailList = [
-      '선택',
-      'naver.com',
-      'kakao.com',
-      'gmail.com',
-      '직접입력'
-    ];
+    final List<String> emailList = ['선택', 'naver.com', 'kakao.com', 'gmail.com', '직접입력'];
 
     return Container(
-      decoration: BoxDecoration(
-          color: Colors.white, borderRadius: BorderRadius.circular(9)),
+      decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(9)),
       padding: EdgeInsets.all(15),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,

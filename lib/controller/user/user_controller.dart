@@ -10,6 +10,9 @@ class UserController {
   final userRepository = UserRepository(Dio());
   login(String username, String password) {
     final loginUser = LoginUser(loginId: username, password: password);
-    userRepository.login(loginUser: loginUser).then((value) => ).onError((error, stackTrace) => null);
+    userRepository
+        .login(loginUser: loginUser)
+        .then((value) => logger.d(value))
+        .onError((error, stackTrace) => null);
   }
 }

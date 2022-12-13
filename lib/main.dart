@@ -50,9 +50,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       navigatorKey: navigatorKey,
-      initialRoute: jwtToken != null
-          ? PageEnum.ALLPAGES.requestLocation
-          : PageEnum.getByDisPlayName('login').requestLocation,
+      initialRoute: jwtToken != null ? PageEnum.ALLPAGES.requestLocation : PageEnum.getByDisPlayName('login').requestLocation,
       routes: {
         PageEnum.LOGIN.requestLocation: (context) => LoginUserView(),
         PageEnum.JOIN.requestLocation: (context) => const JoinUserView(),
