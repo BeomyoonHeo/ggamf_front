@@ -18,13 +18,13 @@ class LoginBox extends StatelessWidget {
       child: Container(
         color: Colors.white,
         width: size.width * 0.9,
-        padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
         child: _buildLoginItemColumn(context),
       ),
     );
   }
 
-  Column _buildLoginItemColumn(context) {
+  Widget _buildLoginItemColumn(context) {
     return Column(
       children: [
         const SizedBox(
@@ -34,7 +34,7 @@ class LoginBox extends StatelessWidget {
           decoration: BoxDecoration(
               border: Border.all(width: 1),
               borderRadius: BorderRadius.circular(9)),
-          padding: EdgeInsets.symmetric(vertical: 15, horizontal: 15),
+          padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 15),
           child: Column(
             children: [
               RoundedInputField(
@@ -42,14 +42,14 @@ class LoginBox extends StatelessWidget {
                 hintText: "아이디입력",
                 onChanged: (value) {},
               ),
-              SizedBox(height: 10),
-              RoundedInputPasswordField(),
+              const SizedBox(height: 10),
+              const RoundedInputPasswordField(),
             ],
           ),
         ),
-        SizedBox(height: 10),
+        const SizedBox(height: 10),
         Container(
-          padding: EdgeInsets.symmetric(horizontal: 5),
+          padding: const EdgeInsets.symmetric(horizontal: 5),
           child: Column(
             children: [
               ItemButton(
@@ -58,14 +58,14 @@ class LoginBox extends StatelessWidget {
                     Navigator.pushNamed(context,
                         PageEnum.getByDisPlayName('allpages').requestLocation);
                   }),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               ItemButton(
                   text: "회원가입",
                   function: () {
                     Navigator.pushNamed(context,
                         PageEnum.getByDisPlayName('join').requestLocation);
                   }),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               ItemButton(
                 text: "아이디|비밀번호찾기",
                 function: () {},
@@ -96,20 +96,22 @@ class _ItemButtonState extends State<ItemButton> {
   @override
   Widget build(BuildContext context) {
     return Material(
+      borderRadius: BorderRadius.circular(30),
       child: InkWell(
+        borderRadius: BorderRadius.circular(30),
         onTap: () {
-          widget.function();
-          setState(() {});
+          Future.delayed(const Duration(milliseconds: 500))
+              .then((value) => widget.function());
         },
         child: Container(
-          padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+          padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
           alignment: Alignment.center,
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(30),
               border: Border.all(width: 1)),
           child: Text(
             widget.text,
-            style: TextStyle(color: Colors.black),
+            style: const TextStyle(color: Colors.black),
           ),
         ),
       ),
