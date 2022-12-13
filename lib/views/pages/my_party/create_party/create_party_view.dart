@@ -12,6 +12,7 @@ class CreatePartyView extends ConsumerStatefulWidget {
 
 class _CreatePartyViewState extends ConsumerState<CreatePartyView> {
   List<String> _valueList = ['게임선택', '리그 오브 레전드', '오버워치', '로스트아크', '발로란트', '기타'];
+  List<int> _gameCode = [1, 2, 3, 4, 5, 6, 7, 8];
   var _selectedValue = '게임선택';
 
   List<String> _numList = ['인원선택', '2', '3', '4', '5', '6', '7', '8'];
