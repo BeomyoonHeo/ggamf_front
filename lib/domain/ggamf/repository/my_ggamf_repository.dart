@@ -18,7 +18,7 @@ abstract class MyGgamfRepository {
 
   //내 껨프 목록보기
   @GET("/s/api/ggamf/user/{userId}/list")
-  Future<MyGgamfList> myGgamf({@Path('userId') required int userId});
+  Future<dynamic> myGgamf({@Path('userId') required int userId});
 
   //껨프 요청
   @POST("/s/api/ggamf/follow/{followingId}")

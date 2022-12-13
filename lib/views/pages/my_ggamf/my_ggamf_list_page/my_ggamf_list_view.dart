@@ -1,28 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ggamf_front/domain/ggamf/model/my_ggamf.dart';
+import 'package:ggamf_front/utils/validator_util.dart';
 import 'package:ggamf_front/views/pages/my_ggamf/my_ggamf_list_page/my_ggamf_list_view_model.dart';
 import 'package:ggamf_front/views/pages/profile/opponent_profile/opponent_profile_view.dart';
 
 import '../../../common_components/custom_icons_icons.dart';
 
 class MyGgamfListView extends ConsumerWidget {
-  const MyGgamfListView({Key? key, required List<MyGgamf> myGgamfList})
-      : _myGgamfList = myGgamfList,
-        super(key: key);
+  const MyGgamfListView({Key? key}) : super(key: key);
 
-  final List<MyGgamf> _myGgamfList;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     //mglv = myGgamfListViewModel
     final mglv = ref.watch(myGgamfListViewModel);
+    logger.d("길이보기: ${mglv?.myGgamfList.length}");
     return Scaffold(
       appBar: _appBar(),
       backgroundColor: Colors.white,
       body: Padding(
         padding: const EdgeInsets.only(right: 5, left: 5, top: 20),
         child: ListView.builder(
-          itemCount: 5,
+          itemCount: 3,
           itemBuilder: (context, index) => Container(
             padding: EdgeInsets.all(10),
             decoration: BoxDecoration(
@@ -47,7 +46,7 @@ class MyGgamfListView extends ConsumerWidget {
                   children: [
                     _profileImage(),
                     SizedBox(width: 20),
-                    _context(),
+                    _context(index),
                   ],
                 ),
               ),
@@ -58,25 +57,36 @@ class MyGgamfListView extends ConsumerWidget {
     );
   }
 
-  Expanded _context() {
-    return Expanded(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          SizedBox(height: 5),
-          Text(
-            //_myGgamfList[index].nickname,
-            "김겐지",
-            style: TextStyle(fontSize: 25, color: Colors.black, fontWeight: FontWeight.w600),
-          ),
-          SizedBox(height: 10),
-          Text(
-            //_myGgamfList[index].intro,
-            "안녕하세요",
-            style: TextStyle(fontSize: 15, color: Colors.black),
-          ),
-        ],
-      ),
+  Widget _context(index) {
+    return Consumer(
+      builder: (context, ref, child) {
+        //mglv = myGgamfListViewModel
+        final mglv = ref.watch(myGgamfListViewModel);
+        if (mglv == null) {
+          return const Center(child: CircularProgressIndicator());
+        } else {
+          logger.d("이름보기: ${mglv.myGgamfList[index].nickname}");
+          return Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(height: 5),
+                Text(
+                  "${mglv.myGgamfList[index].nickname}",
+                  //"김겐지",
+                  style: TextStyle(fontSize: 25, color: Colors.black, fontWeight: FontWeight.w600),
+                ),
+                SizedBox(height: 10),
+                Text(
+                  //_myGgamfList[index].intro,
+                  "안녕하세요",
+                  style: TextStyle(fontSize: 15, color: Colors.black),
+                ),
+              ],
+            ),
+          );
+        }
+      },
     );
   }
 

@@ -13,7 +13,7 @@ class _MyGgamfRepository implements MyGgamfRepository {
     this._dio, {
     this.baseUrl,
   }) {
-    baseUrl ??= 'http://192.168.0.187:8080';
+    baseUrl ??= 'http://183.104.199.106:8080';
   }
 
   final Dio _dio;
@@ -21,25 +21,24 @@ class _MyGgamfRepository implements MyGgamfRepository {
   String? baseUrl;
 
   @override
-  Future<MyGgamfList> myGgamf({required userId}) async {
+  Future<dynamic> myGgamf({required userId}) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<MyGgamfList>(Options(
+    final _result = await _dio.fetch(_setStreamType<dynamic>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
     )
-            .compose(
-              _dio.options,
-              '/s/api/ggamf/user/${userId}/list',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = MyGgamfList.fromJson(_result.data!);
+        .compose(
+          _dio.options,
+          '/s/api/ggamf/user/${userId}/list',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = _result.data;
     return value;
   }
 
