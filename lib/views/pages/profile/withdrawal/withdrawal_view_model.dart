@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ggamf_front/domain/user/model/withdraw_user.dart';
-import 'package:ggamf_front/domain/user/repository/profile_user_repository.dart';
+import 'package:ggamf_front/domain/user/repository/user_repository.dart';
 import 'package:ggamf_front/utils/custom_intercepter.dart';
 
 final withdrawalViewModel = StateNotifierProvider<WithdrawalViewModel, WithdrawUser>((ref) {

@@ -13,6 +13,7 @@ class CustomLogInterceptor extends Interceptor {
       'RESPONSE[${response.statusCode}] => PATH: ${response.requestOptions.path}',
     );
     print('HEADERS = ${response.headers}, DATA = ${response.data}');
+
     super.onResponse(response, handler);
   }
 
