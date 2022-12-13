@@ -11,6 +11,7 @@ final myProfileViewModel =
     ..init();
 });
 
+//View의 데이터를 가짐
 class MyProfileViewModel extends StateNotifier<ProfileUser> {
   final Ref _ref;
   MyProfileViewModel(super.state, this._ref);
@@ -19,11 +20,12 @@ class MyProfileViewModel extends StateNotifier<ProfileUser> {
 
   void init() {
     ProfileUserRepository restApi = ProfileUserRepository(dio);
-    restApi.getUserProfile(id: 1).then((value) => state = ProfileUser(
-        photo: value.photo, nickname: value.nickname, intro: value.intro));
-  }
-
-  void showProfile(ProfileUser profileUser) {
-    state = profileUser;
+    restApi.getUserProfile(userId: 3).then((value) {
+      ProfileUser? profileUser;
+      Map<String, dynamic> data = value;
+      data.forEach((key, value) =>
+          key == 'data' ? profileUser = ProfileUser.fromJson(value) : null);
+      state = profileUser!;
+    });
   }
 }

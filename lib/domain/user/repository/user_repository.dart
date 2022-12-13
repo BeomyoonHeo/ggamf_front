@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:ggamf_front/domain/user/model/join_user.dart';
 import 'package:ggamf_front/domain/user/model/login_user.dart';
 import 'package:ggamf_front/domain/user/model/profile_user.dart';
+import 'package:ggamf_front/domain/user/model/update_user.dart';
 import 'package:ggamf_front/domain/user/model/user.dart';
 import 'package:ggamf_front/utils/validator_util.dart';
 import 'package:jwt_decode/jwt_decode.dart';
@@ -65,10 +66,11 @@ abstract class ProfileUserRepository {
   factory ProfileUserRepository(Dio dio, {String baseUrl}) =
       _ProfileUserRepository;
 
-  @GET('/profileUser/{id}')
-  Future<ProfileUser> getUserProfile({@Path('id') required int id});
+  @GET("/s/api/user/{userId}/detail")
+  Future<dynamic> getUserProfile({@Path('userId') required int userId});
 
-  @PUT('/profileUser/{id}')
-  Future<ProfileUser> putUserProfile(
-      {@Path('id') required int id, @Body() required ProfileUser profileUser});
+  @PUT("/s/api/user/{userId}/update")
+  Future<dynamic> putUserProfile(
+      {@Path('userId') required int userId,
+      @Body() required UpdateUser updateUser});
 }

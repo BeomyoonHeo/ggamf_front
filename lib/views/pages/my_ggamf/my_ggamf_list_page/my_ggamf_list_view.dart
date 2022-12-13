@@ -65,13 +65,13 @@ class MyGgamfListView extends ConsumerWidget {
         children: [
           SizedBox(height: 5),
           Text(
-            //_myGgamfList[index].nickname
+            //_myGgamfList[index].nickname,
             "김겐지",
             style: TextStyle(fontSize: 25, color: Colors.black, fontWeight: FontWeight.w600),
           ),
           SizedBox(height: 10),
           Text(
-            //_myGgamfList[index].intro
+            //_myGgamfList[index].intro,
             "안녕하세요",
             style: TextStyle(fontSize: 15, color: Colors.black),
           ),

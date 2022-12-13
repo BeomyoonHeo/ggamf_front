@@ -15,8 +15,6 @@ class UserController {
   final userRepository =
       UserRepository(Dio()..interceptors.add(LoginInterceptor()));
   login(String username, String password) async {
-    logger.d('username : ${username}');
-    logger.d('password : ${password}');
     final loginUser = LoginUser(loginId: username, password: password);
     userRepository.login(loginUser: loginUser).then((value) {
       Map<String, dynamic> response = value;
