@@ -9,6 +9,7 @@ final joinUserViewModel =
   return JoinUserViewModel(
       keepAlive,
       JoinUser(
+        uid: juc.uid,
         name: juc.nameController.text,
         loginId: juc.idController.text,
         password: juc.passwordController.text,
@@ -28,6 +29,7 @@ class JoinUserViewModel extends StateNotifier<JoinUser> {
   void updateState() {
     final juc = _ref.read(joinUserController);
     state = JoinUser(
+      uid: juc.uid,
       name: juc.nameController.text,
       loginId: juc.idController.text,
       password: juc.passwordController.text,
