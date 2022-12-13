@@ -1,6 +1,6 @@
 // 런타임시 적용되는 어노테이션과 dio의 headers가 겹쳐 dio의 headers만 import를 해제하였다.
 import 'package:dio/dio.dart' hide Headers;
-import 'package:ggamf_front/domain/data.dart';
+import 'package:ggamf_front/domain/user/model/user.dart';
 import 'package:retrofit/retrofit.dart';
 
 part 'recommend_ggamf_list_repository.g.dart';

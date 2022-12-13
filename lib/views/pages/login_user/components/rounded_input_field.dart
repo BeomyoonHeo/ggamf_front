@@ -4,18 +4,24 @@ import 'package:ggamf_front/views/pages/login_user/components/text_field_contain
 class RoundedInputField extends StatelessWidget {
   final String hintText;
   final IconData icon;
+  final TextEditingController controller;
   final ValueChanged<String> onChanged;
+  final Function validator;
   const RoundedInputField({
     Key? key,
     required this.hintText,
     required this.icon,
     required this.onChanged,
+    required this.controller,
+    required this.validator,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return TextFieldContainer(
-      child: TextField(
+      child: TextFormField(
+        controller: controller,
+        validator: validator(),
         onChanged: onChanged,
         decoration: InputDecoration(
             icon: Icon(icon), hintText: hintText, border: InputBorder.none),

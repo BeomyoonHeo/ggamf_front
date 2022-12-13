@@ -2,16 +2,18 @@ import 'package:chips_choice/chips_choice.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:ggamf_front/core/color.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:ggamf_front/domain/party/model/room.dart';
 
-class JoinPartyListView extends StatefulWidget {
-  const JoinPartyListView({Key? key}) : super(key: key);
+class JoinPartyListView extends ConsumerStatefulWidget {
+  const JoinPartyListView({Key? key, required this.roomList}) : super(key: key);
 
+  final List<Room> roomList;
   @override
-  State<JoinPartyListView> createState() => _JoinPartyListViewState();
+  ConsumerState createState() => _JoinPartyListViewState();
 }
 
-class _JoinPartyListViewState extends State<JoinPartyListView> {
+class _JoinPartyListViewState extends ConsumerState<JoinPartyListView> {
   int tag = 1;
   List<String> options = [
     '전체',
@@ -52,60 +54,68 @@ class _JoinPartyListViewState extends State<JoinPartyListView> {
           ),
         ),
         SliverList(
-          delegate: _partyWindow(),
+          delegate: _partyWindow(widget.roomList),
         ),
       ],
     );
   }
 
-  SliverChildBuilderDelegate _partyWindow() {
-    return SliverChildBuilderDelegate((context, index) {
-      return Container(
-        margin: EdgeInsets.all(20),
-        padding: EdgeInsets.all(10),
-        height: 150,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10),
-          border: Border.all(width: 1),
-        ),
-        child: InkWell(
-          onTap: () {
-            showDialog(context: context, builder: (_) => _enterParty());
-          },
-          child: Row(
-            children: [
-              Expanded(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    SizedBox(
-                      child: Text("롤 바텀 모집중", style: TextStyle(fontSize: 20)),
-                      width: 150,
-                    ),
-                    SizedBox(height: 20),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text("방장이름"),
-                        SizedBox(width: 60),
-                        Text("2/5"),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-              SizedBox(
-                width: 100,
-                height: 100,
-                child: Image.asset(
-                  "assets/images/lol.png",
-                ),
-              ),
-            ],
+  SliverChildBuilderDelegate _partyWindow(List<Room> roomList) {
+    return SliverChildBuilderDelegate(
+      (context, index) {
+        return Container(
+          margin: EdgeInsets.all(20),
+          padding: EdgeInsets.all(10),
+          height: 150,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(10),
+            border: Border.all(width: 1),
           ),
-        ),
-      );
-    }, childCount: 10);
+          child: InkWell(
+            onTap: () {
+              showDialog(context: context, builder: (_) => _enterParty());
+            },
+            child: Row(
+              children: [
+                Expanded(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      SizedBox(
+                        child: Text(
+                          //roomList[index].roomName,
+                          "롤 바텀 모집중",
+                          style: TextStyle(fontSize: 20),
+                        ),
+                        width: 150,
+                      ),
+                      SizedBox(height: 20),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text("방장이름"),
+                          SizedBox(width: 60),
+                          //roomList[index].totalPeople
+                          Text("2/5"),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+                SizedBox(
+                  width: 100,
+                  height: 100,
+                  child: Image.asset(
+                    "assets/images/lol.png",
+                  ),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+      childCount: 10,
+    );
   }
 
   ChipsChoice<int> _gameCategory() {

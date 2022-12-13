@@ -1,7 +1,8 @@
 const String baseUrl = 'http://172.30.96.1:8080';
+const headers = {"Content-Type": "application/json; charset=utf-8"};
 
 enum PageEnum {
-  BASEURL(null, 'http://localhost:8000', 'baseUrl'),
+  BASEURL(null, 'http://localhost:8080', 'baseUrl'),
   LOGIN(1, '/login', 'login'),
   JOIN(null, '/join', 'join'),
   RECOMMENDGGAMF(3, '/recommendGamf', 'recommendGamf'),

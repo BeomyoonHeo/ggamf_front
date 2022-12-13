@@ -2,12 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ggamf_front/controller/user/my_profile_controller.dart';
+import 'package:ggamf_front/domain/user/model/profile_user.dart';
 import 'package:ggamf_front/main.dart';
 import 'package:ggamf_front/views/pages/profile/my_profile/my_profile_view_model.dart';
 import 'package:ggamf_front/views/pages/profile/update_my_profile/update_my_profile_view.dart';
 import 'package:ggamf_front/views/pages/profile/withdrawal/withdrawal_view.dart';
-
-import '../../../../core/color.dart';
 
 class MyProfileView extends ConsumerWidget {
   const MyProfileView({Key? key}) : super(key: key);
@@ -18,6 +17,7 @@ class MyProfileView extends ConsumerWidget {
     final mpc = ref.read(myProfileController);
     //mpvm = myProfileViewModel
     final mpvm = ref.watch(myProfileViewModel);
+
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -29,18 +29,19 @@ class MyProfileView extends ConsumerWidget {
         child: ListView(
           children: [
             SizedBox(height: 30),
-            _buildCircleAvatar(),
+            _buildCircleAvatar(mpvm),
             SizedBox(height: 30),
-            _nickName(),
+            _nickName(mpvm),
             SizedBox(height: 10),
             _ratedStar(),
             SizedBox(height: 10),
-            _introduce(),
+            _introduce(mpvm),
             Container(
               height: 150,
               child: InkWell(
                 onTap: () async {
-                  await showDialog(context: context, builder: (_) => _imageDialog());
+                  await showDialog(
+                      context: context, builder: (_) => _imageDialog());
                 },
                 child: Image.asset("assets/images/cart1.png"),
               ),
@@ -58,7 +59,7 @@ class MyProfileView extends ConsumerWidget {
     );
   }
 
-  Widget _buildCircleAvatar() {
+  Widget _buildCircleAvatar(ProfileUser mpvm) {
     return Center(
       child: CircleAvatar(
         radius: 70,
@@ -85,10 +86,9 @@ class MyProfileView extends ConsumerWidget {
 
   Widget _updataProfile() {
     return OutlinedButton(
-      onPressed: () {
+      onPressed: () async {
         Navigator.push(
           navigatorKey.currentState!.context,
-
           MaterialPageRoute(builder: (context) => UpdateMyProfileView()),
         );
       },
@@ -100,7 +100,7 @@ class MyProfileView extends ConsumerWidget {
     );
   }
 
-  Widget _introduce() {
+  Widget _introduce(ProfileUser mpvm) {
     return Container(
       padding: EdgeInsets.all(10),
       width: double.infinity,
@@ -111,7 +111,7 @@ class MyProfileView extends ConsumerWidget {
       ),
       child: Expanded(
         child: Text(
-          "리그오브레전드 원딜 탑레 다이아 1 같이 듀오하실 서폿분 구합니다",
+          "${mpvm.intro}",
           textAlign: TextAlign.center,
           style: TextStyle(fontSize: 15, color: Colors.black),
         ),
@@ -119,7 +119,7 @@ class MyProfileView extends ConsumerWidget {
     );
   }
 
-  Widget _nickName() {
+  Widget _nickName(ProfileUser mpvm) {
     return Container(
       padding: EdgeInsets.all(10),
       width: double.infinity,
@@ -129,7 +129,7 @@ class MyProfileView extends ConsumerWidget {
         color: Colors.white,
       ),
       child: Text(
-        "닉네임",
+        "${mpvm.nickname}",
         style: TextStyle(fontSize: 15, color: Colors.black),
         textAlign: TextAlign.center,
       ),

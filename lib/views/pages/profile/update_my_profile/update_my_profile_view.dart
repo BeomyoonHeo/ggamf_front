@@ -1,23 +1,35 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:ggamf_front/controller/user/my_profile_controller.dart';
+import 'package:ggamf_front/views/pages/profile/my_profile/my_profile_view_model.dart';
 import 'package:image_picker/image_picker.dart';
 
 import '../../../../core/color.dart';
 
-class UpdateMyProfileView extends StatefulWidget {
+class UpdateMyProfileView extends ConsumerStatefulWidget {
   const UpdateMyProfileView({Key? key}) : super(key: key);
 
   @override
-  State<UpdateMyProfileView> createState() => _UpdateMyProfileViewState();
+  ConsumerState createState() => _UpdateMyProfileViewState();
 }
 
-class _UpdateMyProfileViewState extends State<UpdateMyProfileView> {
+class _UpdateMyProfileViewState extends ConsumerState<UpdateMyProfileView> {
   File? _imageFile;
   final ImagePicker _picker = ImagePicker();
+  final _nickname = TextEditingController();
+  final _email = TextEditingController();
+  final _password = TextEditingController();
+  final _introduce = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
+    //mpc = myProfileController
+    final mpc = ref.read(myProfileController);
+    //mpvm = myProfileViewModel
+    final mpvm = ref.watch(myProfileViewModel);
+
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: _appBar(),
@@ -28,15 +40,15 @@ class _UpdateMyProfileViewState extends State<UpdateMyProfileView> {
             SizedBox(height: 50),
             _changePhoto(),
             SizedBox(height: 50),
-            _nickName(),
+            _enterNickName(),
             SizedBox(height: 30),
-            _password(),
+            _enterPassword(),
             SizedBox(height: 30),
-            _email(),
+            _enterEmail(),
             SizedBox(height: 30),
-            _introduce(),
+            _enterIntroduce(),
             SizedBox(height: 30),
-            _updateProfileButton(),
+            _updateProfileButton(mpc),
             SizedBox(height: 30),
           ],
         ),
@@ -44,7 +56,7 @@ class _UpdateMyProfileViewState extends State<UpdateMyProfileView> {
     );
   }
 
-  Container _email() {
+  Container _enterEmail() {
     return Container(
       padding: EdgeInsets.all(5),
       width: double.infinity,
@@ -53,7 +65,8 @@ class _UpdateMyProfileViewState extends State<UpdateMyProfileView> {
         borderRadius: BorderRadius.circular(10),
         color: Colors.white,
       ),
-      child: TextField(
+      child: TextFormField(
+        controller: _email,
         decoration: InputDecoration(
           border: InputBorder.none,
           hintText: "이메일을 입력하세요",
@@ -62,7 +75,7 @@ class _UpdateMyProfileViewState extends State<UpdateMyProfileView> {
     );
   }
 
-  Container _password() {
+  Container _enterPassword() {
     return Container(
       padding: EdgeInsets.all(5),
       width: double.infinity,
@@ -71,7 +84,8 @@ class _UpdateMyProfileViewState extends State<UpdateMyProfileView> {
         borderRadius: BorderRadius.circular(10),
         color: Colors.white,
       ),
-      child: TextField(
+      child: TextFormField(
+        controller: _password,
         decoration: InputDecoration(
           border: InputBorder.none,
           hintText: "비밀번호를 입력하세요",
@@ -120,11 +134,11 @@ class _UpdateMyProfileViewState extends State<UpdateMyProfileView> {
     );
   }
 
-  Widget _updateProfileButton() {
+  Widget _updateProfileButton(MyProfileController mpc) {
     return Container(
       padding: EdgeInsets.only(left: 100, right: 100),
       child: OutlinedButton(
-        onPressed: () {},
+        onPressed: () async {},
         child: Text("수정 완료"),
         style: OutlinedButton.styleFrom(
           foregroundColor: Colors.black,
@@ -134,7 +148,7 @@ class _UpdateMyProfileViewState extends State<UpdateMyProfileView> {
     );
   }
 
-  Widget _introduce() {
+  Widget _enterIntroduce() {
     return Container(
       padding: EdgeInsets.all(5),
       height: 150,
@@ -144,7 +158,8 @@ class _UpdateMyProfileViewState extends State<UpdateMyProfileView> {
         borderRadius: BorderRadius.circular(10),
         color: Colors.white,
       ),
-      child: TextField(
+      child: TextFormField(
+        controller: _introduce,
         keyboardType: TextInputType.multiline,
         maxLines: 5,
         minLines: 1,
@@ -157,7 +172,7 @@ class _UpdateMyProfileViewState extends State<UpdateMyProfileView> {
     );
   }
 
-  Widget _nickName() {
+  Widget _enterNickName() {
     return Container(
       padding: EdgeInsets.all(5),
       width: double.infinity,
@@ -166,7 +181,8 @@ class _UpdateMyProfileViewState extends State<UpdateMyProfileView> {
         borderRadius: BorderRadius.circular(10),
         color: Colors.white,
       ),
-      child: TextField(
+      child: TextFormField(
+        controller: _nickname,
         decoration: InputDecoration(
           border: InputBorder.none,
           hintText: "닉네임을 입력하세요",

@@ -1,4 +1,9 @@
+import 'package:logger/logger.dart';
 import 'package:validators/validators.dart';
+
+final logger = Logger(
+  printer: PrettyPrinter(),
+);
 
 Function nameValidator() {
   return (String? value) {
@@ -58,8 +63,8 @@ Function nickNameValidator() {
     if (value!.isEmpty) {
       return '닉네임은 필수사항입니다.';
     }
-    if (value.length < 8) {
-      return '닉네임은 8자 이상 입력해주세요!';
+    if (value.length < 2) {
+      return '닉네임은 2자 이상 입력해주세요!';
     } else {
       return null;
     }
