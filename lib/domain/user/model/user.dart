@@ -60,9 +60,10 @@ class UserSession {
               key: 'jwtToken',
               value: headers.value('Authorization')?.replaceAll('Bearer ', ''))
           .then((value) {
-        _jwtToken = headers.value('Authorization')?.replaceAll('Bearer ', '');
-        logger.d(_jwtToken);
-        Map<String, dynamic> userInfo = Jwt.parseJwt(_jwtToken!);
+        _jwtToken = headers.value('Authorization');
+        Map<String, dynamic> userInfo =
+            Jwt.parseJwt(_jwtToken!.replaceAll('Bearer ', ''));
+        logger.d(userInfo);
       });
     });
   }
