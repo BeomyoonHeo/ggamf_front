@@ -37,7 +37,7 @@ class _RoomRepository implements RoomRepository {
     )
             .compose(
               _dio.options,
-              '/party/user/${userId}/detail/${roomId}',
+              '/s/api/party/user/${userId}/detail/${roomId}',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -60,7 +60,7 @@ class _RoomRepository implements RoomRepository {
     )
             .compose(
               _dio.options,
-              '/party/user/{userId}/myrooms',
+              '/s/api/party/user/{userId}/myrooms',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -83,7 +83,7 @@ class _RoomRepository implements RoomRepository {
     )
             .compose(
               _dio.options,
-              '/party/user/${userId}/list',
+              '/s/api/party/user/${userId}/list',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -106,7 +106,7 @@ class _RoomRepository implements RoomRepository {
     )
             .compose(
               _dio.options,
-              '/party/user/${userId}/joins',
+              '/s/api/party/user/${userId}/joins',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -134,7 +134,7 @@ class _RoomRepository implements RoomRepository {
     )
             .compose(
               _dio.options,
-              '/party/user/${userId}/kick/${roomId}',
+              '/s/api/party/user/${userId}/kick/${roomId}',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -162,7 +162,7 @@ class _RoomRepository implements RoomRepository {
     )
             .compose(
               _dio.options,
-              '/party/user/${userId}/end/${roomId}',
+              '/s/api/party/user/${userId}/end/${roomId}',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -190,7 +190,7 @@ class _RoomRepository implements RoomRepository {
     )
             .compose(
               _dio.options,
-              '/party/user/${userId}/exit/${roomId}',
+              '/s/api/party/user/${userId}/exit/${roomId}',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -218,7 +218,7 @@ class _RoomRepository implements RoomRepository {
     )
             .compose(
               _dio.options,
-              '/party/user/${userId}/create/${roomId}',
+              '/s/api/party/user/${userId}/create/${roomId}',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -246,7 +246,7 @@ class _RoomRepository implements RoomRepository {
     )
             .compose(
               _dio.options,
-              '/party/user/${userId}/join/${roomId}',
+              '/s/api/party/user/${userId}/join/${roomId}',
               queryParameters: queryParameters,
               data: _data,
             )

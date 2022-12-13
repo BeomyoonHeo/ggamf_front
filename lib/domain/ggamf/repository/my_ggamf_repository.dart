@@ -17,32 +17,32 @@ abstract class MyGgamfRepository {
   factory MyGgamfRepository(Dio dio) = _MyGgamfRepository;
 
   //내 껨프 목록보기
-  @GET("/ggamf/user/{userId}/list")
+  @GET("/s/api/ggamf/user/{userId}/list")
   Future<MyGgamfList> myGgamf({@Path('userId') required int userId});
 
   //껨프 요청
-  @POST("/ggamf/follow/{followingId}")
+  @POST("/s/api/ggamf/follow/{followingId}")
   Future<FollowGgamf> followGgamf({@Path('followingId') required int followingId, @Body() required FollowGgamf followGgamf});
 
   //껨프 거절
-  @DELETE("/ggamf/user/{userId}/unfollow/{followId}")
+  @DELETE("/s/api/ggamf/user/{userId}/unfollow/{followId}")
   Future<RejectGgamf> rejectGgamf({@Path('followId') required int followId, @Path('userId') required int userId});
 
   //껨프 삭제
-  @DELETE("/ggamf/user/{userId}/unfollow/{followId}")
+  @DELETE("/s/api/ggamf/user/{userId}/unfollow/{followId}")
   Future<UnfollowGgamf> deleteGgamf({@Path('followId') required int followId, @Path('userId') required int userId});
 
   //껨프 요청 취소
-  @DELETE("/ggamf/user/{userId}/cancel/{followId}")
+  @DELETE("/s/api/ggamf/user/{userId}/cancel/{followId}")
   Future<CancelGgamf> cancelGgamf({@Path('followId') required int followId, @Path('userId') required int userId});
 
   //껨프 요청 수락
-  @PUT("/ggamf/user/{userId}/accept/{followId}")
+  @PUT("/s/api/ggamf/user/{userId}/accept/{followId}")
   Future<AcceptGgamf> acceptGgamf(
       {@Path('followId') required int followId, @Path('userId') required int userId, @Body() required AcceptGgamf acceptGgamf});
 
   //유저 신고
-  @POST("ggamf/user/{userId}/report/{badUserId}")
+  @POST("/s/api/ggamf/user/{userId}/report/{badUserId}")
   Future<ReportGgamf> reportGgamf(
       {@Path('userId') required int userId, @Path('badUserId') required int badUserId, @Body() required ReportGgamf reportGgamf});
 }

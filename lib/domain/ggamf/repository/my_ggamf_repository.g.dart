@@ -34,7 +34,7 @@ class _MyGgamfRepository implements MyGgamfRepository {
     )
             .compose(
               _dio.options,
-              '/ggamf/user/${userId}/list',
+              '/s/api/ggamf/user/${userId}/list',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -61,7 +61,7 @@ class _MyGgamfRepository implements MyGgamfRepository {
     )
             .compose(
               _dio.options,
-              '/ggamf/follow/${followingId}',
+              '/s/api/ggamf/follow/${followingId}',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -87,7 +87,7 @@ class _MyGgamfRepository implements MyGgamfRepository {
     )
             .compose(
               _dio.options,
-              '/ggamf/user/${userId}/unfollow/${followId}',
+              '/s/api/ggamf/user/${userId}/unfollow/${followId}',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -113,7 +113,7 @@ class _MyGgamfRepository implements MyGgamfRepository {
     )
             .compose(
               _dio.options,
-              '/ggamf/user/${userId}/unfollow/${followId}',
+              '/s/api/ggamf/user/${userId}/unfollow/${followId}',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -139,7 +139,7 @@ class _MyGgamfRepository implements MyGgamfRepository {
     )
             .compose(
               _dio.options,
-              '/ggamf/user/${userId}/cancel/${followId}',
+              '/s/api/ggamf/user/${userId}/cancel/${followId}',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -167,7 +167,7 @@ class _MyGgamfRepository implements MyGgamfRepository {
     )
             .compose(
               _dio.options,
-              '/ggamf/user/${userId}/accept/${followId}',
+              '/s/api/ggamf/user/${userId}/accept/${followId}',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -195,7 +195,7 @@ class _MyGgamfRepository implements MyGgamfRepository {
     )
             .compose(
               _dio.options,
-              'ggamf/user/${userId}/report/${badUserId}',
+              '/s/api/ggamf/user/${userId}/report/${badUserId}',
               queryParameters: queryParameters,
               data: _data,
             )

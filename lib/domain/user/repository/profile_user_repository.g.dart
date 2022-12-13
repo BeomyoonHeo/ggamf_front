@@ -34,7 +34,7 @@ class _ProfileUserRepository implements ProfileUserRepository {
     )
             .compose(
               _dio.options,
-              '/user/${id}/detail',
+              '/s/api/user/${id}/detail',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -61,12 +61,39 @@ class _ProfileUserRepository implements ProfileUserRepository {
     )
             .compose(
               _dio.options,
-              '/user/${id}/update',
+              '/s/api/user/${id}/update',
               queryParameters: queryParameters,
               data: _data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = ProfileUser.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<WithdrawUser> withdrawUser({
+    required userId,
+    required withdrawUser,
+  }) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(withdrawUser.toJson());
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<WithdrawUser>(Options(
+      method: 'PUT',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/s/api/user/${userId}/withdraw',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = WithdrawUser.fromJson(_result.data!);
     return value;
   }
 

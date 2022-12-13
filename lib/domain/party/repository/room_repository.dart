@@ -16,43 +16,43 @@ abstract class RoomRepository {
   factory RoomRepository(Dio dio) = _RoomRepository;
 
   // 파티방 상세보기
-  @GET("/party/user/{userId}/detail/{roomId}")
+  @GET("/s/api/party/user/{userId}/detail/{roomId}")
   Future<Room> detailRoom({@Path('roomId') required int roomId, @Path('userId') required int userId});
 
   // 나의 모집 파티 목록
-  @GET("/party/user/{userId}/myrooms")
+  @GET("/s/api/party/user/{userId}/myrooms")
   Future<Room> findByMyIdRoom({@Path('roomId') required int roomId});
 
   // 전체 파티방 목록 보기
-  @GET("/party/user/{userId}/list")
+  @GET("/s/api/party/user/{userId}/list")
   Future<RoomList> findAllRoom({@Path('userId') required int userId});
 
   // 참가중인 파티방 목록 보기
-  @GET("/party/user/{userId}/joins")
+  @GET("/s/api/party/user/{userId}/joins")
   Future<Room> findJoinRooms({@Path('userId') required int userId});
 
   //파티원 추방(방장)
-  @PUT("/party/user/{userId}/kick/{roomId}")
+  @PUT("/s/api/party/user/{userId}/kick/{roomId}")
   Future<KickUserParty> kickUser(
       {@Path('userId') required int userId, @Path('roomId') required int roomId, @Body() required KickUserParty kickUserParty});
 
   //파티방 종료(방장)
-  @PUT("/party/user/{userId}/end/{roomId}")
+  @PUT("/s/api/party/user/{userId}/end/{roomId}")
   Future<EndRoomParty> endRoom(
       {@Path('userId') required int userId, @Path('roomId') required int roomId, @Body() required EndRoomParty endRoomParty});
 
   //파티방 나가기
-  @PUT("/party/user/{userId}/exit/{roomId}")
+  @PUT("/s/api/party/user/{userId}/exit/{roomId}")
   Future<ExitRoomParty> exitRoom(
       {@Path('userId') required int userId, @Path('roomId') required int roomId, @Body() required ExitRoomParty exitRoomParty});
 
   //파티방 생성하기
-  @POST("/party/user/{userId}/create/{roomId}")
+  @POST("/s/api/party/user/{userId}/create/{roomId}")
   Future<GenerateRoomParty> createRoom(
       {@Path('userId') required int userId, @Path('roomId') required int roomId, @Body() required GenerateRoomParty generateRoomParty});
 
   //파티방 참여하기
-  @POST("/party/user/{userId}/join/{roomId}")
+  @POST("/s/api/party/user/{userId}/join/{roomId}")
   Future<JoinRoomParty> joinRoom(
       {@Path('userId') required int userId, @Path('roomId') required int roomId, @Body() required JoinRoomParty joinRoomParty});
 }

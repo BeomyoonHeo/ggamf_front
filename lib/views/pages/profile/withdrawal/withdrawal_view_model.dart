@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ggamf_front/domain/user/model/withdraw_user.dart';
-import 'package:ggamf_front/domain/user/repository/withdraw_user_repository.dart';
+import 'package:ggamf_front/domain/user/repository/profile_user_repository.dart';
 import 'package:ggamf_front/utils/custom_intercepter.dart';
 
 final withdrawalViewModel = StateNotifierProvider<WithdrawalViewModel, WithdrawUser>((ref) {
@@ -15,7 +15,7 @@ class WithdrawalViewModel extends StateNotifier<WithdrawUser> {
   Dio dio = Dio()..interceptors.add(CustomLogInterceptor());
 
   void withdraw(WithdrawUser withdrawUser) {
-    WithdrawUserRepository restApi = WithdrawUserRepository(dio);
-    restApi.withdrawUser(userId: 1, withdrawUser: withdrawUser).then((value) => state = WithdrawUser(id: 1, state: "30일"));
+    ProfileUserRepository restApi = ProfileUserRepository(dio);
+    //restApi.withdrawUser(userId: 1, withdrawUser: withdrawUser).then((value) => state = WithdrawUser(id: 1, state: "30일"));
   }
 }
