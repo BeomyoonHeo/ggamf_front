@@ -16,3 +16,18 @@ abstract class UserRepository {
   @POST('/s/api/login')
   Future<dynamic> login({@Body() required LoginUser loginUser});
 }
+
+class UserSession {
+  Future<Response> getInitSession(String path, String? jwtToken) async {
+    Map<String, String> requestHeader = {
+      ...headers,
+      "Authorization": jwtToken!
+    };
+
+    Response response = await Dio().get('/s/api/user',
+        options: Options(
+          headers: requestHeader,
+        ));
+    return response;
+  }
+}
