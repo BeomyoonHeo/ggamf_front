@@ -1,7 +1,11 @@
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:json_annotation/json_annotation.dart';
+
+part 'user.g.dart';
 
 const storage = FlutterSecureStorage();
 
+@JsonSerializable()
 class User {
   final String backgroundImage;
   final String name;
@@ -12,6 +16,10 @@ class User {
     required this.name,
     required this.intro,
   });
+
+  factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
+
+  Map<String, dynamic> toJson() => _$UserToJson(this);
 }
 
 class UserSession {
