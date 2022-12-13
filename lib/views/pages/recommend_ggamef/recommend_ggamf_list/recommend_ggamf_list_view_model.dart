@@ -20,10 +20,12 @@ class RecommendGgamfListViewModel extends StateNotifier<List<User>> {
     restApi.getUserList(id: 1).then(
           (value) => recommendGgamfList.add(
             User(
-                userId: value.userId,
-                backgroundImage: value.backgroundImage,
-                name: value.name,
-                intro: value.intro),
+              id: value.id,
+              backgroundImage: value.backgroundImage,
+              name: value.name,
+              intro: value.intro ?? '자기소개가 없습니다.',
+              username: value.username,
+            ),
           ),
         );
   }

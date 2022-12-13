@@ -23,6 +23,7 @@ class _RoundedInputPasswordFieldState extends State<RoundedInputPasswordField> {
       child: TextFormField(
         onChanged: (value) {},
         obscureText: obscureText,
+        obscuringCharacter: '*',
         controller: widget.controller,
         validator: widget.validator(),
         decoration: InputDecoration(
