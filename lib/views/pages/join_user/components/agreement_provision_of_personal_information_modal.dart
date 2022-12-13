@@ -1,23 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:ggamf_front/controller/user/join_user_controller.dart';
 import 'package:ggamf_front/views/pages/join_user/agreement_user_form/agreement_user_form.dart';
 
-class AgreementProvisionOfPersonalInformationModal extends StatefulWidget {
+class AgreementProvisionOfPersonalInformationModal
+    extends ConsumerStatefulWidget {
   const AgreementProvisionOfPersonalInformationModal({
     Key? key,
   }) : super(key: key);
 
   @override
-  State<AgreementProvisionOfPersonalInformationModal> createState() =>
+  ConsumerState<AgreementProvisionOfPersonalInformationModal> createState() =>
       _AgreementProvisionOfPersonalInformationModalState();
 }
 
 class _AgreementProvisionOfPersonalInformationModalState
-    extends State<AgreementProvisionOfPersonalInformationModal> {
-  bool isChecked = false;
-
+    extends ConsumerState<AgreementProvisionOfPersonalInformationModal> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+    final juc = ref.read(joinUserController);
 
     return Container(
       decoration: BoxDecoration(
@@ -25,7 +27,7 @@ class _AgreementProvisionOfPersonalInformationModalState
       padding: const EdgeInsets.all(15),
       child: ElevatedButton(
         onPressed: () {
-          _buildShowModalBottomSheet(context, size);
+          _buildShowModalBottomSheet(context, size, juc);
         },
         style: const ButtonStyle(
           padding: MaterialStatePropertyAll(
@@ -39,7 +41,7 @@ class _AgreementProvisionOfPersonalInformationModalState
         child: Row(
           children: [
             Checkbox(
-              value: isChecked,
+              value: juc.isAgree,
               onChanged: null,
             ),
             const Text(
@@ -52,7 +54,8 @@ class _AgreementProvisionOfPersonalInformationModalState
     );
   }
 
-  Future<dynamic> _buildShowModalBottomSheet(BuildContext context, Size size) {
+  Future<dynamic> _buildShowModalBottomSheet(
+      BuildContext context, Size size, juc) {
     return showModalBottomSheet(
       context: context,
       isScrollControlled: true,
@@ -79,7 +82,7 @@ class _AgreementProvisionOfPersonalInformationModalState
                     onPressed: () {
                       builderSetState(() {
                         setState(() {
-                          isChecked = !isChecked;
+                          juc.changeIsAgree();
                           Navigator.pop(context);
                         });
                       });
@@ -96,7 +99,7 @@ class _AgreementProvisionOfPersonalInformationModalState
                     child: Row(
                       children: [
                         Checkbox(
-                          value: isChecked,
+                          value: juc.isAgree,
                           onChanged: null,
                         ),
                         const Expanded(

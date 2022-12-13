@@ -21,10 +21,12 @@ class ConfirmJoinUserButton extends ConsumerWidget {
             child: InkWell(
               borderRadius: BorderRadius.circular(30),
               onTap: () {
-                if (juc.formKey.currentState!.validate()) {
+                if (juc.formKey.currentState!.validate() &&
+                    juc.authOk &&
+                    juc.isAgree) {
+                  juc.requestJoin();
                   Navigator.pop(context);
                 }
-                juc.requestJoin();
               },
               child: Container(
                   decoration: BoxDecoration(
