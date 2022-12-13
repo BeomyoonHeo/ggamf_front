@@ -1,5 +1,12 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+import 'package:ggamf_front/domain/user/model/login_user.dart';
+>>>>>>> 9b58e789a63d3905d42e1e1344a52e04f39573b0
+>>>>>>> cf7ce277edf36e8aa2409ac331eb380a55a61fea
 import 'package:ggamf_front/utils/validator_util.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:jwt_decode/jwt_decode.dart';
@@ -38,7 +45,15 @@ class UserSession {
   static get jwtToken => _jwtToken;
   static get isLogin => _isLogin;
 
+<<<<<<< HEAD
   static void successAuthentication(User? userParam, String jwtToken) {
+=======
+<<<<<<< HEAD
+  static void successAuthentication(User? userParam, String jwtToken) {
+=======
+  static void successAuthentication(LoginUser? userParam, String jwtToken) {
+>>>>>>> 9b58e789a63d3905d42e1e1344a52e04f39573b0
+>>>>>>> cf7ce277edf36e8aa2409ac331eb380a55a61fea
     _user = userParam;
     _isLogin = true;
     _jwtToken = jwtToken;

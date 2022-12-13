@@ -23,8 +23,20 @@ class JoinUserController {
     printer: PrettyPrinter(),
   );
   final _ref;
+<<<<<<< HEAD
   final dio = Dio()..interceptors.add(CustomLogInterceptor());
   JoinUserController(this._ref);
+=======
+<<<<<<< HEAD
+  final dio = Dio()..interceptors.add(CustomLogInterceptor());
+  JoinUserController(this._ref);
+=======
+  final KeepAliveLink keepAlive;
+  final dio = Dio()..interceptors.add(CustomLogInterceptor());
+  JoinUserController(this._ref, this.keepAlive);
+>>>>>>> 9b58e789a63d3905d42e1e1344a52e04f39573b0
+
+>>>>>>> cf7ce277edf36e8aa2409ac331eb380a55a61fea
   bool authOk = false;
   bool isAgree = false;
   String uid = '';
@@ -74,6 +86,10 @@ class JoinUserController {
     );
     UserRepository joinUserRepository =
         UserRepository(Dio()..interceptors.add(LogInterceptor()));
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> cf7ce277edf36e8aa2409ac331eb380a55a61fea
     try {
       AuthenticationProvider()
           .registerUserUsingEmailAndPassword(joinUser.email, joinUser.password)
@@ -90,5 +106,13 @@ class JoinUserController {
       Fluttertoast.showToast(msg: '서버 에러 발생! 양식을 올바르게 기입해주세요!');
       logger.d(e);
     }
+<<<<<<< HEAD
+=======
+=======
+    joinUserRepository.insert(joinUser: joinUser).then((value) =>
+        Navigator.popAndPushNamed(navigatorKey.currentState!.context,
+            PageEnum.LOGIN.requestLocation));
+>>>>>>> 9b58e789a63d3905d42e1e1344a52e04f39573b0
+>>>>>>> cf7ce277edf36e8aa2409ac331eb380a55a61fea
   }
 }

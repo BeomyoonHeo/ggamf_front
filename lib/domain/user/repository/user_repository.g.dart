@@ -13,7 +13,15 @@ class _UserRepository implements UserRepository {
     this._dio, {
     this.baseUrl,
   }) {
+<<<<<<< HEAD
     baseUrl ??= 'http://172.24.240.1:8080';
+=======
+<<<<<<< HEAD
+    baseUrl ??= 'http://172.24.240.1:8080';
+=======
+    baseUrl ??= 'http://172.30.96.1:8080';
+>>>>>>> 9b58e789a63d3905d42e1e1344a52e04f39573b0
+>>>>>>> cf7ce277edf36e8aa2409ac331eb380a55a61fea
   }
 
   final Dio _dio;
@@ -87,7 +95,15 @@ class _RecommendGgamfListRepository implements RecommendGgamfListRepository {
     this._dio, {
     this.baseUrl,
   }) {
+<<<<<<< HEAD
     baseUrl ??= 'http://172.24.240.1:8080';
+=======
+<<<<<<< HEAD
+    baseUrl ??= 'http://172.24.240.1:8080';
+=======
+    baseUrl ??= 'http://172.30.96.1:8080';
+>>>>>>> 9b58e789a63d3905d42e1e1344a52e04f39573b0
+>>>>>>> cf7ce277edf36e8aa2409ac331eb380a55a61fea
   }
 
   final Dio _dio;
@@ -214,7 +230,15 @@ class _ProfileUserRepository implements ProfileUserRepository {
     this._dio, {
     this.baseUrl,
   }) {
+<<<<<<< HEAD
     baseUrl ??= 'http://172.24.240.1:8080';
+=======
+<<<<<<< HEAD
+    baseUrl ??= 'http://172.24.240.1:8080';
+=======
+    baseUrl ??= 'http://172.30.96.1:8080';
+>>>>>>> 9b58e789a63d3905d42e1e1344a52e04f39573b0
+>>>>>>> cf7ce277edf36e8aa2409ac331eb380a55a61fea
   }
 
   final Dio _dio;
