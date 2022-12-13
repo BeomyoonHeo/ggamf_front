@@ -13,7 +13,7 @@ class _MyGgamfRepository implements MyGgamfRepository {
     this._dio, {
     this.baseUrl,
   }) {
-    baseUrl ??= 'http://localhost:8000';
+    baseUrl ??= 'http://192.168.50.17:8080';
   }
 
   final Dio _dio;
@@ -21,9 +21,9 @@ class _MyGgamfRepository implements MyGgamfRepository {
   String? baseUrl;
 
   @override
-  Future<MyGgamfList> myGgamf({required page}) async {
+  Future<MyGgamfList> myGgamf({required userId}) async {
     const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{r'page': page};
+    final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     final _result = await _dio
@@ -34,12 +34,173 @@ class _MyGgamfRepository implements MyGgamfRepository {
     )
             .compose(
               _dio.options,
-              'ggamf/list',
+              '/ggamf/user/${userId}/list',
               queryParameters: queryParameters,
               data: _data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = MyGgamfList.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<FollowGgamf> followGgamf({
+    required followingId,
+    required followGgamf,
+  }) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(followGgamf.toJson());
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<FollowGgamf>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/ggamf/follow/${followingId}',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = FollowGgamf.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<RejectGgamf> rejectGgamf({
+    required followId,
+    required userId,
+  }) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<RejectGgamf>(Options(
+      method: 'DELETE',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/ggamf/user/${userId}/unfollow/${followId}',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = RejectGgamf.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<UnfollowGgamf> deleteGgamf({
+    required followId,
+    required userId,
+  }) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<UnfollowGgamf>(Options(
+      method: 'DELETE',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/ggamf/user/${userId}/unfollow/${followId}',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = UnfollowGgamf.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<CancelGgamf> cancelGgamf({
+    required followId,
+    required userId,
+  }) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<CancelGgamf>(Options(
+      method: 'DELETE',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/ggamf/user/${userId}/cancel/${followId}',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = CancelGgamf.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<AcceptGgamf> acceptGgamf({
+    required followId,
+    required userId,
+    required acceptGgamf,
+  }) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(acceptGgamf.toJson());
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<AcceptGgamf>(Options(
+      method: 'PUT',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/ggamf/user/${userId}/accept/${followId}',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = AcceptGgamf.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<ReportGgamf> reportGgamf({
+    required userId,
+    required badUserId,
+    required reportGgamf,
+  }) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(reportGgamf.toJson());
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<ReportGgamf>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              'ggamf/user/${userId}/report/${badUserId}',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = ReportGgamf.fromJson(_result.data!);
     return value;
   }
 

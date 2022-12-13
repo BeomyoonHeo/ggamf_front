@@ -14,6 +14,6 @@ class MyGgamfListViewModel extends StateNotifier<List<MyGgamf>> {
   //final dio = Dio()..interceptors.add(CustomLogInterceptor());
   void init() {
     MyGgamfRepository restApi = MyGgamfRepository(Dio());
-    restApi.myGgamf(page: 1).then((value) => value.myGgamfList.isEmpty ? null : state = value.myGgamfList);
+    //restApi.myGgamf(page: 1).then((value) => value.myGgamfList.isEmpty ? null : state = value.myGgamfList);
   }
 }
