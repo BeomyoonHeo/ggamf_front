@@ -4,6 +4,8 @@ import 'package:ggamf_front/domain/user/model/profile_user.dart';
 import 'package:ggamf_front/domain/user/repository/user_repository.dart';
 import 'package:ggamf_front/utils/custom_intercepter.dart';
 
+import '../../utils/validator_util.dart';
+
 final opponentProfileController = Provider((ref) {
   return OpponentProfileController(ref);
 });
@@ -13,10 +15,10 @@ class OpponentProfileController {
 
   OpponentProfileController(this._ref);
 
-  final repo =
-      ProfileUserRepository(Dio()..interceptors.add(CustomLogInterceptor()));
+  final repo = ProfileUserRepository(Dio()..interceptors.add(CustomLogInterceptor()));
 
-  void findById(int id) async {
-    ProfileUser userdata = await repo.getUserProfile(id: 1);
-  }
+  // void findById(int id) async {
+  //   logger.d("로그찍기2");
+  //   ProfileUser userdata = await repo.getUserProfile(userId: 15);
+  // }
 }
