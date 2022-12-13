@@ -27,8 +27,6 @@ class ConfirmJoinUserButton extends ConsumerWidget {
                   juc.requestJoin();
                   Navigator.pop(context);
                 }
-                print(juc.authOk);
-                print(juc.isAgree);
               },
               child: Container(
                   decoration: BoxDecoration(
