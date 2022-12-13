@@ -1,7 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:ggamf_front/domain/user/model/join_user.dart';
 import 'package:ggamf_front/domain/user/model/login_user.dart';
-import 'package:ggamf_front/domain/user/model/profile_user.dart';
 import 'package:ggamf_front/domain/user/model/update_user.dart';
 import 'package:ggamf_front/domain/user/model/user.dart';
 import 'package:ggamf_front/utils/validator_util.dart';
@@ -29,7 +28,8 @@ class Session {
       if (value != null) {
         Map<String, dynamic> jwtData = Jwt.parseJwt(value);
         logger.d('객체 확인 : ${jwtData}');
-        UserSession.successAuthentication(null, value);
+        UserSession.successAuthentication(User.fromJson(jwtData), value);
+        logger.d('유저 객체 확인 : ${UserSession.user}');
       }
     });
   }
