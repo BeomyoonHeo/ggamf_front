@@ -7,11 +7,13 @@ const storage = FlutterSecureStorage();
 
 @JsonSerializable()
 class User {
+  final int userId;
   final String backgroundImage;
   final String name;
   final String intro;
 
   User({
+    required this.userId,
     required this.backgroundImage,
     required this.name,
     required this.intro,

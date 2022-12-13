@@ -54,7 +54,7 @@ class _MyAppState extends State<MyApp> {
           ? PageEnum.ALLPAGES.requestLocation
           : PageEnum.getByDisPlayName('login').requestLocation,
       routes: {
-        PageEnum.LOGIN.requestLocation: (context) => const LoginUserView(),
+        PageEnum.LOGIN.requestLocation: (context) => LoginUserView(),
         PageEnum.JOIN.requestLocation: (context) => const JoinUserView(),
         PageEnum.ALLPAGES.requestLocation: (context) => const AllPages(),
       },

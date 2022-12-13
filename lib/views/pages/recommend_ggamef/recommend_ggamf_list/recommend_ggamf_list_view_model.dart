@@ -17,9 +17,14 @@ class RecommendGgamfListViewModel extends StateNotifier<List<User>> {
     // 최초 init 시에만 repository에 의존
     RecommendGgamfListRepository restApi = RecommendGgamfListRepository(Dio());
     List<User> recommendGgamfList = [];
-    restApi.getUserList(id: 1).then((value) => recommendGgamfList.add(User(
-        backgroundImage: value.backgroundImage,
-        name: value.name,
-        intro: value.intro)));
+    restApi.getUserList(id: 1).then(
+          (value) => recommendGgamfList.add(
+            User(
+                userId: value.userId,
+                backgroundImage: value.backgroundImage,
+                name: value.name,
+                intro: value.intro),
+          ),
+        );
   }
 }

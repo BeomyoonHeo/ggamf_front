@@ -1,4 +1,9 @@
+import 'package:logger/logger.dart';
 import 'package:validators/validators.dart';
+
+final logger = Logger(
+  printer: PrettyPrinter(),
+);
 
 Function nameValidator() {
   return (String? value) {

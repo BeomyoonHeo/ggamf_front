@@ -4,7 +4,9 @@ import 'package:ggamf_front/views/pages/login_user/components/login_box.dart';
 import 'package:ggamf_front/views/pages/login_user/components/login_screen_decoration.dart';
 
 class LoginUserView extends StatelessWidget {
-  const LoginUserView({Key? key}) : super(key: key);
+  final TextEditingController usernameController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+  LoginUserView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +34,11 @@ class LoginUserView extends StatelessWidget {
                             TextStyle(fontFamily: 'NanumSquare', fontSize: 25),
                       ),
                       const SizedBox(height: 10),
-                      LoginBox(size: size),
+                      LoginBox(
+                        size: size,
+                        passwordController: passwordController,
+                        usernameController: usernameController,
+                      ),
                     ],
                   ),
                   const SizedBox(height: 10),

@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:ggamf_front/controller/user/user_controller.dart';
 import 'package:ggamf_front/core/page_enum.dart';
 import 'package:ggamf_front/views/pages/login_user/components/rounded_input_field.dart';
 import 'package:ggamf_front/views/pages/login_user/components/rounded_input_password_field.dart';
 
-class LoginBox extends StatelessWidget {
-  const LoginBox({
+class LoginBox extends ConsumerWidget {
+  final TextEditingController usernameController;
+  final TextEditingController passwordController;
+  LoginBox({
+    required this.usernameController,
+    required this.passwordController,
     Key? key,
     required this.size,
   }) : super(key: key);
@@ -12,19 +18,20 @@ class LoginBox extends StatelessWidget {
   final Size size;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final luc = ref.read(userController);
     return ClipRRect(
       borderRadius: BorderRadius.circular(30),
       child: Container(
         color: Colors.white,
         width: size.width * 0.9,
         padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-        child: _buildLoginItemColumn(context),
+        child: _buildLoginItemColumn(context, luc),
       ),
     );
   }
 
-  Widget _buildLoginItemColumn(context) {
+  Widget _buildLoginItemColumn(context, UserController luc) {
     return Column(
       children: [
         const SizedBox(
@@ -38,12 +45,13 @@ class LoginBox extends StatelessWidget {
           child: Column(
             children: [
               RoundedInputField(
+                controller: usernameController,
                 icon: Icons.person,
                 hintText: "아이디입력",
                 onChanged: (value) {},
               ),
               const SizedBox(height: 10),
-              const RoundedInputPasswordField(),
+              RoundedInputPasswordField(controller: passwordController),
             ],
           ),
         ),
@@ -55,8 +63,7 @@ class LoginBox extends StatelessWidget {
               ItemButton(
                   text: "로그인",
                   function: () {
-                    Navigator.pushNamed(context,
-                        PageEnum.getByDisPlayName('allpages').requestLocation);
+                    luc.login(usernameController.text, passwordController.text);
                   }),
               const SizedBox(height: 10),
               ItemButton(
