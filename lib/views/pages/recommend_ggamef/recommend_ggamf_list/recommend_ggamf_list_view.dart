@@ -43,7 +43,8 @@ class _RecommendGgamfListViewState extends State<RecommendGgamfListView>
     super.build(context);
     return Consumer(
       builder: (context, ref, child) {
-        final ggamfViewModel = ref.watch(recommendGgamfListViewModel.notifier);
+        final recommendGgamfViewModel = ref.watch(recommendGgamfListViewModel);
+
         return Scaffold(
           appBar: AppBar(
             automaticallyImplyLeading: false,
@@ -60,7 +61,7 @@ class _RecommendGgamfListViewState extends State<RecommendGgamfListView>
                 const SizedBox(height: 20),
                 RecommendGgamfListTabView(
                     tabController: _tabController,
-                    ggamfList: ggamfViewModel.state),
+                    ggamfList: recommendGgamfViewModel),
               ],
             ),
           ),

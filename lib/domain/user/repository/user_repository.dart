@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:ggamf_front/domain/user/model/ggamf.dart';
 import 'package:ggamf_front/domain/user/model/join_user.dart';
 import 'package:ggamf_front/domain/user/model/login_user.dart';
 import 'package:ggamf_front/domain/user/model/update_user.dart';
@@ -41,12 +42,20 @@ abstract class RecommendGgamfListRepository {
       _RecommendGgamfListRepository;
 
   @POST('/users/{id}')
-  Future<User> postUser(
+  Future<dynamic> postUser(
       {@Path() required int id, @Body() required dynamic body});
 
   //추천 겜프 리스트 불러오기
   @GET('/s/api/ggamf/users/{id}/recommend')
-  Future<User> getUserList({@Path("id") required int id});
+  Future<GgamfList> getRecommendGgamfList({@Path("id") required int id});
+
+  //보낸 겜프 요청 목록 보기
+  @GET('/s/api/ggamf/user/{id}/sendggamf')
+  Future<dynamic> getSendGgamfList({@Path('id') required int id});
+
+  //받은 겜프 요청 목록 보기
+  @GET('/s/api/ggamf/user/{id}/receiveggamf')
+  Future<dynamic> getReceiveggamfList({@Path('id') required int id});
 
   // 겜프 요청하기
   @POST('/s/api/ggamf/{id}/follow/{followUserId}')
