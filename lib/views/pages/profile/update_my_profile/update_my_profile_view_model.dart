@@ -15,19 +15,10 @@ class UpdateMyProfileViewModel extends StateNotifier<ProfileUser> {
 
   Dio dio = Dio()..interceptors.add(CustomLogInterceptor());
 
-  // void init() {
-  //   ProfileUserRepository restApi = ProfileUserRepository(dio);
-  //   restApi.getUserProfile(userId: 1).then((value) => state = ProfileUser(photo: value.photo, nickname: value.nickname, intro: value.intro));
-  // }
-
-  void updateMyProfile(UpdateUser updateUser) {
-    ProfileUserRepository restApi = ProfileUserRepository(dio);
+  Future<void> updateMyProfile(UpdateUser updateUser) async {
+    ProfileUserRepository restApi = await ProfileUserRepository(dio);
     restApi
         .putUserProfile(userId: 1, updateUser: updateUser)
         .then((value) => state = ProfileUser(photo: value.photo, nickname: value.nickname, intro: value.intro));
-  }
-
-  void showProfile(ProfileUser profileUser) {
-    state = profileUser;
   }
 }

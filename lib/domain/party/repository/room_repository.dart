@@ -21,7 +21,7 @@ abstract class RoomRepository {
 
   // 나의 모집 파티 목록
   @GET("/s/api/party/user/{userId}/myrooms")
-  Future<Room> findByMyIdRoom({@Path('roomId') required int roomId});
+  Future<dynamic> findByMyIdRoom({@Path('userId') required int userId});
 
   // 전체 파티방 목록 보기
   @GET("/s/api/party/user/{userId}/list")
