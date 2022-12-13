@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:ggamf_front/controller/user/my_profile_controller.dart';
 import 'package:ggamf_front/main.dart';
 import 'package:ggamf_front/views/pages/profile/my_profile/my_profile_view_model.dart';
 import 'package:ggamf_front/views/pages/profile/update_my_profile/update_my_profile_view.dart';
@@ -56,7 +57,7 @@ class MyProfileView extends ConsumerWidget {
               ),
               child: Expanded(
                 child: Text(
-                  mpvm.intro ?? '자기소개가 없습니다.',
+                  "${mpvm.intro}",
                   textAlign: TextAlign.center,
                   style: TextStyle(fontSize: 15, color: Colors.black),
                 ),
