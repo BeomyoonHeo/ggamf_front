@@ -4,6 +4,8 @@ import 'package:ggamf_front/domain/user/model/join_user.dart';
 import 'package:ggamf_front/domain/user/model/login_user.dart';
 import 'package:ggamf_front/domain/user/model/profile_user.dart';
 import 'package:ggamf_front/domain/user/model/user.dart';
+import 'package:ggamf_front/utils/validator_util.dart';
+import 'package:jwt_decode/jwt_decode.dart';
 import 'package:retrofit/http.dart';
 
 part 'user_repository.g.dart';
@@ -19,18 +21,15 @@ abstract class UserRepository {
   Future<dynamic> login({@Body() required LoginUser loginUser});
 }
 
-class UserSession {
-  Future<Response> getInitSession(String path, String? jwtToken) async {
-    Map<String, String> requestHeader = {
-      ...headers,
-      "Authorization": jwtToken!
-    };
-
-    Response response = await Dio().get('/s/api/user',
-        options: Options(
-          headers: requestHeader,
-        ));
-    return response;
+class Session {
+  Future<void> getInitSession() async {
+    storage.read(key: 'jwtToken').then((value) {
+      if (value != null) {
+        Map<String, dynamic> jwtData = Jwt.parseJwt(value);
+        logger.d('객체 확인 : ${jwtData}');
+        UserSession.successAuthentication(null, value);
+      }
+    });
   }
 }
 

@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:ggamf_front/core/page_enum.dart';
 import 'package:ggamf_front/core/theme.dart';
+import 'package:ggamf_front/domain/user/model/user.dart';
+import 'package:ggamf_front/domain/user/repository/user_repository.dart';
 import 'package:ggamf_front/utils/full_screen_util.dart';
 import 'package:ggamf_front/views/common_components/common_pages.dart';
 import 'package:ggamf_front/views/pages/join_user/join_user_view.dart';
@@ -17,12 +18,12 @@ void main() async {
     DeviceOrientation.portraitDown,
   ]); //세로화면 고정
   SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);
-  runApp(SplashPage(
-    key: UniqueKey(),
-    onInitializationComplete: () {
-      runApp(const ProviderScope(child: MyApp()));
-    },
-  ));
+  Session().getInitSession().then((value) => runApp(SplashPage(
+        key: UniqueKey(),
+        onInitializationComplete: () {
+          runApp(const ProviderScope(child: MyApp()));
+        },
+      )));
 }
 
 // 페이지 context를 global로 가지고 있을 NavigatorKey 적용
@@ -36,13 +37,10 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  static FlutterSecureStorage secureStorage = const FlutterSecureStorage();
-  dynamic jwtToken;
   late final fullScreen;
   @override
   void initState() {
     fullScreen = FullscreenService();
-    secureStorage.read(key: 'jwtToken').then((value) => jwtToken = value);
     super.initState();
   }
 
@@ -50,7 +48,9 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       navigatorKey: navigatorKey,
-      initialRoute: jwtToken != null ? PageEnum.ALLPAGES.requestLocation : PageEnum.getByDisPlayName('login').requestLocation,
+      initialRoute: UserSession.jwtToken != null
+          ? PageEnum.ALLPAGES.requestLocation
+          : PageEnum.getByDisPlayName('login').requestLocation,
       routes: {
         PageEnum.LOGIN.requestLocation: (context) => LoginUserView(),
         PageEnum.JOIN.requestLocation: (context) => const JoinUserView(),

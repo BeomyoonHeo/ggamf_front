@@ -6,21 +6,25 @@ import 'package:ggamf_front/core/page_enum.dart';
 import 'package:ggamf_front/domain/user/model/login_user.dart';
 import 'package:ggamf_front/domain/user/repository/user_repository.dart';
 import 'package:ggamf_front/main.dart';
+import 'package:ggamf_front/utils/custom_intercepter.dart';
 import 'package:ggamf_front/utils/validator_util.dart';
 
 final userController = Provider((ref) => UserController());
 
 class UserController {
-  final userRepository = UserRepository(Dio());
-  login(String username, String password) {
+  final userRepository =
+      UserRepository(Dio()..interceptors.add(LoginInterceptor()));
+  login(String username, String password) async {
     logger.d('username : ${username}');
     logger.d('password : ${password}');
     final loginUser = LoginUser(loginId: username, password: password);
     userRepository.login(loginUser: loginUser).then((value) {
+      Map<String, dynamic> response = value;
+      logger.d(response);
       Navigator.pushNamed(navigatorKey.currentState!.context,
           PageEnum.ALLPAGES.requestLocation);
     }).onError((error, stackTrace) {
-      print(error);
+      logger.d(error);
       Fluttertoast.showToast(msg: '아이디와 패스워드를 확인해주세요');
     });
   }

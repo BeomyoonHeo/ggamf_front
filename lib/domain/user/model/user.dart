@@ -1,5 +1,9 @@
+import 'package:dio/dio.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:ggamf_front/domain/user/model/login_user.dart';
+import 'package:ggamf_front/utils/validator_util.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:jwt_decode/jwt_decode.dart';
 
 part 'user.g.dart';
 
@@ -25,7 +29,7 @@ class User {
 }
 
 class UserSession {
-  static User? _user;
+  static LoginUser? _user;
   static String? _jwtToken;
   static bool _isLogin = false;
 
@@ -33,21 +37,38 @@ class UserSession {
   static get jwtToken => _jwtToken;
   static get isLogin => _isLogin;
 
-  static void successAuthentication(User userParam, String jwtToken) {
+  static void successAuthentication(LoginUser? userParam, String jwtToken) {
     _user = userParam;
     _isLogin = true;
     _jwtToken = jwtToken;
+    logger.d('로그인 ? ${_isLogin}');
   }
 
   static Future<void> removeAuthentication() async {
-    _user = null;
-    _jwtToken = null;
-    _isLogin = false;
+    storage.delete(key: 'jwtToken').then((value) {
+      _user = null;
+      _jwtToken = null;
+      _isLogin = false;
+    });
   }
 
-  static Map<String, String> getJwtTokenHeader(Map<String, String> headers) {
-    return UserSession._jwtToken == null
-        ? headers
-        : {...headers, "Authorization": UserSession._jwtToken!};
+  static void setJwtTokenHeader(Headers headers) {
+    storage.read(key: 'jwtToken').then((value) {
+      storage
+          .write(
+              key: 'jwtToken',
+              value: headers.value('Authorization')?.replaceAll('Bearer ', ''))
+          .then((value) {
+        _jwtToken = headers.value('Authorization')?.replaceAll('Bearer ', '');
+        logger.d(_jwtToken);
+        Map<String, dynamic> userInfo = Jwt.parseJwt(_jwtToken!);
+      });
+    });
+  }
+
+  static Map<String, dynamic>? getJwtTokenHeader(Map<String, dynamic> headers) {
+    return UserSession._jwtToken != null
+        ? {...headers, 'Authorization': UserSession._jwtToken}
+        : headers;
   }
 }
