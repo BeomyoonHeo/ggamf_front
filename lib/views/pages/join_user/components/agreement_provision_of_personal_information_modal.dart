@@ -22,24 +22,12 @@ class _AgreementProvisionOfPersonalInformationModalState
     return Container(
       decoration: BoxDecoration(
           color: Colors.white, borderRadius: BorderRadius.circular(9)),
-      padding: EdgeInsets.all(15),
+      padding: const EdgeInsets.all(15),
       child: ElevatedButton(
         onPressed: () {
           _buildShowModalBottomSheet(context, size);
         },
-        child: Row(
-          children: [
-            Checkbox(
-              value: isChecked,
-              onChanged: null,
-            ),
-            Text(
-              '개인정보 활용 및 처리에 동의합니다.',
-              style: TextStyle(fontFamily: 'NanumSquare', fontSize: 14),
-            ),
-          ],
-        ),
-        style: ButtonStyle(
+        style: const ButtonStyle(
           padding: MaterialStatePropertyAll(
             EdgeInsets.symmetric(
               horizontal: 5,
@@ -47,6 +35,18 @@ class _AgreementProvisionOfPersonalInformationModalState
           ),
           backgroundColor: MaterialStatePropertyAll(Colors.white),
           foregroundColor: MaterialStatePropertyAll(Colors.black),
+        ),
+        child: Row(
+          children: [
+            Checkbox(
+              value: isChecked,
+              onChanged: null,
+            ),
+            const Text(
+              '개인정보 활용 및 처리에 동의합니다.',
+              style: TextStyle(fontFamily: 'NanumSquare', fontSize: 14),
+            ),
+          ],
         ),
       ),
     );
@@ -60,20 +60,20 @@ class _AgreementProvisionOfPersonalInformationModalState
       builder: (BuildContext context) {
         return StatefulBuilder(
             builder: (BuildContext context, builderSetState) {
-          return Container(
+          return SizedBox(
             height: size.height * 0.9,
             child: Padding(
               padding: const EdgeInsets.all(20),
               child: Column(
                 children: [
-                  Text('개인정보 제공 동의서'),
+                  const Text('개인정보 제공 동의서'),
                   Container(
-                    padding: EdgeInsets.all(10),
+                    padding: const EdgeInsets.all(10),
                     decoration: BoxDecoration(
                       border: Border.all(width: 1),
                       borderRadius: BorderRadius.circular(30),
                     ),
-                    child: AgreementUserForm(),
+                    child: const AgreementUserForm(),
                   ),
                   ElevatedButton(
                     onPressed: () {
@@ -84,20 +84,7 @@ class _AgreementProvisionOfPersonalInformationModalState
                         });
                       });
                     },
-                    child: Row(
-                      children: [
-                        Checkbox(
-                          value: isChecked,
-                          onChanged: null,
-                        ),
-                        Text(
-                          '위의 개인정보 수집 및 취급 방침에 동의합니다.',
-                          style: TextStyle(
-                              fontFamily: 'NanumSquare', fontSize: 14),
-                        ),
-                      ],
-                    ),
-                    style: ButtonStyle(
+                    style: const ButtonStyle(
                       padding: MaterialStatePropertyAll(
                         EdgeInsets.symmetric(
                           horizontal: 5,
@@ -105,6 +92,21 @@ class _AgreementProvisionOfPersonalInformationModalState
                       ),
                       backgroundColor: MaterialStatePropertyAll(Colors.white),
                       foregroundColor: MaterialStatePropertyAll(Colors.black),
+                    ),
+                    child: Row(
+                      children: [
+                        Checkbox(
+                          value: isChecked,
+                          onChanged: null,
+                        ),
+                        const Expanded(
+                          child: Text(
+                            '위의 개인정보 수집 및 취급 방침에 동의합니다.',
+                            style: TextStyle(
+                                fontFamily: 'NanumSquare', fontSize: 14),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ],

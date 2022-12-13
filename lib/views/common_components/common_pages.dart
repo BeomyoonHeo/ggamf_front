@@ -1,6 +1,6 @@
 import 'package:flashy_tab_bar2/flashy_tab_bar2.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:ggamf_front/views/common_components/custom_icons_icons.dart';
 import 'package:ggamf_front/views/pages/join_party/join_party_list/join_party_list_view.dart';
 import 'package:ggamf_front/views/pages/my_ggamf/my_ggamf_list_page/my_ggamf_list_view.dart';
@@ -29,6 +29,7 @@ class _AllPagesState extends State<AllPages> {
 
   @override
   void initState() {
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);
     super.initState();
   }
 

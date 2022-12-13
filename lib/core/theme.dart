@@ -24,39 +24,13 @@ AppBarTheme appBarTheme() {
   );
 }
 
-// ThemeData theme() {
-//   return ThemeData(
-//     scaffoldBackgroundColor: Colors.white,
-//     textTheme: textTheme(),
-//     appBarTheme: appBarTheme(),
-//     bottomNavigationBarTheme: BottomNavigationBarThemeData(
-//       selectedItemColor: Colors.black87,
-//       unselectedItemColor: Colors.black38,
-//     ),
-//   );
-// }
-
 ThemeData theme() {
   return ThemeData(
     fontFamily: 'NanumSquare',
-    backgroundColor: Color(0xFFFFFBFE),
-    elevatedButtonTheme: ElevatedButtonThemeData(
+    backgroundColor: const Color(0xFFFFFBFE),
+    elevatedButtonTheme: const ElevatedButtonThemeData(
         style: ButtonStyle(elevation: MaterialStatePropertyAll(0))),
-    appBarTheme: AppBarTheme(
-      elevation: 0,
-      backgroundColor: Colors.white,
-      titleTextStyle: TextStyle(fontSize: 25, color: Colors.black),
-    ),
-  );
-}
-
-ThemeData buildThemeData() {
-  return ThemeData(
-    fontFamily: 'NanumSquare',
-    backgroundColor: Color(0xFFFFFBFE),
-    elevatedButtonTheme: ElevatedButtonThemeData(
-        style: ButtonStyle(elevation: MaterialStatePropertyAll(0))),
-    appBarTheme: AppBarTheme(
+    appBarTheme: const AppBarTheme(
       elevation: 0,
       backgroundColor: Colors.white,
       titleTextStyle: TextStyle(fontSize: 25, color: Colors.black),

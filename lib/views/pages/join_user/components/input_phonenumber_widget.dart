@@ -1,80 +1,64 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:ggamf_front/controller/user/join_user_controller.dart';
+import 'package:ggamf_front/views/pages/join_user/join_user_view_model.dart';
 
-class InputPhoneNumberWidget extends StatelessWidget {
+class InputPhoneNumberWidget extends ConsumerWidget {
+  final List<TextEditingController> controller;
   const InputPhoneNumberWidget({
     Key? key,
+    required this.controller,
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-          color: Colors.white, borderRadius: BorderRadius.circular(9)),
-      padding: EdgeInsets.all(15),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(
-            "전화번호 : ",
-            style: TextStyle(fontFamily: 'NanumSquare', fontSize: 15),
-          ),
-          Container(
-            width: 50,
-            height: 30,
+  Widget build(BuildContext context, WidgetRef ref) {
+    final juc = ref.read(joinUserController);
+    final jvm = ref.watch(joinUserViewModel);
+    return juc.authOk
+        ? const SizedBox()
+        : Container(
             decoration: BoxDecoration(
-                border: Border.all(width: 1), color: Colors.white),
-            child: TextField(
-              maxLength: 3,
-              decoration: InputDecoration(
-                filled: true,
-                fillColor: Colors.white,
-                border: InputBorder.none,
-                counterText: '',
-              ),
-              style: TextStyle(fontSize: 12, height: 2.0),
+                color: Colors.white, borderRadius: BorderRadius.circular(9)),
+            padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+            height: 60,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Text(
+                  "전화번호 : ",
+                  style: TextStyle(fontSize: 15),
+                ),
+                _buildCustomTextFormField(controller[0], 3),
+                const Text(
+                  " - ",
+                  style: TextStyle(fontSize: 15),
+                ),
+                _buildCustomTextFormField(controller[1], 4),
+                const Text(
+                  " - ",
+                  style: TextStyle(fontSize: 15),
+                ),
+                _buildCustomTextFormField(controller[2], 4),
+              ],
             ),
-          ),
-          Text(
-            " - ",
-            style: TextStyle(fontFamily: 'NanumSquare', fontSize: 15),
-          ),
-          Container(
-            width: 60,
-            height: 30,
-            decoration: BoxDecoration(
-                border: Border.all(width: 1), color: Colors.white),
-            child: TextField(
-              maxLength: 4,
-              decoration: InputDecoration(
-                filled: true,
-                fillColor: Colors.white,
-                border: InputBorder.none,
-                counterText: '',
-              ),
-              style: TextStyle(fontSize: 12, height: 2.0),
-            ),
-          ),
-          Text(
-            " - ",
-            style: TextStyle(fontFamily: 'NanumSquare', fontSize: 15),
-          ),
-          Container(
-            width: 60,
-            height: 30,
-            decoration: BoxDecoration(
-                border: Border.all(width: 1), color: Colors.white),
-            child: TextField(
-              maxLength: 4,
-              decoration: InputDecoration(
-                filled: true,
-                fillColor: Colors.white,
-                border: InputBorder.none,
-                counterText: '',
-              ),
-              style: TextStyle(fontSize: 12, height: 2.0),
-            ),
-          ),
-        ],
+          );
+  }
+
+  Widget _buildCustomTextFormField(
+      TextEditingController controller, int maxLength) {
+    return Expanded(
+      child: TextFormField(
+        keyboardType: TextInputType.number,
+        controller: controller,
+        maxLength: maxLength,
+        decoration: const InputDecoration(
+          filled: true,
+          contentPadding: EdgeInsets.symmetric(horizontal: 12),
+          fillColor: Colors.white,
+          border: OutlineInputBorder(borderSide: BorderSide(width: 1)),
+          counterText: '',
+        ),
+        style: const TextStyle(fontSize: 15),
       ),
     );
   }

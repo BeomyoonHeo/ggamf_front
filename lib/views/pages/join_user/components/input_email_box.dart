@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 
 class InputEmailBox extends StatelessWidget {
+  final Function validator;
+  final TextEditingController controller;
   const InputEmailBox({
     Key? key,
+    required this.validator,
+    required this.controller,
   }) : super(key: key);
 
   @override
@@ -10,29 +14,27 @@ class InputEmailBox extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
           color: Colors.white, borderRadius: BorderRadius.circular(9)),
-      padding: EdgeInsets.all(15),
+      padding: const EdgeInsets.all(15),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          Text(
+          const Text(
             "이메일 : ",
             style: TextStyle(fontFamily: 'NanumSquare', fontSize: 15),
           ),
-          Container(
+          SizedBox(
             width: 200,
-            height: 30,
-            decoration: BoxDecoration(
-                border: Border.all(width: 1), color: Colors.white),
-            child: TextField(
-              decoration: InputDecoration(
+            child: TextFormField(
+              validator: validator(),
+              controller: controller,
+              decoration: const InputDecoration(
                 filled: true,
                 fillColor: Colors.white,
-                border: InputBorder.none,
               ),
-              style: TextStyle(fontSize: 12, height: 2.0),
+              style: const TextStyle(fontSize: 12, height: 2.0),
             ),
           ),
-          Text(
+          const Text(
             "@",
             style: TextStyle(fontFamily: 'NanumSquare', fontSize: 15),
           ),

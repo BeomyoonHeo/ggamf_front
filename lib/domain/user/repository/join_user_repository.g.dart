@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'login_user_http_repository.dart';
+part of 'join_user_repository.dart';
 
 // **************************************************************************
 // RetrofitGenerator
@@ -8,8 +8,8 @@ part of 'login_user_http_repository.dart';
 
 // ignore_for_file: unnecessary_brace_in_string_interps,no_leading_underscores_for_local_identifiers
 
-class _LoginUserHttpRepository implements LoginUserHttpRepository {
-  _LoginUserHttpRepository(
+class _JoinUserRepository implements JoinUserRepository {
+  _JoinUserRepository(
     this._dio, {
     this.baseUrl,
   }) {
@@ -21,12 +21,12 @@ class _LoginUserHttpRepository implements LoginUserHttpRepository {
   String? baseUrl;
 
   @override
-  Future<dynamic> login({required loginUser}) async {
+  Future<dynamic> insert(joinUser) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    _data.addAll(loginUser.toJson());
+    _data.addAll(joinUser.toJson());
     final _result = await _dio.fetch(_setStreamType<dynamic>(Options(
       method: 'POST',
       headers: _headers,
@@ -34,7 +34,7 @@ class _LoginUserHttpRepository implements LoginUserHttpRepository {
     )
         .compose(
           _dio.options,
-          '/login',
+          '/s/api/join',
           queryParameters: queryParameters,
           data: _data,
         )
