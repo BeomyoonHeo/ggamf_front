@@ -143,7 +143,15 @@ class _RecommendGgamfListTabViewState extends State<RecommendGgamfListTabView>
                         },
                       ),
                       IconButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          function() {
+                            rgc.denyReceiveGgamf(ggamfList[index].userId);
+                            Navigator.pop(context);
+                          }
+
+                          _showAlertDialog(context, '껨프 요청 무시',
+                              '해당 껨프요청을 무시하시겠습니까?', function);
+                        },
                         icon: const Icon(Icons.delete),
                       ),
                     ],
@@ -157,6 +165,7 @@ class _RecommendGgamfListTabViewState extends State<RecommendGgamfListTabView>
   }
 
   Widget _buildSendGgamfListView(List<Ggamf> ggamfList, WidgetRef ref) {
+    final rgc = ref.read(ggamfController);
     return ggamfList.isEmpty
         ? const Center(
             child: Text('현재 추전껨프가 없습니다.'),
@@ -173,7 +182,15 @@ class _RecommendGgamfListTabViewState extends State<RecommendGgamfListTabView>
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       IconButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          function() {
+                            rgc.cancelSendGgamf(ggamfList[index].userId);
+                            Navigator.pop(context);
+                          }
+
+                          _showAlertDialog(context, '껨프 요청 무시',
+                              '해당 껨프요청을 무시하시겠습니까?', function);
+                        },
                         icon: const Icon(CupertinoIcons.xmark),
                       ),
                     ],

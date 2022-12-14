@@ -135,7 +135,7 @@ class _RecommendGgamfListRepository implements RecommendGgamfListRepository {
     )
         .compose(
           _dio.options,
-          '/s/api/ggamf/user/${id}/reject/{targetId/',
+          '/s/api/ggamf/user/${id}/reject/${targetId}',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -145,7 +145,10 @@ class _RecommendGgamfListRepository implements RecommendGgamfListRepository {
   }
 
   @override
-  Future<dynamic> cancelSendGgamf({required id}) async {
+  Future<dynamic> cancelSendGgamf({
+    required id,
+    required targetId,
+  }) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -157,32 +160,7 @@ class _RecommendGgamfListRepository implements RecommendGgamfListRepository {
     )
         .compose(
           _dio.options,
-          '/s/api/ggamf/user/${id}',
-          queryParameters: queryParameters,
-          data: _data,
-        )
-        .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = _result.data;
-    return value;
-  }
-
-  @override
-  Future<dynamic> postUser({
-    required id,
-    required body,
-  }) async {
-    const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{};
-    final _data = body;
-    final _result = await _dio.fetch(_setStreamType<dynamic>(Options(
-      method: 'POST',
-      headers: _headers,
-      extra: _extra,
-    )
-        .compose(
-          _dio.options,
-          '/user/${id}',
+          '/s/api/ggamf/user/${id}/cancel/${targetId}',
           queryParameters: queryParameters,
           data: _data,
         )

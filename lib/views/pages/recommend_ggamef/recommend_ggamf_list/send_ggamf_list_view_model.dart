@@ -16,9 +16,8 @@ class SendGgamfListViewModel extends StateNotifier<List<Ggamf>> {
   RecommendGgamfListRepository repo = RecommendGgamfListRepository(Dio()
     ..interceptors.add(CustomLogInterceptor())
     ..interceptors.add(SignedInterceptor()));
-
+  List<Ggamf> sendGgamfList = [];
   void init() {
-    List<Ggamf> sendGgamfList = [];
     repo.getSendGgamfList(id: UserSession.user.id).then(
       (value) {
         value.data['followings']?.forEach((_ggamf) {
@@ -34,5 +33,9 @@ class SendGgamfListViewModel extends StateNotifier<List<Ggamf>> {
         state = sendGgamfList;
       },
     );
+  }
+
+  cancelSendGgamf(int id) {
+    state = state.where((_ggamf) => _ggamf.userId != id).toList();
   }
 }

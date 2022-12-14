@@ -49,4 +49,8 @@ class ReceiveGgamfListViewModel extends StateNotifier<List<Ggamf>> {
       return false;
     }).toList();
   }
+
+  void denyGgamf(int id) {
+    state = state.where((_ggamf) => _ggamf.userId != id).toList();
+  }
 }

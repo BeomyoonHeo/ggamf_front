@@ -21,13 +21,13 @@ class _MyGgamfRepository implements MyGgamfRepository {
   String? baseUrl;
 
   @override
-  Future<MyGgamfList> myGgamf({required userId}) async {
+  Future<Ggamf> myGgamf({required userId}) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<MyGgamfList>(Options(
+    final _result =
+        await _dio.fetch<Map<String, dynamic>>(_setStreamType<Ggamf>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -39,12 +39,12 @@ class _MyGgamfRepository implements MyGgamfRepository {
               data: _data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = MyGgamfList.fromJson(_result.data!);
+    final value = Ggamf.fromJson(_result.data!);
     return value;
   }
 
   @override
-  Future<FollowGgamf> followGgamf({
+  Future<Ggamf> followGgamf({
     required followingId,
     required followGgamf,
   }) async {
@@ -53,8 +53,8 @@ class _MyGgamfRepository implements MyGgamfRepository {
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(followGgamf.toJson());
-    final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<FollowGgamf>(Options(
+    final _result =
+        await _dio.fetch<Map<String, dynamic>>(_setStreamType<Ggamf>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
@@ -66,12 +66,12 @@ class _MyGgamfRepository implements MyGgamfRepository {
               data: _data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = FollowGgamf.fromJson(_result.data!);
+    final value = Ggamf.fromJson(_result.data!);
     return value;
   }
 
   @override
-  Future<RejectGgamf> rejectGgamf({
+  Future<Ggamf> rejectGgamf({
     required followId,
     required userId,
   }) async {
@@ -79,8 +79,8 @@ class _MyGgamfRepository implements MyGgamfRepository {
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<RejectGgamf>(Options(
+    final _result =
+        await _dio.fetch<Map<String, dynamic>>(_setStreamType<Ggamf>(Options(
       method: 'DELETE',
       headers: _headers,
       extra: _extra,
@@ -92,7 +92,7 @@ class _MyGgamfRepository implements MyGgamfRepository {
               data: _data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = RejectGgamf.fromJson(_result.data!);
+    final value = Ggamf.fromJson(_result.data!);
     return value;
   }
 
@@ -123,7 +123,7 @@ class _MyGgamfRepository implements MyGgamfRepository {
   }
 
   @override
-  Future<CancelGgamf> cancelGgamf({
+  Future<Ggamf> cancelGgamf({
     required followId,
     required userId,
   }) async {
@@ -131,8 +131,8 @@ class _MyGgamfRepository implements MyGgamfRepository {
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<CancelGgamf>(Options(
+    final _result =
+        await _dio.fetch<Map<String, dynamic>>(_setStreamType<Ggamf>(Options(
       method: 'DELETE',
       headers: _headers,
       extra: _extra,
@@ -144,12 +144,12 @@ class _MyGgamfRepository implements MyGgamfRepository {
               data: _data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = CancelGgamf.fromJson(_result.data!);
+    final value = Ggamf.fromJson(_result.data!);
     return value;
   }
 
   @override
-  Future<AcceptGgamf> acceptGgamf({
+  Future<Ggamf> acceptGgamf({
     required followId,
     required userId,
     required acceptGgamf,
@@ -159,8 +159,8 @@ class _MyGgamfRepository implements MyGgamfRepository {
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(acceptGgamf.toJson());
-    final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<AcceptGgamf>(Options(
+    final _result =
+        await _dio.fetch<Map<String, dynamic>>(_setStreamType<Ggamf>(Options(
       method: 'PUT',
       headers: _headers,
       extra: _extra,
@@ -172,7 +172,7 @@ class _MyGgamfRepository implements MyGgamfRepository {
               data: _data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = AcceptGgamf.fromJson(_result.data!);
+    final value = Ggamf.fromJson(_result.data!);
     return value;
   }
 

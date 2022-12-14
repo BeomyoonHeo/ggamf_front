@@ -1,12 +1,8 @@
 import 'package:dio/dio.dart';
-import 'package:ggamf_front/domain/ggamf/model/cancel_ggamf.dart';
-import 'package:ggamf_front/domain/ggamf/model/my_ggamf.dart';
+import 'package:ggamf_front/domain/user/model/ggamf.dart';
 import 'package:ggamf_front/utils/page_enum.dart';
 import 'package:retrofit/http.dart';
 
-import '../model/accept_ggamf.dart';
-import '../model/follow_ggamf.dart';
-import '../model/reject_ggamf.dart';
 import '../model/report_ggamf.dart';
 import '../model/unfollow_ggamf.dart';
 
@@ -18,17 +14,17 @@ abstract class MyGgamfRepository {
 
   //내 껨프 목록보기
   @GET("/s/api/ggamf/user/{userId}/list")
-  Future<MyGgamfList> myGgamf({@Path('userId') required int userId});
+  Future<Ggamf> myGgamf({@Path('userId') required int userId});
 
   //껨프 요청
   @POST("/s/api/ggamf/follow/{followingId}")
-  Future<FollowGgamf> followGgamf(
+  Future<Ggamf> followGgamf(
       {@Path('followingId') required int followingId,
-      @Body() required FollowGgamf followGgamf});
+      @Body() required Ggamf followGgamf});
 
   //껨프 거절
   @DELETE("/s/api/ggamf/user/{userId}/unfollow/{followId}")
-  Future<RejectGgamf> rejectGgamf(
+  Future<Ggamf> rejectGgamf(
       {@Path('followId') required int followId,
       @Path('userId') required int userId});
 
@@ -40,16 +36,16 @@ abstract class MyGgamfRepository {
 
   //껨프 요청 취소
   @DELETE("/s/api/ggamf/user/{userId}/cancel/{followId}")
-  Future<CancelGgamf> cancelGgamf(
+  Future<Ggamf> cancelGgamf(
       {@Path('followId') required int followId,
       @Path('userId') required int userId});
 
   //껨프 요청 수락
   @PUT("/s/api/ggamf/user/{userId}/accept/{followId}")
-  Future<AcceptGgamf> acceptGgamf(
+  Future<Ggamf> acceptGgamf(
       {@Path('followId') required int followId,
       @Path('userId') required int userId,
-      @Body() required AcceptGgamf acceptGgamf});
+      @Body() required Ggamf acceptGgamf});
 
   //유저 신고
   @POST("/s/api/ggamf/user/{userId}/report/{badUserId}")
