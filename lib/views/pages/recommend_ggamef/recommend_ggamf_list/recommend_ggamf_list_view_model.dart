@@ -6,7 +6,9 @@ import 'package:ggamf_front/domain/user/repository/user_repository.dart';
 import 'package:ggamf_front/utils/custom_intercepter.dart';
 import 'package:ggamf_front/utils/validator_util.dart';
 
-final recommendGgamfListViewModel = StateNotifierProvider.autoDispose<RecommendGgamfListViewModel, List<Ggamf>>((ref) {
+final recommendGgamfListViewModel =
+    StateNotifierProvider.autoDispose<RecommendGgamfListViewModel, List<Ggamf>>(
+        (ref) {
   return RecommendGgamfListViewModel([], ref)..init();
 });
 
@@ -17,10 +19,12 @@ class RecommendGgamfListViewModel extends StateNotifier<List<Ggamf>> {
   final dio = Dio()
     ..interceptors.add(CustomLogInterceptor())
     ..interceptors.add(SignedInterceptor());
+
+  List<Ggamf> recommendGgamfList = [];
+
   void init() {
     // 최초 init 시에만 repository에 의존
     RecommendGgamfListRepository repo = RecommendGgamfListRepository(dio);
-    List<Ggamf> recommendGgamfList = [];
     logger.d(UserSession.user.id);
     repo.getRecommendGgamfList(id: UserSession.user.id).then(
       (value) {

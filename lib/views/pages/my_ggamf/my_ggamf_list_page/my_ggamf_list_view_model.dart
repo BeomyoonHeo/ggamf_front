@@ -7,13 +7,13 @@ import 'package:ggamf_front/utils/validator_util.dart';
 
 import '../../../../utils/custom_intercepter.dart';
 
-final myGgamfListViewModel = StateNotifierProvider.autoDispose<MyGgamfListViewModel, List<Ggamf>>((ref) {
+final myGgamfListViewModel =
+    StateNotifierProvider.autoDispose<MyGgamfListViewModel, List<Ggamf>>((ref) {
   return MyGgamfListViewModel([])..init();
 });
 
 class MyGgamfListViewModel extends StateNotifier<List<Ggamf>> {
   MyGgamfListViewModel(super.state);
-
   MyGgamfRepository repo = MyGgamfRepository(Dio()
     ..interceptors.add(CustomLogInterceptor())
     ..interceptors.add(SignedInterceptor()));

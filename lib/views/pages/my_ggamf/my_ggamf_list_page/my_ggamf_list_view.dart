@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:ggamf_front/domain/ggamf/model/my_ggamf.dart';
 import 'package:ggamf_front/domain/user/model/ggamf.dart';
 import 'package:ggamf_front/utils/validator_util.dart';
 import 'package:ggamf_front/views/pages/my_ggamf/my_ggamf_list_page/my_ggamf_list_view_model.dart';
 import 'package:ggamf_front/views/pages/profile/opponent_profile/opponent_profile_view.dart';
-
-import '../../../common_components/custom_icons_icons.dart';
 
 class MyGgamfListView extends ConsumerWidget {
   const MyGgamfListView({Key? key}) : super(key: key);
@@ -41,7 +38,10 @@ class MyGgamfListView extends ConsumerWidget {
               height: 120,
               child: InkWell(
                 onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => OpponentProfileView()));
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => OpponentProfileView()));
                 },
                 child: Row(
                   children: [
@@ -67,7 +67,8 @@ class MyGgamfListView extends ConsumerWidget {
           Text(
             "${mglv[index].nickName}",
             //"김겐지",
-            style: TextStyle(fontSize: 25, color: Colors.black, fontWeight: FontWeight.w600),
+            style: TextStyle(
+                fontSize: 25, color: Colors.black, fontWeight: FontWeight.w600),
           ),
           SizedBox(height: 10),
           Text(
@@ -97,7 +98,8 @@ AppBar _appBar() {
     backgroundColor: Colors.white,
     title: Text(
       "내 껨프",
-      style: TextStyle(color: Colors.black, fontFamily: 'NanumSquare', fontSize: 25),
+      style: TextStyle(
+          color: Colors.black, fontFamily: 'NanumSquare', fontSize: 25),
     ),
     elevation: 0,
   );

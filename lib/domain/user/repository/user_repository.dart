@@ -38,10 +38,23 @@ class Session {
 
 @RestApi(baseUrl: baseUrl)
 abstract class RecommendGgamfListRepository {
-  factory RecommendGgamfListRepository(Dio dio, {String baseUrl}) = _RecommendGgamfListRepository;
+  factory RecommendGgamfListRepository(Dio dio, {String baseUrl}) =
+      _RecommendGgamfListRepository;
 
-  @POST('/users/{id}')
-  Future<dynamic> postUser({@Path() required int id, @Body() required dynamic body});
+  //받은 껨프 요청 수락하기
+  @PUT('/s/api/ggamf/user/{id}/accept/{targetId}')
+  Future<dynamic> acceptReceiveGgmaf(
+      {@Path('id') required int id, @Path('targetId') required int targetId});
+
+  //받은 껨프 요청 무시하기
+  @DELETE('/s/api/ggamf/user/{id}/reject/{targetId}')
+  Future<dynamic> denyReceiveGgamf(
+      {@Path('id') required int id, @Path('targetId') required int targetId});
+
+  //보낸 껨프 요청 취소하기
+  @DELETE('/s/api/ggamf/user/{id}/cancel/{targetId}')
+  Future<dynamic> cancelSendGgamf(
+      {@Path('id') required int id, @Path('targetId') required int targetId});
 
   //추천 겜프 리스트 불러오기
   @GET('/s/api/ggamf/user/{id}/recommend')
@@ -57,20 +70,27 @@ abstract class RecommendGgamfListRepository {
 
   // 겜프 요청하기
   @POST('/s/api/ggamf/{id}/follow/{followUserId}')
-  Future<dynamic> requestGgmf({@Path('id') required int id, @Path('followUserId') required int followUserId});
+  Future<dynamic> requestGgmf(
+      {@Path('id') required int id,
+      @Path('followUserId') required int followUserId});
 
   //겜프 요청 수락하기
   @PUT('/s/api/ggamf/user/{id}/accept/{followUserId}')
-  Future<dynamic> acceptGgamf({@Path('id') required int id, @Path('followUserId') required int followUserId});
+  Future<dynamic> acceptGgamf(
+      {@Path('id') required int id,
+      @Path('followUserId') required int followUserId});
 }
 
 @RestApi(baseUrl: baseUrl)
 abstract class ProfileUserRepository {
-  factory ProfileUserRepository(Dio dio, {String baseUrl}) = _ProfileUserRepository;
+  factory ProfileUserRepository(Dio dio, {String baseUrl}) =
+      _ProfileUserRepository;
 
   @GET("/s/api/user/{userId}/detail")
   Future<dynamic> getUserProfile({@Path('userId') required int userId});
 
   @PUT("/s/api/user/{userId}/update")
-  Future<dynamic> putUserProfile({@Path('userId') required int userId, @Body() required UpdateUser updateUser});
+  Future<dynamic> putUserProfile(
+      {@Path('userId') required int userId,
+      @Body() required UpdateUser updateUser});
 }
