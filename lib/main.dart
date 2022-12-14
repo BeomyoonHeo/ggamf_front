@@ -18,12 +18,16 @@ void main() async {
     DeviceOrientation.portraitDown,
   ]); //세로화면 고정
   SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);
-  Session().getInitSession().then((value) => runApp(SplashPage(
-        key: UniqueKey(),
-        onInitializationComplete: () {
-          runApp(const ProviderScope(child: MyApp()));
-        },
-      )));
+  Session().getInitSession().then(
+        (value) => runApp(
+          SplashPage(
+            key: UniqueKey(),
+            onInitializationComplete: () {
+              runApp(const ProviderScope(child: MyApp()));
+            },
+          ),
+        ),
+      );
 }
 
 // 페이지 context를 global로 가지고 있을 NavigatorKey 적용

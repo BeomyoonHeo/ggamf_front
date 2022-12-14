@@ -1,30 +1,30 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:ggamf_front/domain/user/model/get_profile_user.dart';
+import 'package:ggamf_front/domain/user/model/profile_user.dart';
 import 'package:ggamf_front/domain/user/model/user.dart';
 import 'package:ggamf_front/domain/user/repository/user_repository.dart';
 import 'package:ggamf_front/utils/custom_intercepter.dart';
-import 'package:ggamf_front/utils/validator_util.dart';
 
-final myProfileViewModel = StateNotifierProvider.autoDispose<MyProfileViewModel, GetProfileUser>((ref) {
-  logger.d("실행댐");
-  return MyProfileViewModel(GetProfileUser(intro: null, nickname: null, photo: null), ref)..init();
+final myProfileViewModel = StateNotifierProvider.autoDispose<MyProfileViewModel, ProfileUser>((ref) {
+  return MyProfileViewModel(ProfileUser(intro: null, nickname: null, photo: null), ref)..init();
 });
 
 //View의 데이터를 가짐
-class MyProfileViewModel extends StateNotifier<GetProfileUser> {
+class MyProfileViewModel extends StateNotifier<ProfileUser> {
   final Ref _ref;
   MyProfileViewModel(super.state, this._ref);
 
-  Dio dio = Dio()..interceptors.add(CustomLogInterceptor());
+  Dio dio = Dio()
+    ..interceptors.add(CustomLogInterceptor())
+    ..interceptors.add(SignedInterceptor());
 
   void init() {
     ProfileUserRepository restApi = ProfileUserRepository(dio);
     restApi.getUserProfile(userId: UserSession.user.id).then((value) {
-      GetProfileUser? getProfileUser;
+      ProfileUser? profileUser;
       Map<String, dynamic> data = value;
-      data.forEach((key, value) => key == 'data' ? getProfileUser = GetProfileUser.fromJson(value) : null);
-      state = getProfileUser!;
+      data.forEach((key, value) => key == 'data' ? profileUser = ProfileUser.fromJson(value) : '');
+      state = profileUser!;
     });
   }
 }

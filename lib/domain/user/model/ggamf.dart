@@ -4,8 +4,7 @@ part 'ggamf.g.dart';
 
 @JsonSerializable()
 class GgamfList {
-  List<Ggamf> data;
-
+  Map<String, List<Ggamf>> data;
   GgamfList({required this.data});
 
   factory GgamfList.fromJson(Map<String, dynamic> json) =>
@@ -15,13 +14,13 @@ class GgamfList {
 
 @JsonSerializable()
 class Ggamf {
-  int friendId;
+  int userId;
   String nickName;
   String photo;
   String intro;
 
   Ggamf(
-      {required this.friendId,
+      {required this.userId,
       required this.nickName,
       required this.photo,
       required this.intro});

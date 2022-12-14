@@ -4,8 +4,9 @@ import 'package:ggamf_front/domain/user/model/ggamf.dart';
 import 'package:ggamf_front/domain/user/model/user.dart';
 import 'package:ggamf_front/domain/user/repository/user_repository.dart';
 import 'package:ggamf_front/utils/custom_intercepter.dart';
+import 'package:ggamf_front/utils/validator_util.dart';
 
-final recommendGgamfListViewModel = StateNotifierProvider<RecommendGgamfListViewModel, List<Ggamf>>((ref) {
+final recommendGgamfListViewModel = StateNotifierProvider.autoDispose<RecommendGgamfListViewModel, List<Ggamf>>((ref) {
   return RecommendGgamfListViewModel([], ref)..init();
 });
 
@@ -20,12 +21,13 @@ class RecommendGgamfListViewModel extends StateNotifier<List<Ggamf>> {
     // 최초 init 시에만 repository에 의존
     RecommendGgamfListRepository repo = RecommendGgamfListRepository(dio);
     List<Ggamf> recommendGgamfList = [];
+    logger.d(UserSession.user.id);
     repo.getRecommendGgamfList(id: UserSession.user.id).then(
       (value) {
-        value.data.forEach((_ggamf) {
+        value.data['recommendUserList']?.forEach((_ggamf) {
           recommendGgamfList.add(
             Ggamf(
-              friendId: _ggamf.friendId,
+              userId: _ggamf.userId,
               photo: _ggamf.photo,
               nickName: _ggamf.nickName,
               intro: _ggamf.intro,
