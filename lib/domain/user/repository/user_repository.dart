@@ -41,7 +41,18 @@ abstract class RecommendGgamfListRepository {
   factory RecommendGgamfListRepository(Dio dio, {String baseUrl}) =
       _RecommendGgamfListRepository;
 
-  @POST('/users/{id}')
+  @PUT('/s/api/ggamf/user/{id}/accept/{targetId}')
+  Future<dynamic> acceptReceiveGgmaf(
+      {@Path('id') required int id, @Path('targetId') required int targetId});
+
+  @DELETE('/s/api/ggamf/user/{id}/reject/{targetId/')
+  Future<dynamic> denyReceiveGgamf(
+      {@Path('id') required int id, @Path('targetId') required int targetId});
+
+  @DELETE('/s/api/ggamf/user/{id}')
+  Future<dynamic> cancelSendGgamf({@Path('id') required int id});
+
+  @POST('/user/{id}')
   Future<dynamic> postUser(
       {@Path() required int id, @Body() required dynamic body});
 

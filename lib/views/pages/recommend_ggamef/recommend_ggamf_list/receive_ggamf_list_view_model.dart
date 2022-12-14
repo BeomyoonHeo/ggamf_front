@@ -7,18 +7,20 @@ import 'package:ggamf_front/utils/custom_intercepter.dart';
 
 final receiveGgamfListViewModel =
     StateNotifierProvider.autoDispose<ReceiveGgamfListViewModel, List<Ggamf>>(
-        (ref) => ReceiveGgamfListViewModel([])..init());
+        (ref) => ReceiveGgamfListViewModel([], ref)..init());
 
 class ReceiveGgamfListViewModel extends StateNotifier<List<Ggamf>> {
-  ReceiveGgamfListViewModel(super.state);
+  final Ref _ref;
+  ReceiveGgamfListViewModel(super.state, this._ref);
 
   //토큰이 필요한 곳 이므로 인터셉터 추가
   RecommendGgamfListRepository repo = RecommendGgamfListRepository(Dio()
     ..interceptors.add(CustomLogInterceptor())
     ..interceptors.add(SignedInterceptor()));
 
+  List<Ggamf> receiveGgamfList = [];
+
   void init() {
-    List<Ggamf> receiveGgamfList = [];
     repo.getReceiveggamfList(id: UserSession.user.id).then(
       (value) {
         value.data['followers']?.forEach((_ggamf) {
@@ -34,5 +36,17 @@ class ReceiveGgamfListViewModel extends StateNotifier<List<Ggamf>> {
         state = receiveGgamfList;
       },
     );
+  }
+
+  //요청 수락 후 껨프요청 리스트 변경 해주기
+  void acceptGgamf(int id) {
+    state = state.where((_ggamf) {
+      if (_ggamf.userId != id) {
+        // 여기다가 ref 땡겨서 내 껨프 ViewModel에 전달
+        //_ref.read(myGgamfListViewModel.notifier).해당메서드(_ggamf);
+        return true;
+      }
+      return false;
+    }).toList();
   }
 }
