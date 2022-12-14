@@ -13,7 +13,7 @@ class _MyGgamfRepository implements MyGgamfRepository {
     this._dio, {
     this.baseUrl,
   }) {
-    baseUrl ??= 'http://192.168.50.17:8080';
+    baseUrl ??= 'http://192.168.0.187:8080';
   }
 
   final Dio _dio;
@@ -21,13 +21,13 @@ class _MyGgamfRepository implements MyGgamfRepository {
   String? baseUrl;
 
   @override
-  Future<MyGgamfList> myGgamf({required userId}) async {
+  Future<GgamfList> myGgamfList({required userId}) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<MyGgamfList>(Options(
+        .fetch<Map<String, dynamic>>(_setStreamType<GgamfList>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -39,7 +39,7 @@ class _MyGgamfRepository implements MyGgamfRepository {
               data: _data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = MyGgamfList.fromJson(_result.data!);
+    final value = GgamfList.fromJson(_result.data!);
     return value;
   }
 
