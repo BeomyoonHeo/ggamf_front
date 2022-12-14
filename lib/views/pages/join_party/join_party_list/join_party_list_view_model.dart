@@ -5,7 +5,7 @@ import 'package:ggamf_front/domain/ggamf/repository/my_ggamf_repository.dart';
 import 'package:ggamf_front/domain/party/model/room.dart';
 import 'package:ggamf_front/domain/party/repository/room_repository.dart';
 
-final joinPartyListViewModel = StateNotifierProvider<JoinPartyListViewModel, List<Room>>((ref) {
+final joinPartyListViewModel = StateNotifierProvider.autoDispose<JoinPartyListViewModel, List<Room>>((ref) {
   return JoinPartyListViewModel([], ref)..init();
 });
 

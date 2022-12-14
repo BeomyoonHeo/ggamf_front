@@ -6,7 +6,7 @@ import 'package:ggamf_front/domain/party/repository/room_repository.dart';
 
 import '../../../../utils/custom_intercepter.dart';
 
-final myRecruitmentPartyListViewModel = StateNotifierProvider<MyRecruitmentPartyListViewModel, RoomList?>((ref) {
+final myRecruitmentPartyListViewModel = StateNotifierProvider.autoDispose<MyRecruitmentPartyListViewModel, RoomList?>((ref) {
   return MyRecruitmentPartyListViewModel(null, ref)..init();
 });
 

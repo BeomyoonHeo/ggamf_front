@@ -13,7 +13,7 @@ class _RoomRepository implements RoomRepository {
     this._dio, {
     this.baseUrl,
   }) {
-    baseUrl ??= 'http://183.104.199.106:8080';
+    baseUrl ??= 'http://192.168.0.187:8080';
   }
 
   final Dio _dio;
@@ -201,7 +201,7 @@ class _RoomRepository implements RoomRepository {
   @override
   Future<GenerateRoomParty> createRoom({
     required userId,
-    required roomId,
+    required gameCodeId,
     required generateRoomParty,
   }) async {
     const _extra = <String, dynamic>{};
@@ -217,7 +217,7 @@ class _RoomRepository implements RoomRepository {
     )
             .compose(
               _dio.options,
-              '/s/api/party/user/${userId}/create/${roomId}',
+              '/s/api/party/user/${userId}/create/${gameCodeId}',
               queryParameters: queryParameters,
               data: _data,
             )
