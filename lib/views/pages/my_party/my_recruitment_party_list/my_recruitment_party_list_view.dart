@@ -47,7 +47,7 @@ class _MyRecruitmentPartyListViewState extends State<MyRecruitmentPartyListView>
               Navigator.push(context, MaterialPageRoute(builder: (context) => CreatePartyView()));
             },
             icon: Icon(
-              FontAwesomeIcons.personCirclePlus,
+              FontAwesomeIcons.userPlus,
               color: Colors.black,
               size: 25,
             ),
