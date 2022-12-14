@@ -15,10 +15,12 @@ class CreatePartyView extends ConsumerStatefulWidget {
 
 class _CreatePartyViewState extends ConsumerState<CreatePartyView> {
   //{'게임선택': 0, '리그 오브 레전드': 1, '오버워치': 2, '로스트아크': 3, '발로란트': 4, '기타': 5};
-  List<DropdownMenuItem<int>> _valueList = [];
+  //List<DropdownMenuItem<int>> _valueList = [];
   // object.map(key, value){
   //   _valueList.add(DropdownMenuItem(child: Text('${key}'), value: value,));
   // }
+
+  List<String> _valueList = ['게임선택', '리그 오브 레전드', '오버워치', '로스트아크', '발로란트', '기타'];
   var _selectedValue = '게임선택';
 
   List<String> _numList = ['인원선택', '2', '3', '4', '5', '6', '7', '8'];
@@ -147,36 +149,37 @@ class _CreatePartyViewState extends ConsumerState<CreatePartyView> {
         borderRadius: BorderRadius.circular(20),
         border: Border.all(width: 1),
       ),
-      child: Column(
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          // DropdownButton(
-          //   value: _selectedValue,
-          //   items: _valueList.map((value, item) {
-          //     return DropdownMenuItem<int>(
-          //       child: Text('$item'),
-          //       value: item,
-          //     );
-          //   }).toList(),
-          //   onChanged: (dynamic value) {
-          //     setState(
-          //       () {
-          //         _selectedValue = value;
-          //         if (value == '기타') {
-          //           _enableTextField = true;
-          //           cpc.selectGameController.text = '';
-          //         } else if (value == '게임선택') {
-          //           cpc.selectGameController.text = '';
-          //           _enableTextField = false;
-          //         } else {
-          //           _enableTextField = true;
-          //           cpc.selectGameController.text = value;
-          //           _enableTextField = false;
-          //         }
-          //         ;
-          //       },
-          //     );
-          //   },
-          // ),
+          DropdownButton(
+            value: _selectedValue,
+            items: _valueList.map((String item) {
+              return DropdownMenuItem<String>(
+                child: Text('$item'),
+                value: item,
+              );
+            }).toList(),
+            onChanged: (dynamic value) {
+              setState(
+                () {
+                  _selectedValue = value;
+                  if (value == '기타') {
+                    _enableTextField = true;
+                    cpc.selectGameController.text = '';
+                  } else if (value == '게임선택') {
+                    cpc.selectGameController.text = '';
+                    _enableTextField = false;
+                  } else {
+                    _enableTextField = true;
+                    cpc.selectGameController.text = value;
+                    _enableTextField = false;
+                  }
+                  ;
+                },
+              );
+            },
+          ),
           SizedBox(
             width: 150,
             height: 40,
