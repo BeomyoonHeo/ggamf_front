@@ -54,17 +54,27 @@ class UserSession {
   }
 
   static void setJwtTokenHeader(Headers headers) {
-    storage.read(key: 'jwtToken').then((value) {
-      storage
-          .write(
-              key: 'jwtToken',
-              value: headers.value('Authorization')?.replaceAll('Bearer ', ''))
-          .then((value) {
-        _jwtToken = headers.value('Authorization');
-        Map<String, dynamic> userInfo =
-            Jwt.parseJwt(_jwtToken!.replaceAll('Bearer ', ''));
-        logger.d(userInfo);
-      });
+    // storage.read(key: 'jwtToken').then((value) {
+    //   storage
+    //       .write(
+    //           key: 'jwtToken',
+    //           value: headers.value('Authorization')?.replaceAll('Bearer ', ''))
+    //       .then((value) {
+    //     _jwtToken = headers.value('Authorization');
+    //     Map<String, dynamic> userInfo =
+    //         Jwt.parseJwt(_jwtToken!.replaceAll('Bearer ', ''));
+    //     logger.d(userInfo);
+    //   });
+    // });
+    storage
+        .write(
+            key: 'jwtToken',
+            value: headers.value('Authorization')?.replaceAll('Bearer ', ''))
+        .then((value) {
+      _jwtToken = headers.value('Authorization');
+      Map<String, dynamic> userInfo =
+          Jwt.parseJwt(_jwtToken!.replaceAll('Bearer ', ''));
+      logger.d(userInfo);
     });
   }
 
