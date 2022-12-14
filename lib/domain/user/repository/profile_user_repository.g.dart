@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'my_ggamf_repository.dart';
+part of 'profile_user_repository.dart';
 
 // **************************************************************************
 // RetrofitGenerator
@@ -8,8 +8,8 @@ part of 'my_ggamf_repository.dart';
 
 // ignore_for_file: unnecessary_brace_in_string_interps,no_leading_underscores_for_local_identifiers
 
-class _MyGgamfRepository implements MyGgamfRepository {
-  _MyGgamfRepository(
+class _ProfileUserRepository implements ProfileUserRepository {
+  _ProfileUserRepository(
     this._dio, {
     this.baseUrl,
   }) {
@@ -21,80 +21,79 @@ class _MyGgamfRepository implements MyGgamfRepository {
   String? baseUrl;
 
   @override
-  Future<GgamfList> myGgamfList({required userId}) async {
+  Future<ProfileUser> getUserProfile({required userId}) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<GgamfList>(Options(
+        .fetch<Map<String, dynamic>>(_setStreamType<ProfileUser>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
     )
             .compose(
               _dio.options,
-              '/s/api/ggamf/user/${userId}/list',
+              '/s/api/user/${userId}/detail',
               queryParameters: queryParameters,
               data: _data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = GgamfList.fromJson(_result.data!);
+    final value = ProfileUser.fromJson(_result.data!);
     return value;
   }
 
   @override
-  Future<Ggamf> followGgamf({
-    required followingId,
-    required followGgamf,
-  }) async {
-    const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{};
-    final _data = <String, dynamic>{};
-    _data.addAll(followGgamf.toJson());
-    final _result =
-        await _dio.fetch<Map<String, dynamic>>(_setStreamType<Ggamf>(Options(
-      method: 'POST',
-      headers: _headers,
-      extra: _extra,
-    )
-            .compose(
-              _dio.options,
-              '/s/api/ggamf/follow/${followingId}',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = Ggamf.fromJson(_result.data!);
-    return value;
-  }
-
-  @override
-  Future<ReportGgamf> reportGgamf({
+  Future<ProfileUser> putUserProfile({
     required userId,
-    required badUserId,
-    required reportGgamf,
+    required profileUser,
   }) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    _data.addAll(reportGgamf.toJson());
+    _data.addAll(profileUser.toJson());
     final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<ReportGgamf>(Options(
-      method: 'POST',
+        .fetch<Map<String, dynamic>>(_setStreamType<ProfileUser>(Options(
+      method: 'PUT',
       headers: _headers,
       extra: _extra,
     )
             .compose(
               _dio.options,
-              '/s/api/ggamf/user/${userId}/report/${badUserId}',
+              '/s/api/user/${userId}/update',
               queryParameters: queryParameters,
               data: _data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = ReportGgamf.fromJson(_result.data!);
+    final value = ProfileUser.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<WithdrawUser> withdrawUser({
+    required userId,
+    required withdrawUser,
+  }) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(withdrawUser.toJson());
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<WithdrawUser>(Options(
+      method: 'PUT',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/s/api/user/${userId}/withdraw',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = WithdrawUser.fromJson(_result.data!);
     return value;
   }
 

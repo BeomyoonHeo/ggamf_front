@@ -54,8 +54,7 @@ class _MyAppState extends State<MyApp> {
       debugShowCheckedModeBanner: false,
       navigatorKey: navigatorKey,
       initialRoute: UserSession.jwtToken != null
-          ? PageEnum.getByDisPlayName('login')
-              .requestLocation //PageEnum.ALLPAGES.requestLocation
+          ? PageEnum.getByDisPlayName('login').requestLocation //PageEnum.ALLPAGES.requestLocation
           : PageEnum.getByDisPlayName('login').requestLocation,
       routes: {
         PageEnum.LOGIN.requestLocation: (context) => LoginUserView(),

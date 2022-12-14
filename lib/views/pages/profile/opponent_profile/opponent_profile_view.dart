@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ggamf_front/controller/user/opponent_profile_controller.dart';
+import 'package:ggamf_front/domain/user/model/get_profile_user.dart';
 import 'package:ggamf_front/domain/user/model/profile_user.dart';
 
 import 'opponent_profile_view_model.dart';
@@ -19,8 +20,6 @@ class _OpponentProfileViewState extends ConsumerState<OpponentProfileView> {
 
   @override
   Widget build(BuildContext context) {
-    //opc = opponentProfileController
-    final opc = ref.read(opponentProfileController);
     //opvm = opponentProfileViewModel
     final opvm = ref.watch(opponentProfileViewModel);
 
@@ -61,7 +60,7 @@ class _OpponentProfileViewState extends ConsumerState<OpponentProfileView> {
     );
   }
 
-  Widget _buildCircleAvatar(ProfileUser opvm) {
+  Widget _buildCircleAvatar(GetProfileUser opvm) {
     return Center(
       child: CircleAvatar(
         radius: 70,
@@ -140,7 +139,7 @@ class _OpponentProfileViewState extends ConsumerState<OpponentProfileView> {
     );
   }
 
-  Widget _introduce(ProfileUser opvm) {
+  Widget _introduce(GetProfileUser opvm) {
     return Container(
       padding: EdgeInsets.all(10),
       width: double.infinity,
@@ -159,7 +158,7 @@ class _OpponentProfileViewState extends ConsumerState<OpponentProfileView> {
     );
   }
 
-  Widget _nickName(ProfileUser opvm) {
+  Widget _nickName(GetProfileUser opvm) {
     return Container(
       padding: EdgeInsets.all(5),
       decoration: BoxDecoration(

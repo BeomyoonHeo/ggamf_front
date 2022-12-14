@@ -25,7 +25,6 @@ class RecommendGgamfListViewModel extends StateNotifier<List<Ggamf>> {
   void init() {
     // 최초 init 시에만 repository에 의존
     RecommendGgamfListRepository repo = RecommendGgamfListRepository(dio);
-
     logger.d(UserSession.user.id);
     repo.getRecommendGgamfList(id: UserSession.user.id).then(
       (value) {
