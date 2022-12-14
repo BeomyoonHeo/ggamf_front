@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:ggamf_front/controller/party/create_party_controller.dart';
+import 'package:ggamf_front/utils/validator_util.dart';
 import 'package:ggamf_front/views/pages/chatting/chatting_view.dart';
+import 'package:ggamf_front/views/pages/my_party/my_recruitment_party_list/my_recruitment_party_list_view.dart';
 
 class CreatePartyView extends ConsumerStatefulWidget {
   const CreatePartyView({Key? key}) : super(key: key);
@@ -11,8 +14,13 @@ class CreatePartyView extends ConsumerStatefulWidget {
 }
 
 class _CreatePartyViewState extends ConsumerState<CreatePartyView> {
+  //{'게임선택': 0, '리그 오브 레전드': 1, '오버워치': 2, '로스트아크': 3, '발로란트': 4, '기타': 5};
+  //List<DropdownMenuItem<int>> _valueList = [];
+  // object.map(key, value){
+  //   _valueList.add(DropdownMenuItem(child: Text('${key}'), value: value,));
+  // }
+
   List<String> _valueList = ['게임선택', '리그 오브 레전드', '오버워치', '로스트아크', '발로란트', '기타'];
-  List<int> _gameCode = [1, 2, 3, 4, 5, 6, 7, 8];
   var _selectedValue = '게임선택';
 
   List<String> _numList = ['인원선택', '2', '3', '4', '5', '6', '7', '8'];
@@ -97,7 +105,7 @@ class _CreatePartyViewState extends ConsumerState<CreatePartyView> {
           onPressed: () {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => ChattingView()),
+              MaterialPageRoute(builder: (context) => MyRecruitmentPartyListView()),
             );
             cpc.requestCreateRoom();
           },
@@ -141,7 +149,8 @@ class _CreatePartyViewState extends ConsumerState<CreatePartyView> {
         borderRadius: BorderRadius.circular(20),
         border: Border.all(width: 1),
       ),
-      child: Column(
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           DropdownButton(
             value: _selectedValue,

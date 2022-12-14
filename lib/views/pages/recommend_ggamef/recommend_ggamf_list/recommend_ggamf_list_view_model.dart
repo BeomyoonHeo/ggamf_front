@@ -6,9 +6,7 @@ import 'package:ggamf_front/domain/user/repository/user_repository.dart';
 import 'package:ggamf_front/utils/custom_intercepter.dart';
 import 'package:ggamf_front/utils/validator_util.dart';
 
-final recommendGgamfListViewModel =
-    StateNotifierProvider.autoDispose<RecommendGgamfListViewModel, List<Ggamf>>(
-        (ref) {
+final recommendGgamfListViewModel = StateNotifierProvider.autoDispose<RecommendGgamfListViewModel, List<Ggamf>>((ref) {
   return RecommendGgamfListViewModel([], ref)..init();
 });
 

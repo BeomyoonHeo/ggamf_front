@@ -1,8 +1,10 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ggamf_front/controller/user/my_profile_controller.dart';
+import 'package:ggamf_front/utils/validator_util.dart';
 import 'package:ggamf_front/views/pages/profile/my_profile/my_profile_view_model.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -18,6 +20,23 @@ class UpdateMyProfileView extends ConsumerStatefulWidget {
 class _UpdateMyProfileViewState extends ConsumerState<UpdateMyProfileView> {
   File? _imageFile;
   final ImagePicker _picker = ImagePicker();
+
+  void _pickIamgeBase64() async {
+    final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
+    if (image == null) return;
+
+    List<int> imagebyte = await image!.readAsBytes();
+    String _base64 = base64Encode(imagebyte);
+
+    logger.d(_base64);
+
+    final imagePath = File(image.path);
+    print(imagePath);
+    setState(() {
+      this._imageFile = imagePath;
+    });
+  }
+
   final _nickname = TextEditingController();
   final _email = TextEditingController();
   final _password = TextEditingController();
