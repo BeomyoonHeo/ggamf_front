@@ -1,7 +1,5 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:ggamf_front/domain/ggamf/model/my_ggamf.dart';
-import 'package:ggamf_front/domain/ggamf/repository/my_ggamf_repository.dart';
 import 'package:ggamf_front/domain/party/model/room.dart';
 import 'package:ggamf_front/domain/party/repository/room_repository.dart';
 

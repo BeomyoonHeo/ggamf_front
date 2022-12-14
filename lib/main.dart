@@ -51,6 +51,7 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       navigatorKey: navigatorKey,
       initialRoute: UserSession.jwtToken != null
           ? PageEnum.getByDisPlayName('login').requestLocation //PageEnum.ALLPAGES.requestLocation
