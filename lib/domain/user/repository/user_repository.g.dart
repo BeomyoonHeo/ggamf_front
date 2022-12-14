@@ -13,7 +13,7 @@ class _UserRepository implements UserRepository {
     this._dio, {
     this.baseUrl,
   }) {
-    baseUrl ??= 'http://192.168.50.17:8080';
+    baseUrl ??= 'http://172.25.96.1:8080';
   }
 
   final Dio _dio;
@@ -87,7 +87,7 @@ class _RecommendGgamfListRepository implements RecommendGgamfListRepository {
     this._dio, {
     this.baseUrl,
   }) {
-    baseUrl ??= 'http://192.168.50.17:8080';
+    baseUrl ??= 'http://172.25.96.1:8080';
   }
 
   final Dio _dio;
@@ -95,7 +95,7 @@ class _RecommendGgamfListRepository implements RecommendGgamfListRepository {
   String? baseUrl;
 
   @override
-  Future<User> postUser({
+  Future<dynamic> postUser({
     required id,
     required body,
   }) async {
@@ -103,31 +103,30 @@ class _RecommendGgamfListRepository implements RecommendGgamfListRepository {
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = body;
-    final _result =
-        await _dio.fetch<Map<String, dynamic>>(_setStreamType<User>(Options(
+    final _result = await _dio.fetch(_setStreamType<dynamic>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
     )
-            .compose(
-              _dio.options,
-              '/users/${id}',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = User.fromJson(_result.data!);
+        .compose(
+          _dio.options,
+          '/users/${id}',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = _result.data;
     return value;
   }
 
   @override
-  Future<User> getUserList({required id}) async {
+  Future<GgamfList> getRecommendGgamfList({required id}) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    final _result =
-        await _dio.fetch<Map<String, dynamic>>(_setStreamType<User>(Options(
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<GgamfList>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -139,7 +138,51 @@ class _RecommendGgamfListRepository implements RecommendGgamfListRepository {
               data: _data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = User.fromJson(_result.data!);
+    final value = GgamfList.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<dynamic> getSendGgamfList({required id}) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch(_setStreamType<dynamic>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          '/s/api/ggamf/user/${id}/sendggamf',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = _result.data;
+    return value;
+  }
+
+  @override
+  Future<dynamic> getReceiveggamfList({required id}) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch(_setStreamType<dynamic>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          '/s/api/ggamf/user/${id}/receiveggamf',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = _result.data;
     return value;
   }
 
@@ -214,7 +257,7 @@ class _ProfileUserRepository implements ProfileUserRepository {
     this._dio, {
     this.baseUrl,
   }) {
-    baseUrl ??= 'http://192.168.50.17:8080';
+    baseUrl ??= 'http://172.25.96.1:8080';
   }
 
   final Dio _dio;
@@ -222,52 +265,50 @@ class _ProfileUserRepository implements ProfileUserRepository {
   String? baseUrl;
 
   @override
-  Future<ProfileUser> getUserProfile({required id}) async {
+  Future<dynamic> getUserProfile({required userId}) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<ProfileUser>(Options(
+    final _result = await _dio.fetch(_setStreamType<dynamic>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
     )
-            .compose(
-              _dio.options,
-              '/profileUser/${id}',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = ProfileUser.fromJson(_result.data!);
+        .compose(
+          _dio.options,
+          '/s/api/user/${userId}/detail',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = _result.data;
     return value;
   }
 
   @override
-  Future<ProfileUser> putUserProfile({
-    required id,
-    required profileUser,
+  Future<dynamic> putUserProfile({
+    required userId,
+    required updateUser,
   }) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    _data.addAll(profileUser.toJson());
-    final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<ProfileUser>(Options(
+    _data.addAll(updateUser.toJson());
+    final _result = await _dio.fetch(_setStreamType<dynamic>(Options(
       method: 'PUT',
       headers: _headers,
       extra: _extra,
     )
-            .compose(
-              _dio.options,
-              '/profileUser/${id}',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = ProfileUser.fromJson(_result.data!);
+        .compose(
+          _dio.options,
+          '/s/api/user/${userId}/update',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = _result.data;
     return value;
   }
 

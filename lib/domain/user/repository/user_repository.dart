@@ -1,12 +1,14 @@
 import 'package:dio/dio.dart';
-import 'package:ggamf_front/core/page_enum.dart';
+import 'package:ggamf_front/domain/user/model/ggamf.dart';
 import 'package:ggamf_front/domain/user/model/join_user.dart';
 import 'package:ggamf_front/domain/user/model/login_user.dart';
-import 'package:ggamf_front/domain/user/model/profile_user.dart';
+import 'package:ggamf_front/domain/user/model/update_user.dart';
 import 'package:ggamf_front/domain/user/model/user.dart';
 import 'package:ggamf_front/utils/validator_util.dart';
 import 'package:jwt_decode/jwt_decode.dart';
 import 'package:retrofit/http.dart';
+
+import '../../../utils/page_enum.dart';
 
 part 'user_repository.g.dart';
 
@@ -27,7 +29,8 @@ class Session {
       if (value != null) {
         Map<String, dynamic> jwtData = Jwt.parseJwt(value);
         logger.d('객체 확인 : ${jwtData}');
-        UserSession.successAuthentication(null, value);
+        UserSession.successAuthentication(User.fromJson(jwtData), value);
+        logger.d('유저 객체 확인 : ${UserSession.user}');
       }
     });
   }
@@ -39,12 +42,20 @@ abstract class RecommendGgamfListRepository {
       _RecommendGgamfListRepository;
 
   @POST('/users/{id}')
-  Future<User> postUser(
+  Future<dynamic> postUser(
       {@Path() required int id, @Body() required dynamic body});
 
   //추천 겜프 리스트 불러오기
   @GET('/s/api/ggamf/users/{id}/recommend')
-  Future<User> getUserList({@Path("id") required int id});
+  Future<GgamfList> getRecommendGgamfList({@Path("id") required int id});
+
+  //보낸 겜프 요청 목록 보기
+  @GET('/s/api/ggamf/user/{id}/sendggamf')
+  Future<dynamic> getSendGgamfList({@Path('id') required int id});
+
+  //받은 겜프 요청 목록 보기
+  @GET('/s/api/ggamf/user/{id}/receiveggamf')
+  Future<dynamic> getReceiveggamfList({@Path('id') required int id});
 
   // 겜프 요청하기
   @POST('/s/api/ggamf/{id}/follow/{followUserId}')
@@ -64,10 +75,11 @@ abstract class ProfileUserRepository {
   factory ProfileUserRepository(Dio dio, {String baseUrl}) =
       _ProfileUserRepository;
 
-  @GET('/profileUser/{id}')
-  Future<ProfileUser> getUserProfile({@Path('id') required int id});
+  @GET("/s/api/user/{userId}/detail")
+  Future<dynamic> getUserProfile({@Path('userId') required int userId});
 
-  @PUT('/profileUser/{id}')
-  Future<ProfileUser> putUserProfile(
-      {@Path('id') required int id, @Body() required ProfileUser profileUser});
+  @PUT("/s/api/user/{userId}/update")
+  Future<dynamic> putUserProfile(
+      {@Path('userId') required int userId,
+      @Body() required UpdateUser updateUser});
 }

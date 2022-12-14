@@ -5,26 +5,24 @@ import 'package:ggamf_front/domain/user/model/user.dart';
 import 'package:ggamf_front/domain/user/repository/user_repository.dart';
 import 'package:ggamf_front/utils/custom_intercepter.dart';
 
-final recommendGgamfListViewModel =
-    StateNotifierProvider<RecommendGgamfListViewModel, List<Ggamf>>((ref) {
-  return RecommendGgamfListViewModel([], ref)..init();
-});
+final receiveGgamfListViewModel =
+    StateNotifierProvider<ReceiveGgamfListViewModel, List<Ggamf>>(
+        (ref) => ReceiveGgamfListViewModel([])..init());
 
-class RecommendGgamfListViewModel extends StateNotifier<List<Ggamf>> {
-  final Ref _ref;
-  RecommendGgamfListViewModel(super.state, this._ref);
+class ReceiveGgamfListViewModel extends StateNotifier<List<Ggamf>> {
+  ReceiveGgamfListViewModel(super.state);
 
-  final dio = Dio()
+  //토큰이 필요한 곳 이므로 인터셉터 추가
+  RecommendGgamfListRepository repo = RecommendGgamfListRepository(Dio()
     ..interceptors.add(CustomLogInterceptor())
-    ..interceptors.add(SignedInterceptor());
+    ..interceptors.add(SignedInterceptor()));
+
   void init() {
-    // 최초 init 시에만 repository에 의존
-    RecommendGgamfListRepository repo = RecommendGgamfListRepository(dio);
-    List<Ggamf> recommendGgamfList = [];
+    List<Ggamf> receiveGgamfList = [];
     repo.getRecommendGgamfList(id: UserSession.user.id).then(
       (value) {
         value.data.forEach((_ggamf) {
-          recommendGgamfList.add(
+          receiveGgamfList.add(
             Ggamf(
               friendId: _ggamf.friendId,
               photo: _ggamf.photo,
@@ -33,7 +31,7 @@ class RecommendGgamfListViewModel extends StateNotifier<List<Ggamf>> {
             ),
           );
         });
-        state = recommendGgamfList;
+        state = receiveGgamfList;
       },
     );
   }
