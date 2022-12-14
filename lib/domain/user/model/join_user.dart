@@ -12,6 +12,7 @@ class JoinUser {
   String phoneNumber;
   String nickname;
   String email;
+  String uid;
   bool isAgree;
 
   JoinUser({
@@ -21,6 +22,7 @@ class JoinUser {
     required this.phoneNumber,
     required this.nickname,
     required this.email,
+    required this.uid,
     required this.isAgree,
   });
 

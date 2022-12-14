@@ -2,12 +2,10 @@ import 'dart:async';
 
 import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:ggamf_front/domain/user/model/profile_user.dart';
 import 'package:ggamf_front/domain/user/repository/user_repository.dart';
 import 'package:ggamf_front/utils/custom_intercepter.dart';
 
 import '../../../../domain/user/model/get_profile_user.dart';
-import '../../../../utils/validator_util.dart';
 
 final opponentProfileViewModel = StateNotifierProvider<OpponentProfileViewModel, GetProfileUser>((ref) {
   return OpponentProfileViewModel(GetProfileUser(intro: null, nickname: null, photo: null), ref)..init();

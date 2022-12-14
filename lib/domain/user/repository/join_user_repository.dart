@@ -1,7 +1,8 @@
 import 'package:dio/dio.dart';
-import 'package:ggamf_front/core/page_enum.dart';
 import 'package:ggamf_front/domain/user/model/join_user.dart';
 import 'package:retrofit/http.dart';
+
+import '../../../utils/page_enum.dart';
 
 part 'join_user_repository.g.dart';
 
@@ -11,4 +12,7 @@ abstract class JoinUserRepository {
 
   @POST('/s/api/join')
   Future<dynamic> insert(@Body() JoinUser joinUser);
+
+  @GET('/')
+  Future<dynamic> test();
 }

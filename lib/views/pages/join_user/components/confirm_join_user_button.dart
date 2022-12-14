@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ggamf_front/controller/user/join_user_controller.dart';
+import 'package:ggamf_front/utils/validator_util.dart';
+import 'package:ggamf_front/views/pages/join_user/join_user_view_model.dart';
 
 class ConfirmJoinUserButton extends ConsumerWidget {
   const ConfirmJoinUserButton({
@@ -10,6 +12,7 @@ class ConfirmJoinUserButton extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final juc = ref.read(joinUserController);
+    final jvm = ref.watch(joinUserViewModel);
     return Container(
       decoration: BoxDecoration(
           color: Colors.white, borderRadius: BorderRadius.circular(9)),
@@ -25,8 +28,10 @@ class ConfirmJoinUserButton extends ConsumerWidget {
                     juc.authOk &&
                     juc.isAgree) {
                   juc.requestJoin();
-                  Navigator.pop(context);
                 }
+                logger.d('벨리데이션 : ${juc.formKey.currentState!.validate()}');
+                logger.d('authOK? ${juc.authOk}');
+                logger.d('동의 ? ${juc.isAgree}');
               },
               child: Container(
                   decoration: BoxDecoration(

@@ -13,6 +13,7 @@ JoinUser _$JoinUserFromJson(Map<String, dynamic> json) => JoinUser(
       phoneNumber: json['phone'] as String,
       nickname: json['nickname'] as String,
       email: json['email'] as String,
+      uid: json['uid'] as String,
       isAgree: json['isAgree'] as bool,
     );
 
@@ -23,5 +24,6 @@ Map<String, dynamic> _$JoinUserToJson(JoinUser instance) => <String, dynamic>{
       'phone': instance.phoneNumber,
       'nickname': instance.nickname,
       'email': instance.email,
+      'uid': instance.uid,
       'isAgree': instance.isAgree,
     };

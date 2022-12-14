@@ -20,7 +20,8 @@ class ProfileUser {
     this.email,
   });
 
-  factory ProfileUser.fromJson(Map<String, dynamic> json) => _$ProfileUserFromJson(json);
+  factory ProfileUser.fromJson(Map<String, dynamic> json) =>
+      _$ProfileUserFromJson(json);
 
   Map<String, dynamic> toJson() => _$ProfileUserToJson(this);
 }

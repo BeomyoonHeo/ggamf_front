@@ -26,7 +26,7 @@ class CreatePartyController {
       gameCodeId: int.parse(selectGameController.text),
       roomName: partyNameController.text,
       totalPeople: int.parse(totalPeopleController.text),
-      userId: 15,
+      userId: 3,
     );
   }
 }

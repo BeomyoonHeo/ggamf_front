@@ -41,7 +41,8 @@ class _OpponentProfileViewState extends ConsumerState<OpponentProfileView> {
               height: 150,
               child: InkWell(
                 onTap: () async {
-                  await showDialog(context: context, builder: (_) => _imageDialog());
+                  await showDialog(
+                      context: context, builder: (_) => _imageDialog());
                 },
                 child: Image.asset("assets/images/cart1.png"),
               ),

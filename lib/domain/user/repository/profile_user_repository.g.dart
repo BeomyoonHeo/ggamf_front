@@ -21,7 +21,7 @@ class _ProfileUserRepository implements ProfileUserRepository {
   String? baseUrl;
 
   @override
-  Future<ProfileUser> getUserProfile({required id}) async {
+  Future<ProfileUser> getUserProfile({required userId}) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -34,7 +34,7 @@ class _ProfileUserRepository implements ProfileUserRepository {
     )
             .compose(
               _dio.options,
-              '/s/api/user/${id}/detail',
+              '/s/api/user/${userId}/detail',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -45,7 +45,7 @@ class _ProfileUserRepository implements ProfileUserRepository {
 
   @override
   Future<ProfileUser> putUserProfile({
-    required id,
+    required userId,
     required profileUser,
   }) async {
     const _extra = <String, dynamic>{};
@@ -61,7 +61,7 @@ class _ProfileUserRepository implements ProfileUserRepository {
     )
             .compose(
               _dio.options,
-              '/s/api/user/${id}/update',
+              '/s/api/user/${userId}/update',
               queryParameters: queryParameters,
               data: _data,
             )
