@@ -46,16 +46,16 @@ abstract class RecommendGgamfListRepository {
       {@Path() required int id, @Body() required dynamic body});
 
   //추천 겜프 리스트 불러오기
-  @GET('/s/api/ggamf/users/{id}/recommend')
+  @GET('/s/api/ggamf/user/{id}/recommend')
   Future<GgamfList> getRecommendGgamfList({@Path("id") required int id});
 
   //보낸 겜프 요청 목록 보기
   @GET('/s/api/ggamf/user/{id}/sendggamf')
-  Future<dynamic> getSendGgamfList({@Path('id') required int id});
+  Future<GgamfList> getSendGgamfList({@Path('id') required int id});
 
   //받은 겜프 요청 목록 보기
   @GET('/s/api/ggamf/user/{id}/receiveggamf')
-  Future<dynamic> getReceiveggamfList({@Path('id') required int id});
+  Future<GgamfList> getReceiveggamfList({@Path('id') required int id});
 
   // 겜프 요청하기
   @POST('/s/api/ggamf/{id}/follow/{followUserId}')

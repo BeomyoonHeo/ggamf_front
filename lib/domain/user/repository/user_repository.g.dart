@@ -13,11 +13,7 @@ class _UserRepository implements UserRepository {
     this._dio, {
     this.baseUrl,
   }) {
-<<<<<<< HEAD
     baseUrl ??= 'http://192.168.50.17:8080';
-=======
-    baseUrl ??= 'http://172.25.96.1:8080';
->>>>>>> 9b7876cc8292a7f94384aa5bb3bf04d7695e8a8e
   }
 
   final Dio _dio;
@@ -91,11 +87,7 @@ class _RecommendGgamfListRepository implements RecommendGgamfListRepository {
     this._dio, {
     this.baseUrl,
   }) {
-<<<<<<< HEAD
     baseUrl ??= 'http://192.168.50.17:8080';
-=======
-    baseUrl ??= 'http://172.25.96.1:8080';
->>>>>>> 9b7876cc8292a7f94384aa5bb3bf04d7695e8a8e
   }
 
   final Dio _dio;
@@ -141,7 +133,7 @@ class _RecommendGgamfListRepository implements RecommendGgamfListRepository {
     )
             .compose(
               _dio.options,
-              '/s/api/ggamf/users/${id}/recommend',
+              '/s/api/ggamf/user/${id}/recommend',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -151,46 +143,48 @@ class _RecommendGgamfListRepository implements RecommendGgamfListRepository {
   }
 
   @override
-  Future<dynamic> getSendGgamfList({required id}) async {
+  Future<GgamfList> getSendGgamfList({required id}) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    final _result = await _dio.fetch(_setStreamType<dynamic>(Options(
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<GgamfList>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
     )
-        .compose(
-          _dio.options,
-          '/s/api/ggamf/user/${id}/sendggamf',
-          queryParameters: queryParameters,
-          data: _data,
-        )
-        .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = _result.data;
+            .compose(
+              _dio.options,
+              '/s/api/ggamf/user/${id}/sendggamf',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = GgamfList.fromJson(_result.data!);
     return value;
   }
 
   @override
-  Future<dynamic> getReceiveggamfList({required id}) async {
+  Future<GgamfList> getReceiveggamfList({required id}) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    final _result = await _dio.fetch(_setStreamType<dynamic>(Options(
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<GgamfList>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
     )
-        .compose(
-          _dio.options,
-          '/s/api/ggamf/user/${id}/receiveggamf',
-          queryParameters: queryParameters,
-          data: _data,
-        )
-        .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = _result.data;
+            .compose(
+              _dio.options,
+              '/s/api/ggamf/user/${id}/receiveggamf',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = GgamfList.fromJson(_result.data!);
     return value;
   }
 
@@ -265,11 +259,7 @@ class _ProfileUserRepository implements ProfileUserRepository {
     this._dio, {
     this.baseUrl,
   }) {
-<<<<<<< HEAD
     baseUrl ??= 'http://192.168.50.17:8080';
-=======
-    baseUrl ??= 'http://172.25.96.1:8080';
->>>>>>> 9b7876cc8292a7f94384aa5bb3bf04d7695e8a8e
   }
 
   final Dio _dio;

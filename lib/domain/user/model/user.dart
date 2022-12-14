@@ -79,8 +79,9 @@ class UserSession {
   }
 
   static Map<String, dynamic>? getJwtTokenHeader(Map<String, dynamic> headers) {
+    logger.d('토큰 붙힘 : Bearer ${UserSession._jwtToken}');
     return UserSession._jwtToken != null
-        ? {...headers, 'Authorization': UserSession._jwtToken}
+        ? {...headers, 'Authorization': 'Bearer ${UserSession._jwtToken}'}
         : headers;
   }
 }

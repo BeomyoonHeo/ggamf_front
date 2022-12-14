@@ -46,6 +46,11 @@ class SignedInterceptor extends Interceptor {
     options.headers = UserSession.getJwtTokenHeader(options.headers);
     super.onRequest(options, handler);
   }
+
+  @override
+  void onResponse(Response response, ResponseInterceptorHandler handler) {
+    super.onResponse(response, handler);
+  }
 }
 
 //인터셉터 사용시 예시

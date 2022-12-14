@@ -6,7 +6,7 @@ import 'package:ggamf_front/domain/user/repository/user_repository.dart';
 import 'package:ggamf_front/utils/custom_intercepter.dart';
 
 final sendGgamfListViewModel =
-    StateNotifierProvider<SendGgamfListViewModel, List<Ggamf>>(
+    StateNotifierProvider.autoDispose<SendGgamfListViewModel, List<Ggamf>>(
         (ref) => SendGgamfListViewModel([])..init());
 
 class SendGgamfListViewModel extends StateNotifier<List<Ggamf>> {
@@ -19,12 +19,12 @@ class SendGgamfListViewModel extends StateNotifier<List<Ggamf>> {
 
   void init() {
     List<Ggamf> sendGgamfList = [];
-    repo.getRecommendGgamfList(id: UserSession.user.id).then(
+    repo.getSendGgamfList(id: UserSession.user.id).then(
       (value) {
-        value.data.forEach((_ggamf) {
+        value.data['followings']?.forEach((_ggamf) {
           sendGgamfList.add(
             Ggamf(
-              friendId: _ggamf.friendId,
+              userId: _ggamf.userId,
               photo: _ggamf.photo,
               nickName: _ggamf.nickName,
               intro: _ggamf.intro,
