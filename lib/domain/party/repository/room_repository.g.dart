@@ -13,7 +13,11 @@ class _RoomRepository implements RoomRepository {
     this._dio, {
     this.baseUrl,
   }) {
+<<<<<<< HEAD
     baseUrl ??= 'http://192.168.50.17:8080';
+=======
+    baseUrl ??= 'http://172.25.96.1:8080';
+>>>>>>> 9b7876cc8292a7f94384aa5bb3bf04d7695e8a8e
   }
 
   final Dio _dio;
