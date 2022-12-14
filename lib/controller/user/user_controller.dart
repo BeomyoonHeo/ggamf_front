@@ -19,8 +19,10 @@ class UserController {
     userRepository.login(loginUser: loginUser).then((value) {
       Map<String, dynamic> response = value;
       logger.d(response);
-      Navigator.pushNamed(navigatorKey.currentState!.context,
-          PageEnum.ALLPAGES.requestLocation);
+      Session().getInitSession().then(
+            (value) => Navigator.pushNamed(navigatorKey.currentState!.context,
+                PageEnum.ALLPAGES.requestLocation),
+          );
     }).onError((error, stackTrace) {
       logger.d(error);
       Fluttertoast.showToast(msg: '아이디와 패스워드를 확인해주세요');

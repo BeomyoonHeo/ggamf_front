@@ -7,9 +7,13 @@ part of 'ggamf.dart';
 // **************************************************************************
 
 GgamfList _$GgamfListFromJson(Map<String, dynamic> json) => GgamfList(
-      data: (json['data'] as List<dynamic>)
-          .map((e) => Ggamf.fromJson(e as Map<String, dynamic>))
-          .toList(),
+      data: (json['data'] as Map<String, dynamic>).map(
+        (k, e) => MapEntry(
+            k,
+            (e as List<dynamic>)
+                .map((e) => Ggamf.fromJson(e as Map<String, dynamic>))
+                .toList()),
+      ),
     );
 
 Map<String, dynamic> _$GgamfListToJson(GgamfList instance) => <String, dynamic>{
@@ -17,14 +21,14 @@ Map<String, dynamic> _$GgamfListToJson(GgamfList instance) => <String, dynamic>{
     };
 
 Ggamf _$GgamfFromJson(Map<String, dynamic> json) => Ggamf(
-      friendId: json['friendId'] as int,
+      userId: json['userId'] as int,
       nickName: json['nickName'] as String,
       photo: json['photo'] as String,
       intro: json['intro'] as String,
     );
 
 Map<String, dynamic> _$GgamfToJson(Ggamf instance) => <String, dynamic>{
-      'friendId': instance.friendId,
+      'userId': instance.userId,
       'nickName': instance.nickName,
       'photo': instance.photo,
       'intro': instance.intro,

@@ -1,8 +1,33 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:ggamf_front/utils/validator_util.dart';
 
 class AuthenticationProvider extends ChangeNotifier {
   late final FirebaseAuth _auth;
+
+  Future<String?> registerUserUsingEmailAndPassword(
+      String _email, String _password) async {
+    _auth = FirebaseAuth.instance;
+    try {
+      UserCredential _credential = await _auth.createUserWithEmailAndPassword(
+          email: _email, password: _password);
+      return _credential.user!.uid;
+    } on FirebaseAuthException catch (e) {
+      logger.d(e.code);
+      logger.d('회원가입 도중 에러 발생');
+    } catch (e) {
+      logger.d(e);
+    }
+    return null;
+  }
+
+  Future<void> logout() async {
+    try {
+      await _auth.signOut();
+    } catch (e) {
+      logger.d(e);
+    }
+  }
 
   // AuthenticationProvider() {
   //   _auth = FirebaseAuth.instance;
@@ -44,27 +69,4 @@ class AuthenticationProvider extends ChangeNotifier {
   //     print(e);
   //   }
   // }
-
-  Future<String?> registerUserUsingEmailAndPassword(
-      String _email, String _password) async {
-    _auth = FirebaseAuth.instance;
-    try {
-      UserCredential _credential = await _auth.createUserWithEmailAndPassword(
-          email: _email, password: _password);
-      return _credential.user!.uid;
-    } on FirebaseAuthException catch (e) {
-      print(e.code);
-      print('회원가입 도중 에러 발생');
-    } catch (e) {
-      print(e);
-    }
-  }
-
-  Future<void> logout() async {
-    try {
-      await _auth.signOut();
-    } catch (e) {
-      print(e);
-    }
-  }
 }

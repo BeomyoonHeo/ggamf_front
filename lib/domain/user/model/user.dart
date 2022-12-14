@@ -54,23 +54,34 @@ class UserSession {
   }
 
   static void setJwtTokenHeader(Headers headers) {
-    storage.read(key: 'jwtToken').then((value) {
-      storage
-          .write(
-              key: 'jwtToken',
-              value: headers.value('Authorization')?.replaceAll('Bearer ', ''))
-          .then((value) {
-        _jwtToken = headers.value('Authorization');
-        Map<String, dynamic> userInfo =
-            Jwt.parseJwt(_jwtToken!.replaceAll('Bearer ', ''));
-        logger.d(userInfo);
-      });
+    // storage.read(key: 'jwtToken').then((value) {
+    //   storage
+    //       .write(
+    //           key: 'jwtToken',
+    //           value: headers.value('Authorization')?.replaceAll('Bearer ', ''))
+    //       .then((value) {
+    //     _jwtToken = headers.value('Authorization');
+    //     Map<String, dynamic> userInfo =
+    //         Jwt.parseJwt(_jwtToken!.replaceAll('Bearer ', ''));
+    //     logger.d(userInfo);
+    //   });
+    // });
+    storage
+        .write(
+            key: 'jwtToken',
+            value: headers.value('Authorization')?.replaceAll('Bearer ', ''))
+        .then((value) {
+      _jwtToken = headers.value('Authorization');
+      Map<String, dynamic> userInfo =
+          Jwt.parseJwt(_jwtToken!.replaceAll('Bearer ', ''));
+      logger.d(userInfo);
     });
   }
 
   static Map<String, dynamic>? getJwtTokenHeader(Map<String, dynamic> headers) {
+    logger.d('토큰 붙힘 : Bearer ${UserSession._jwtToken}');
     return UserSession._jwtToken != null
-        ? {...headers, 'Authorization': UserSession._jwtToken}
+        ? {...headers, 'Authorization': 'Bearer ${UserSession._jwtToken}'}
         : headers;
   }
 }

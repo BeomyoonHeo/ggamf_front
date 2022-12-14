@@ -6,7 +6,7 @@ import 'package:ggamf_front/domain/user/repository/user_repository.dart';
 import 'package:ggamf_front/utils/custom_intercepter.dart';
 
 final myProfileViewModel =
-    StateNotifierProvider<MyProfileViewModel, ProfileUser>((ref) {
+    StateNotifierProvider.autoDispose<MyProfileViewModel, ProfileUser>((ref) {
   return MyProfileViewModel(
       ProfileUser(intro: null, nickname: null, photo: null), ref)
     ..init();
@@ -17,7 +17,9 @@ class MyProfileViewModel extends StateNotifier<ProfileUser> {
   final Ref _ref;
   MyProfileViewModel(super.state, this._ref);
 
-  Dio dio = Dio()..interceptors.add(CustomLogInterceptor());
+  Dio dio = Dio()
+    ..interceptors.add(CustomLogInterceptor())
+    ..interceptors.add(SignedInterceptor());
 
   void init() {
     ProfileUserRepository restApi = ProfileUserRepository(dio);
