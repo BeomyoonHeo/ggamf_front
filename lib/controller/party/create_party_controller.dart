@@ -16,18 +16,19 @@ class CreatePartyController {
 
   CreatePartyController(this._ref);
 
+  final Map<String, dynamic> _keyList = {'게임선택': 0, '리그 오브 레전드': 1, '오버워치': 2, '로스트아크': 3, '발로란트': 4, '기타': 5};
+
+  Dio dio = Dio()..interceptors.add(CustomLogInterceptor());
+
   final TextEditingController partyNameController = TextEditingController();
   final TextEditingController selectGameController = TextEditingController();
   final TextEditingController totalPeopleController = TextEditingController();
 
-  Dio dio = Dio()..interceptors.add(CustomLogInterceptor());
-
   void requestCreateRoom() {
-    logger.d("${selectGameController.text}");
-
-    logger.d("${partyNameController.text}");
-    logger.d("${int.parse(totalPeopleController.text)}");
-    logger.d("${UserSession.user.id}");
+    logger.d("게임선택:${selectGameController.text}");
+    logger.d("파티이름:${partyNameController.text}");
+    logger.d("인원수:${int.parse(totalPeopleController.text)}");
+    logger.d("게임코드:${_keyList[selectGameController.text]}");
 
     GenerateRoomParty createRoomParty = GenerateRoomParty(
       gameName: selectGameController.text,
@@ -36,7 +37,6 @@ class CreatePartyController {
       totalPeople: int.parse(totalPeopleController.text),
       userId: UserSession.user.id,
     );
-    logger.d(int.parse(selectGameController.text));
 
     RoomRepository createRoomRepository = RoomRepository(dio);
     createRoomRepository.createRoom(userId: UserSession.user.id, gameCodeId: 3, generateRoomParty: createRoomParty);
