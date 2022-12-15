@@ -1,41 +1,59 @@
-import 'package:json_annotation/json_annotation.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
-part 'chats.g.dart';
-
-@JsonSerializable()
-class Chat {
-  final String image;
-  final String title;
-  final String content;
-  final String time;
-  final String count;
-
-  Chat(
-      {required this.image,
-      required this.title,
-      required this.content,
-      required this.time,
-      required this.count});
-
-  factory Chat.fromJson(Map<String, dynamic> json) => _$ChatFromJson(json);
-  Map<String, dynamic> toJson() => _$ChatToJson(this);
+enum MessageType {
+  TEXT,
+  IMAGE,
+  UNKNOWN,
 }
 
-// final String _urlPrefix = "https://raw.githubusercontent.com/flutter-coder/ui_images/master/messenger";
-//
-// List<Chat> chats = [
-//   Chat(
-//     image: "${_urlPrefix}_man_1.jpg",
-//     title: "홍길동",
-//     content: "오늘 저녁에 시간 되시나요?",
-//     time: "오후 11:00",
-//     count: "0",
-//   ),
-//   Chat(
-//     image: "${_urlPrefix}_woman_1.jpg",
-//     title: "정도전",
-//     content: "오늘 날씨가 참 맑네요.",
-//     time: "오전 09:30",
-//     count: "1",
-//   ),
-// ];
+class ChatMessage {
+  final String senderID;
+  final MessageType type;
+  final String content;
+  final Timestamp sentTime;
+
+  ChatMessage({
+    required this.content,
+    required this.type,
+    required this.senderID,
+    required this.sentTime,
+  });
+  factory ChatMessage.fromJSON(Map<String, dynamic> _json) {
+    MessageType _messageType;
+    switch (_json['type']) {
+      case 'text':
+        _messageType = MessageType.TEXT;
+        break;
+      case 'image':
+        _messageType = MessageType.IMAGE;
+        break;
+      default:
+        _messageType = MessageType.UNKNOWN;
+    }
+    return ChatMessage(
+        content: _json['content'],
+        type: _messageType,
+        senderID: _json['sender_id'],
+        sentTime: _json['sent_time']);
+  }
+
+  Map<String, dynamic> tojson() {
+    String _messageType;
+    switch (type) {
+      case MessageType.TEXT:
+        _messageType = 'text';
+        break;
+      case MessageType.IMAGE:
+        _messageType = 'image';
+        break;
+      default:
+        _messageType = '';
+    }
+    return {
+      'content': content,
+      'type': _messageType,
+      'sender_id': senderID,
+      'sent_time': Timestamp.fromDate(sentTime.toDate()),
+    };
+  }
+}

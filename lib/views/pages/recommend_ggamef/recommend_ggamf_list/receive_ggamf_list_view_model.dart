@@ -14,7 +14,7 @@ class ReceiveGgamfListViewModel extends StateNotifier<List<Ggamf>> {
   ReceiveGgamfListViewModel(super.state, this._ref);
 
   //토큰이 필요한 곳 이므로 인터셉터 추가
-  RecommendGgamfListRepository repo = RecommendGgamfListRepository(Dio()
+  GgamfRepository repo = GgamfRepository(Dio()
     ..interceptors.add(CustomLogInterceptor())
     ..interceptors.add(SignedInterceptor()));
 

@@ -10,8 +10,8 @@ import 'package:ggamf_front/utils/page_enum.dart';
 import 'package:ggamf_front/views/pages/join_user/join_user_view_model.dart';
 import 'package:logger/logger.dart';
 
-import '../../domain/user/repository/authentication_provider.dart';
 import '../../domain/user/repository/user_repository.dart';
+import '../../provider/authentication_provider.dart';
 
 // 회원가입은 한번만 하면 되기 때문에 회원가입 후 Autodispose를 실행하여 페이지에서 참조가 더이상 일어나지 않는다면 메모리에서 제거 해주기
 final joinUserController = Provider((ref) {
@@ -79,7 +79,8 @@ class JoinUserController {
       AuthenticationProvider()
           .registerUserUsingEmailAndPassword(joinUser.email, joinUser.password)
           .then((value) {
-        joinUser.uid = uid;
+        logger.d('uid 확인${value}');
+        joinUser.uid = value!;
         joinUserRepository.insert(joinUser: joinUser).then((value) =>
             Navigator.popAndPushNamed(navigatorKey.currentState!.context,
                 PageEnum.LOGIN.requestLocation));
