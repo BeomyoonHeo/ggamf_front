@@ -16,14 +16,16 @@ class Room {
   int id;
   String nickName;
   String roomName;
-  int totalPeople;
+  String gameName;
+  String gameLogo;
   bool active;
 
   Room({
     required this.id,
     required this.nickName,
     required this.roomName,
-    required this.totalPeople,
+    required this.gameName,
+    required this.gameLogo,
     required this.active,
   });
 

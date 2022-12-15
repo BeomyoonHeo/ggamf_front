@@ -24,7 +24,6 @@ class JoiningPartyListViewModel extends StateNotifier<List<MyRoom>> {
   void init() {
     repo.findJoinRooms(userId: UserSession.user.id).then((value) {
       value.data['rooms']?.forEach((_myRoom) {
-        logger.d("룸밸류 확인 ${value}");
         joiningPartyList.add(
           MyRoom(
             id: _myRoom.id,
@@ -34,11 +33,11 @@ class JoiningPartyListViewModel extends StateNotifier<List<MyRoom>> {
             gameLogo: _myRoom.gameLogo,
           ),
         );
-        logger.d("데이터 확인1 : ${_myRoom.nickName}");
-        logger.d("데이터 확인2 : ${_myRoom.roomName}");
-        logger.d("데이터 확인3 : ${_myRoom.totalPeople}");
-        logger.d("데이터 확인4 : ${_myRoom.gameLogo}");
-        logger.d("데이터 확인4 : ${_myRoom.id}");
+        // logger.d("데이터 확인1 : ${_myRoom.nickName}");
+        // logger.d("데이터 확인2 : ${_myRoom.roomName}");
+        // logger.d("데이터 확인3 : ${_myRoom.totalPeople}");
+        // logger.d("데이터 확인4 : ${_myRoom.gameLogo}");
+        // logger.d("데이터 확인4 : ${_myRoom.id}");
       });
       state = joiningPartyList;
     });
