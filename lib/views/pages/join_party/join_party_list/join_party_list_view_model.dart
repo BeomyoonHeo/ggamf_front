@@ -15,6 +15,6 @@ class JoinPartyListViewModel extends StateNotifier<List<Room>> {
   void init() {
     //전체 파티방 목록보기
     RoomRepository restApi = RoomRepository(Dio());
-    restApi.findAllRoom(userId: 1).then((value) => value.roomList.isEmpty ? null : state = value.roomList);
+    restApi.findAllRoom(userId: 1).then((value) => value.data.isEmpty ? null : state = value.data as List<Room>);
   }
 }

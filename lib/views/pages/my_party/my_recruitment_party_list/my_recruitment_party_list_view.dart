@@ -1,22 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:ggamf_front/views/pages/my_party/create_party/create_party_view.dart';
 import 'package:ggamf_front/views/pages/my_party/my_recruitment_party_list/components/my_recruitment_party_list_tab_bar.dart';
 import 'package:ggamf_front/views/pages/my_party/my_recruitment_party_list/components/my_recruitment_party_list_tab_view.dart';
+import 'package:ggamf_front/views/pages/my_party/my_recruitment_party_list/my_recruitment_party_list_view_model.dart';
 
-class MyRecruitmentPartyListView extends StatefulWidget {
+class MyRecruitmentPartyListView extends ConsumerStatefulWidget {
   const MyRecruitmentPartyListView({Key? key}) : super(key: key);
 
   @override
-  State<MyRecruitmentPartyListView> createState() => _MyRecruitmentPartyListViewState();
+  ConsumerState<MyRecruitmentPartyListView> createState() => _MyRecruitmentPartyListViewState();
 }
 
-class _MyRecruitmentPartyListViewState extends State<MyRecruitmentPartyListView>
+class _MyRecruitmentPartyListViewState extends ConsumerState<MyRecruitmentPartyListView>
     with SingleTickerProviderStateMixin<MyRecruitmentPartyListView>, AutomaticKeepAliveClientMixin<MyRecruitmentPartyListView> {
   final List<String> textIndex = [
     '나의 파티',
     '참가중인 방',
   ];
+
   late TabController _tabController;
 
   @override
@@ -37,6 +40,7 @@ class _MyRecruitmentPartyListViewState extends State<MyRecruitmentPartyListView>
   @override
   Widget build(BuildContext context) {
     super.build(context);
+    final mrplv = ref.watch(myRecruitmentPartyListViewModel);
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,

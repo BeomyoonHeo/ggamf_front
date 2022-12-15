@@ -13,7 +13,7 @@ class _UserRepository implements UserRepository {
     this._dio, {
     this.baseUrl,
   }) {
-    baseUrl ??= 'http://183.104.199.106:8080';
+    baseUrl ??= 'http://192.168.0.187:8080';
   }
 
   final Dio _dio;
@@ -87,7 +87,7 @@ class _RecommendGgamfListRepository implements RecommendGgamfListRepository {
     this._dio, {
     this.baseUrl,
   }) {
-    baseUrl ??= 'http://183.104.199.106:8080';
+    baseUrl ??= 'http://192.168.0.187:8080';
   }
 
   final Dio _dio;
@@ -309,7 +309,7 @@ class _ProfileUserRepository implements ProfileUserRepository {
     this._dio, {
     this.baseUrl,
   }) {
-    baseUrl ??= 'http://183.104.199.106:8080';
+    baseUrl ??= 'http://192.168.0.187:8080';
   }
 
   final Dio _dio;

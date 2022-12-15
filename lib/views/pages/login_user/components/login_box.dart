@@ -63,8 +63,8 @@ class LoginBox extends ConsumerWidget {
               ItemButton(
                   text: "로그인",
                   function: () {
-                    Navigator.pushNamed(context, PageEnum.getByDisPlayName('allpages').requestLocation);
-                    //luc.login(usernameController.text, passwordController.text);
+                    //Navigator.pushNamed(context, PageEnum.getByDisPlayName('allpages').requestLocation);
+                    luc.login(usernameController.text, passwordController.text);
                   }),
               const SizedBox(height: 10),
               ItemButton(

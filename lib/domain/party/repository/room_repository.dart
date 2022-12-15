@@ -21,7 +21,7 @@ abstract class RoomRepository {
 
   // 나의 모집 파티 목록
   @GET("/s/api/party/user/{userId}/myrooms")
-  Future<dynamic> findByMyIdRoom({@Path('userId') required int userId});
+  Future<RoomList> findByMyIdRoom({@Path('userId') required int userId});
 
   // 전체 파티방 목록 보기
   @GET("/s/api/party/user/{userId}/list")
@@ -50,6 +50,10 @@ abstract class RoomRepository {
   @POST("/s/api/party/user/{userId}/create/{gameCodeId}")
   Future<GenerateRoomParty> createRoom(
       {@Path('userId') required int userId, @Path('gameCodeId') required int gameCodeId, @Body() required GenerateRoomParty generateRoomParty});
+
+  //파티방 생성하기 게임코드전달
+  @GET("/s/api/party/user/{userId}/create")
+  Future<GenerateRoomParty> createRoomView({@Path('userId') required int userId});
 
   //파티방 참여하기
   @POST("/s/api/party/user/{userId}/join/{roomId}")
