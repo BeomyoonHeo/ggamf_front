@@ -36,6 +36,7 @@ class LoginInterceptor extends Interceptor {
   @override
   void onResponse(Response response, ResponseInterceptorHandler handler) {
     UserSession.setJwtTokenHeader(response.headers);
+    logger.d("로그인 Dto : ${response.data}");
     super.onResponse(response, handler);
   }
 }

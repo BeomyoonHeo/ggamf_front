@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:ggamf_front/provider/chats_page_provider.dart';
 import 'package:ggamf_front/views/pages/chatting/chatting_view.dart';
 
-class MyRecruitmentPartyListTabView extends StatefulWidget {
+class MyRecruitmentPartyListTabView extends ConsumerStatefulWidget {
   const MyRecruitmentPartyListTabView({
     Key? key,
     required TabController tabController,
@@ -11,10 +13,12 @@ class MyRecruitmentPartyListTabView extends StatefulWidget {
   final TabController _tabController;
 
   @override
-  State<MyRecruitmentPartyListTabView> createState() => _MyRecruitmentPartyListTabViewState();
+  ConsumerState<MyRecruitmentPartyListTabView> createState() =>
+      _MyRecruitmentPartyListTabViewState();
 }
 
-class _MyRecruitmentPartyListTabViewState extends State<MyRecruitmentPartyListTabView>
+class _MyRecruitmentPartyListTabViewState
+    extends ConsumerState<MyRecruitmentPartyListTabView>
     with SingleTickerProviderStateMixin<MyRecruitmentPartyListTabView> {
   late final TabController _innerTabController;
 
@@ -31,6 +35,7 @@ class _MyRecruitmentPartyListTabViewState extends State<MyRecruitmentPartyListTa
 
   @override
   Widget build(BuildContext context) {
+    final cpp = ref.watch(chatsPageProvider.notifier);
     return Expanded(
       child: TabBarView(
         controller: widget._tabController,
@@ -62,7 +67,10 @@ class _MyRecruitmentPartyListTabViewState extends State<MyRecruitmentPartyListTa
                 ),
                 child: InkWell(
                   onTap: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (_) => ChattingView()));
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (_) => ChatPage(chat: cpp.chats![0])));
                   },
                   child: Row(
                     children: [

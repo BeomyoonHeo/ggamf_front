@@ -22,7 +22,7 @@ class JoinUserController {
   var logger = Logger(
     printer: PrettyPrinter(),
   );
-  final _ref;
+  final Ref _ref;
   final dio = Dio()..interceptors.add(CustomLogInterceptor());
   JoinUserController(this._ref);
 
@@ -63,6 +63,7 @@ class JoinUserController {
   }
 
   void requestJoin() {
+    final authProvider = _ref.read(authenticationProvider);
     JoinUser joinUser = JoinUser(
       name: nameController.text,
       loginId: idController.text,
@@ -76,11 +77,11 @@ class JoinUserController {
     UserRepository joinUserRepository =
         UserRepository(Dio()..interceptors.add(LogInterceptor()));
     try {
-      AuthenticationProvider()
+      authProvider
           .registerUserUsingEmailAndPassword(joinUser.email, joinUser.password)
           .then((value) {
-        logger.d('uid 확인${value}');
         joinUser.uid = value!;
+        logger.d('uid 확인${joinUser.uid}');
         joinUserRepository.insert(joinUser: joinUser).then((value) =>
             Navigator.popAndPushNamed(navigatorKey.currentState!.context,
                 PageEnum.LOGIN.requestLocation));

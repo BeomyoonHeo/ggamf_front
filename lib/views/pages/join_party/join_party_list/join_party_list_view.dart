@@ -4,7 +4,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ggamf_front/domain/party/model/room.dart';
-import 'package:ggamf_front/views/pages/chatting/chatting_view.dart';
 
 class JoinPartyListView extends ConsumerStatefulWidget {
   const JoinPartyListView({Key? key, required this.roomList}) : super(key: key);
@@ -204,9 +203,7 @@ class _JoinPartyListViewState extends ConsumerState<JoinPartyListView> {
                   ),
                   SizedBox(height: 10),
                   ElevatedButton(
-                    onPressed: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (_) => ChattingView()));
-                    },
+                    onPressed: () {},
                     child: Text(
                       "입장",
                       style: TextStyle(color: Colors.black),

@@ -3,9 +3,9 @@ import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:ggamf_front/domain/chats/model/chats.dart';
+import 'package:ggamf_front/domain/chats/model/chat_message.dart';
 import 'package:ggamf_front/domain/user/model/user.dart';
-import 'package:ggamf_front/service/firebase_service.dart';
+import 'package:ggamf_front/service/database_service.dart';
 
 final chatPageProvider = Provider((ref) => ChatPageProvider('', ref));
 

@@ -30,7 +30,6 @@ class Session {
         Map<String, dynamic> jwtData = Jwt.parseJwt(value);
         logger.d('객체 확인 : ${jwtData}');
         UserSession.successAuthentication(User.fromJson(jwtData), value);
-        logger.d('유저 객체 확인 : ${UserSession.user}');
       }
     });
   }
