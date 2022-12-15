@@ -13,7 +13,7 @@ class _RoomRepository implements RoomRepository {
     this._dio, {
     this.baseUrl,
   }) {
-    baseUrl ??= 'http://192.168.0.187:8080';
+    baseUrl ??= 'http://183.104.199.106:8080';
   }
 
   final Dio _dio;
@@ -280,13 +280,13 @@ class _RoomRepository implements RoomRepository {
   }
 
   @override
-  Future<GenerateRoomParty> createRoomView({required userId}) async {
+  Future<GameCodeList> getGameCode({required userId}) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<GenerateRoomParty>(Options(
+        .fetch<Map<String, dynamic>>(_setStreamType<GameCodeList>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -298,7 +298,7 @@ class _RoomRepository implements RoomRepository {
               data: _data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = GenerateRoomParty.fromJson(_result.data!);
+    final value = GameCodeList.fromJson(_result.data!);
     return value;
   }
 

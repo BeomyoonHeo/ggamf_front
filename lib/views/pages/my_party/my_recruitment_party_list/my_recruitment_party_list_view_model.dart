@@ -25,7 +25,6 @@ class MyRecruitmentPartyListViewModel extends StateNotifier<List<MyRoom>> {
   void init() {
     repo.findByMyIdRoom(userId: UserSession.user.id).then((value) {
       value.data['rooms']?.forEach((_myRoom) {
-        logger.d("룸밸류 확인 ${value}");
         myRecruitmentPartyList.add(
           MyRoom(
             id: _myRoom.id,

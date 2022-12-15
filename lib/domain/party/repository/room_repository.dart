@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:ggamf_front/domain/party/model/end_room_party.dart';
 import 'package:ggamf_front/domain/party/model/exit_room_party.dart';
+import 'package:ggamf_front/domain/party/model/game_code.dart';
 import 'package:ggamf_front/domain/party/model/kick_user_party.dart';
 import 'package:ggamf_front/domain/party/model/room.dart';
 import 'package:ggamf_front/utils/page_enum.dart';
@@ -62,7 +63,7 @@ abstract class RoomRepository {
 
   //파티방 생성하기 게임코드전달
   @GET("/s/api/party/user/{userId}/create")
-  Future<GenerateRoomParty> createRoomView({@Path('userId') required int userId});
+  Future<GameCodeList> getGameCode({@Path('userId') required int userId});
 
   //파티방 참여하기
   @POST("/s/api/party/user/{userId}/join/{roomId}")
