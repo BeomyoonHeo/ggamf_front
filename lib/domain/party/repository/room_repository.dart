@@ -8,6 +8,7 @@ import 'package:retrofit/http.dart';
 
 import '../model/generate_room_party.dart';
 import '../model/join_room_party.dart';
+import '../model/my_room.dart';
 
 part 'room_repository.g.dart';
 
@@ -21,7 +22,7 @@ abstract class RoomRepository {
 
   // 나의 모집 파티 목록
   @GET("/s/api/party/user/{userId}/myrooms")
-  Future<RoomList> findByMyIdRoom({@Path('userId') required int userId});
+  Future<MyRoomList> findByMyIdRoom({@Path('userId') required int userId});
 
   // 전체 파티방 목록 보기
   @GET("/s/api/party/user/{userId}/list")
@@ -29,7 +30,7 @@ abstract class RoomRepository {
 
   // 참가중인 파티방 목록 보기
   @GET("/s/api/party/user/{userId}/joins")
-  Future<Room> findJoinRooms({@Path('userId') required int userId});
+  Future<MyRoomList> findJoinRooms({@Path('userId') required int userId});
 
   //파티원 추방(방장)
   @PUT("/s/api/party/user/{userId}/kick/{roomId}")

@@ -105,7 +105,6 @@ class _CreatePartyViewState extends ConsumerState<CreatePartyView> {
         height: 40,
         child: TextButton(
           onPressed: () {
-            Navigator.pop(context);
             cpc.requestCreateRoom();
           },
           child: Text(

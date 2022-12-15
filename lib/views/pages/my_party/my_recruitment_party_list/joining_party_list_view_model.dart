@@ -1,7 +1,5 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:ggamf_front/domain/ggamf/repository/my_ggamf_repository.dart';
-import 'package:ggamf_front/domain/party/model/room.dart';
 import 'package:ggamf_front/domain/party/repository/room_repository.dart';
 import 'package:ggamf_front/domain/user/model/user.dart';
 import 'package:ggamf_front/utils/validator_util.dart';
@@ -9,24 +7,25 @@ import 'package:ggamf_front/utils/validator_util.dart';
 import '../../../../domain/party/model/my_room.dart';
 import '../../../../utils/custom_intercepter.dart';
 
-final myRecruitmentPartyListViewModel = StateNotifierProvider.autoDispose<MyRecruitmentPartyListViewModel, List<MyRoom>>((ref) {
-  return MyRecruitmentPartyListViewModel([])..init();
+final joiningPartyListViewModel = StateNotifierProvider.autoDispose<JoiningPartyListViewModel, List<MyRoom>>((ref) {
+  return JoiningPartyListViewModel([], ref)..init();
 });
 
-class MyRecruitmentPartyListViewModel extends StateNotifier<List<MyRoom>> {
-  MyRecruitmentPartyListViewModel(super.state);
+class JoiningPartyListViewModel extends StateNotifier<List<MyRoom>> {
+  final Ref _ref;
+  JoiningPartyListViewModel(super.state, this._ref);
 
   RoomRepository repo = RoomRepository(Dio()
     ..interceptors.add(CustomLogInterceptor())
     ..interceptors.add(SignedInterceptor()));
 
-  List<MyRoom> myRecruitmentPartyList = [];
+  List<MyRoom> joiningPartyList = [];
 
   void init() {
-    repo.findByMyIdRoom(userId: UserSession.user.id).then((value) {
+    repo.findJoinRooms(userId: UserSession.user.id).then((value) {
       value.data['rooms']?.forEach((_myRoom) {
         logger.d("룸밸류 확인 ${value}");
-        myRecruitmentPartyList.add(
+        joiningPartyList.add(
           MyRoom(
             id: _myRoom.id,
             nickName: _myRoom.nickName,
@@ -35,8 +34,13 @@ class MyRecruitmentPartyListViewModel extends StateNotifier<List<MyRoom>> {
             gameLogo: _myRoom.gameLogo,
           ),
         );
+        logger.d("데이터 확인1 : ${_myRoom.nickName}");
+        logger.d("데이터 확인2 : ${_myRoom.roomName}");
+        logger.d("데이터 확인3 : ${_myRoom.totalPeople}");
+        logger.d("데이터 확인4 : ${_myRoom.gameLogo}");
+        logger.d("데이터 확인4 : ${_myRoom.id}");
       });
-      state = myRecruitmentPartyList;
+      state = joiningPartyList;
     });
   }
 

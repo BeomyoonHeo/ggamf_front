@@ -64,7 +64,7 @@ class _MyRecruitmentPartyListViewState extends ConsumerState<MyRecruitmentPartyL
           children: [
             MyRecruitmentPartyListTabBar(tabController: _tabController, textIndex: textIndex),
             const SizedBox(height: 20),
-            MyRecruitmentPartyListTabView(tabController: _tabController),
+            MyRecruitmentPartyListTabView(tabController: _tabController, myRoomList: mrplv),
           ],
         ),
       ),

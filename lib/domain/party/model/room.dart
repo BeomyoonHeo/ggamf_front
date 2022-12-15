@@ -14,14 +14,14 @@ class RoomList {
 @JsonSerializable()
 class Room {
   int id;
-  String gameName;
+  String nickName;
   String roomName;
   int totalPeople;
   bool active;
 
   Room({
     required this.id,
-    required this.gameName,
+    required this.nickName,
     required this.roomName,
     required this.totalPeople,
     required this.active,
