@@ -128,14 +128,17 @@ class _JoinPartyListViewState extends State<JoinPartyListView> {
         label: (i, v) => v,
       ),
       choiceStyle: C2ChipStyle.filled(
+        borderAlpha: 10,
         height: 27,
-        foregroundColor: Colors.black,
+        //foregroundColor: Colors.black,
         borderWidth: 5,
-        foregroundStyle: TextStyle(fontSize: 13),
-        selectedStyle: C2ChipStyle(
+        foregroundStyle: const TextStyle(fontSize: 13),
+        selectedStyle: const C2ChipStyle(
+          borderStyle: BorderStyle.solid,
           backgroundColor: Colors.black,
           foregroundColor: Colors.white,
           borderColor: Colors.black,
+          borderWidth: 2,
         ),
         color: Colors.white,
       ),

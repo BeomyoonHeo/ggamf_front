@@ -28,6 +28,14 @@ abstract class RoomRepository {
   @GET("/s/api/party/user/{userId}/list")
   Future<RoomList> findAllRoom({@Path('userId') required int userId});
 
+  //전체 파티방 목록보기(게임코드)
+  @GET("/s/api/party/user/{userId}/list")
+  Future<RoomList> findAllRoomByGameCode({@Path('userId') required int userId, @Query("gameCode") required int gameCode});
+
+  //전체 파티방 목록보기(키워드)
+  @GET("/s/api/party/user/{userId}/list")
+  Future<RoomList> findAllRoomByKeyword({@Path('userId') required int userId, @Query("keyword") required String keyword});
+
   // 참가중인 파티방 목록 보기
   @GET("/s/api/party/user/{userId}/joins")
   Future<MyRoomList> findJoinRooms({@Path('userId') required int userId});

@@ -44,4 +44,12 @@ class JoinPartyListViewModel extends StateNotifier<List<Room>> {
       state = joinPartyList;
     });
   }
+
+  // void findAllRoomByGameCode(int gameCode) {
+  //   state = state.where((_Room) => _Room. != ).toList();
+  // }
+
+  void findAllRoomByKeyword(String keyword) {
+    state = state.where((_Room) => _Room.gameName != keyword).toList();
+  }
 }
