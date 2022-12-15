@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:ggamf_front/views/pages/my_party/my_recruitment_party_list/my_recruitment_party_list_view.dart';
 import 'package:intl/intl.dart';
 
 import '../../../core/color.dart';
@@ -173,13 +174,15 @@ class _ChattingViewState extends State<ChattingView> {
                             height: 35,
                             width: 100,
                             child: ElevatedButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                Navigator.push(context, MaterialPageRoute(builder: (_) => MyRecruitmentPartyListView()));
+                              },
                               child: Text(
                                 "예",
                                 style: TextStyle(color: Colors.black),
                               ),
                               style: ElevatedButton.styleFrom(
-                                backgroundColor: Colors.amber,
+                                backgroundColor: Colors.white,
                                 side: BorderSide(
                                   width: 1,
                                 ),
@@ -190,13 +193,15 @@ class _ChattingViewState extends State<ChattingView> {
                             height: 35,
                             width: 100,
                             child: ElevatedButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
                               child: Text(
                                 "아니오",
                                 style: TextStyle(color: Colors.black),
                               ),
                               style: ElevatedButton.styleFrom(
-                                backgroundColor: Colors.amber,
+                                backgroundColor: Colors.white,
                                 side: BorderSide(
                                   width: 1,
                                 ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ggamf_front/views/pages/chatting/chatting_view.dart';
 
 class MyRecruitmentPartyListTabView extends StatefulWidget {
   const MyRecruitmentPartyListTabView({
@@ -10,12 +11,10 @@ class MyRecruitmentPartyListTabView extends StatefulWidget {
   final TabController _tabController;
 
   @override
-  State<MyRecruitmentPartyListTabView> createState() =>
-      _MyRecruitmentPartyListTabViewState();
+  State<MyRecruitmentPartyListTabView> createState() => _MyRecruitmentPartyListTabViewState();
 }
 
-class _MyRecruitmentPartyListTabViewState
-    extends State<MyRecruitmentPartyListTabView>
+class _MyRecruitmentPartyListTabViewState extends State<MyRecruitmentPartyListTabView>
     with SingleTickerProviderStateMixin<MyRecruitmentPartyListTabView> {
   late final TabController _innerTabController;
 
@@ -62,7 +61,9 @@ class _MyRecruitmentPartyListTabViewState
                   border: Border.all(width: 1),
                 ),
                 child: InkWell(
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.push(context, MaterialPageRoute(builder: (_) => ChattingView()));
+                  },
                   child: Row(
                     children: [
                       Expanded(

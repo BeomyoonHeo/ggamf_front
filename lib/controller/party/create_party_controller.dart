@@ -29,16 +29,17 @@ class CreatePartyController {
     logger.d("파티이름:${partyNameController.text}");
     logger.d("인원수:${int.parse(totalPeopleController.text)}");
     logger.d("게임코드:${_keyList[selectGameController.text]}");
+    logger.d("유저 id : ${UserSession.user.id}");
 
     GenerateRoomParty createRoomParty = GenerateRoomParty(
       gameName: selectGameController.text,
-      gameCodeId: 3,
+      gameCodeId: _keyList[selectGameController.text],
       roomName: partyNameController.text,
       totalPeople: int.parse(totalPeopleController.text),
       userId: UserSession.user.id,
     );
 
     RoomRepository createRoomRepository = RoomRepository(dio);
-    createRoomRepository.createRoom(userId: UserSession.user.id, gameCodeId: 3, generateRoomParty: createRoomParty);
+    createRoomRepository.createRoom(userId: UserSession.user.id, gameCodeId: _keyList[selectGameController.text], generateRoomParty: createRoomParty);
   }
 }
