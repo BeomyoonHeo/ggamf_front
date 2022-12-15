@@ -15,13 +15,13 @@ class GgamfList {
 @JsonSerializable()
 class Ggamf {
   int userId;
-  String nickName;
+  String nickname;
   String photo;
   String intro;
 
   Ggamf(
       {required this.userId,
-      required this.nickName,
+      required this.nickname,
       required this.photo,
       required this.intro});
 
