@@ -51,8 +51,7 @@ class LoginBox extends ConsumerWidget {
                 onChanged: (value) {},
               ),
               const SizedBox(height: 10),
-              RoundedInputPasswordField(
-                  controller: passwordController, validator: passwordValidator),
+              RoundedInputPasswordField(controller: passwordController, validator: passwordValidator),
             ],
           ),
         ),

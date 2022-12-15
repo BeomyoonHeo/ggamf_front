@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ggamf_front/controller/user/my_profile_controller.dart';
+import 'package:ggamf_front/domain/user/model/profile_user.dart';
 import 'package:ggamf_front/main.dart';
 import 'package:ggamf_front/views/pages/profile/my_profile/my_profile_view_model.dart';
 import 'package:ggamf_front/views/pages/profile/update_my_profile/update_my_profile_view.dart';
@@ -28,20 +29,7 @@ class MyProfileView extends ConsumerWidget {
             SizedBox(height: 30),
             _buildCircleAvatar(mpvm),
             SizedBox(height: 30),
-            Container(
-              padding: EdgeInsets.all(10),
-              width: double.infinity,
-              decoration: BoxDecoration(
-                border: Border.all(width: 1),
-                borderRadius: BorderRadius.circular(10),
-                color: Colors.white,
-              ),
-              child: Text(
-                "${mpvm.nickname}",
-                style: TextStyle(fontSize: 15, color: Colors.black),
-                textAlign: TextAlign.center,
-              ),
-            ),
+            _buildNickName(mpvm),
             SizedBox(height: 10),
             _ratedStar(),
             SizedBox(height: 10),
@@ -79,6 +67,23 @@ class MyProfileView extends ConsumerWidget {
             ),
           ],
         ),
+      ),
+    );
+  }
+
+  Widget _buildNickName(ProfileUser mpvm) {
+    return Container(
+      padding: EdgeInsets.all(10),
+      width: double.infinity,
+      decoration: BoxDecoration(
+        border: Border.all(width: 1),
+        borderRadius: BorderRadius.circular(10),
+        color: Colors.white,
+      ),
+      child: Text(
+        "${mpvm.nickname}",
+        style: TextStyle(fontSize: 15, color: Colors.black),
+        textAlign: TextAlign.center,
       ),
     );
   }
