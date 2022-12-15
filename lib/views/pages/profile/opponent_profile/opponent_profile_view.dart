@@ -41,8 +41,7 @@ class _OpponentProfileViewState extends ConsumerState<OpponentProfileView> {
               height: 150,
               child: InkWell(
                 onTap: () async {
-                  await showDialog(
-                      context: context, builder: (_) => _imageDialog());
+                  await showDialog(context: context, builder: (_) => _imageDialog());
                 },
                 child: Image.asset("assets/images/cart1.png"),
               ),
@@ -316,20 +315,24 @@ class _OpponentProfileViewState extends ConsumerState<OpponentProfileView> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  OutlinedButton(
+                  ElevatedButton(
                     onPressed: () {},
                     child: Text("리포트하기"),
-                    style: OutlinedButton.styleFrom(
+                    style: ElevatedButton.styleFrom(
                       foregroundColor: Colors.black,
+                      backgroundColor: Colors.white,
+                      side: BorderSide(width: 1),
                     ),
                   ),
-                  OutlinedButton(
+                  ElevatedButton(
                     onPressed: () {
                       Navigator.pop(context);
                     },
                     child: Text("취소"),
-                    style: OutlinedButton.styleFrom(
+                    style: ElevatedButton.styleFrom(
                       foregroundColor: Colors.black,
+                      backgroundColor: Colors.white,
+                      side: BorderSide(width: 1),
                     ),
                   ),
                 ],
