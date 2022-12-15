@@ -34,13 +34,13 @@ class MyGgamfListViewModel extends StateNotifier<List<Ggamf>> {
             Ggamf(
               userId: _ggamf.userId,
               photo: _ggamf.photo,
-              nickName: _ggamf.nickName,
+              nickname: _ggamf.nickname,
               intro: _ggamf.intro,
             ),
           );
           logger.d("데이터 확인1 : ${_ggamf.userId}");
           logger.d("데이터 확인2 : ${_ggamf.photo}");
-          logger.d("데이터 확인3 : ${_ggamf.nickName}");
+          logger.d("데이터 확인3 : ${_ggamf.nickname}");
           logger.d("데이터 확인4 : ${_ggamf.intro}");
         });
         state = myGgamfList;
