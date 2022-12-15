@@ -6,6 +6,7 @@ import 'package:ggamf_front/domain/party/repository/room_repository.dart';
 import 'package:ggamf_front/domain/user/model/user.dart';
 import 'package:ggamf_front/utils/custom_intercepter.dart';
 import 'package:ggamf_front/utils/validator_util.dart';
+import 'package:ggamf_front/views/pages/my_party/my_recruitment_party_list/my_recruitment_party_list_view_model.dart';
 
 final createPartyController = Provider((ref) {
   return CreatePartyController(ref);
@@ -16,29 +17,33 @@ class CreatePartyController {
 
   CreatePartyController(this._ref);
 
+  final Map<String, dynamic> _keyList = {'게임선택': 0, '리그 오브 레전드': 1, '오버워치': 2, '로스트아크': 3, '발로란트': 4, '기타': 5};
+
+  late RoomRepository repo = RoomRepository(Dio()
+    ..interceptors.add(CustomLogInterceptor())
+    ..interceptors.add(SignedInterceptor()));
+
   final TextEditingController partyNameController = TextEditingController();
   final TextEditingController selectGameController = TextEditingController();
   final TextEditingController totalPeopleController = TextEditingController();
 
-  Dio dio = Dio()..interceptors.add(CustomLogInterceptor());
-
   void requestCreateRoom() {
-    logger.d("${selectGameController.text}");
-
-    logger.d("${partyNameController.text}");
-    logger.d("${int.parse(totalPeopleController.text)}");
-    logger.d("${UserSession.user.id}");
+    logger.d("게임선택:${selectGameController.text}");
+    logger.d("파티이름:${partyNameController.text}");
+    logger.d("인원수:${int.parse(totalPeopleController.text)}");
+    logger.d("게임코드:${_keyList[selectGameController.text]}");
+    logger.d("유저 id : ${UserSession.user.id}");
 
     GenerateRoomParty createRoomParty = GenerateRoomParty(
       gameName: selectGameController.text,
-      gameCodeId: 3,
+      gameCodeId: _keyList[selectGameController.text],
       roomName: partyNameController.text,
       totalPeople: int.parse(totalPeopleController.text),
       userId: UserSession.user.id,
     );
-    logger.d(int.parse(selectGameController.text));
 
-    RoomRepository createRoomRepository = RoomRepository(dio);
-    createRoomRepository.createRoom(userId: UserSession.user.id, gameCodeId: 3, generateRoomParty: createRoomParty);
+    repo
+        .createRoom(userId: UserSession.user.id, gameCodeId: _keyList[selectGameController.text], generateRoomParty: createRoomParty)
+        .then((value) => _ref.read(myRecruitmentPartyListViewModel.notifier).updateMyRecruitmentParty());
   }
 }

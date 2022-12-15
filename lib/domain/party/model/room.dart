@@ -4,9 +4,8 @@ part 'room.g.dart';
 
 @JsonSerializable()
 class RoomList {
-  List<Room> roomList;
-
-  RoomList({required this.roomList});
+  Map<String, List<Room>> data;
+  RoomList({required this.data});
 
   factory RoomList.fromJson(Map<String, dynamic> json) => _$RoomListFromJson(json);
   Map<String, dynamic> toJson() => _$RoomListToJson(this);

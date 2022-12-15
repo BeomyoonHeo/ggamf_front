@@ -78,17 +78,9 @@ class _JoinUserViewState extends ConsumerState<JoinUserView> {
             child: SingleChildScrollView(
               child: Column(
                 children: [
-                  InputBox(
-                      validator: nameValidator,
-                      inputText: "이름   : ",
-                      hintText: "이름을 입력하세요",
-                      controller: juc.nameController),
+                  InputBox(validator: nameValidator, inputText: "이름   : ", hintText: "이름을 입력하세요", controller: juc.nameController),
                   const SizedBox(height: 10),
-                  InputBox(
-                      validator: idValidator,
-                      inputText: "아이디   : ",
-                      hintText: "아이디를 입력하세요",
-                      controller: juc.idController),
+                  InputBox(validator: idValidator, inputText: "아이디   : ", hintText: "아이디를 입력하세요", controller: juc.idController),
                   const SizedBox(height: 10),
                   InputBox(
                       obsText: true,
