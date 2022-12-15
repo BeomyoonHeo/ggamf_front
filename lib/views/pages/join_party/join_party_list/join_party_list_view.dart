@@ -19,9 +19,8 @@ class JoinPartyListView extends StatefulWidget {
 }
 
 class _JoinPartyListViewState extends State<JoinPartyListView> {
-  int tag = 1;
+  int tag = 2;
   List<String> options = [
-    '전체',
     '리그오브레전드',
     '배틀그라운드',
     '로스트아크',
@@ -130,9 +129,15 @@ class _JoinPartyListViewState extends State<JoinPartyListView> {
       ),
       choiceStyle: C2ChipStyle.filled(
         height: 27,
+        foregroundColor: Colors.black,
+        borderWidth: 5,
         foregroundStyle: TextStyle(fontSize: 13),
-        selectedStyle: C2ChipStyle(backgroundColor: Colors.green),
-        color: Colors.amber[500],
+        selectedStyle: C2ChipStyle(
+          backgroundColor: Colors.black,
+          foregroundColor: Colors.white,
+          borderColor: Colors.black,
+        ),
+        color: Colors.white,
       ),
     );
   }

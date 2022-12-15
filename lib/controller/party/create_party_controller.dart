@@ -29,12 +29,6 @@ class CreatePartyController {
   final TextEditingController totalPeopleController = TextEditingController();
 
   void requestCreateRoom() {
-    logger.d("게임선택:${selectGameController.text}");
-    logger.d("파티이름:${partyNameController.text}");
-    logger.d("인원수:${int.parse(totalPeopleController.text)}");
-    logger.d("게임코드:${_keyList[selectGameController.text]}");
-    logger.d("유저 id : ${UserSession.user.id}");
-
     GenerateRoomParty createRoomParty = GenerateRoomParty(
       gameName: selectGameController.text,
       gameCodeId: _keyList[selectGameController.text],
