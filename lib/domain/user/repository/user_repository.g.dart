@@ -13,7 +13,7 @@ class _UserRepository implements UserRepository {
     this._dio, {
     this.baseUrl,
   }) {
-    baseUrl ??= 'http://192.168.0.187:8080';
+    baseUrl ??= 'http://183.104.199.106:8080';
   }
 
   final Dio _dio;
@@ -87,7 +87,7 @@ class _RecommendGgamfListRepository implements RecommendGgamfListRepository {
     this._dio, {
     this.baseUrl,
   }) {
-    baseUrl ??= 'http://192.168.0.187:8080';
+    baseUrl ??= 'http://183.104.199.106:8080';
   }
 
   final Dio _dio;
@@ -95,22 +95,72 @@ class _RecommendGgamfListRepository implements RecommendGgamfListRepository {
   String? baseUrl;
 
   @override
-  Future<dynamic> postUser({
+  Future<dynamic> acceptReceiveGgmaf({
     required id,
-    required body,
+    required targetId,
   }) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final _data = body;
+    final _data = <String, dynamic>{};
     final _result = await _dio.fetch(_setStreamType<dynamic>(Options(
-      method: 'POST',
+      method: 'PUT',
       headers: _headers,
       extra: _extra,
     )
         .compose(
           _dio.options,
-          '/users/${id}',
+          '/s/api/ggamf/user/${id}/accept/${targetId}',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = _result.data;
+    return value;
+  }
+
+  @override
+  Future<dynamic> denyReceiveGgamf({
+    required id,
+    required targetId,
+  }) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch(_setStreamType<dynamic>(Options(
+      method: 'DELETE',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          '/s/api/ggamf/user/${id}/reject/${targetId}',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = _result.data;
+    return value;
+  }
+
+  @override
+  Future<dynamic> cancelSendGgamf({
+    required id,
+    required targetId,
+  }) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch(_setStreamType<dynamic>(Options(
+      method: 'DELETE',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          '/s/api/ggamf/user/${id}/cancel/${targetId}',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -259,7 +309,7 @@ class _ProfileUserRepository implements ProfileUserRepository {
     this._dio, {
     this.baseUrl,
   }) {
-    baseUrl ??= 'http://192.168.0.187:8080';
+    baseUrl ??= 'http://183.104.199.106:8080';
   }
 
   final Dio _dio;

@@ -40,8 +40,17 @@ class Session {
 abstract class RecommendGgamfListRepository {
   factory RecommendGgamfListRepository(Dio dio, {String baseUrl}) = _RecommendGgamfListRepository;
 
-  @POST('/users/{id}')
-  Future<dynamic> postUser({@Path() required int id, @Body() required dynamic body});
+  //받은 껨프 요청 수락하기
+  @PUT('/s/api/ggamf/user/{id}/accept/{targetId}')
+  Future<dynamic> acceptReceiveGgmaf({@Path('id') required int id, @Path('targetId') required int targetId});
+
+  //받은 껨프 요청 무시하기
+  @DELETE('/s/api/ggamf/user/{id}/reject/{targetId}')
+  Future<dynamic> denyReceiveGgamf({@Path('id') required int id, @Path('targetId') required int targetId});
+
+  //보낸 껨프 요청 취소하기
+  @DELETE('/s/api/ggamf/user/{id}/cancel/{targetId}')
+  Future<dynamic> cancelSendGgamf({@Path('id') required int id, @Path('targetId') required int targetId});
 
   //추천 겜프 리스트 불러오기
   @GET('/s/api/ggamf/user/{id}/recommend')
