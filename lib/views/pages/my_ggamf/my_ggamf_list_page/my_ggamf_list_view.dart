@@ -18,44 +18,49 @@ class MyGgamfListView extends ConsumerWidget {
       backgroundColor: Colors.white,
       body: Padding(
         padding: const EdgeInsets.only(right: 5, left: 5, top: 20),
-        child: ListView.builder(
-          itemCount: mglv.length,
-          itemBuilder: (context, index) => Container(
-            padding: EdgeInsets.all(10),
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                fit: BoxFit.cover,
-                image: AssetImage("assets/images/rgb.gif"),
-              ),
-              border: Border.all(width: 1),
-            ),
-            child: Container(
+        child: _buildMyGgamfList(mglv),
+      ),
+    );
+  }
+
+  Widget _buildMyGgamfList(List<Ggamf> mglv) {
+    return mglv.isEmpty
+        ? Center(
+            child: Text('내껨프가 한명도 없습니다.'),
+          )
+        : ListView.builder(
+            itemCount: mglv.length,
+            itemBuilder: (context, index) => Container(
               padding: EdgeInsets.all(10),
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
-                color: Color.fromRGBO(255, 255, 255, 0.75),
+                image: DecorationImage(
+                  fit: BoxFit.cover,
+                  image: AssetImage("assets/images/rgb.gif"),
+                ),
+                border: Border.all(width: 1),
               ),
-              height: 120,
-              child: InkWell(
-                onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => OpponentProfileView()));
-                },
-                child: Row(
-                  children: [
-                    _profileImage(),
-                    SizedBox(width: 20),
-                    _context(mglv, index),
-                  ],
+              child: Container(
+                padding: EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20),
+                  color: Color.fromRGBO(255, 255, 255, 0.75),
+                ),
+                height: 120,
+                child: InkWell(
+                  onTap: () {
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => OpponentProfileView()));
+                  },
+                  child: Row(
+                    children: [
+                      _profileImage(),
+                      SizedBox(width: 20),
+                      _context(mglv, index),
+                    ],
+                  ),
                 ),
               ),
             ),
-          ),
-        ),
-      ),
-    );
+          );
   }
 
   Widget _context(List<Ggamf> mglv, index) {
@@ -67,8 +72,7 @@ class MyGgamfListView extends ConsumerWidget {
           Text(
             "${mglv[index].nickname}",
             //"김겐지",
-            style: TextStyle(
-                fontSize: 25, color: Colors.black, fontWeight: FontWeight.w600),
+            style: TextStyle(fontSize: 25, color: Colors.black, fontWeight: FontWeight.w600),
           ),
           SizedBox(height: 10),
           Text(
@@ -98,8 +102,7 @@ AppBar _appBar() {
     backgroundColor: Colors.white,
     title: Text(
       "내 껨프",
-      style: TextStyle(
-          color: Colors.black, fontFamily: 'NanumSquare', fontSize: 25),
+      style: TextStyle(color: Colors.black, fontFamily: 'NanumSquare', fontSize: 25),
     ),
     elevation: 0,
   );

@@ -47,24 +47,25 @@ class _RoomRepository implements RoomRepository {
   }
 
   @override
-  Future<dynamic> findByMyIdRoom({required userId}) async {
+  Future<RoomList> findByMyIdRoom({required userId}) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    final _result = await _dio.fetch(_setStreamType<dynamic>(Options(
+    final _result =
+        await _dio.fetch<Map<String, dynamic>>(_setStreamType<RoomList>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
     )
-        .compose(
-          _dio.options,
-          '/s/api/party/user/${userId}/myrooms',
-          queryParameters: queryParameters,
-          data: _data,
-        )
-        .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = _result.data;
+            .compose(
+              _dio.options,
+              '/s/api/party/user/${userId}/myrooms',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = RoomList.fromJson(_result.data!);
     return value;
   }
 
@@ -218,6 +219,29 @@ class _RoomRepository implements RoomRepository {
             .compose(
               _dio.options,
               '/s/api/party/user/${userId}/create/${gameCodeId}',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = GenerateRoomParty.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<GenerateRoomParty> createRoomView({required userId}) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<GenerateRoomParty>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/s/api/party/user/${userId}/create',
               queryParameters: queryParameters,
               data: _data,
             )

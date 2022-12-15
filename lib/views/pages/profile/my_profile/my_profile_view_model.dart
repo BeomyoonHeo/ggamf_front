@@ -5,11 +5,8 @@ import 'package:ggamf_front/domain/user/model/user.dart';
 import 'package:ggamf_front/domain/user/repository/user_repository.dart';
 import 'package:ggamf_front/utils/custom_intercepter.dart';
 
-final myProfileViewModel =
-    StateNotifierProvider.autoDispose<MyProfileViewModel, ProfileUser>((ref) {
-  return MyProfileViewModel(
-      ProfileUser(intro: null, nickname: null, photo: null), ref)
-    ..init();
+final myProfileViewModel = StateNotifierProvider.autoDispose<MyProfileViewModel, ProfileUser>((ref) {
+  return MyProfileViewModel(ProfileUser(intro: null, nickname: null, photo: null), ref)..init();
 });
 
 //View의 데이터를 가짐
@@ -26,8 +23,7 @@ class MyProfileViewModel extends StateNotifier<ProfileUser> {
     restApi.getUserProfile(userId: UserSession.user.id).then((value) {
       ProfileUser? profileUser;
       Map<String, dynamic> data = value;
-      data.forEach((key, value) =>
-          key == 'data' ? profileUser = ProfileUser.fromJson(value) : '');
+      data.forEach((key, value) => key == 'data' ? profileUser = ProfileUser.fromJson(value) : '');
       state = profileUser!;
     });
   }

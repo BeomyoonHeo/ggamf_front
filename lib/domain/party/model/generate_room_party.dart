@@ -4,11 +4,11 @@ part 'generate_room_party.g.dart';
 
 @JsonSerializable()
 class GenerateRoomParty {
-  String gameName;
-  String roomName;
-  int totalPeople;
-  int userId;
-  int gameCodeId;
+  String? gameName;
+  String? roomName;
+  int? totalPeople;
+  int? userId;
+  int? gameCodeId;
 
   GenerateRoomParty({
     required this.gameName,

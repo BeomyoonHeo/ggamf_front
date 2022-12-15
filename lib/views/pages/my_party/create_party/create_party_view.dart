@@ -15,14 +15,9 @@ class CreatePartyView extends ConsumerStatefulWidget {
 
 class _CreatePartyViewState extends ConsumerState<CreatePartyView> {
   //{'게임선택': 0, '리그 오브 레전드': 1, '오버워치': 2, '로스트아크': 3, '발로란트': 4, '기타': 5};
-  //List<DropdownMenuItem<int>> _valueList = [];
-  // object.map(key, value){
-  //   _valueList.add(DropdownMenuItem(child: Text('${key}'), value: value,));
-  // }
-
-  List<String> _valueList = ['게임선택', '리그 오브 레전드', '오버워치', '로스트아크', '발로란트', '기타'];
-  var _selectedValue = '게임선택';
-
+  List<DropdownMenuItem> _valueList = [];
+  final Map<String, dynamic> _keyList = {'게임선택': 0, '리그 오브 레전드': 1, '오버워치': 2, '로스트아크': 3, '발로란트': 4, '기타': 5};
+  String _selectedValue = '게임선택';
   List<String> _numList = ['인원선택', '2', '3', '4', '5', '6', '7', '8'];
   var _selectedNum = '인원선택';
 
@@ -31,7 +26,14 @@ class _CreatePartyViewState extends ConsumerState<CreatePartyView> {
   @override
   Widget build(BuildContext context) {
     final cpc = ref.read(createPartyController);
-
+    if (_valueList.isEmpty) {
+      _keyList.forEach((key, value) {
+        _valueList.add(DropdownMenuItem(
+          child: Text('${key}'),
+          value: key,
+        ));
+      });
+    }
     return Scaffold(
       appBar: _appBar(),
       body: Padding(
@@ -68,7 +70,7 @@ class _CreatePartyViewState extends ConsumerState<CreatePartyView> {
             setState(
               () {
                 if (value == '인원선택') {
-                  _selectedValue = value;
+                  _selectedNum = value;
                 } else {
                   cpc.totalPeopleController.text = value;
                 }
@@ -103,10 +105,7 @@ class _CreatePartyViewState extends ConsumerState<CreatePartyView> {
         height: 40,
         child: TextButton(
           onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => MyRecruitmentPartyListView()),
-            );
+            Navigator.pop(context);
             cpc.requestCreateRoom();
           },
           child: Text(
@@ -154,12 +153,7 @@ class _CreatePartyViewState extends ConsumerState<CreatePartyView> {
         children: [
           DropdownButton(
             value: _selectedValue,
-            items: _valueList.map((String item) {
-              return DropdownMenuItem<String>(
-                child: Text('$item'),
-                value: item,
-              );
-            }).toList(),
+            items: _valueList,
             onChanged: (dynamic value) {
               setState(
                 () {
@@ -173,6 +167,7 @@ class _CreatePartyViewState extends ConsumerState<CreatePartyView> {
                   } else {
                     _enableTextField = true;
                     cpc.selectGameController.text = value;
+                    logger.d(cpc.selectGameController.text);
                     _enableTextField = false;
                   }
                   ;

@@ -16,14 +16,10 @@ enum PageEnum {
   final String displayName;
 
   factory PageEnum.getByCode(int navigatorCode) {
-    return PageEnum.values.firstWhere(
-        (value) => value.navigatorCode == navigatorCode,
-        orElse: () => PageEnum.UNDEFINED);
+    return PageEnum.values.firstWhere((value) => value.navigatorCode == navigatorCode, orElse: () => PageEnum.UNDEFINED);
   }
 
   factory PageEnum.getByDisPlayName(String displayName) {
-    return PageEnum.values.firstWhere(
-        (value) => value.displayName == displayName,
-        orElse: () => PageEnum.UNDEFINED);
+    return PageEnum.values.firstWhere((value) => value.displayName == displayName, orElse: () => PageEnum.UNDEFINED);
   }
 }

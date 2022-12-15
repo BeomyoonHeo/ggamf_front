@@ -5,27 +5,19 @@
 // import 'package:ggamf_front/domain/user/model/join_user.dart';
 //
 // final createPartyViewModel =
-// StateNotifierProvider<CreatePartyViewModel, JoinUser>((ref) {
+// StateNotifierProvider<CreatePartyViewModel, GenerateRoomParty>((ref) {
 //   final cpc = ref.read(createPartyController);
 //   return CreatePartyViewModel(
-//       GenerateRoomParty(userId: ,gameCodeId: ,gameName: ,roomName: ,totalPeople: ,),
+//       GenerateRoomParty(userId: null,gameCodeId: ,gameName: ,roomName: ,totalPeople: ,),
 //       ref);
 // });
 //
-// class CreatePartyViewModel extends StateNotifier<JoinUser> {
+// class CreatePartyViewModel extends StateNotifier<GenerateRoomParty> {
 //   final _ref;
 //   CreatePartyViewModel(super.state, this._ref);
 //
 //   void updateState() {
 //     final juc = _ref.read(joinUserController);
-//     state = JoinUser(
-//       name: juc.nameController.text,
-//       loginId: juc.idController.text,
-//       password: juc.passwordController.text,
-//       phoneNumber: juc.combinePhoneNumber(),
-//       nickname: juc.nickNameController.text,
-//       email: juc.emailController.text,
-//       isAgree: juc.isAgree,
-//     );
+//
 //   }
 // }

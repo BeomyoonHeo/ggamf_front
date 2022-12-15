@@ -17,14 +17,10 @@ abstract class MyGgamfRepository {
 
   //껨프 요청
   @POST("/s/api/ggamf/follow/{followingId}")
-  Future<Ggamf> followGgamf(
-      {@Path('followingId') required int followingId,
-      @Body() required Ggamf followGgamf});
+  Future<Ggamf> followGgamf({@Path('followingId') required int followingId, @Body() required Ggamf followGgamf});
 
   //유저 신고
   @POST("/s/api/ggamf/user/{userId}/report/{badUserId}")
   Future<ReportGgamf> reportGgamf(
-      {@Path('userId') required int userId,
-      @Path('badUserId') required int badUserId,
-      @Body() required ReportGgamf reportGgamf});
+      {@Path('userId') required int userId, @Path('badUserId') required int badUserId, @Body() required ReportGgamf reportGgamf});
 }
