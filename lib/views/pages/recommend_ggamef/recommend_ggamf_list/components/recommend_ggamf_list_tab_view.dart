@@ -87,7 +87,7 @@ class _RecommendGgamfListTabViewState extends State<RecommendGgamfListTabView>
                   leading: CircleAvatar(
                     backgroundImage: NetworkImage(ggamfList[index].photo ?? ''),
                   ),
-                  title: Text(ggamfList[index].nickName ?? ''),
+                  title: Text(ggamfList[index].nickname ?? ''),
                   subtitle: Text(ggamfList[index].intro ?? ''),
                   trailing: Row(
                     mainAxisSize: MainAxisSize.min,
@@ -125,7 +125,7 @@ class _RecommendGgamfListTabViewState extends State<RecommendGgamfListTabView>
                   leading: CircleAvatar(
                     backgroundImage: NetworkImage(ggamfList[index].photo ?? ''),
                   ),
-                  title: Text(ggamfList[index].nickName ?? ''),
+                  title: Text(ggamfList[index].nickname ?? ''),
                   subtitle: Text(ggamfList[index].intro ?? ''),
                   trailing: Row(
                     mainAxisSize: MainAxisSize.min,
@@ -176,7 +176,7 @@ class _RecommendGgamfListTabViewState extends State<RecommendGgamfListTabView>
                   leading: CircleAvatar(
                     backgroundImage: NetworkImage(ggamfList[index].photo ?? ''),
                   ),
-                  title: Text(ggamfList[index].nickName ?? ''),
+                  title: Text(ggamfList[index].nickname ?? ''),
                   subtitle: Text(ggamfList[index].intro ?? ''),
                   trailing: Row(
                     mainAxisSize: MainAxisSize.min,

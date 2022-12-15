@@ -28,7 +28,7 @@ class ReceiveGgamfListViewModel extends StateNotifier<List<Ggamf>> {
             Ggamf(
               userId: _ggamf.userId,
               photo: _ggamf.photo,
-              nickName: _ggamf.nickName,
+              nickname: _ggamf.nickname,
               intro: _ggamf.intro,
             ),
           );

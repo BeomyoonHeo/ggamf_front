@@ -65,7 +65,7 @@ class MyGgamfListView extends ConsumerWidget {
         children: [
           SizedBox(height: 5),
           Text(
-            "${mglv[index].nickName}",
+            "${mglv[index].nickname}",
             //"김겐지",
             style: TextStyle(
                 fontSize: 25, color: Colors.black, fontWeight: FontWeight.w600),

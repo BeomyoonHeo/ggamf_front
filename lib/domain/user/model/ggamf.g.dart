@@ -22,14 +22,14 @@ Map<String, dynamic> _$GgamfListToJson(GgamfList instance) => <String, dynamic>{
 
 Ggamf _$GgamfFromJson(Map<String, dynamic> json) => Ggamf(
       userId: json['userId'] as int,
-      nickName: json['nickName'] as String,
+      nickname: json['nickname'] as String,
       photo: json['photo'] as String,
       intro: json['intro'] as String,
     );
 
 Map<String, dynamic> _$GgamfToJson(Ggamf instance) => <String, dynamic>{
       'userId': instance.userId,
-      'nickName': instance.nickName,
+      'nickname': instance.nickname,
       'photo': instance.photo,
       'intro': instance.intro,
     };
