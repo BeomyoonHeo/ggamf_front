@@ -119,7 +119,7 @@ class _MyRecruitmentPartyListTabViewState extends State<MyRecruitmentPartyListTa
           )
         : ListView.separated(
             itemCount: mrplv.length,
-            separatorBuilder: (context, index) => Divider(
+            separatorBuilder: (context, index) => const Divider(
               height: 20,
               color: Colors.white,
             ),
