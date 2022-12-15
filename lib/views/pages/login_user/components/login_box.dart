@@ -66,7 +66,7 @@ class LoginBox extends ConsumerWidget {
               ItemButton(
                   text: "로그인",
                   function: () {
-                    //luc.login(usernameController.text, passwordController.text);
+                    luc.login(usernameController.text, passwordController.text);
                   }),
               const SizedBox(height: 10),
               ItemButton(

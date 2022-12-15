@@ -12,16 +12,14 @@ import 'package:ggamf_front/utils/validator_util.dart';
 final userController = Provider((ref) => UserController());
 
 class UserController {
-  final userRepository =
-      UserRepository(Dio()..interceptors.add(LoginInterceptor()));
+  final userRepository = UserRepository(Dio()..interceptors.add(LoginInterceptor()));
   login(String username, String password) async {
     final loginUser = LoginUser(loginId: username, password: password);
     userRepository.login(loginUser: loginUser).then((value) {
       Map<String, dynamic> response = value;
       logger.d(response);
       Session().getInitSession().then(
-            (value) => Navigator.pushNamed(navigatorKey.currentState!.context,
-                PageEnum.ALLPAGES.requestLocation),
+            (value) => Navigator.pushNamed(navigatorKey.currentState!.context, PageEnum.ALLPAGES.requestLocation),
           );
     }).onError((error, stackTrace) {
       logger.d(error);

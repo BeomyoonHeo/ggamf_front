@@ -4,12 +4,13 @@ import 'package:ggamf_front/domain/user/model/profile_user.dart';
 import 'package:ggamf_front/domain/user/model/update_user.dart';
 import 'package:ggamf_front/domain/user/repository/user_repository.dart';
 import 'package:ggamf_front/utils/custom_intercepter.dart';
+import 'package:ggamf_front/views/pages/profile/my_profile/my_profile_view_model.dart';
 
-final updateMyProfileViewModel = StateNotifierProvider<UpdateMyProfileViewModel, ProfileUser>((ref) {
-  return UpdateMyProfileViewModel(ProfileUser(intro: null, nickname: null, photo: null), ref);
+final updateMyProfileViewModel = StateNotifierProvider<UpdateMyProfileViewModel, UpdateUser>((ref) {
+  return UpdateMyProfileViewModel(UpdateUser(photo: null, nickname: null, intro: null), ref);
 });
 
-class UpdateMyProfileViewModel extends StateNotifier<ProfileUser> {
+class UpdateMyProfileViewModel extends StateNotifier<UpdateUser> {
   final Ref _ref;
   UpdateMyProfileViewModel(super.state, this._ref);
 
@@ -17,8 +18,5 @@ class UpdateMyProfileViewModel extends StateNotifier<ProfileUser> {
 
   Future<void> updateMyProfile(UpdateUser updateUser) async {
     ProfileUserRepository restApi = await ProfileUserRepository(dio);
-    restApi
-        .putUserProfile(userId: 1, updateUser: updateUser)
-        .then((value) => state = ProfileUser(photo: value.photo, nickname: value.nickname, intro: value.intro));
   }
 }

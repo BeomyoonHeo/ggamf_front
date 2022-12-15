@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:ggamf_front/views/pages/my_party/my_recruitment_party_list/my_recruitment_party_list_view.dart';
 import 'package:intl/intl.dart';
 
 import '../../../core/color.dart';
@@ -151,21 +152,67 @@ class _ChattingViewState extends State<ChattingView> {
           onTap: () {
             showDialog(
               context: context,
-              builder: (_) => CupertinoAlertDialog(
-                title: Text("확인"),
-                content: Text("정말 파티에서 나가시겠습니까?"),
-                actions: [
-                  CupertinoDialogAction(
-                    child: Text("네"),
-                    onPressed: () {},
+              builder: (_) => Dialog(
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
                   ),
-                  CupertinoDialogAction(
-                    child: Text("아니오"),
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
-                  )
-                ],
+                  padding: EdgeInsets.all(10),
+                  width: double.infinity,
+                  height: 150,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      Text(
+                        "정말 나가시겠습니까?",
+                        style: TextStyle(fontSize: 20),
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          SizedBox(
+                            height: 35,
+                            width: 100,
+                            child: ElevatedButton(
+                              onPressed: () {
+                                Navigator.push(context, MaterialPageRoute(builder: (_) => MyRecruitmentPartyListView()));
+                              },
+                              child: Text(
+                                "예",
+                                style: TextStyle(color: Colors.black),
+                              ),
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.white,
+                                side: BorderSide(
+                                  width: 1,
+                                ),
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            height: 35,
+                            width: 100,
+                            child: ElevatedButton(
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                              child: Text(
+                                "아니오",
+                                style: TextStyle(color: Colors.black),
+                              ),
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.white,
+                                side: BorderSide(
+                                  width: 1,
+                                ),
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
               ),
             );
           },
