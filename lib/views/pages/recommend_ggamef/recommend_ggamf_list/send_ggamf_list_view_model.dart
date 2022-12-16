@@ -24,7 +24,7 @@ class SendGgamfListViewModel extends StateNotifier<List<Ggamf>> {
     repo.getSendGgamfList(id: UserSession.user.id).then(
       (value) {
         value.data['followings']?.forEach((_ggamf) {
-          sendList[_ggamf.userId] = _ggamf;
+          sendList[_ggamf.userId] = _ggamf; // provider에 데이터 담기
           sendGgamfList.add(
             Ggamf(
               userId: _ggamf.userId,

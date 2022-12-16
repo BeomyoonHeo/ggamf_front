@@ -7,8 +7,9 @@ import 'package:ggamf_front/utils/custom_intercepter.dart';
 
 import '../utils/validator_util.dart';
 
-final ggamfProvider = StateNotifierProvider<GgamfProvider, List<Ggamf>>(
-    (ref) => GgamfProvider([], ref)..showMyGgamf());
+final ggamfProvider =
+    StateNotifierProvider.autoDispose<GgamfProvider, List<Ggamf>>(
+        (ref) => GgamfProvider([], ref)..showMyGgamf());
 
 class GgamfProvider extends StateNotifier<List<Ggamf>> {
   final Ref _ref;
@@ -21,13 +22,26 @@ class GgamfProvider extends StateNotifier<List<Ggamf>> {
   Map<int, Ggamf> myGgamIdList = {};
   Map<int, Ggamf> sendGgamfIdList = {};
 
-  void addMyGgamf() {}
+  void addMyGgamf(Ggamf _ggamf) {
+    state = [...state, _ggamf];
+  }
 
   void showMyGgamf() {
     repo.myGgamfList(userId: UserSession.user.id).then(
       (value) {
         logger.d('내껨프 벨류 확인 : ${value.data}');
         value.data['followers']?.forEach((_ggamf) {
+          myGgamIdList[_ggamf.userId] = _ggamf;
+          myGgamfList.add(
+            Ggamf(
+              userId: _ggamf.userId,
+              photo: _ggamf.photo,
+              nickname: _ggamf.nickname,
+              intro: _ggamf.intro,
+            ),
+          );
+        });
+        value.data['followings']?.forEach((_ggamf) {
           myGgamIdList[_ggamf.userId] = _ggamf;
           myGgamfList.add(
             Ggamf(
