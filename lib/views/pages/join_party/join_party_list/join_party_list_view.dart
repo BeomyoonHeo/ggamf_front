@@ -11,8 +11,9 @@ import 'package:ggamf_front/views/pages/chatting/chatting_view.dart';
 import 'package:ggamf_front/views/pages/join_party/join_party_list/join_party_list_view_model.dart';
 
 class JoinPartyListView extends StatefulWidget {
-  const JoinPartyListView({Key? key}) : super(key: key);
+  const JoinPartyListView({Key? key, required this.roomList}) : super(key: key);
 
+  final List<Room> roomList;
   @override
   State createState() => _JoinPartyListViewState();
 }
@@ -104,8 +105,7 @@ class _JoinPartyListViewState extends State<JoinPartyListView> {
                 SizedBox(
                   width: 100,
                   height: 100,
-                  child: //Image.memory(base64Decode("${jplv[index].gameLogo}")),
-                      Image.asset(
+                  child: Image.asset(
                     "assets/images/lol.png",
                   ),
                 ),
