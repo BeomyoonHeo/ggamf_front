@@ -32,8 +32,19 @@ class MyGgamfListView extends ConsumerWidget {
               padding: EdgeInsets.all(10),
               margin: EdgeInsets.all(20),
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                color: Colors.purple[500],
+                borderRadius: BorderRadius.circular(5),
+                gradient: LinearGradient(
+                    colors: [Color.fromRGBO(202, 73, 245, 0.5), Color.fromRGBO(202, 73, 245, 0.7)],
+                    begin: Alignment.centerLeft,
+                    end: Alignment.centerRight,
+                    tileMode: TileMode.clamp),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.purple.withOpacity(0.2),
+                    spreadRadius: 5,
+                    blurRadius: 7,
+                  ),
+                ],
               ),
               height: 120,
               child: InkWell(
@@ -88,10 +99,10 @@ CircleAvatar _profileImage() {
 AppBar _appBar() {
   return AppBar(
     automaticallyImplyLeading: false,
-    backgroundColor: Colors.purple[500],
+    backgroundColor: Colors.white,
     title: Text(
       "내 껨프",
-      style: TextStyle(color: Colors.white, fontFamily: 'NanumSquare', fontSize: 25),
+      style: TextStyle(color: Colors.black, fontFamily: 'NanumSquare', fontSize: 25),
     ),
     elevation: 0,
   );

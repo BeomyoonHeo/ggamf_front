@@ -5,21 +5,16 @@ import 'package:ggamf_front/views/common_components/custom_icons_icons.dart';
 class CommonBottomNavigationBar extends StatefulWidget {
   final int selectedIndex;
   final Function widgetState;
-  const CommonBottomNavigationBar(
-      {Key? key, required this.selectedIndex, required this.widgetState})
-      : super(key: key);
+  const CommonBottomNavigationBar({Key? key, required this.selectedIndex, required this.widgetState}) : super(key: key);
 
   @override
-  State<CommonBottomNavigationBar> createState() =>
-      _CommonBottomNavigationBarState(
-          selectedIndex: selectedIndex, widgetState: widgetState);
+  State<CommonBottomNavigationBar> createState() => _CommonBottomNavigationBarState(selectedIndex: selectedIndex, widgetState: widgetState);
 }
 
 class _CommonBottomNavigationBarState extends State<CommonBottomNavigationBar> {
   int selectedIndex;
   Function widgetState;
-  _CommonBottomNavigationBarState(
-      {required this.selectedIndex, required this.widgetState});
+  _CommonBottomNavigationBarState({required this.selectedIndex, required this.widgetState});
 
   @override
   Widget build(BuildContext context) {

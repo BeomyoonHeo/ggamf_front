@@ -57,17 +57,27 @@ class MyProfileView extends ConsumerWidget {
       padding: EdgeInsets.all(10),
       width: double.infinity,
       decoration: BoxDecoration(
-        border: Border.all(width: 1),
-        borderRadius: BorderRadius.circular(10),
-        color: Colors.white,
+        borderRadius: BorderRadius.circular(5),
+        gradient: LinearGradient(
+            colors: [Color.fromRGBO(202, 73, 245, 0.5), Color.fromRGBO(202, 73, 245, 0.7)],
+            begin: Alignment.centerLeft,
+            end: Alignment.centerRight,
+            tileMode: TileMode.clamp),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.purple.withOpacity(0.2),
+            spreadRadius: 5,
+            blurRadius: 7,
+          ),
+        ],
       ),
       child: Expanded(
         child: mpvm.intro!.isEmpty
-            ? Text("닉네임이 없습니다")
+            ? Text("자기소개가 없습니다")
             : Text(
                 "${mpvm.intro}",
                 textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 15, color: Colors.black),
+                style: TextStyle(fontSize: 15, color: Colors.white),
               ),
       ),
     );
@@ -83,17 +93,30 @@ class MyProfileView extends ConsumerWidget {
 
   Widget _buildNickName(ProfileUser mpvm) {
     return Container(
+      height: 50,
       padding: EdgeInsets.all(10),
       width: double.infinity,
       decoration: BoxDecoration(
-        border: Border.all(width: 1),
-        borderRadius: BorderRadius.circular(10),
-        color: Colors.white,
+        borderRadius: BorderRadius.circular(5),
+        gradient: LinearGradient(
+            colors: [Color.fromRGBO(202, 73, 245, 0.5), Color.fromRGBO(202, 73, 245, 0.7)],
+            begin: Alignment.centerLeft,
+            end: Alignment.centerRight,
+            tileMode: TileMode.clamp),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.purple.withOpacity(0.2),
+            spreadRadius: 5,
+            blurRadius: 7,
+          ),
+        ],
       ),
-      child: Text(
-        "${mpvm.nickname}",
-        style: TextStyle(fontSize: 15, color: Colors.black),
-        textAlign: TextAlign.center,
+      child: Center(
+        child: Text(
+          "${mpvm.nickname}",
+          style: TextStyle(fontSize: 20, color: Colors.white, fontWeight: FontWeight.bold),
+          textAlign: TextAlign.center,
+        ),
       ),
     );
   }
@@ -115,12 +138,11 @@ class MyProfileView extends ConsumerWidget {
           MaterialPageRoute(builder: (context) => WithdrawalView()),
         );
       },
-      child: Text("탈퇴"),
+      child: Text("탈퇴", style: TextStyle(fontSize: 20, color: Colors.white)),
       style: ElevatedButton.styleFrom(
         foregroundColor: Colors.black,
         minimumSize: Size(150, 50),
-        backgroundColor: Colors.white,
-        side: BorderSide(width: 1),
+        backgroundColor: Color.fromRGBO(202, 73, 245, 0.8),
       ),
     );
   }
@@ -133,12 +155,11 @@ class MyProfileView extends ConsumerWidget {
           MaterialPageRoute(builder: (context) => UpdateMyProfileView()),
         );
       },
-      child: Text("프로필 수정"),
+      child: Text("프로필 수정", style: TextStyle(fontSize: 20, color: Colors.white)),
       style: ElevatedButton.styleFrom(
         foregroundColor: Colors.black,
         minimumSize: Size(150, 50),
-        backgroundColor: Colors.white,
-        side: BorderSide(width: 1),
+        backgroundColor: Color.fromRGBO(202, 73, 245, 0.8),
       ),
     );
   }
@@ -164,16 +185,26 @@ class MyProfileView extends ConsumerWidget {
     return Container(
       padding: EdgeInsets.all(10),
       decoration: BoxDecoration(
-        border: Border.all(width: 1),
-        borderRadius: BorderRadius.circular(10),
-        color: Colors.white,
+        borderRadius: BorderRadius.circular(5),
+        gradient: LinearGradient(
+            colors: [Color.fromRGBO(202, 73, 245, 0.5), Color.fromRGBO(202, 73, 245, 0.7)],
+            begin: Alignment.centerLeft,
+            end: Alignment.centerRight,
+            tileMode: TileMode.clamp),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.purple.withOpacity(0.2),
+            spreadRadius: 5,
+            blurRadius: 7,
+          ),
+        ],
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
             "평균별점",
-            style: TextStyle(fontSize: 15, color: Colors.black),
+            style: TextStyle(fontSize: 15, color: Colors.white),
           ),
           SizedBox(width: 20),
           _ratingBar(),
