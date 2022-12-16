@@ -42,7 +42,7 @@ class _AgreementProvisionOfPersonalInformationModalState
           children: [
             Checkbox(
               value: juc.isAgree,
-              onChanged: null,
+              onChanged: (_bool) {},
             ),
             const Text(
               '개인정보 활용 및 처리에 동의합니다.',
@@ -100,7 +100,7 @@ class _AgreementProvisionOfPersonalInformationModalState
                       children: [
                         Checkbox(
                           value: juc.isAgree,
-                          onChanged: null,
+                          onChanged: (_boolean) {},
                         ),
                         const Expanded(
                           child: Text(

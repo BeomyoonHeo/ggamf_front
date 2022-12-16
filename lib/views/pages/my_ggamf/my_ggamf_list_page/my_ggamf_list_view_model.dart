@@ -1,20 +1,20 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:ggamf_front/domain/ggamf/repository/my_ggamf_repository.dart';
 import 'package:ggamf_front/domain/user/model/ggamf.dart';
 import 'package:ggamf_front/domain/user/model/user.dart';
-import 'package:ggamf_front/utils/validator_util.dart';
+import 'package:ggamf_front/domain/user/repository/user_repository.dart';
 
 import '../../../../utils/custom_intercepter.dart';
 
-final myGgamfListViewModel = StateNotifierProvider.autoDispose<MyGgamfListViewModel, List<Ggamf>>((ref) {
+final myGgamfListViewModel =
+    StateNotifierProvider.autoDispose<MyGgamfListViewModel, List<Ggamf>>((ref) {
   return MyGgamfListViewModel([])..init();
 });
 
 class MyGgamfListViewModel extends StateNotifier<List<Ggamf>> {
   MyGgamfListViewModel(super.state);
 
-  MyGgamfRepository repo = MyGgamfRepository(Dio()
+  GgamfRepository repo = GgamfRepository(Dio()
     ..interceptors.add(CustomLogInterceptor())
     ..interceptors.add(SignedInterceptor()));
 

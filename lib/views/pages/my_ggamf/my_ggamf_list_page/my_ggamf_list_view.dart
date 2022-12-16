@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ggamf_front/domain/user/model/ggamf.dart';
-import 'package:ggamf_front/utils/validator_util.dart';
-import 'package:ggamf_front/views/pages/my_ggamf/my_ggamf_list_page/my_ggamf_list_view_model.dart';
+import 'package:ggamf_front/provider/ggamf_provider.dart';
 import 'package:ggamf_front/views/pages/profile/opponent_profile/opponent_profile_view.dart';
 
 class MyGgamfListView extends ConsumerWidget {
@@ -11,13 +10,13 @@ class MyGgamfListView extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     //mglv = myGgamfListViewModel
-    final mglv = ref.watch(myGgamfListViewModel);
+    final gp = ref.watch(ggamfProvider);
     return Scaffold(
       appBar: _appBar(),
       backgroundColor: Colors.white,
       body: Padding(
         padding: const EdgeInsets.only(right: 5, left: 5, top: 20),
-        child: _buildMyGgamfList(mglv),
+        child: _buildMyGgamfList(gp),
       ),
     );
   }
@@ -32,7 +31,7 @@ class MyGgamfListView extends ConsumerWidget {
             itemBuilder: (context, index) => Container(
               padding: EdgeInsets.all(10),
               decoration: BoxDecoration(
-                image: DecorationImage(
+                image: const DecorationImage(
                   fit: BoxFit.cover,
                   image: AssetImage("assets/images/rgb.gif"),
                 ),

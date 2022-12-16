@@ -39,7 +39,9 @@ class LoginBox extends ConsumerWidget {
           height: 10,
         ),
         Container(
-          decoration: BoxDecoration(border: Border.all(width: 1), borderRadius: BorderRadius.circular(9)),
+          decoration: BoxDecoration(
+              border: Border.all(width: 1),
+              borderRadius: BorderRadius.circular(9)),
           padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 15),
           child: Column(
             children: [
@@ -51,7 +53,8 @@ class LoginBox extends ConsumerWidget {
                 onChanged: (value) {},
               ),
               const SizedBox(height: 10),
-              RoundedInputPasswordField(controller: passwordController, validator: passwordValidator),
+              RoundedInputPasswordField(
+                  controller: passwordController, validator: passwordValidator),
             ],
           ),
         ),
@@ -69,7 +72,8 @@ class LoginBox extends ConsumerWidget {
               ItemButton(
                   text: "회원가입",
                   function: () {
-                    Navigator.pushNamed(context, PageEnum.getByDisPlayName('join').requestLocation);
+                    Navigator.pushNamed(context,
+                        PageEnum.getByDisPlayName('join').requestLocation);
                   }),
               const SizedBox(height: 10),
               ItemButton(
@@ -106,12 +110,15 @@ class _ItemButtonState extends State<ItemButton> {
       child: InkWell(
         borderRadius: BorderRadius.circular(30),
         onTap: () {
-          Future.delayed(const Duration(milliseconds: 500)).then((value) => widget.function());
+          Future.delayed(const Duration(milliseconds: 500))
+              .then((value) => widget.function());
         },
         child: Container(
           padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
           alignment: Alignment.center,
-          decoration: BoxDecoration(borderRadius: BorderRadius.circular(30), border: Border.all(width: 1)),
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(30),
+              border: Border.all(width: 1)),
           child: Text(
             widget.text,
             style: const TextStyle(color: Colors.black),

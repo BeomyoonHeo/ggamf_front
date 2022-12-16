@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:ggamf_front/controller/user/join_user_controller.dart';
+import 'package:ggamf_front/provider/authentication_provider.dart';
 
 class CertificationNumberButton extends ConsumerStatefulWidget {
   String certificationText;
@@ -21,7 +22,7 @@ class _CertificationNumberButtonState
   final TextEditingController _credentialController = TextEditingController();
 
   String _verificationId = '';
-  final FirebaseAuth _auth = FirebaseAuth.instance;
+  late final FirebaseAuth _auth;
 
   @override
   Widget build(BuildContext context) {
@@ -30,6 +31,7 @@ class _CertificationNumberButtonState
 
   @override
   void initState() {
+    _auth = ref.read(authenticationProvider).getInstance();
     super.initState();
   }
 

@@ -5,11 +5,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ggamf_front/views/pages/chatting/chatting_view.dart';
 import 'package:ggamf_front/views/pages/my_party/my_recruitment_party_list/joining_party_list_view_model.dart';
 import 'package:ggamf_front/views/pages/my_party/my_recruitment_party_list/my_recruitment_party_list_view_model.dart';
-
 import '../../../../../domain/party/model/my_room.dart';
 import '../../../../../utils/validator_util.dart';
+import '../../../../../domain/party/model/my_room.dart';
 
-class MyRecruitmentPartyListTabView extends StatefulWidget {
+class MyRecruitmentPartyListTabView extends ConsumerStatefulWidget {
   const MyRecruitmentPartyListTabView({
     Key? key,
     required TabController tabController,
@@ -22,10 +22,10 @@ class MyRecruitmentPartyListTabView extends StatefulWidget {
   final List<MyRoom> _myRoomList;
 
   @override
-  State<MyRecruitmentPartyListTabView> createState() => _MyRecruitmentPartyListTabViewState();
+  ConsumerState<MyRecruitmentPartyListTabView> createState() => _MyRecruitmentPartyListTabViewState();
 }
 
-class _MyRecruitmentPartyListTabViewState extends State<MyRecruitmentPartyListTabView>
+class _MyRecruitmentPartyListTabViewState extends ConsumerState<MyRecruitmentPartyListTabView>
     with SingleTickerProviderStateMixin<MyRecruitmentPartyListTabView> {
   late final TabController _innerTabController;
 
@@ -81,7 +81,7 @@ class _MyRecruitmentPartyListTabViewState extends State<MyRecruitmentPartyListTa
               ),
               child: InkWell(
                 onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (_) => ChattingView()));
+                  //Navigator.push(context, MaterialPageRoute(builder: (_) => ChattingView()));
                 },
                 child: Row(
                   children: [
@@ -137,7 +137,7 @@ class _MyRecruitmentPartyListTabViewState extends State<MyRecruitmentPartyListTa
               ),
               child: InkWell(
                 onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (_) => ChattingView()));
+                  //Navigator.push(context, MaterialPageRoute(builder: (_) => ChattingView()));
                 },
                 child: Row(
                   children: [

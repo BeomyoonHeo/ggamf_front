@@ -1,13 +1,12 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:ggamf_front/domain/ggamf/repository/my_ggamf_repository.dart';
-import 'package:ggamf_front/domain/party/model/room.dart';
+import 'package:ggamf_front/domain/party/model/generate_room_party.dart';
 import 'package:ggamf_front/domain/party/repository/room_repository.dart';
 import 'package:ggamf_front/domain/user/model/user.dart';
-import 'package:ggamf_front/utils/validator_util.dart';
 
 import '../../../../domain/party/model/my_room.dart';
 import '../../../../utils/custom_intercepter.dart';
+import '../../../../utils/validator_util.dart';
 
 final myRecruitmentPartyListViewModel = StateNotifierProvider.autoDispose<MyRecruitmentPartyListViewModel, List<MyRoom>>((ref) {
   return MyRecruitmentPartyListViewModel([])..init();
@@ -15,7 +14,6 @@ final myRecruitmentPartyListViewModel = StateNotifierProvider.autoDispose<MyRecr
 
 class MyRecruitmentPartyListViewModel extends StateNotifier<List<MyRoom>> {
   MyRecruitmentPartyListViewModel(super.state);
-
   RoomRepository repo = RoomRepository(Dio()
     ..interceptors.add(CustomLogInterceptor())
     ..interceptors.add(SignedInterceptor()));
@@ -34,13 +32,14 @@ class MyRecruitmentPartyListViewModel extends StateNotifier<List<MyRoom>> {
             gameLogo: _myRoom.gameLogo,
           ),
         );
-
         logger.d("사진보기 ${_myRoom.gameLogo}");
       });
-
       state = myRecruitmentPartyList;
     });
   }
 
-  void updateMyRecruitmentParty() {}
+  void updateMyRecruitmentParty(GenerateRoomParty _party) {
+    init();
+    //state = [...state, _party.createdParty()];
+  }
 }

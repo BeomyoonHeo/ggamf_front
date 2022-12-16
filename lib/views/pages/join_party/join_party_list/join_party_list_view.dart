@@ -11,9 +11,8 @@ import 'package:ggamf_front/views/pages/chatting/chatting_view.dart';
 import 'package:ggamf_front/views/pages/join_party/join_party_list/join_party_list_view_model.dart';
 
 class JoinPartyListView extends StatefulWidget {
-  const JoinPartyListView({Key? key, required this.roomList}) : super(key: key);
+  const JoinPartyListView({Key? key}) : super(key: key);
 
-  final List<Room> roomList;
   @override
   State createState() => _JoinPartyListViewState();
 }
@@ -83,7 +82,7 @@ class _JoinPartyListViewState extends State<JoinPartyListView> {
           ),
           child: InkWell(
             onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (_) => ChattingView()));
+              //Navigator.push(context, MaterialPageRoute(builder: (_) => ));
             },
             child: Row(
               children: [
@@ -212,9 +211,7 @@ class _JoinPartyListViewState extends State<JoinPartyListView> {
                   ),
                   SizedBox(height: 10),
                   ElevatedButton(
-                    onPressed: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (_) => ChattingView()));
-                    },
+                    onPressed: () {},
                     child: Text(
                       "입장",
                       style: TextStyle(color: Colors.black),

@@ -13,7 +13,7 @@ class _UserRepository implements UserRepository {
     this._dio, {
     this.baseUrl,
   }) {
-    baseUrl ??= 'http://192.168.0.187:8080';
+    baseUrl ??= 'http://192.168.50.17:8080';
   }
 
   final Dio _dio;
@@ -80,17 +80,40 @@ class _UserRepository implements UserRepository {
 
 // ignore_for_file: unnecessary_brace_in_string_interps,no_leading_underscores_for_local_identifiers
 
-class _RecommendGgamfListRepository implements RecommendGgamfListRepository {
-  _RecommendGgamfListRepository(
+class _GgamfRepository implements GgamfRepository {
+  _GgamfRepository(
     this._dio, {
     this.baseUrl,
   }) {
-    baseUrl ??= 'http://192.168.0.187:8080';
+    baseUrl ??= 'http://192.168.50.17:8080';
   }
 
   final Dio _dio;
 
   String? baseUrl;
+
+  @override
+  Future<GgamfList> myGgamfList({required userId}) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<GgamfList>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/s/api/ggamf/user/${userId}/list',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = GgamfList.fromJson(_result.data!);
+    return value;
+  }
 
   @override
   Future<dynamic> acceptReceiveGgmaf({
@@ -302,7 +325,7 @@ class _ProfileUserRepository implements ProfileUserRepository {
     this._dio, {
     this.baseUrl,
   }) {
-    baseUrl ??= 'http://192.168.0.187:8080';
+    baseUrl ??= 'http://192.168.50.17:8080';
   }
 
   final Dio _dio;

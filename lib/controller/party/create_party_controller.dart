@@ -1,12 +1,13 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:ggamf_front/domain/party/model/generate_room_party.dart';
 import 'package:ggamf_front/domain/party/repository/room_repository.dart';
 import 'package:ggamf_front/domain/user/model/user.dart';
 import 'package:ggamf_front/main.dart';
 import 'package:ggamf_front/utils/custom_intercepter.dart';
-import 'package:ggamf_front/utils/validator_util.dart';
 import 'package:ggamf_front/views/pages/my_party/my_recruitment_party_list/my_recruitment_party_list_view_model.dart';
 
 final createPartyController = Provider((ref) {
@@ -39,10 +40,11 @@ class CreatePartyController {
       userId: UserSession.user.id,
     );
 
-    repo
-        .createRoom(userId: UserSession.user.id, gameCodeId: _keyList[selectGameController.text], generateRoomParty: createRoomParty)
-        .then((value) => _ref.read(myRecruitmentPartyListViewModel.notifier).updateMyRecruitmentParty());
-
-    Navigator.pop(mContext!);
+    repo.createRoom(userId: UserSession.user.id, gameCodeId: _keyList[selectGameController.text], generateRoomParty: createRoomParty).then((value) {
+      _ref.read(myRecruitmentPartyListViewModel.notifier).updateMyRecruitmentParty(value);
+      Navigator.pop(mContext!);
+    }).onError((error, stackTrace) {
+      Fluttertoast.showToast(msg: '입력양식이 맞지 않습니다.');
+    });
   }
 }
