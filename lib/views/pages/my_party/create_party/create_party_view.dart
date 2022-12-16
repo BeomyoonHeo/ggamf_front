@@ -22,7 +22,7 @@ class _CreatePartyViewState extends ConsumerState<CreatePartyView> {
   final Map<String, dynamic> _keyList = {'게임선택': 0, '리그 오브 레전드': 1, '오버워치': 2, '로스트아크': 3, '발로란트': 4, '기타': 5};
   String _selectedValue = '게임선택';
   List<String> _numList = ['인원선택', '2', '3', '4', '5', '6', '7', '8'];
-  String _selectedNum = '인원선택';
+  var _selectedNum = '인원선택';
 
   bool _enableTextField = false;
 
@@ -143,8 +143,10 @@ class _CreatePartyViewState extends ConsumerState<CreatePartyView> {
     );
   }
 
-  Widget _selectGame(CreatePartyController cpc, List<GameCode> cpv) {
-    final items = {};
+  Widget _selectGame(
+    CreatePartyController cpc,
+    List<GameCode> cpv,
+  ) {
     return Container(
       padding: EdgeInsets.all(5),
       width: double.infinity,

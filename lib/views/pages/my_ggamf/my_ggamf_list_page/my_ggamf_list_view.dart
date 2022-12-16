@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ggamf_front/domain/user/model/ggamf.dart';
 import 'package:ggamf_front/provider/ggamf_provider.dart';
+import 'package:ggamf_front/views/pages/profile/my_profile/my_profile_view_model.dart';
 import 'package:ggamf_front/views/pages/profile/opponent_profile/opponent_profile_view.dart';
 
 class MyGgamfListView extends ConsumerWidget {
@@ -11,13 +12,35 @@ class MyGgamfListView extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     //mglv = myGgamfListViewModel
     final gp = ref.watch(ggamfProvider);
+    final mpvm = ref.watch(myProfileViewModel);
     return Scaffold(
       appBar: _appBar(),
       backgroundColor: Colors.white,
-      body: Padding(
-        padding: const EdgeInsets.only(right: 5, left: 5, top: 20),
-        child: _buildMyGgamfList(gp),
-      ),
+      body: Column(children: [
+        Container(
+          padding: EdgeInsets.all(10),
+          margin: EdgeInsets.all(20),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(5),
+            gradient: LinearGradient(
+                colors: [Color.fromRGBO(202, 73, 245, 0.5), Color.fromRGBO(202, 73, 245, 0.7)],
+                begin: Alignment.centerLeft,
+                end: Alignment.centerRight,
+                tileMode: TileMode.clamp),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.purple.withOpacity(0.2),
+                spreadRadius: 5,
+                blurRadius: 7,
+              ),
+            ],
+          ),
+          width: double.infinity,
+          height: 120,
+          child: Text("${mpvm.nickname}"),
+        ),
+        _buildMyGgamfList(gp),
+      ]),
     );
   }
 
@@ -26,37 +49,39 @@ class MyGgamfListView extends ConsumerWidget {
         ? Center(
             child: Text('내껨프가 한명도 없습니다.'),
           )
-        : ListView.builder(
-            itemCount: mglv.length,
-            itemBuilder: (context, index) => Container(
-              padding: EdgeInsets.all(10),
-              margin: EdgeInsets.all(20),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(5),
-                gradient: LinearGradient(
-                    colors: [Color.fromRGBO(202, 73, 245, 0.5), Color.fromRGBO(202, 73, 245, 0.7)],
-                    begin: Alignment.centerLeft,
-                    end: Alignment.centerRight,
-                    tileMode: TileMode.clamp),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.purple.withOpacity(0.2),
-                    spreadRadius: 5,
-                    blurRadius: 7,
-                  ),
-                ],
-              ),
-              height: 120,
-              child: InkWell(
-                onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => OpponentProfileView()));
-                },
-                child: Row(
-                  children: [
-                    _profileImage(),
-                    SizedBox(width: 20),
-                    _context(mglv, index),
+        : Expanded(
+            child: ListView.builder(
+              itemCount: mglv.length,
+              itemBuilder: (context, index) => Container(
+                padding: EdgeInsets.all(10),
+                margin: EdgeInsets.all(20),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(5),
+                  gradient: LinearGradient(
+                      colors: [Color.fromRGBO(202, 73, 245, 0.5), Color.fromRGBO(202, 73, 245, 0.7)],
+                      begin: Alignment.centerLeft,
+                      end: Alignment.centerRight,
+                      tileMode: TileMode.clamp),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.purple.withOpacity(0.2),
+                      spreadRadius: 5,
+                      blurRadius: 7,
+                    ),
                   ],
+                ),
+                height: 120,
+                child: InkWell(
+                  onTap: () {
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => OpponentProfileView()));
+                  },
+                  child: Row(
+                    children: [
+                      _profileImage(),
+                      SizedBox(width: 20),
+                      _context(mglv, index),
+                    ],
+                  ),
                 ),
               ),
             ),
