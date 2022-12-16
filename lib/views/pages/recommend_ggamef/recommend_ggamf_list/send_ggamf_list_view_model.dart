@@ -24,7 +24,7 @@ class SendGgamfListViewModel extends StateNotifier<List<Ggamf>> {
     repo.getSendGgamfList(id: UserSession.user.id).then(
       (value) {
         value.data['followings']?.forEach((_ggamf) {
-          sendList[_ggamf.userId] = _ggamf.userId;
+          sendList[_ggamf.userId] = _ggamf;
           sendGgamfList.add(
             Ggamf(
               userId: _ggamf.userId,
@@ -40,6 +40,8 @@ class SendGgamfListViewModel extends StateNotifier<List<Ggamf>> {
   }
 
   cancelSendGgamf(int id) {
+    final sendList = _ref.read(ggamfProvider.notifier).sendGgamfIdList;
     state = state.where((_ggamf) => _ggamf.userId != id).toList();
+    sendList.remove(id);
   }
 }

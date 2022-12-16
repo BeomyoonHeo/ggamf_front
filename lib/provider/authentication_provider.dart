@@ -20,7 +20,6 @@ class AuthenticationProvider extends ChangeNotifier {
   Future<String?> registerUserUsingEmailAndPassword(
       String _email, String _password) async {
     try {
-      auth.signOut();
       UserCredential _credential = await auth.createUserWithEmailAndPassword(
           email: _email, password: _password);
       return _credential.user!.uid;
