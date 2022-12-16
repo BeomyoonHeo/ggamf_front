@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -10,11 +11,8 @@ import '../../../../../utils/validator_util.dart';
 import '../../../../../domain/party/model/my_room.dart';
 
 class MyRecruitmentPartyListTabView extends ConsumerStatefulWidget {
-  const MyRecruitmentPartyListTabView({
-    Key? key,
-    required TabController tabController,
-    required List<MyRoom> myRoomList,
-  })  : _tabController = tabController,
+  const MyRecruitmentPartyListTabView({Key? key, required TabController tabController, required List<MyRoom> myRoomList})
+      : _tabController = tabController,
         _myRoomList = myRoomList,
         super(key: key);
 
@@ -103,10 +101,8 @@ class _MyRecruitmentPartyListTabViewState extends ConsumerState<MyRecruitmentPar
                     SizedBox(
                       width: 100,
                       height: 100,
-                      child: //Image.memory(base64Decode("${jplvm[index].gameLogo}")),
-                          Image.asset(
-                        "assets/images/lol.png",
-                      ),
+                      child: Image.memory(Uri.parse("${jplvm[index].gameLogo}").data!.contentAsBytes()),
+                      //Image.asset("assets/images/lol.png"),
                     ),
                   ],
                 ),
@@ -159,10 +155,8 @@ class _MyRecruitmentPartyListTabViewState extends ConsumerState<MyRecruitmentPar
                     SizedBox(
                       width: 100,
                       height: 100,
-                      child: //Image.memory(base64Decode("${mrplv[index].gameLogo}")),
-                          Image.asset(
-                        "assets/images/lol.png",
-                      ),
+                      child: Image.memory(Uri.parse("${mrplv[index].gameLogo}").data!.contentAsBytes()),
+                      //Image.asset("assets/images/lol.png"),
                     ),
                   ],
                 ),

@@ -32,7 +32,6 @@ class MyRecruitmentPartyListViewModel extends StateNotifier<List<MyRoom>> {
             gameLogo: _myRoom.gameLogo,
           ),
         );
-        logger.d("사진보기 ${_myRoom.gameLogo}");
       });
       state = myRecruitmentPartyList;
     });
