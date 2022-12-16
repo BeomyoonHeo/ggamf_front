@@ -15,6 +15,8 @@ class OpponentProfileViewModel extends StateNotifier<GetProfileUser> {
   final Ref _ref;
   OpponentProfileViewModel(super.state, this._ref);
 
+  //final int userId;
+
   Dio dio = Dio()..interceptors.add(CustomLogInterceptor());
 
   void init() {

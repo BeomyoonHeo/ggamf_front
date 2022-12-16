@@ -18,6 +18,10 @@ class _OpponentProfileViewState extends ConsumerState<OpponentProfileView> {
   final List<String> _valueList = ['욕설', '비방', '광고', '괴롭힘', '기타'];
   var _selectedValue;
 
+  //final int userId;
+
+  //_OpponentProfileViewState(this.userId);
+
   @override
   Widget build(BuildContext context) {
     //opvm = opponentProfileViewModel

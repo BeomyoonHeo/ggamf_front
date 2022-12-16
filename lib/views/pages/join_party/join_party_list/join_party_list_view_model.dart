@@ -22,6 +22,7 @@ class JoinPartyListViewModel extends StateNotifier<List<Room>> {
   void init() {
     repo.findAllRoom(userId: UserSession.user.id).then((value) {
       value.data['rooms']?.forEach((_Room) {
+        logger.d("룸밸류 확인 ${value}");
         joinPartyList.add(
           Room(
             id: _Room.id,
@@ -32,7 +33,6 @@ class JoinPartyListViewModel extends StateNotifier<List<Room>> {
             active: _Room.active,
           ),
         );
-        logger.d("게임로고 확인:${_Room.gameLogo}");
       });
       state = joinPartyList;
     });

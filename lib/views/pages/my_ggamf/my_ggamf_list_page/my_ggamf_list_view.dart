@@ -30,31 +30,22 @@ class MyGgamfListView extends ConsumerWidget {
             itemCount: mglv.length,
             itemBuilder: (context, index) => Container(
               padding: EdgeInsets.all(10),
+              margin: EdgeInsets.all(20),
               decoration: BoxDecoration(
-                image: const DecorationImage(
-                  fit: BoxFit.cover,
-                  image: AssetImage("assets/images/rgb.gif"),
-                ),
-                border: Border.all(width: 1),
+                borderRadius: BorderRadius.circular(10),
+                color: Colors.purple[500],
               ),
-              child: Container(
-                padding: EdgeInsets.all(10),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
-                  color: Color.fromRGBO(255, 255, 255, 0.75),
-                ),
-                height: 120,
-                child: InkWell(
-                  onTap: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => OpponentProfileView()));
-                  },
-                  child: Row(
-                    children: [
-                      _profileImage(),
-                      SizedBox(width: 20),
-                      _context(mglv, index),
-                    ],
-                  ),
+              height: 120,
+              child: InkWell(
+                onTap: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => OpponentProfileView()));
+                },
+                child: Row(
+                  children: [
+                    _profileImage(),
+                    SizedBox(width: 20),
+                    _context(mglv, index),
+                  ],
                 ),
               ),
             ),
@@ -70,13 +61,13 @@ class MyGgamfListView extends ConsumerWidget {
           Text(
             "${mglv[index].nickname}",
             //"김겐지",
-            style: TextStyle(fontSize: 25, color: Colors.black, fontWeight: FontWeight.w600),
+            style: TextStyle(fontSize: 25, color: Colors.white, fontWeight: FontWeight.w600),
           ),
           SizedBox(height: 10),
           Text(
             "${mglv[index].intro}",
             //"안녕하세요",
-            style: TextStyle(fontSize: 15, color: Colors.black),
+            style: TextStyle(fontSize: 15, color: Colors.white),
           ),
         ],
       ),
@@ -97,10 +88,10 @@ CircleAvatar _profileImage() {
 AppBar _appBar() {
   return AppBar(
     automaticallyImplyLeading: false,
-    backgroundColor: Colors.white,
+    backgroundColor: Colors.purple[500],
     title: Text(
       "내 껨프",
-      style: TextStyle(color: Colors.black, fontFamily: 'NanumSquare', fontSize: 25),
+      style: TextStyle(color: Colors.white, fontFamily: 'NanumSquare', fontSize: 25),
     ),
     elevation: 0,
   );
