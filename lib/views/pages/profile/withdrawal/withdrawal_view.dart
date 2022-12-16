@@ -57,25 +57,75 @@ class _WithdrawalViewState extends State<WithdrawalView> {
             ),
             Divider(),
             SizedBox(height: 20),
-            OutlinedButton(
-              style: OutlinedButton.styleFrom(
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
                 foregroundColor: Colors.black,
                 minimumSize: Size(150, 50),
+                backgroundColor: Colors.white,
+                side: BorderSide(width: 1),
               ),
               onPressed: () {
-                showCupertinoDialog(
+                showDialog(
                   context: context,
-                  builder: (context) => CupertinoAlertDialog(
-                    title: Text("정말 탈퇴하시겠습니까?"),
-                    actions: [
-                      CupertinoDialogAction(child: Text("네")),
-                      CupertinoDialogAction(
-                        child: Text("아니오"),
-                        onPressed: () {
-                          Navigator.pop(context);
-                        },
+                  builder: (_) => Dialog(
+                    child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
                       ),
-                    ],
+                      padding: EdgeInsets.all(10),
+                      width: double.infinity,
+                      height: 150,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          Text(
+                            "정말 탈퇴하시겠습니까?",
+                            style: TextStyle(fontSize: 20),
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              SizedBox(
+                                height: 35,
+                                width: 100,
+                                child: ElevatedButton(
+                                  onPressed: () {},
+                                  child: Text(
+                                    "예",
+                                    style: TextStyle(color: Colors.black),
+                                  ),
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor: Colors.white,
+                                    side: BorderSide(
+                                      width: 1,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              SizedBox(
+                                height: 35,
+                                width: 100,
+                                child: ElevatedButton(
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                  },
+                                  child: Text(
+                                    "아니오",
+                                    style: TextStyle(color: Colors.black),
+                                  ),
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor: Colors.white,
+                                    side: BorderSide(
+                                      width: 1,
+                                    ),
+                                  ),
+                                ),
+                              )
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
                   ),
                 );
               },

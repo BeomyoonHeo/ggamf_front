@@ -98,7 +98,7 @@ class MyProfileView extends ConsumerWidget {
   }
 
   Widget _withdrawal() {
-    return OutlinedButton(
+    return ElevatedButton(
       onPressed: () {
         Navigator.push(
           navigatorKey.currentState!.context,
@@ -106,15 +106,17 @@ class MyProfileView extends ConsumerWidget {
         );
       },
       child: Text("탈퇴"),
-      style: OutlinedButton.styleFrom(
+      style: ElevatedButton.styleFrom(
         foregroundColor: Colors.black,
         minimumSize: Size(150, 50),
+        backgroundColor: Colors.white,
+        side: BorderSide(width: 1),
       ),
     );
   }
 
   Widget _updataProfile() {
-    return OutlinedButton(
+    return ElevatedButton(
       onPressed: () async {
         Navigator.push(
           navigatorKey.currentState!.context,
@@ -122,9 +124,11 @@ class MyProfileView extends ConsumerWidget {
         );
       },
       child: Text("프로필 수정"),
-      style: OutlinedButton.styleFrom(
+      style: ElevatedButton.styleFrom(
         foregroundColor: Colors.black,
         minimumSize: Size(150, 50),
+        backgroundColor: Colors.white,
+        side: BorderSide(width: 1),
       ),
     );
   }
