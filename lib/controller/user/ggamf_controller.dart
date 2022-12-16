@@ -11,7 +11,7 @@ final ggamfController = Provider((ref) => GgamfController(ref));
 class GgamfController {
   final Ref ref;
   GgamfController(this.ref);
-  late RecommendGgamfListRepository repo = RecommendGgamfListRepository(Dio()
+  late GgamfRepository repo = GgamfRepository(Dio()
     ..interceptors.add(CustomLogInterceptor())
     ..interceptors.add(SignedInterceptor()));
 

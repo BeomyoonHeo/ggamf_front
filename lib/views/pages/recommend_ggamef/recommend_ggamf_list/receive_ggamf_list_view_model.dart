@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ggamf_front/domain/user/model/ggamf.dart';
 import 'package:ggamf_front/domain/user/model/user.dart';
 import 'package:ggamf_front/domain/user/repository/user_repository.dart';
+import 'package:ggamf_front/provider/ggamf_provider.dart';
 import 'package:ggamf_front/utils/custom_intercepter.dart';
 
 final receiveGgamfListViewModel =
@@ -14,7 +15,7 @@ class ReceiveGgamfListViewModel extends StateNotifier<List<Ggamf>> {
   ReceiveGgamfListViewModel(super.state, this._ref);
 
   //토큰이 필요한 곳 이므로 인터셉터 추가
-  RecommendGgamfListRepository repo = RecommendGgamfListRepository(Dio()
+  GgamfRepository repo = GgamfRepository(Dio()
     ..interceptors.add(CustomLogInterceptor())
     ..interceptors.add(SignedInterceptor()));
 
@@ -42,10 +43,9 @@ class ReceiveGgamfListViewModel extends StateNotifier<List<Ggamf>> {
   void acceptGgamf(int id) {
     state = state.where((_ggamf) {
       if (_ggamf.userId != id) {
-        // 여기다가 ref 땡겨서 내 껨프 ViewModel에 전달
-        //_ref.read(myGgamfListViewModel.notifier).해당메서드(_ggamf);
         return true;
       }
+      _ref.read(ggamfProvider.notifier).addMyGgamf(_ggamf);
       return false;
     }).toList();
   }

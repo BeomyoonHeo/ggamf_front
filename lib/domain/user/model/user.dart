@@ -14,6 +14,7 @@ class User {
   final String? username;
   final String? backgroundImage;
   final String? name;
+  final String? uid;
   final String? intro;
 
   User({
@@ -21,6 +22,7 @@ class User {
     required this.id,
     required this.backgroundImage,
     required this.name,
+    required this.uid,
     required this.intro,
   });
 

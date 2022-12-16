@@ -50,7 +50,7 @@ Function passwordValidator() {
       return "패스워드에 공백이 들어갈 수 없습니다.";
     } else if (value.length > 16) {
       return "패스워드가 16자리를 초과하였습니다.";
-    } else if (value.length < 4) {
+    } else if (value.length < 8) {
       return "패스워드의 최소 길이는 4자입니다.";
     } else {
       return null;

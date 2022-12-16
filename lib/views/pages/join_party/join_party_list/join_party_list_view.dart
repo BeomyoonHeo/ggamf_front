@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:chips_choice/chips_choice.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
@@ -7,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ggamf_front/domain/party/model/room.dart';
 import 'package:ggamf_front/utils/validator_util.dart';
-import 'package:ggamf_front/views/pages/chatting/chatting_view.dart';
 import 'package:ggamf_front/views/pages/join_party/join_party_list/join_party_list_view_model.dart';
 
 class JoinPartyListView extends StatefulWidget {
@@ -39,7 +36,8 @@ class _JoinPartyListViewState extends State<JoinPartyListView> {
   }
 
   Widget _sliverAppbar() {
-    return Consumer(builder: (BuildContext context, WidgetRef ref, Widget? child) {
+    return Consumer(
+        builder: (BuildContext context, WidgetRef ref, Widget? child) {
       final jplv = ref.watch(joinPartyListViewModel);
       logger.d("길이보기: ${jplv.length}");
       return CustomScrollView(
@@ -83,7 +81,7 @@ class _JoinPartyListViewState extends State<JoinPartyListView> {
           ),
           child: InkWell(
             onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (_) => ChattingView()));
+              //Navigator.push(context, MaterialPageRoute(builder: (_) => ));
             },
             child: Row(
               children: [
@@ -212,9 +210,7 @@ class _JoinPartyListViewState extends State<JoinPartyListView> {
                   ),
                   SizedBox(height: 10),
                   ElevatedButton(
-                    onPressed: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (_) => ChattingView()));
-                    },
+                    onPressed: () {},
                     child: Text(
                       "입장",
                       style: TextStyle(color: Colors.black),
