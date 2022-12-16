@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ggamf_front/views/pages/chatting/chatting_view.dart';
@@ -101,7 +103,8 @@ class _MyRecruitmentPartyListTabViewState extends State<MyRecruitmentPartyListTa
                     SizedBox(
                       width: 100,
                       height: 100,
-                      child: Image.asset(
+                      child: //Image.memory(base64Decode("${jplvm[index].gameLogo}")),
+                          Image.asset(
                         "assets/images/lol.png",
                       ),
                     ),
@@ -156,7 +159,8 @@ class _MyRecruitmentPartyListTabViewState extends State<MyRecruitmentPartyListTa
                     SizedBox(
                       width: 100,
                       height: 100,
-                      child: Image.asset(
+                      child: //Image.memory(base64Decode("${mrplv[index].gameLogo}")),
+                          Image.asset(
                         "assets/images/lol.png",
                       ),
                     ),

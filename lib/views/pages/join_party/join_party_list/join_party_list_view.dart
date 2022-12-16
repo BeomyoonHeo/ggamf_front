@@ -104,7 +104,8 @@ class _JoinPartyListViewState extends State<JoinPartyListView> {
                 SizedBox(
                   width: 100,
                   height: 100,
-                  child: Image.asset(
+                  child: //Image.memory(base64Decode("${jplv[index].gameLogo}")),
+                      Image.asset(
                     "assets/images/lol.png",
                   ),
                 ),

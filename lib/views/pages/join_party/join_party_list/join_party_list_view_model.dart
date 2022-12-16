@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ggamf_front/domain/party/model/room.dart';
 import 'package:ggamf_front/domain/party/repository/room_repository.dart';
 import 'package:ggamf_front/domain/user/model/user.dart';
+import 'package:ggamf_front/utils/validator_util.dart';
 
 import '../../../../utils/custom_intercepter.dart';
 
@@ -32,6 +33,7 @@ class JoinPartyListViewModel extends StateNotifier<List<Room>> {
             active: _Room.active,
           ),
         );
+        logger.d("게임로고 확인:${_Room.gameLogo}");
       });
       state = joinPartyList;
     });
