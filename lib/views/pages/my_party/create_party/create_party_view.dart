@@ -15,6 +15,7 @@ class CreatePartyView extends ConsumerStatefulWidget {
 }
 
 class _CreatePartyViewState extends ConsumerState<CreatePartyView> {
+  //{'게임선택': 0, '리그 오브 레전드': 1, '오버워치': 2, '로스트아크': 3, '발로란트': 4, '기타': 5};
   List<DropdownMenuItem> _valueList = [];
   final Map<String, dynamic> _keyList = {'게임선택': 0, '리그 오브 레전드': 1, '오버워치': 2, '로스트아크': 3, '발로란트': 4, '기타': 5};
   String _selectedValue = '게임선택';

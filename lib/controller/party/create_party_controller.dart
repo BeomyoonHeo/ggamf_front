@@ -19,7 +19,9 @@ class CreatePartyController {
   CreatePartyController(this._ref);
 
   final Map<String, dynamic> _keyList = {'게임선택': 0, '리그 오브 레전드': 1, '오버워치': 2, '로스트아크': 3, '발로란트': 4, '기타': 5};
+
   final mContext = navigatorKey.currentContext;
+
   late RoomRepository repo = RoomRepository(Dio()
     ..interceptors.add(CustomLogInterceptor())
     ..interceptors.add(SignedInterceptor()));
@@ -40,6 +42,7 @@ class CreatePartyController {
     repo
         .createRoom(userId: UserSession.user.id, gameCodeId: _keyList[selectGameController.text], generateRoomParty: createRoomParty)
         .then((value) => _ref.read(myRecruitmentPartyListViewModel.notifier).updateMyRecruitmentParty());
+
     Navigator.pop(mContext!);
   }
 }

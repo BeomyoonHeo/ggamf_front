@@ -3,7 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ggamf_front/domain/party/model/room.dart';
 import 'package:ggamf_front/domain/party/repository/room_repository.dart';
 import 'package:ggamf_front/domain/user/model/user.dart';
-import 'package:ggamf_front/utils/validator_util.dart';
 
 import '../../../../utils/custom_intercepter.dart';
 
@@ -44,5 +43,8 @@ class JoinPartyListViewModel extends StateNotifier<List<Room>> {
 
   void findAllRoomByKeyword(String keyword) {
     state = state.where((_Room) => _Room.gameName != keyword).toList();
+    //전체 파티방 목록보기
+    RoomRepository restApi = RoomRepository(Dio());
+    restApi.findAllRoom(userId: 1).then((value) => value.data.isEmpty ? null : state = value.data as List<Room>);
   }
 }
