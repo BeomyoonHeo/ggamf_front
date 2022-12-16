@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:ggamf_front/domain/chats/model/chat_message.dart';
-import 'package:timeago/timeago.dart' as timeago;
 
 class TextMessageBubble extends StatelessWidget {
   final bool isOwnMessage;
@@ -48,12 +47,6 @@ class TextMessageBubble extends StatelessWidget {
             message.content,
             style: TextStyle(
               color: Colors.white,
-            ),
-          ),
-          Text(
-            timeago.format(message.sentTime.toDate()),
-            style: TextStyle(
-              color: Colors.white70,
             ),
           ),
         ],
@@ -118,12 +111,6 @@ class ImageMessageBubble extends StatelessWidget {
             ),
           ),
           SizedBox(height: height * 0.02),
-          Text(
-            timeago.format(message.sentTime.toDate()),
-            style: TextStyle(
-              color: Colors.white70,
-            ),
-          ),
         ],
       ),
     );

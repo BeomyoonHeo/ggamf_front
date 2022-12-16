@@ -115,7 +115,7 @@ class _MyRecruitmentPartyListTabViewState
       List<MyRoom> mrplv, WidgetRef ref) {
     final pc = ref.read(partyController);
     return mrplv.isEmpty
-        ? Center(
+        ? const Center(
             child: Text('파티창이 없습니다.'),
           )
         : ListView.separated(

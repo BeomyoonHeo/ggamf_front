@@ -33,7 +33,7 @@ class _ChatPageState extends ConsumerState<ChatPage> {
 
   @override
   Widget build(BuildContext context) {
-    final cpp = ref.watch(chatPageProvider);
+    final cpp = ref.watch(chatPageProvider.notifier)..listenToMessages();
     _deviceWidth = MediaQuery.of(context).size.width;
     _deviceHeight = MediaQuery.of(context).size.height;
 
@@ -43,8 +43,9 @@ class _ChatPageState extends ConsumerState<ChatPage> {
   Widget _buildUI() {
     return Builder(
       builder: (context) {
-        _pageProvider = ref.watch(chatPageProvider);
+        _pageProvider = ref.watch(chatPageProvider.notifier);
         return Scaffold(
+          resizeToAvoidBottomInset: false,
           appBar: AppBar(
             automaticallyImplyLeading: false,
             title: const Text('채팅'),
@@ -88,10 +89,7 @@ class _ChatPageState extends ConsumerState<ChatPage> {
                   deviceHeight: _deviceHeight,
                   isOwnMessage: _isOwnMessage,
                   message: _message,
-                  sender: this
-                      .widget
-                      .chat
-                      .memebers
+                  sender: widget.chat.memebers
                       .where((_m) => _m.uid == _message.senderID)
                       .first,
                 ),
@@ -100,7 +98,7 @@ class _ChatPageState extends ConsumerState<ChatPage> {
           ),
         );
       } else {
-        return Align(
+        return const Align(
           alignment: Alignment.center,
           child: Text(
             "인사를 나눠보세요!",
@@ -109,7 +107,7 @@ class _ChatPageState extends ConsumerState<ChatPage> {
         );
       }
     } else {
-      return Center(
+      return const Center(
         child: CircularProgressIndicator(
           color: Colors.white,
         ),
@@ -146,7 +144,7 @@ class _ChatPageState extends ConsumerState<ChatPage> {
 
   Widget _messageTextField() {
     return SizedBox(
-      width: _deviceWidth * 0.65,
+      width: _deviceWidth * 0.50,
       child: CustomTextFormField(
           onsaved: (_value) {
             _pageProvider.message = _value;

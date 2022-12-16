@@ -5,7 +5,9 @@ import 'package:ggamf_front/domain/party/repository/room_repository.dart';
 import 'package:ggamf_front/main.dart';
 import 'package:ggamf_front/provider/chats_page_provider.dart';
 import 'package:ggamf_front/utils/custom_intercepter.dart';
-import 'package:ggamf_front/views/pages/chatting/chatting_view.dart';
+
+import '../../provider/chat_provider.dart';
+import '../../views/pages/chatting/chatting_view.dart';
 
 final partyController = Provider((ref) => PartyController(ref));
 
@@ -19,7 +21,11 @@ class PartyController {
   PartyController(this._ref);
   void enterParty({required int roomId}) {
     navigatorKey.currentState?.push(MaterialPageRoute(builder: (context) {
-      return ChatPage(chat: _ref.watch(chatsPageProvider)[roomId]);
+      _ref.read(chatPageProvider.notifier).setChatId(24.toString());
+      return ChatPage(
+          chat: _ref
+              .read(chatsPageProvider)
+              .singleWhere((_chat) => _chat.id == 24.toString()));
     }));
   }
 }

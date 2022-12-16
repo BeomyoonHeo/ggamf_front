@@ -46,21 +46,20 @@ class ChatsPageProvider extends StateNotifier<List<Chat>> {
         state = await Future.wait(
           _snapshot.docs.map(
             (_d) async {
+              logger.d('_userSnapshot.id = ${_d.data()}');
               Map<String, dynamic> _chatData =
                   _d.data() as Map<String, dynamic>;
-              print('_userSnapshot.id = ${_chatData}');
               List<ChatUser> _members = [];
               //firebase에서 가져온 member collection을 전부 ChatUser로 치환하여 Object로 반환
               for (var _uid in _chatData['members']) {
-                DocumentSnapshot _userSnapshot = await _db.getUser(_uid);
-                Map<String, dynamic> _userData =
-                    _userSnapshot.data() as Map<String, dynamic> ?? {};
-                _userData['uid'] = _userSnapshot.id;
+                DocumentSnapshot _userSnapshot =
+                    await _db.getUser(_uid); // 실제 db에서 유저 데이터 가져 옴
+                Map<String, dynamic> _userData = _userSnapshot.data() as Map<
+                    String, dynamic>; // 가져온 유저 데이터를 <String, dynamic> 형태로 변환
                 _members.add(
-                  ChatUser.fromJSON(_userData),
+                  ChatUser.fromJson(_userData),
                 );
               }
-
               List<ChatMessage> _messages = [];
               //채팅방에 뿌릴 메세지 데이터를 List로 받는다.
               QuerySnapshot _chatMessage =
@@ -73,20 +72,21 @@ class ChatsPageProvider extends StateNotifier<List<Chat>> {
                 _messages.add(_message);
               }
               return Chat(
-                uid: _d.id,
-                currentUserUid: UserSession.user.uid,
-                activity: _chatData['is_activity'],
-                group: _chatData['is_group'],
+                id: _d.id,
+                totalPeople: _chatData['total_people'],
                 memebers: _members,
                 messages: _messages,
               );
             },
           ).toList(),
         ); // 데이터가 실시간으로 변하는 것을 감지하겠다 -> listen 메서드가 붙어있는 것을
+        state.forEach((element) {
+          logger.d('데이터 확인 : ${element.id}');
+        });
       });
     } catch (e) {
       print("Error getting chats.");
-      print(e);
+      logger.d(e);
     }
   }
 }

@@ -1,5 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-
 enum MessageType {
   TEXT,
   IMAGE,
@@ -10,7 +8,7 @@ class ChatMessage {
   final String senderID;
   final MessageType type;
   final String content;
-  final Timestamp sentTime;
+  final String sentTime;
 
   ChatMessage({
     required this.content,
@@ -53,7 +51,7 @@ class ChatMessage {
       'content': content,
       'type': _messageType,
       'sender_id': senderID,
-      'sent_time': Timestamp.fromDate(sentTime.toDate()),
+      'sent_time': sentTime,
     };
   }
 }
