@@ -12,7 +12,6 @@ class MyGgamfListView extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     //mglv = myGgamfListViewModel
     final mglv = ref.watch(myGgamfListViewModel);
-    logger.d("길이보기: ${mglv.length}");
     return Scaffold(
       appBar: _appBar(),
       backgroundColor: Colors.white,

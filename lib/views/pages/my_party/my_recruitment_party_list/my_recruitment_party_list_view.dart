@@ -42,32 +42,36 @@ class _MyRecruitmentPartyListViewState extends ConsumerState<MyRecruitmentPartyL
     super.build(context);
     final mrplv = ref.watch(myRecruitmentPartyListViewModel);
     return Scaffold(
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        title: Text(textIndex[0]),
-        actions: [
-          IconButton(
-            onPressed: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => CreatePartyView()));
-            },
-            icon: Icon(
-              FontAwesomeIcons.userPlus,
-              color: Colors.black,
-              size: 25,
-            ),
-          ),
-        ],
-      ),
+      appBar: _appBar(context),
       body: Padding(
-        padding: const EdgeInsets.all(10),
+        padding: const EdgeInsets.all(20),
         child: Column(
           children: [
             MyRecruitmentPartyListTabBar(tabController: _tabController, textIndex: textIndex),
             const SizedBox(height: 20),
-            MyRecruitmentPartyListTabView(tabController: _tabController),
+            MyRecruitmentPartyListTabView(tabController: _tabController, myRoomList: mrplv),
           ],
         ),
       ),
+    );
+  }
+
+  AppBar _appBar(BuildContext context) {
+    return AppBar(
+      automaticallyImplyLeading: false,
+      title: Text(textIndex[0]),
+      actions: [
+        IconButton(
+          onPressed: () {
+            Navigator.push(context, MaterialPageRoute(builder: (context) => CreatePartyView()));
+          },
+          icon: Icon(
+            FontAwesomeIcons.userPlus,
+            color: Colors.black,
+            size: 25,
+          ),
+        ),
+      ],
     );
   }
 }

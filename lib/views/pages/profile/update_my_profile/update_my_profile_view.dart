@@ -156,12 +156,14 @@ class _UpdateMyProfileViewState extends ConsumerState<UpdateMyProfileView> {
   Widget _updateProfileButton(MyProfileController mpc) {
     return Container(
       padding: EdgeInsets.only(left: 100, right: 100),
-      child: OutlinedButton(
+      child: ElevatedButton(
         onPressed: () async {},
         child: Text("수정 완료"),
-        style: OutlinedButton.styleFrom(
+        style: ElevatedButton.styleFrom(
           foregroundColor: Colors.black,
           minimumSize: Size(150, 50),
+          backgroundColor: Colors.white,
+          side: BorderSide(width: 1),
         ),
       ),
     );

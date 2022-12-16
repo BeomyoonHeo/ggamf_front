@@ -4,6 +4,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:ggamf_front/controller/party/create_party_controller.dart';
 import 'package:ggamf_front/utils/validator_util.dart';
 import 'package:ggamf_front/views/pages/chatting/chatting_view.dart';
+import 'package:ggamf_front/views/pages/my_party/create_party/create_party_view_model.dart';
 import 'package:ggamf_front/views/pages/my_party/my_recruitment_party_list/my_recruitment_party_list_view.dart';
 
 class CreatePartyView extends ConsumerStatefulWidget {
@@ -25,6 +26,7 @@ class _CreatePartyViewState extends ConsumerState<CreatePartyView> {
 
   @override
   Widget build(BuildContext context) {
+    final cpv = ref.watch(createPartyViewModel);
     final cpc = ref.read(createPartyController);
     if (_valueList.isEmpty) {
       _keyList.forEach((key, value) {
@@ -105,7 +107,6 @@ class _CreatePartyViewState extends ConsumerState<CreatePartyView> {
         height: 40,
         child: TextButton(
           onPressed: () {
-            Navigator.pop(context);
             cpc.requestCreateRoom();
           },
           child: Text(

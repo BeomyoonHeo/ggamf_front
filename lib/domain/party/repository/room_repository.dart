@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:ggamf_front/domain/party/model/end_room_party.dart';
 import 'package:ggamf_front/domain/party/model/exit_room_party.dart';
+import 'package:ggamf_front/domain/party/model/game_code.dart';
 import 'package:ggamf_front/domain/party/model/kick_user_party.dart';
 import 'package:ggamf_front/domain/party/model/room.dart';
 import 'package:ggamf_front/utils/page_enum.dart';
@@ -8,6 +9,7 @@ import 'package:retrofit/http.dart';
 
 import '../model/generate_room_party.dart';
 import '../model/join_room_party.dart';
+import '../model/my_room.dart';
 
 part 'room_repository.g.dart';
 
@@ -21,15 +23,22 @@ abstract class RoomRepository {
 
   // 나의 모집 파티 목록
   @GET("/s/api/party/user/{userId}/myrooms")
-  Future<RoomList> findByMyIdRoom({@Path('userId') required int userId});
-
+  Future<MyRoomList> findByMyIdRoom({@Path('userId') required int userId});
   // 전체 파티방 목록 보기
   @GET("/s/api/party/user/{userId}/list")
   Future<RoomList> findAllRoom({@Path('userId') required int userId});
 
+  //전체 파티방 목록보기(게임코드)
+  @GET("/s/api/party/user/{userId}/list")
+  Future<RoomList> findAllRoomByGameCode({@Path('userId') required int userId, @Query("gameCode") required int gameCode});
+
+  //전체 파티방 목록보기(키워드)
+  @GET("/s/api/party/user/{userId}/list")
+  Future<RoomList> findAllRoomByKeyword({@Path('userId') required int userId, @Query("keyword") required String keyword});
+
   // 참가중인 파티방 목록 보기
   @GET("/s/api/party/user/{userId}/joins")
-  Future<Room> findJoinRooms({@Path('userId') required int userId});
+  Future<MyRoomList> findJoinRooms({@Path('userId') required int userId});
 
   //파티원 추방(방장)
   @PUT("/s/api/party/user/{userId}/kick/{roomId}")
@@ -53,7 +62,7 @@ abstract class RoomRepository {
 
   //파티방 생성하기 게임코드전달
   @GET("/s/api/party/user/{userId}/create")
-  Future<GenerateRoomParty> createRoomView({@Path('userId') required int userId});
+  Future<GameCodeList> getGameCode({@Path('userId') required int userId});
 
   //파티방 참여하기
   @POST("/s/api/party/user/{userId}/join/{roomId}")
