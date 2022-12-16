@@ -11,9 +11,8 @@ import 'package:ggamf_front/views/pages/chatting/chatting_view.dart';
 import 'package:ggamf_front/views/pages/join_party/join_party_list/join_party_list_view_model.dart';
 
 class JoinPartyListView extends StatefulWidget {
-  const JoinPartyListView({Key? key, required this.roomList}) : super(key: key);
+  const JoinPartyListView({Key? key}) : super(key: key);
 
-  final List<Room> roomList;
   @override
   State createState() => _JoinPartyListViewState();
 }
