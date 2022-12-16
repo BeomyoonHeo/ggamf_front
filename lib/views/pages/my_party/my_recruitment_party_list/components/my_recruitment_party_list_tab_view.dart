@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:ggamf_front/controller/party/party_controller.dart';
 import 'package:ggamf_front/views/pages/my_party/my_recruitment_party_list/joining_party_list_view_model.dart';
 import 'package:ggamf_front/views/pages/my_party/my_recruitment_party_list/my_recruitment_party_list_view_model.dart';
 
@@ -78,9 +79,7 @@ class _MyRecruitmentPartyListTabViewState
                 border: Border.all(width: 1),
               ),
               child: InkWell(
-                onTap: () {
-                  //Navigator.push(context, MaterialPageRoute(builder: (_) => ChattingView()));
-                },
+                onTap: () {},
                 child: Row(
                   children: [
                     Expanded(
@@ -114,6 +113,7 @@ class _MyRecruitmentPartyListTabViewState
 
   Widget _buildMyRecruitmentPartyListTabView(
       List<MyRoom> mrplv, WidgetRef ref) {
+    final pc = ref.read(partyController);
     return mrplv.isEmpty
         ? Center(
             child: Text('파티창이 없습니다.'),
@@ -136,6 +136,7 @@ class _MyRecruitmentPartyListTabViewState
               child: InkWell(
                 onTap: () {
                   //Navigator.push(context, MaterialPageRoute(builder: (_) => ChattingView()));
+                  pc.enterParty(roomId: mrplv[index].id);
                 },
                 child: Row(
                   children: [

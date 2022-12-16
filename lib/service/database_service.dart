@@ -32,6 +32,30 @@ class DatabaseService {
     return _db.collection(USER_COLLECTION).doc(_uid).get();
   }
 
+  Future<void> createChatRoom(
+      {required int roomId,
+      required String ownerId,
+      required int totalPeople}) async {
+    Map<String, dynamic> messages = {
+      'content': 'dummy',
+      'sender_id': '${ownerId}',
+      'sent_time': '${DateTime.now().toString()}',
+      'type': 'text',
+    };
+    List<String> members = [ownerId];
+    Map<String, dynamic> roomInfo = {
+      'id': roomId,
+      'members': members,
+      'total_people': totalPeople
+    };
+    await _db.collection(CHAT_COLLECTION).doc(roomId.toString()).set(roomInfo);
+    await _db
+        .collection(CHAT_COLLECTION)
+        .doc(roomId.toString())
+        .collection(MESSAGES_COLLECTION)
+        .add(messages);
+  }
+
   //Chats 컬렉션에 있는 members중에 같은 uid를 가지고 있는 데이터를 가지고 온다.
   Stream<QuerySnapshot> getChatsForUser(String _uid) {
     return _db

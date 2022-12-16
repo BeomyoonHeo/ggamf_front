@@ -7,7 +7,9 @@ import 'package:ggamf_front/domain/party/model/generate_room_party.dart';
 import 'package:ggamf_front/domain/party/repository/room_repository.dart';
 import 'package:ggamf_front/domain/user/model/user.dart';
 import 'package:ggamf_front/main.dart';
+import 'package:ggamf_front/provider/chats_page_provider.dart';
 import 'package:ggamf_front/utils/custom_intercepter.dart';
+import 'package:ggamf_front/utils/validator_util.dart';
 import 'package:ggamf_front/views/pages/my_party/my_recruitment_party_list/my_recruitment_party_list_view_model.dart';
 
 final createPartyController = Provider((ref) {
@@ -38,7 +40,7 @@ class CreatePartyController {
   final TextEditingController selectGameController = TextEditingController();
   final TextEditingController totalPeopleController = TextEditingController();
 
-  void requestCreateRoom() {
+  void requestCreateRoom() async {
     GenerateRoomParty createRoomParty = GenerateRoomParty(
       gameName: selectGameController.text,
       gameCodeId: _keyList[selectGameController.text],
@@ -46,19 +48,24 @@ class CreatePartyController {
       totalPeople: int.parse(totalPeopleController.text),
       userId: UserSession.user.id,
     );
-
-    repo
+    await repo
         .createRoom(
             userId: UserSession.user.id,
             gameCodeId: _keyList[selectGameController.text],
             generateRoomParty: createRoomParty)
-        .then((value) {
-      _ref
-          .read(myRecruitmentPartyListViewModel.notifier)
-          .updateMyRecruitmentParty(value);
-      Navigator.pop(mContext!);
-    }).onError((error, stackTrace) {
-      Fluttertoast.showToast(msg: '입력양식이 맞지 않습니다.');
-    });
+        .then((value) => _ref
+                .read(chatsPageProvider.notifier)
+                .createChat(
+                    id: UserSession.user.id!,
+                    totalPeople: int.parse(totalPeopleController.text))
+                .then((value) {
+              _ref
+                  .read(myRecruitmentPartyListViewModel.notifier)
+                  .updateMyRecruitmentParty(createRoomParty);
+              Navigator.pop(mContext!);
+            }).onError((error, stackTrace) {
+              logger.d(error);
+              Fluttertoast.showToast(msg: '입력양식이 맞지 않습니다.');
+            }));
   }
 }

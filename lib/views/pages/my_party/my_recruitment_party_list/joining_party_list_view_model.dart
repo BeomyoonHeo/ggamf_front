@@ -2,12 +2,14 @@ import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ggamf_front/domain/party/repository/room_repository.dart';
 import 'package:ggamf_front/domain/user/model/user.dart';
-import 'package:ggamf_front/utils/validator_util.dart';
+import 'package:ggamf_front/provider/chats_page_provider.dart';
 
 import '../../../../domain/party/model/my_room.dart';
 import '../../../../utils/custom_intercepter.dart';
 
-final joiningPartyListViewModel = StateNotifierProvider.autoDispose<JoiningPartyListViewModel, List<MyRoom>>((ref) {
+final joiningPartyListViewModel =
+    StateNotifierProvider.autoDispose<JoiningPartyListViewModel, List<MyRoom>>(
+        (ref) {
   return JoiningPartyListViewModel([], ref)..init();
 });
 
@@ -21,7 +23,8 @@ class JoiningPartyListViewModel extends StateNotifier<List<MyRoom>> {
 
   List<MyRoom> joiningPartyList = [];
 
-  void init() {
+  void init() async {
+    await _ref.watch(chatsPageProvider.notifier).getChats();
     repo.findJoinRooms(userId: UserSession.user.id).then((value) {
       value.data['rooms']?.forEach((_myRoom) {
         joiningPartyList.add(
