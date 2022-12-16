@@ -5,6 +5,8 @@ import 'package:ggamf_front/domain/user/model/user.dart';
 import 'package:ggamf_front/domain/user/repository/user_repository.dart';
 import 'package:ggamf_front/utils/custom_intercepter.dart';
 
+import '../utils/validator_util.dart';
+
 final ggamfProvider = StateNotifierProvider<GgamfProvider, List<Ggamf>>(
     (ref) => GgamfProvider([], ref)..showMyGgamf());
 
@@ -24,6 +26,7 @@ class GgamfProvider extends StateNotifier<List<Ggamf>> {
   void showMyGgamf() {
     repo.myGgamfList(userId: UserSession.user.id).then(
       (value) {
+        logger.d('내껨프 벨류 확인 : ${value.data}');
         value.data['followers']?.forEach((_ggamf) {
           myGgamIdList[_ggamf.userId] = _ggamf;
           myGgamfList.add(

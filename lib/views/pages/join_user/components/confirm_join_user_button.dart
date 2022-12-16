@@ -26,8 +26,9 @@ class ConfirmJoinUserButton extends ConsumerWidget {
               onTap: () {
                 if (juc.formKey.currentState!.validate() &&
                     juc.authOk &&
-                    juc.isAgree) {}
-                juc.requestJoin();
+                    juc.isAgree) {
+                  juc.requestJoin();
+                }
                 logger.d('벨리데이션 : ${juc.formKey.currentState!.validate()}');
                 logger.d('authOK? ${juc.authOk}');
                 logger.d('동의 ? ${juc.isAgree}');
