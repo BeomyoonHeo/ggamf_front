@@ -67,9 +67,7 @@ class _UserRepository implements UserRepository {
   }
 
   RequestOptions _setStreamType<T>(RequestOptions requestOptions) {
-    if (T != dynamic &&
-        !(requestOptions.responseType == ResponseType.bytes ||
-            requestOptions.responseType == ResponseType.stream)) {
+    if (T != dynamic && !(requestOptions.responseType == ResponseType.bytes || requestOptions.responseType == ResponseType.stream)) {
       if (T == String) {
         requestOptions.responseType = ResponseType.plain;
       } else {
@@ -82,8 +80,8 @@ class _UserRepository implements UserRepository {
 
 // ignore_for_file: unnecessary_brace_in_string_interps,no_leading_underscores_for_local_identifiers
 
-class _RecommendGgamfListRepository implements RecommendGgamfListRepository {
-  _RecommendGgamfListRepository(
+class _GgamfRepository implements GgamfRepository {
+  _GgamfRepository(
     this._dio, {
     this.baseUrl,
   }) {
@@ -93,6 +91,29 @@ class _RecommendGgamfListRepository implements RecommendGgamfListRepository {
   final Dio _dio;
 
   String? baseUrl;
+
+  @override
+  Future<GgamfList> myGgamfList({required userId}) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<GgamfList>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/s/api/ggamf/user/${userId}/list',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = GgamfList.fromJson(_result.data!);
+    return value;
+  }
 
   @override
   Future<dynamic> acceptReceiveGgmaf({
@@ -175,19 +196,18 @@ class _RecommendGgamfListRepository implements RecommendGgamfListRepository {
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<GgamfList>(Options(
+    final _result = await _dio.fetch<Map<String, dynamic>>(_setStreamType<GgamfList>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
     )
-            .compose(
-              _dio.options,
-              '/s/api/ggamf/user/${id}/recommend',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+        .compose(
+          _dio.options,
+          '/s/api/ggamf/user/${id}/recommend',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = GgamfList.fromJson(_result.data!);
     return value;
   }
@@ -198,19 +218,18 @@ class _RecommendGgamfListRepository implements RecommendGgamfListRepository {
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<GgamfList>(Options(
+    final _result = await _dio.fetch<Map<String, dynamic>>(_setStreamType<GgamfList>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
     )
-            .compose(
-              _dio.options,
-              '/s/api/ggamf/user/${id}/sendggamf',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+        .compose(
+          _dio.options,
+          '/s/api/ggamf/user/${id}/sendggamf',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = GgamfList.fromJson(_result.data!);
     return value;
   }
@@ -221,19 +240,18 @@ class _RecommendGgamfListRepository implements RecommendGgamfListRepository {
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<GgamfList>(Options(
+    final _result = await _dio.fetch<Map<String, dynamic>>(_setStreamType<GgamfList>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
     )
-            .compose(
-              _dio.options,
-              '/s/api/ggamf/user/${id}/receiveggamf',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+        .compose(
+          _dio.options,
+          '/s/api/ggamf/user/${id}/receiveggamf',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = GgamfList.fromJson(_result.data!);
     return value;
   }
@@ -289,9 +307,7 @@ class _RecommendGgamfListRepository implements RecommendGgamfListRepository {
   }
 
   RequestOptions _setStreamType<T>(RequestOptions requestOptions) {
-    if (T != dynamic &&
-        !(requestOptions.responseType == ResponseType.bytes ||
-            requestOptions.responseType == ResponseType.stream)) {
+    if (T != dynamic && !(requestOptions.responseType == ResponseType.bytes || requestOptions.responseType == ResponseType.stream)) {
       if (T == String) {
         requestOptions.responseType = ResponseType.plain;
       } else {
@@ -365,9 +381,7 @@ class _ProfileUserRepository implements ProfileUserRepository {
   }
 
   RequestOptions _setStreamType<T>(RequestOptions requestOptions) {
-    if (T != dynamic &&
-        !(requestOptions.responseType == ResponseType.bytes ||
-            requestOptions.responseType == ResponseType.stream)) {
+    if (T != dynamic && !(requestOptions.responseType == ResponseType.bytes || requestOptions.responseType == ResponseType.stream)) {
       if (T == String) {
         requestOptions.responseType = ResponseType.plain;
       } else {

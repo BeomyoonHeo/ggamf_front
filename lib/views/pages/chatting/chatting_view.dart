@@ -1,290 +1,196 @@
-import 'package:dio/dio.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:ggamf_front/views/pages/my_party/my_recruitment_party_list/my_recruitment_party_list_view.dart';
-import 'package:intl/intl.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:ggamf_front/domain/chats/model/chat.dart';
+import 'package:ggamf_front/domain/chats/model/chat_message.dart';
+import 'package:ggamf_front/domain/user/model/user.dart';
+import 'package:ggamf_front/provider/chat_provider.dart';
+import 'package:ggamf_front/views/pages/chatting/chatting_components/custom_text_form_field.dart';
+import 'package:ggamf_front/views/pages/chatting/chatting_components/custom_view_tiles.dart';
 
-import '../../../core/color.dart';
-import 'chatting_components/chat_icon_button.dart';
-import 'chatting_components/my_chat.dart';
-import 'chatting_components/other_chat.dart';
+class ChatPage extends ConsumerStatefulWidget {
+  final Chat chat;
 
-class ChattingView extends StatefulWidget {
-  final dio = Dio();
-  ChattingView({Key? key}) : super(key: key);
+  const ChatPage({super.key, required this.chat});
 
   @override
-  State<ChattingView> createState() => _ChattingViewState();
+  ConsumerState<ChatPage> createState() => _ChatPageState();
 }
 
-class _ChattingViewState extends State<ChattingView> {
-  final List<MyChat> chats = [];
-  final TextEditingController _textController = TextEditingController();
-  bool _ischecked = false;
+class _ChatPageState extends ConsumerState<ChatPage> {
+  late double _deviceHeight;
+  late double _deviceWidth;
+
+  late ChatPageProvider _pageProvider;
+  late GlobalKey<FormState> _messageFormState;
+  late ScrollController _messageListViewController;
+
+  @override
+  void initState() {
+    super.initState();
+    _messageFormState = GlobalKey<FormState>();
+    _messageListViewController = ScrollController();
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        color: Color(0xFFb2c7da),
-        child: Scaffold(
-          backgroundColor: kPrimaryColor,
-          appBar: _AppBar(context),
-          body: Column(
-            children: [
-              Expanded(
-                child: SingleChildScrollView(
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                    child: Column(
-                      children: [
-                        OtherChat(
-                          num: 0,
-                          name: "홍길동",
-                          time: "오후 8:10",
-                          text: "오늘 10시에 자랭 돌립시다",
-                        ),
-                        SizedBox(height: 20),
-                        OtherChat(
-                          num: 1,
-                          name: "임꺽정",
-                          time: "오후 8:15",
-                          text: "10시는 너무 늦고 9시에 돌립시다",
-                        ),
-                        SizedBox(height: 20),
-                        MyChat(
-                          text: "9시도 늦다 8시에 돌리자",
-                          time: "오후 8:15",
-                        ),
-                        SizedBox(height: 20),
-                        OtherChat(
-                          num: 2,
-                          name: "김유미",
-                          time: "오전 10:10",
-                          text: "다들 포지션 뭘로 하실거에요?",
-                        ),
-                        SizedBox(height: 20),
-                        OtherChat(
-                          num: 2,
-                          name: "김유미",
-                          time: "오전 10:10",
-                          text: "저는 탑 할게요",
-                        ),
-                        SizedBox(height: 20),
-                        MyChat(
-                          text: "그럼 저는 탑할게요",
-                          time: "오후 2:15",
-                        ),
-                        ...List.generate(chats.length, (index) => chats[index]),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-              _chattingBox()
-            ],
-          ),
-        ),
-      ),
-    );
+    final cpp = ref.watch(chatPageProvider.notifier)..listenToMessages();
+    _deviceWidth = MediaQuery.of(context).size.width;
+    _deviceHeight = MediaQuery.of(context).size.height;
+
+    return _buildUI();
   }
 
-  Widget _chattingBox() {
-    return Container(
-      padding: EdgeInsets.only(right: 20),
-      height: 60,
-      color: Colors.white,
-      child: Row(
-        children: [
-          ChatIconButton(icon: Icon(FontAwesomeIcons.plusSquare)),
-          Expanded(
+  Widget _buildUI() {
+    return Builder(
+      builder: (context) {
+        _pageProvider = ref.watch(chatPageProvider.notifier);
+        return Scaffold(
+          resizeToAvoidBottomInset: false,
+          appBar: AppBar(
+            automaticallyImplyLeading: false,
+            title: const Text('채팅'),
+          ),
+          body: SingleChildScrollView(
             child: Container(
-              decoration: BoxDecoration(
-                color: kPrimaryColor,
-                borderRadius: BorderRadius.circular(20),
+              padding: EdgeInsets.symmetric(
+                horizontal: _deviceWidth * 0.03,
+                vertical: _deviceHeight * 0.02,
               ),
-              child: TextField(
-                controller: _textController,
-                maxLines: 1,
-                style: TextStyle(fontSize: 20),
-                decoration: InputDecoration(
-                  focusedBorder: InputBorder.none,
-                  enabledBorder: InputBorder.none,
-                ),
-                onSubmitted: _handleSubmitted,
+              height: _deviceHeight * 0.98,
+              width: _deviceWidth * 0.97,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  _messagesListView(),
+                  _sendMessageForm(),
+                ],
               ),
             ),
           ),
-        ],
-      ),
+        );
+      },
     );
   }
 
-  AppBar _AppBar(BuildContext context) {
-    return AppBar(
-      automaticallyImplyLeading: false,
-      backgroundColor: Colors.white,
-      title: Row(
-        children: [
-          BackButton(color: Colors.black),
-          Text(
-            "채팅",
-            style: TextStyle(color: Colors.black, fontSize: 25),
-          ),
-        ],
-      ),
-      actions: [
-        TextButton(
-          onPressed: () {
-            showDialog(context: context, builder: (_) => _invite());
-          },
-          child: Text(
-            "초대하기",
-            style: TextStyle(fontSize: 12, color: Colors.green),
-          ),
-          style: TextButton.styleFrom(
-            foregroundColor: Colors.black,
-          ),
-        ),
-        SizedBox(width: 20),
-        InkWell(
-          onTap: () {
-            showDialog(
-              context: context,
-              builder: (_) => Dialog(
-                child: Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  padding: EdgeInsets.all(10),
-                  width: double.infinity,
-                  height: 150,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      Text(
-                        "정말 나가시겠습니까?",
-                        style: TextStyle(fontSize: 20),
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          SizedBox(
-                            height: 35,
-                            width: 100,
-                            child: ElevatedButton(
-                              onPressed: () {
-                                Navigator.push(context, MaterialPageRoute(builder: (_) => MyRecruitmentPartyListView()));
-                              },
-                              child: Text(
-                                "예",
-                                style: TextStyle(color: Colors.black),
-                              ),
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor: Colors.white,
-                                side: BorderSide(
-                                  width: 1,
-                                ),
-                              ),
-                            ),
-                          ),
-                          SizedBox(
-                            height: 35,
-                            width: 100,
-                            child: ElevatedButton(
-                              onPressed: () {
-                                Navigator.pop(context);
-                              },
-                              child: Text(
-                                "아니오",
-                                style: TextStyle(color: Colors.black),
-                              ),
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor: Colors.white,
-                                side: BorderSide(
-                                  width: 1,
-                                ),
-                              ),
-                            ),
-                          )
-                        ],
-                      ),
-                    ],
-                  ),
+  Widget _messagesListView() {
+    if (_pageProvider.messages != null) {
+      if (_pageProvider.messages!.length != 0) {
+        return Container(
+          height: _deviceHeight * 0.74,
+          child: ListView.builder(
+            itemCount: _pageProvider.messages!.length,
+            itemBuilder: (context, index) {
+              ChatMessage _message = _pageProvider.messages![index];
+              bool _isOwnMessage = _message.senderID == UserSession.user.uid;
+              return Container(
+                child: CustomChatListViewTile(
+                  width: _deviceWidth * 0.8,
+                  deviceHeight: _deviceHeight,
+                  isOwnMessage: _isOwnMessage,
+                  message: _message,
+                  sender: widget.chat.memebers
+                      .where((_m) => _m.uid == _message.senderID)
+                      .first,
                 ),
-              ),
-            );
-          },
-          child: Icon(Icons.logout, size: 20, color: Colors.black),
-        ),
-        SizedBox(width: 25),
-      ],
-    );
-  }
-
-  void _handleSubmitted(text) {
-    _textController.clear();
-
-    setState(() {
-      chats.add(
-        MyChat(
-          text: text,
-          time: DateFormat("a K:m").format(new DateTime.now()).replaceAll("AM", "오전").replaceAll("PM", "오후"),
+              );
+            },
+          ),
+        );
+      } else {
+        return const Align(
+          alignment: Alignment.center,
+          child: Text(
+            "인사를 나눠보세요!",
+            style: TextStyle(color: Colors.white),
+          ),
+        );
+      }
+    } else {
+      return const Center(
+        child: CircularProgressIndicator(
+          color: Colors.white,
         ),
       );
-    });
+    }
   }
 
-  Widget _invite() {
-    return Dialog(
-      child: Container(
-        margin: EdgeInsets.all(20),
-        width: double.infinity,
-        height: 400,
-        child: Column(
+  Widget _sendMessageForm() {
+    return Container(
+      height: _deviceHeight * 0.06,
+      decoration: BoxDecoration(
+        color: Color.fromRGBO(30, 29, 37, 1.0),
+        borderRadius: BorderRadius.circular(100),
+      ),
+      margin: EdgeInsets.symmetric(
+        horizontal: _deviceWidth * 0.04,
+        vertical: _deviceHeight * 0.001,
+      ),
+      child: Form(
+        key: _messageFormState,
+        child: Row(
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Text(
-              "초대할 껨프 선택",
-              style: TextStyle(fontSize: 25),
-            ),
-            SizedBox(height: 40),
-            CheckboxListTile(
-              title: Text('껨프 1'),
-              secondary: CircleAvatar(
-                radius: 30,
-                backgroundImage: AssetImage("assets/images/76.jpg"),
-              ),
-              activeColor: Colors.white,
-              checkColor: Colors.black,
-              controlAffinity: ListTileControlAffinity.trailing,
-              value: _ischecked,
-              onChanged: (bool? value) {
-                setState(() {
-                  _ischecked = value!;
-                });
-              },
-            ),
-            Divider(color: Colors.black),
-            CheckboxListTile(
-              title: Text('껨프 2'),
-              secondary: CircleAvatar(
-                radius: 30,
-                backgroundImage: AssetImage("assets/images/20.jpg"),
-              ),
-              activeColor: Colors.white,
-              checkColor: Colors.black,
-              controlAffinity: ListTileControlAffinity.trailing,
-              value: _ischecked,
-              onChanged: (bool? value) {
-                setState(() {
-                  _ischecked = value!;
-                });
-              },
-            ),
-            Divider(color: Colors.black),
+            _messageTextField(),
+            _sendMessageButton(),
+            _imageMessageButton(),
           ],
         ),
+      ),
+    );
+  }
+
+  Widget _messageTextField() {
+    return SizedBox(
+      width: _deviceWidth * 0.50,
+      child: CustomTextFormField(
+          onsaved: (_value) {
+            _pageProvider.message = _value;
+          },
+          regEx: r"^(?!\s*$).+",
+          hintText: '메세지를 적어주세요',
+          obscureText: false),
+    );
+  }
+
+  Widget _sendMessageButton() {
+    double _size = _deviceHeight * 0.04;
+    return Container(
+      width: _size,
+      height: _size,
+      margin: EdgeInsets.only(bottom: 10, right: 5),
+      child: IconButton(
+        icon: Icon(
+          Icons.send,
+          color: Colors.white,
+        ),
+        onPressed: () {
+          if (_messageFormState.currentState!.validate()) {
+            _messageFormState.currentState!.save();
+            _pageProvider.sendTextMessge();
+            _messageFormState.currentState!.reset();
+          }
+        },
+      ),
+    );
+  }
+
+  Widget _imageMessageButton() {
+    double _size = _deviceHeight * 0.04;
+    return Container(
+      height: _size,
+      width: _size,
+      child: FloatingActionButton(
+        backgroundColor: Color.fromRGBO(
+          0,
+          82,
+          218,
+          1.0,
+        ),
+        onPressed: () {},
+        child: Icon(Icons.camera_enhance),
       ),
     );
   }

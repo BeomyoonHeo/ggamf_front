@@ -4,20 +4,20 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ggamf_front/domain/party/model/room.dart';
-import 'package:ggamf_front/views/pages/chatting/chatting_view.dart';
+import 'package:ggamf_front/utils/validator_util.dart';
+import 'package:ggamf_front/views/pages/join_party/join_party_list/join_party_list_view_model.dart';
 
-class JoinPartyListView extends ConsumerStatefulWidget {
+class JoinPartyListView extends StatefulWidget {
   const JoinPartyListView({Key? key, required this.roomList}) : super(key: key);
 
   final List<Room> roomList;
   @override
-  ConsumerState createState() => _JoinPartyListViewState();
+  State createState() => _JoinPartyListViewState();
 }
 
-class _JoinPartyListViewState extends ConsumerState<JoinPartyListView> {
-  int tag = 1;
+class _JoinPartyListViewState extends State<JoinPartyListView> {
+  int tag = 2;
   List<String> options = [
-    '전체',
     '리그오브레전드',
     '배틀그라운드',
     '로스트아크',
@@ -35,74 +35,71 @@ class _JoinPartyListViewState extends ConsumerState<JoinPartyListView> {
     );
   }
 
-  CustomScrollView _sliverAppbar() {
-    return CustomScrollView(
-      slivers: [
-        SliverAppBar(
-          backgroundColor: Colors.white,
-          expandedHeight: 150,
-          floating: true,
-          flexibleSpace: FlexibleSpaceBar(
-            titlePadding: EdgeInsets.zero,
-            title: SingleChildScrollView(
-              child: Column(
-                children: [
-                  _searchBar(),
-                  _gameCategory(),
-                ],
+  Widget _sliverAppbar() {
+    return Consumer(
+        builder: (BuildContext context, WidgetRef ref, Widget? child) {
+      final jplv = ref.watch(joinPartyListViewModel);
+      logger.d("길이보기: ${jplv.length}");
+      return CustomScrollView(
+        slivers: [
+          SliverAppBar(
+            backgroundColor: Colors.white,
+            expandedHeight: 150,
+            floating: true,
+            flexibleSpace: FlexibleSpaceBar(
+              titlePadding: EdgeInsets.zero,
+              title: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    _searchBar(),
+                    _gameCategory(),
+                  ],
+                ),
               ),
             ),
           ),
-        ),
-        SliverList(
-          delegate: _partyWindow(widget.roomList),
-        ),
-      ],
-    );
+          SliverList(
+            delegate: _partyWindow(jplv),
+          ),
+        ],
+      );
+    });
   }
 
-  SliverChildBuilderDelegate _partyWindow(List<Room> roomList) {
+  SliverChildBuilderDelegate _partyWindow(List<Room> jplv) {
     return SliverChildBuilderDelegate(
       (context, index) {
         return Container(
-          margin: EdgeInsets.all(20),
-          padding: EdgeInsets.all(10),
+          margin: const EdgeInsets.all(20),
+          padding: const EdgeInsets.all(20),
+          width: double.infinity,
           height: 150,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
+            color: Colors.white,
             border: Border.all(width: 1),
           ),
           child: InkWell(
             onTap: () {
-              showDialog(context: context, builder: (_) => _enterParty());
+              //Navigator.push(context, MaterialPageRoute(builder: (_) => ));
             },
             child: Row(
               children: [
                 Expanded(
                   child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      SizedBox(
-                        child: Text(
-                          //roomList[index].roomName,
-                          "롤 바텀 모집중",
-                          style: TextStyle(fontSize: 20),
-                        ),
-                        width: 150,
-                      ),
-                      SizedBox(height: 20),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text("방장이름"),
-                          SizedBox(width: 60),
-                          //roomList[index].totalPeople
-                          Text("2/5"),
-                        ],
-                      ),
+                      //Text("방 제목 : 롤 골드 자랭하실분 구합니다"),
+                      Text("게임네임 : ${jplv[index].gameName} "),
+                      SizedBox(height: 10),
+                      Text("방 제목 : ${jplv[index].roomName}"),
+                      SizedBox(height: 10),
+                      Text("방장이름 : ${jplv[index].nickName}"),
                     ],
                   ),
                 ),
+                SizedBox(width: 30),
                 SizedBox(
                   width: 100,
                   height: 100,
@@ -115,7 +112,7 @@ class _JoinPartyListViewState extends ConsumerState<JoinPartyListView> {
           ),
         );
       },
-      childCount: 10,
+      childCount: jplv.length,
     );
   }
 
@@ -129,10 +126,19 @@ class _JoinPartyListViewState extends ConsumerState<JoinPartyListView> {
         label: (i, v) => v,
       ),
       choiceStyle: C2ChipStyle.filled(
+        borderAlpha: 10,
         height: 27,
-        foregroundStyle: TextStyle(fontSize: 13),
-        selectedStyle: C2ChipStyle(backgroundColor: Colors.green),
-        color: Colors.amber[500],
+        //foregroundColor: Colors.black,
+        borderWidth: 5,
+        foregroundStyle: const TextStyle(fontSize: 13),
+        selectedStyle: const C2ChipStyle(
+          borderStyle: BorderStyle.solid,
+          backgroundColor: Colors.black,
+          foregroundColor: Colors.white,
+          borderColor: Colors.black,
+          borderWidth: 2,
+        ),
+        color: Colors.white,
       ),
     );
   }
@@ -204,9 +210,7 @@ class _JoinPartyListViewState extends ConsumerState<JoinPartyListView> {
                   ),
                   SizedBox(height: 10),
                   ElevatedButton(
-                    onPressed: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (_) => ChattingView()));
-                    },
+                    onPressed: () {},
                     child: Text(
                       "입장",
                       style: TextStyle(color: Colors.black),

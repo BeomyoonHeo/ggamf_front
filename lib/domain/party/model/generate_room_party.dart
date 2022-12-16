@@ -1,3 +1,4 @@
+import 'package:ggamf_front/domain/party/model/my_room.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'generate_room_party.g.dart';
@@ -18,7 +19,18 @@ class GenerateRoomParty {
     required this.gameCodeId,
   });
 
-  factory GenerateRoomParty.fromJson(Map<String, dynamic> json) => _$GenerateRoomPartyFromJson(json);
+  //Dto 데이터를 -> MyRoomType으로 변환 필요
+  MyRoom createdParty() {
+    return MyRoom(
+        id: 1,
+        nickName: 'nickName',
+        roomName: 'roomName',
+        totalPeople: 2,
+        gameLogo: 'gameLogo');
+  }
+
+  factory GenerateRoomParty.fromJson(Map<String, dynamic> json) =>
+      _$GenerateRoomPartyFromJson(json);
 
   Map<String, dynamic> toJson() => _$GenerateRoomPartyToJson(this);
 }
