@@ -37,8 +37,26 @@ class MyRecruitmentPartyListViewModel extends StateNotifier<List<MyRoom>> {
     });
   }
 
+  void _reinit() {
+    repo.findByMyIdRoom(userId: UserSession.user.id).then((value) {
+      List<MyRoom> newMyRecruitmentPartyList = [];
+      value.data['rooms']?.forEach((_myRoom) {
+        newMyRecruitmentPartyList.add(
+          MyRoom(
+            id: _myRoom.id,
+            nickName: _myRoom.nickName,
+            roomName: _myRoom.roomName,
+            totalPeople: _myRoom.totalPeople,
+            gameLogo: _myRoom.gameLogo,
+          ),
+        );
+      });
+      state = newMyRecruitmentPartyList;
+    });
+  }
+
   void updateMyRecruitmentParty(GenerateRoomParty _party) {
-    init();
+    _reinit();
     //state = [...state, _party.createdParty()];
   }
 }
