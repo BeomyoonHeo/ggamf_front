@@ -17,11 +17,7 @@ class MyProfileView extends ConsumerWidget {
     final mpvm = ref.watch(myProfileViewModel);
 
     return Scaffold(
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        backgroundColor: Colors.white,
-        title: Text("내 프로필"),
-      ),
+      appBar: _appBar(),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),
         child: ListView(
@@ -33,22 +29,7 @@ class MyProfileView extends ConsumerWidget {
             SizedBox(height: 10),
             _ratedStar(),
             SizedBox(height: 10),
-            Container(
-              padding: EdgeInsets.all(10),
-              width: double.infinity,
-              decoration: BoxDecoration(
-                border: Border.all(width: 1),
-                borderRadius: BorderRadius.circular(10),
-                color: Colors.white,
-              ),
-              child: Expanded(
-                child: Text(
-                  "${mpvm.intro}",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 15, color: Colors.black),
-                ),
-              ),
-            ),
+            _buildIntro(mpvm),
             Container(
               height: 150,
               child: InkWell(
@@ -68,6 +49,35 @@ class MyProfileView extends ConsumerWidget {
           ],
         ),
       ),
+    );
+  }
+
+  Container _buildIntro(ProfileUser mpvm) {
+    return Container(
+      padding: EdgeInsets.all(10),
+      width: double.infinity,
+      decoration: BoxDecoration(
+        border: Border.all(width: 1),
+        borderRadius: BorderRadius.circular(10),
+        color: Colors.white,
+      ),
+      child: Expanded(
+        child: mpvm.intro!.isEmpty
+            ? Text("닉네임이 없습니다")
+            : Text(
+                "${mpvm.intro}",
+                textAlign: TextAlign.center,
+                style: TextStyle(fontSize: 15, color: Colors.black),
+              ),
+      ),
+    );
+  }
+
+  AppBar _appBar() {
+    return AppBar(
+      automaticallyImplyLeading: false,
+      backgroundColor: Colors.white,
+      title: Text("내 프로필"),
     );
   }
 
@@ -92,7 +102,7 @@ class MyProfileView extends ConsumerWidget {
     return Center(
       child: CircleAvatar(
         radius: 70,
-        backgroundImage: AssetImage("assets/images/76.jpg"),
+        backgroundImage: mpvm.intro!.isEmpty ? AssetImage("assets/images/generic-avatar.svg") : AssetImage("assets/images/76.jpg"),
       ),
     );
   }
