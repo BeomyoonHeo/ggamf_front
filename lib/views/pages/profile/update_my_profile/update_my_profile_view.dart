@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ggamf_front/controller/user/my_profile_controller.dart';
@@ -52,24 +53,25 @@ class _UpdateMyProfileViewState extends ConsumerState<UpdateMyProfileView> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: _appBar(),
-      body: Padding(
-        padding: const EdgeInsets.only(left: 20, right: 20),
-        child: ListView(
-          children: [
-            SizedBox(height: 50),
-            _changePhoto(),
-            SizedBox(height: 50),
-            _enterNickName(),
-            SizedBox(height: 30),
-            _enterPassword(),
-            SizedBox(height: 30),
-            _enterEmail(),
-            SizedBox(height: 30),
-            _enterIntroduce(),
-            SizedBox(height: 30),
-            _updateProfileButton(mpc),
-            SizedBox(height: 30),
-          ],
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          child: Column(
+            children: [
+              const SizedBox(height: 50),
+              _changePhoto(),
+              const SizedBox(height: 50),
+              _enterNickName(),
+              const SizedBox(height: 30),
+              _enterPassword(),
+              const SizedBox(height: 30),
+              _enterEmail(),
+              const SizedBox(height: 30),
+              _enterIntroduce(),
+              const SizedBox(height: 30),
+              _updateProfileButton(mpc),
+            ],
+          ),
         ),
       ),
     );
@@ -77,18 +79,19 @@ class _UpdateMyProfileViewState extends ConsumerState<UpdateMyProfileView> {
 
   Container _enterEmail() {
     return Container(
-      padding: EdgeInsets.all(5),
+      padding: const EdgeInsets.all(5),
       width: double.infinity,
       decoration: BoxDecoration(
         border: Border.all(width: 1),
-        borderRadius: BorderRadius.circular(10),
+        borderRadius: BorderRadius.circular(5),
         color: Colors.white,
       ),
       child: TextFormField(
         controller: _email,
-        decoration: InputDecoration(
+        decoration: const InputDecoration(
           border: InputBorder.none,
           hintText: "이메일을 입력하세요",
+          suffixIcon: Icon(CupertinoIcons.pen),
         ),
       ),
     );
@@ -96,18 +99,19 @@ class _UpdateMyProfileViewState extends ConsumerState<UpdateMyProfileView> {
 
   Container _enterPassword() {
     return Container(
-      padding: EdgeInsets.all(5),
+      padding: const EdgeInsets.all(5),
       width: double.infinity,
       decoration: BoxDecoration(
         border: Border.all(width: 1),
-        borderRadius: BorderRadius.circular(10),
+        borderRadius: BorderRadius.circular(5),
         color: Colors.white,
       ),
       child: TextFormField(
         controller: _password,
-        decoration: InputDecoration(
+        decoration: const InputDecoration(
           border: InputBorder.none,
           hintText: "비밀번호를 입력하세요",
+          suffixIcon: Icon(CupertinoIcons.pen),
         ),
       ),
     );
@@ -118,7 +122,7 @@ class _UpdateMyProfileViewState extends ConsumerState<UpdateMyProfileView> {
       automaticallyImplyLeading: false,
       backgroundColor: Colors.white,
       title: Row(
-        children: [
+        children: const [
           BackButton(color: Colors.black),
           Text("내 프로필 수정", style: TextStyle(color: Colors.black)),
         ],
@@ -131,7 +135,7 @@ class _UpdateMyProfileViewState extends ConsumerState<UpdateMyProfileView> {
       children: [
         Stack(
           children: [
-            CircleAvatar(
+            const CircleAvatar(
               radius: 70,
               backgroundImage: AssetImage("assets/images/20.jpg"),
             ),
@@ -142,7 +146,7 @@ class _UpdateMyProfileViewState extends ConsumerState<UpdateMyProfileView> {
                   onTap: () {
                     showModalBottomSheet(context: context, builder: (builder) => _bottomSheet());
                   },
-                  child: Icon(
+                  child: const Icon(
                     Icons.camera_alt,
                     size: 25,
                   ),
@@ -154,29 +158,24 @@ class _UpdateMyProfileViewState extends ConsumerState<UpdateMyProfileView> {
   }
 
   Widget _updateProfileButton(MyProfileController mpc) {
-    return Container(
-      padding: EdgeInsets.only(left: 100, right: 100),
-      child: ElevatedButton(
-        onPressed: () async {},
-        child: Text("수정 완료"),
-        style: ElevatedButton.styleFrom(
-          foregroundColor: Colors.black,
-          minimumSize: Size(150, 50),
-          backgroundColor: Colors.white,
-          side: BorderSide(width: 1),
-        ),
+    return ElevatedButton(
+      onPressed: () async {},
+      style: ElevatedButton.styleFrom(
+        foregroundColor: Colors.white,
+        backgroundColor: Colors.grey[800],
+        minimumSize: const Size(150, 50),
       ),
+      child: const Text("수정 완료"),
     );
   }
 
   Widget _enterIntroduce() {
     return Container(
-      padding: EdgeInsets.all(5),
-      height: 150,
+      padding: const EdgeInsets.all(5),
       width: double.infinity,
       decoration: BoxDecoration(
         border: Border.all(width: 1),
-        borderRadius: BorderRadius.circular(10),
+        borderRadius: BorderRadius.circular(5),
         color: Colors.white,
       ),
       child: TextFormField(
@@ -185,9 +184,10 @@ class _UpdateMyProfileViewState extends ConsumerState<UpdateMyProfileView> {
         maxLines: 5,
         minLines: 1,
         textInputAction: TextInputAction.done,
-        decoration: InputDecoration(
+        decoration: const InputDecoration(
           border: InputBorder.none,
           hintText: "자기소개를 입력하세요",
+          suffixIcon: Icon(CupertinoIcons.pen),
         ),
       ),
     );
@@ -195,18 +195,19 @@ class _UpdateMyProfileViewState extends ConsumerState<UpdateMyProfileView> {
 
   Widget _enterNickName() {
     return Container(
-      padding: EdgeInsets.all(5),
+      padding: const EdgeInsets.all(5),
       width: double.infinity,
       decoration: BoxDecoration(
         border: Border.all(width: 1),
-        borderRadius: BorderRadius.circular(10),
+        borderRadius: BorderRadius.circular(5),
         color: Colors.white,
       ),
       child: TextFormField(
         controller: _nickname,
-        decoration: InputDecoration(
+        decoration: const InputDecoration(
           border: InputBorder.none,
           hintText: "닉네임을 입력하세요",
+          suffixIcon: Icon(CupertinoIcons.pen),
         ),
       ),
     );
