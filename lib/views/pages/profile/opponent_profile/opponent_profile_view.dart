@@ -33,14 +33,14 @@ class _OpponentProfileViewState extends ConsumerState<OpponentProfileView> {
         padding: const EdgeInsets.symmetric(horizontal: 20),
         child: ListView(
           children: [
-            SizedBox(height: 50),
+            SizedBox(height: 70),
             _buildCircleAvatar(opvm),
-            SizedBox(height: 50),
+            SizedBox(height: 30),
             _nickName(opvm),
+            SizedBox(height: 20),
+            _introduce(opvm),
             SizedBox(height: 30),
             _ratedStar(),
-            SizedBox(height: 30),
-            _introduce(opvm),
             Container(
               height: 150,
               child: InkWell(
@@ -99,19 +99,15 @@ class _OpponentProfileViewState extends ConsumerState<OpponentProfileView> {
 
   Widget _ratedStar() {
     return Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10),
-        border: Border.all(width: 1),
-        color: Colors.white,
-      ),
+      padding: EdgeInsets.all(10),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text(
+          const Text(
             "평균별점",
-            style: TextStyle(fontSize: 15, color: Colors.black),
+            style: TextStyle(fontSize: 20),
           ),
-          SizedBox(width: 20),
+          const SizedBox(width: 20),
           _ratingBar(),
         ],
       ),
@@ -119,24 +115,26 @@ class _OpponentProfileViewState extends ConsumerState<OpponentProfileView> {
   }
 
   Widget _ratingStarButton() {
-    return OutlinedButton(
+    return ElevatedButton(
       onPressed: () {
         showDialog(context: context, builder: (_) => _ratingStar());
       },
       child: Text("별점 주기", style: TextStyle(fontSize: 20)),
-      style: OutlinedButton.styleFrom(
-        foregroundColor: Colors.black,
+      style: ElevatedButton.styleFrom(
+        foregroundColor: Colors.white,
+        backgroundColor: Colors.grey[800],
         minimumSize: Size(150, 50),
       ),
     );
   }
 
   Widget _followButton() {
-    return OutlinedButton(
+    return ElevatedButton(
       onPressed: () {},
       child: Text("팔로우하기", style: TextStyle(fontSize: 20)),
-      style: OutlinedButton.styleFrom(
-        foregroundColor: Colors.black,
+      style: ElevatedButton.styleFrom(
+        foregroundColor: Colors.white,
+        backgroundColor: Colors.grey[800],
         minimumSize: Size(150, 50),
       ),
     );
@@ -144,35 +142,33 @@ class _OpponentProfileViewState extends ConsumerState<OpponentProfileView> {
 
   Widget _introduce(GetProfileUser opvm) {
     return Container(
+      alignment: Alignment.center,
       padding: EdgeInsets.all(10),
       width: double.infinity,
-      decoration: BoxDecoration(
-        border: Border.all(width: 1),
-        borderRadius: BorderRadius.circular(10),
-        color: Colors.white,
-      ),
+      height: 50,
       child: Expanded(
-        child: Text(
-          "${opvm.intro}",
-          textAlign: TextAlign.center,
-          style: TextStyle(fontSize: 15, color: Colors.black),
-        ),
+        child: opvm.intro!.isEmpty
+            ? Text("자기소개가 없습니다")
+            : Text(
+                "${opvm.intro}",
+                textAlign: TextAlign.center,
+                style: TextStyle(fontSize: 15),
+              ),
       ),
     );
   }
 
   Widget _nickName(GetProfileUser opvm) {
     return Container(
-      padding: EdgeInsets.all(5),
-      decoration: BoxDecoration(
-        border: Border.all(width: 1),
-        borderRadius: BorderRadius.circular(10),
-        color: Colors.white,
-      ),
-      child: Text(
-        "${opvm.nickname}",
-        style: TextStyle(fontSize: 15, color: Colors.black),
-        textAlign: TextAlign.center,
+      height: 50,
+      padding: EdgeInsets.all(10),
+      width: double.infinity,
+      child: Center(
+        child: Text(
+          "${opvm.nickname}",
+          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+          textAlign: TextAlign.center,
+        ),
       ),
     );
   }
@@ -207,11 +203,14 @@ class _OpponentProfileViewState extends ConsumerState<OpponentProfileView> {
       child: Container(
         padding: EdgeInsets.all(20),
         width: 350,
-        height: 250,
+        height: 240,
         child: Column(
           children: [
             SizedBox(height: 20),
-            Text("별점주기"),
+            Text(
+              "별점주기",
+              style: TextStyle(fontSize: 20),
+            ),
             SizedBox(height: 20),
             RatingBar.builder(
               initialRating: 3,
@@ -232,12 +231,24 @@ class _OpponentProfileViewState extends ConsumerState<OpponentProfileView> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                ElevatedButton(onPressed: () {}, child: Text("별점쾅!")),
                 ElevatedButton(
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                    child: Text("취소")),
+                  onPressed: () {},
+                  child: Text("별점쾅!"),
+                  style: ElevatedButton.styleFrom(
+                    foregroundColor: Colors.white,
+                    backgroundColor: Colors.grey[800],
+                  ),
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: Text("취소"),
+                  style: ElevatedButton.styleFrom(
+                    foregroundColor: Colors.white,
+                    backgroundColor: Colors.grey[800],
+                  ),
+                ),
               ],
             )
           ],
@@ -323,9 +334,8 @@ class _OpponentProfileViewState extends ConsumerState<OpponentProfileView> {
                     onPressed: () {},
                     child: Text("리포트하기"),
                     style: ElevatedButton.styleFrom(
-                      foregroundColor: Colors.black,
-                      backgroundColor: Colors.white,
-                      side: BorderSide(width: 1),
+                      foregroundColor: Colors.white,
+                      backgroundColor: Colors.grey[800],
                     ),
                   ),
                   ElevatedButton(
@@ -334,9 +344,8 @@ class _OpponentProfileViewState extends ConsumerState<OpponentProfileView> {
                     },
                     child: Text("취소"),
                     style: ElevatedButton.styleFrom(
-                      foregroundColor: Colors.black,
-                      backgroundColor: Colors.white,
-                      side: BorderSide(width: 1),
+                      foregroundColor: Colors.white,
+                      backgroundColor: Colors.grey[800],
                     ),
                   ),
                 ],

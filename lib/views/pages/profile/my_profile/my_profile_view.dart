@@ -144,11 +144,6 @@ class MyProfileView extends ConsumerWidget {
     );
   }
 
-//   Widget _nickName(MyProfileViewModel mpvm) {
-//     return
-//   }
-// }
-
   Widget _imageDialog() {
     return Dialog(
       child: Container(
@@ -164,9 +159,6 @@ class MyProfileView extends ConsumerWidget {
   Widget _ratedStar() {
     return Container(
       padding: EdgeInsets.all(10),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(5),
-      ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
