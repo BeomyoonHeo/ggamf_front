@@ -138,7 +138,7 @@ class _JoinPartyListViewState extends State<JoinPartyListView> {
         borderWidth: 5,
         foregroundStyle: const TextStyle(fontSize: 13),
         selectedStyle: const C2ChipStyle(
-          backgroundColor: Colors.black54,
+          backgroundColor: Color.fromRGBO(35, 204, 81, 1),
           foregroundColor: Colors.white,
         ),
         color: Colors.white,
