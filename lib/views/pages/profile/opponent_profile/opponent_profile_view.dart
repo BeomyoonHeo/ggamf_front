@@ -28,7 +28,7 @@ class _OpponentProfileViewState extends ConsumerState<OpponentProfileView> {
     final opvm = ref.watch(opponentProfileViewModel);
 
     return Scaffold(
-      appBar: _appbar(),
+      appBar: _appbar(opvm),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),
         child: ListView(
@@ -72,7 +72,7 @@ class _OpponentProfileViewState extends ConsumerState<OpponentProfileView> {
     );
   }
 
-  AppBar _appbar() {
+  AppBar _appbar(GetProfileUser opvm) {
     return AppBar(
       automaticallyImplyLeading: false,
       backgroundColor: Colors.white,
@@ -81,7 +81,7 @@ class _OpponentProfileViewState extends ConsumerState<OpponentProfileView> {
           BackButton(
             color: Colors.black,
           ),
-          Text("김겐지", style: TextStyle(color: Colors.black)),
+          Text("${opvm.nickname}", style: TextStyle(color: Colors.black)),
         ],
       ),
       actions: [

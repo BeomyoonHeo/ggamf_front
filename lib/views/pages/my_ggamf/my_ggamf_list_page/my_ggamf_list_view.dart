@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ggamf_front/domain/user/model/ggamf.dart';
 import 'package:ggamf_front/provider/ggamf_provider.dart';
+import 'package:ggamf_front/views/pages/profile/my_profile/my_profile_view.dart';
 import 'package:ggamf_front/views/pages/profile/my_profile/my_profile_view_model.dart';
 import 'package:ggamf_front/views/pages/profile/opponent_profile/opponent_profile_view.dart';
 
@@ -19,37 +20,32 @@ class MyGgamfListView extends ConsumerWidget {
       body: Padding(
         padding: const EdgeInsets.only(left: 5),
         child: Column(children: [
-          Container(
-            padding: EdgeInsets.symmetric(vertical: 5),
-            margin: EdgeInsets.all(10),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(5),
-              // boxShadow: [
-              //   BoxShadow(
-              //     color: Colors.purple.withOpacity(0.2),
-              //     spreadRadius: 5,
-              //     blurRadius: 7,
-              //   ),
-              // ],
-            ),
-            width: double.infinity,
-            height: 80,
-            child: Row(
-              children: [
-                CircleAvatar(
-                  backgroundImage: MemoryImage(Uri.parse(mpvm.photo ?? '').data!.contentAsBytes()),
-                  radius: 40,
-                ),
-                SizedBox(width: 20),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text("${mpvm.nickname}", style: TextStyle(fontSize: 24)),
-                    SizedBox(height: 15),
-                    Text("${mpvm.intro}"),
-                  ],
-                ),
-              ],
+          InkWell(
+            onTap: () {
+              Navigator.popAndPushNamed(context, '/myProfile');
+            },
+            child: Container(
+              padding: EdgeInsets.symmetric(vertical: 5),
+              margin: EdgeInsets.all(10),
+              width: double.infinity,
+              height: 80,
+              child: Row(
+                children: [
+                  CircleAvatar(
+                    backgroundImage: MemoryImage(Uri.parse(mpvm.photo ?? '').data!.contentAsBytes()),
+                    radius: 40,
+                  ),
+                  SizedBox(width: 20),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text("${mpvm.nickname}", style: TextStyle(fontSize: 24)),
+                      SizedBox(height: 15),
+                      Text("${mpvm.intro}"),
+                    ],
+                  ),
+                ],
+              ),
             ),
           ),
           Divider(height: 1.5, color: Colors.grey, endIndent: 5),
