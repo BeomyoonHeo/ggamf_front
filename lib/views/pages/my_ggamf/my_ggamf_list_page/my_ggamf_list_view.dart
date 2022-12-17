@@ -16,76 +16,116 @@ class MyGgamfListView extends ConsumerWidget {
     return Scaffold(
       appBar: _appBar(),
       backgroundColor: Colors.white,
-      body: Column(children: [
-        Container(
-          padding: EdgeInsets.all(10),
-          margin: EdgeInsets.all(20),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(5),
-            gradient: LinearGradient(
-                colors: [Color.fromRGBO(202, 73, 245, 0.5), Color.fromRGBO(202, 73, 245, 0.7)],
-                begin: Alignment.centerLeft,
-                end: Alignment.centerRight,
-                tileMode: TileMode.clamp),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.purple.withOpacity(0.2),
-                spreadRadius: 5,
-                blurRadius: 7,
-              ),
-            ],
+      body: Padding(
+        padding: const EdgeInsets.only(left: 5),
+        child: Column(children: [
+          Container(
+            padding: EdgeInsets.symmetric(vertical: 5),
+            margin: EdgeInsets.all(10),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(5),
+              // boxShadow: [
+              //   BoxShadow(
+              //     color: Colors.purple.withOpacity(0.2),
+              //     spreadRadius: 5,
+              //     blurRadius: 7,
+              //   ),
+              // ],
+            ),
+            width: double.infinity,
+            height: 80,
+            child: Row(
+              children: [
+                CircleAvatar(
+                  backgroundImage: MemoryImage(Uri.parse(mpvm.photo ?? '').data!.contentAsBytes()),
+                  radius: 40,
+                ),
+                SizedBox(width: 20),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text("${mpvm.nickname}", style: TextStyle(fontSize: 24)),
+                    SizedBox(height: 15),
+                    Text("${mpvm.intro}"),
+                  ],
+                ),
+              ],
+            ),
           ),
-          width: double.infinity,
-          height: 120,
-          child: Text("${mpvm.nickname}"),
-        ),
-        _buildMyGgamfList(gp),
-      ]),
+          Divider(height: 1.5, color: Colors.grey, endIndent: 5),
+          _buildMyGgamfList(gp),
+        ]),
+      ),
     );
   }
 
   Widget _buildMyGgamfList(List<Ggamf> mglv) {
-    return mglv.isEmpty
-        ? Center(
-            child: Text('내껨프가 한명도 없습니다.'),
-          )
-        : Expanded(
-            child: ListView.builder(
-              itemCount: mglv.length,
-              itemBuilder: (context, index) => Container(
-                padding: EdgeInsets.all(10),
-                margin: EdgeInsets.all(20),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(5),
-                  gradient: LinearGradient(
-                      colors: [Color.fromRGBO(202, 73, 245, 0.5), Color.fromRGBO(202, 73, 245, 0.7)],
-                      begin: Alignment.centerLeft,
-                      end: Alignment.centerRight,
-                      tileMode: TileMode.clamp),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.purple.withOpacity(0.2),
-                      spreadRadius: 5,
-                      blurRadius: 7,
-                    ),
-                  ],
-                ),
-                height: 120,
-                child: InkWell(
-                  onTap: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => OpponentProfileView()));
-                  },
-                  child: Row(
-                    children: [
-                      _profileImage(),
-                      SizedBox(width: 20),
-                      _context(mglv, index),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-          );
+    return
+        // mglv.isEmpty
+        //   ? Center(
+        //       child: Text('내껨프가 한명도 없습니다.'),
+        //     )
+        //   :
+        Expanded(
+      child: ListView.separated(
+        itemCount: 3,
+        separatorBuilder: (context, index) => const Divider(
+          height: 10,
+          color: Colors.white,
+        ),
+        //mglv.length,
+        itemBuilder: (context, index) => ListTile(
+          visualDensity: VisualDensity(horizontal: 3),
+          leading: _profileImage(),
+          //CircleAvatar(
+          //   backgroundImage: MemoryImage(Uri.parse(mglv[index].photo ?? '').data!.contentAsBytes()),
+          //   radius: 30,
+          // ),
+          title: Text(
+            "김겐지",
+            style: TextStyle(fontSize: 20),
+          ), //
+          subtitle: Text(
+            "안녕하세요 잘가세요",
+            style: TextStyle(fontSize: 15),
+          ),
+          onTap: () {
+            Navigator.push(context, MaterialPageRoute(builder: (_) => OpponentProfileView()));
+          },
+        ),
+        //     Container(
+        //   padding: EdgeInsets.all(10),
+        //   decoration: BoxDecoration(
+        //     borderRadius: BorderRadius.circular(5),
+        //     gradient: LinearGradient(
+        //         colors: [Color.fromRGBO(202, 73, 245, 0.5), Color.fromRGBO(202, 73, 245, 0.7)],
+        //         begin: Alignment.centerLeft,
+        //         end: Alignment.centerRight,
+        //         tileMode: TileMode.clamp),
+        //     boxShadow: [
+        //       BoxShadow(
+        //         color: Colors.purple.withOpacity(0.2),
+        //         spreadRadius: 5,
+        //         blurRadius: 7,
+        //       ),
+        //     ],
+        //   ),
+        //   height: 120,
+        //   child: InkWell(
+        //     onTap: () {
+        //       Navigator.push(context, MaterialPageRoute(builder: (context) => OpponentProfileView()));
+        //     },
+        //     child: Row(
+        //       children: [
+        //         _profileImage(),
+        //         SizedBox(width: 20),
+        //         _context(mglv, index),
+        //       ],
+        //     ),
+        //   ),
+        // ),
+      ),
+    );
   }
 
   Widget _context(List<Ggamf> mglv, index) {
@@ -95,14 +135,14 @@ class MyGgamfListView extends ConsumerWidget {
         children: [
           SizedBox(height: 5),
           Text(
-            "${mglv[index].nickname}",
-            //"김겐지",
+            //"${mglv[index].nickname}",
+            "김겐지",
             style: TextStyle(fontSize: 25, color: Colors.white, fontWeight: FontWeight.w600),
           ),
           SizedBox(height: 10),
           Text(
-            "${mglv[index].intro}",
-            //"안녕하세요",
+            //"${mglv[index].intro}",
+            "안녕하세요",
             style: TextStyle(fontSize: 15, color: Colors.white),
           ),
         ],
@@ -111,13 +151,12 @@ class MyGgamfListView extends ConsumerWidget {
   }
 }
 
-CircleAvatar _profileImage() {
+Widget _profileImage() {
   return CircleAvatar(
-    radius: 40,
     backgroundImage: AssetImage(
-      //_myGgamfList[index].photo,
       "assets/images/76.jpg",
     ),
+    radius: 30,
   );
 }
 
