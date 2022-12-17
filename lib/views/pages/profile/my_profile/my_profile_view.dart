@@ -22,18 +22,52 @@ class MyProfileView extends ConsumerWidget {
       appBar: _appBar(),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),
-        child: ListView(
+        child: Column(
           children: [
-            SizedBox(height: 70),
-            _buildCircleAvatar(mpvm),
-            SizedBox(height: 30),
+            SizedBox(
+              height: MediaQuery.of(context).size.width / 2 + 95,
+              child: Stack(
+                children: [
+                  Container(
+                    height: 250,
+                    width: double.infinity,
+                    decoration: const BoxDecoration(
+                        gradient: LinearGradient(
+                            colors: [Color.fromRGBO(35, 204, 81, 0.5), Color.fromRGBO(35, 204, 81, 0.7)],
+                            begin: Alignment.centerLeft,
+                            end: Alignment.centerRight,
+                            tileMode: TileMode.clamp),
+                        borderRadius: BorderRadius.only(bottomLeft: Radius.circular(30), bottomRight: Radius.circular(30))),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const SizedBox(),
+                      Align(
+                        alignment: Alignment.bottomCenter,
+                        child: CircleAvatar(
+                          radius: 60.0,
+                          child: ClipRRect(
+                            child: mpvm.intro!.isEmpty
+                                ? Image.asset("assets/images/generic-avatar.svg")
+                                : Image.memory((Uri.parse(mpvm.photo ?? '').data!.contentAsBytes())),
+                            borderRadius: BorderRadius.circular(100.0),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(height: 10),
             _buildNickName(mpvm),
-            SizedBox(height: 20),
+            SizedBox(height: 10),
             _buildIntro(mpvm),
             SizedBox(height: 10),
             _ratedStar(),
             Container(
-              height: 150,
+              height: 130,
               child: InkWell(
                 onTap: () async {
                   await showDialog(context: context, builder: (_) => _imageDialog());
@@ -88,7 +122,7 @@ class MyProfileView extends ConsumerWidget {
       child: Center(
         child: Text(
           "${mpvm.nickname}",
-          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+          style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
           textAlign: TextAlign.center,
         ),
       ),
