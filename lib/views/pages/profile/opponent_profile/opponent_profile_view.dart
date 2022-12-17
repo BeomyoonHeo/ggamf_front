@@ -265,20 +265,20 @@ class _OpponentProfileViewState extends ConsumerState<OpponentProfileView> {
               children: [
                 ElevatedButton(
                   onPressed: () {},
-                  child: Text("별점쾅!"),
+                  child: Text("별점쾅!", style: TextStyle(fontSize: 20)),
                   style: ElevatedButton.styleFrom(
                     foregroundColor: Colors.white,
-                    backgroundColor: Colors.grey[800],
+                    backgroundColor: Color.fromRGBO(35, 204, 81, 1),
                   ),
                 ),
                 ElevatedButton(
                   onPressed: () {
                     Navigator.pop(context);
                   },
-                  child: Text("취소"),
+                  child: Text("취소", style: TextStyle(fontSize: 20)),
                   style: ElevatedButton.styleFrom(
                     foregroundColor: Colors.white,
-                    backgroundColor: Colors.grey[800],
+                    backgroundColor: Color.fromRGBO(35, 204, 81, 1),
                   ),
                 ),
               ],
@@ -295,7 +295,7 @@ class _OpponentProfileViewState extends ConsumerState<OpponentProfileView> {
         padding: const EdgeInsets.all(15.0),
         child: Container(
           width: double.infinity,
-          height: 400,
+          height: 330,
           child: Column(
             children: [
               Text(
@@ -364,20 +364,20 @@ class _OpponentProfileViewState extends ConsumerState<OpponentProfileView> {
                 children: [
                   ElevatedButton(
                     onPressed: () {},
-                    child: Text("리포트하기"),
+                    child: Text("리포트하기", style: TextStyle(fontSize: 20)),
                     style: ElevatedButton.styleFrom(
                       foregroundColor: Colors.white,
-                      backgroundColor: Colors.grey[800],
+                      backgroundColor: Color.fromRGBO(35, 204, 81, 1),
                     ),
                   ),
                   ElevatedButton(
                     onPressed: () {
                       Navigator.pop(context);
                     },
-                    child: Text("취소"),
+                    child: Text("취소", style: TextStyle(fontSize: 20)),
                     style: ElevatedButton.styleFrom(
                       foregroundColor: Colors.white,
-                      backgroundColor: Colors.grey[800],
+                      backgroundColor: Color.fromRGBO(35, 204, 81, 1),
                     ),
                   ),
                 ],

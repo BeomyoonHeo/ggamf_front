@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ggamf_front/domain/user/model/ggamf.dart';
+import 'package:ggamf_front/domain/user/model/profile_user.dart';
 import 'package:ggamf_front/provider/ggamf_provider.dart';
 import 'package:ggamf_front/views/pages/profile/my_profile/my_profile_view.dart';
 import 'package:ggamf_front/views/pages/profile/my_profile/my_profile_view_model.dart';
@@ -18,39 +19,53 @@ class MyGgamfListView extends ConsumerWidget {
       appBar: _appBar(),
       backgroundColor: Colors.white,
       body: Padding(
-        padding: const EdgeInsets.only(left: 5),
-        child: Column(children: [
-          InkWell(
-            onTap: () {
-              Navigator.popAndPushNamed(context, '/myProfile');
-            },
-            child: Container(
-              padding: EdgeInsets.symmetric(vertical: 5),
-              margin: EdgeInsets.all(10),
-              width: double.infinity,
-              height: 80,
-              child: Row(
-                children: [
-                  CircleAvatar(
-                    backgroundImage: MemoryImage(Uri.parse(mpvm.photo ?? '').data!.contentAsBytes()),
-                    radius: 40,
-                  ),
-                  SizedBox(width: 20),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text("${mpvm.nickname}", style: TextStyle(fontSize: 24)),
-                      SizedBox(height: 15),
-                      Text("${mpvm.intro}"),
-                    ],
-                  ),
-                ],
-              ),
+        padding: const EdgeInsets.only(left: 8),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            _myprofile(mpvm),
+            const SizedBox(height: 5),
+            Divider(height: 1.5, color: Colors.grey[600], endIndent: 8),
+            const SizedBox(height: 5),
+            Container(
+              padding: EdgeInsets.all(15),
+              child: Text("내 껨프 3", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+              //Text("내 껨프 ${gp.length}", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
             ),
-          ),
-          Divider(height: 1.5, color: Colors.grey, endIndent: 5),
-          _buildMyGgamfList(gp),
-        ]),
+            _buildMyGgamfList(gp),
+          ],
+        ),
+      ),
+    );
+  }
+
+  InkWell _myprofile(ProfileUser mpvm) {
+    return InkWell(
+      onTap: () {
+        //Navigator.popAndPushNamed(context, '/myProfile');
+      },
+      child: Container(
+        padding: const EdgeInsets.symmetric(vertical: 10),
+        margin: const EdgeInsets.symmetric(horizontal: 15),
+        width: double.infinity,
+        height: 80,
+        child: Row(
+          children: [
+            CircleAvatar(
+              backgroundImage: MemoryImage(Uri.parse(mpvm.photo ?? '').data!.contentAsBytes()),
+              radius: 30,
+            ),
+            const SizedBox(width: 20),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text("${mpvm.nickname}", style: const TextStyle(fontSize: 22)),
+                Text("${mpvm.intro}", style: const TextStyle(fontSize: 17)),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
