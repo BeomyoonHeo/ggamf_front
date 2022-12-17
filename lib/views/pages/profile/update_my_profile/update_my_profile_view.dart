@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ggamf_front/controller/user/my_profile_controller.dart';
+import 'package:ggamf_front/domain/user/model/profile_user.dart';
 import 'package:ggamf_front/utils/validator_util.dart';
 import 'package:ggamf_front/views/pages/profile/my_profile/my_profile_view_model.dart';
 import 'package:image_picker/image_picker.dart';
@@ -58,9 +59,26 @@ class _UpdateMyProfileViewState extends ConsumerState<UpdateMyProfileView> {
           padding: const EdgeInsets.symmetric(horizontal: 20),
           child: Column(
             children: [
-              const SizedBox(height: 50),
-              _changePhoto(),
-              const SizedBox(height: 50),
+              SizedBox(
+                height: MediaQuery.of(context).size.width / 2 + 95,
+                child: Stack(
+                  children: [
+                    Container(
+                      height: 250,
+                      width: double.infinity,
+                      decoration: const BoxDecoration(
+                          gradient: LinearGradient(
+                              colors: [Color.fromRGBO(35, 204, 81, 0.6), Color.fromRGBO(35, 204, 81, 0.7)],
+                              begin: Alignment.centerLeft,
+                              end: Alignment.centerRight,
+                              tileMode: TileMode.clamp),
+                          borderRadius: BorderRadius.only(bottomLeft: Radius.circular(30), bottomRight: Radius.circular(30))),
+                    ),
+                    _choosephoto(mpvm, context),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 20),
               _enterNickName(),
               const SizedBox(height: 30),
               _enterPassword(),
@@ -74,6 +92,44 @@ class _UpdateMyProfileViewState extends ConsumerState<UpdateMyProfileView> {
           ),
         ),
       ),
+    );
+  }
+
+  Row _choosephoto(ProfileUser mpvm, BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        const SizedBox(),
+        Align(
+          alignment: Alignment.bottomCenter,
+          child: Stack(
+            children: [
+              CircleAvatar(
+                radius: 60.0,
+                child: ClipRRect(
+                  child: mpvm.intro!.isEmpty
+                      ? Image.asset("assets/images/generic-avatar.svg")
+                      : Image.memory((Uri.parse(mpvm.photo ?? '').data!.contentAsBytes())),
+                  borderRadius: BorderRadius.circular(100.0),
+                ),
+              ),
+              Positioned(
+                bottom: 0,
+                right: 0,
+                child: InkWell(
+                  onTap: () {
+                    showModalBottomSheet(context: context, builder: (builder) => _bottomSheet());
+                  },
+                  child: const Icon(
+                    Icons.camera_alt,
+                    size: 25,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
     );
   }
 
@@ -130,42 +186,42 @@ class _UpdateMyProfileViewState extends ConsumerState<UpdateMyProfileView> {
     );
   }
 
-  Column _changePhoto() {
-    return Column(
-      children: [
-        Stack(
-          children: [
-            const CircleAvatar(
-              radius: 70,
-              backgroundImage: AssetImage("assets/images/20.jpg"),
-            ),
-            Positioned(
-                bottom: 0,
-                right: 0,
-                child: InkWell(
-                  onTap: () {
-                    showModalBottomSheet(context: context, builder: (builder) => _bottomSheet());
-                  },
-                  child: const Icon(
-                    Icons.camera_alt,
-                    size: 25,
-                  ),
-                ))
-          ],
-        ),
-      ],
-    );
-  }
+  // Widget _changePhoto() {
+  //   return Column(
+  //     children: [
+  //       Stack(
+  //         children: [
+  //           const CircleAvatar(
+  //             radius: 60,
+  //             backgroundImage: AssetImage("assets/images/20.jpg"),
+  //           ),
+  //           Positioned(
+  //               bottom: 0,
+  //               right: 0,
+  //               child: InkWell(
+  //                 onTap: () {
+  //                   showModalBottomSheet(context: context, builder: (builder) => _bottomSheet());
+  //                 },
+  //                 child: const Icon(
+  //                   Icons.camera_alt,
+  //                   size: 25,
+  //                 ),
+  //               ))
+  //         ],
+  //       ),
+  //     ],
+  //   );
+  // }
 
   Widget _updateProfileButton(MyProfileController mpc) {
     return ElevatedButton(
       onPressed: () async {},
       style: ElevatedButton.styleFrom(
         foregroundColor: Colors.white,
-        backgroundColor: Colors.grey[800],
+        backgroundColor: Color.fromRGBO(35, 204, 81, 1),
         minimumSize: const Size(150, 50),
       ),
-      child: const Text("수정 완료"),
+      child: const Text("수정 완료", style: TextStyle(fontSize: 20)),
     );
   }
 
@@ -221,7 +277,7 @@ class _UpdateMyProfileViewState extends ConsumerState<UpdateMyProfileView> {
       child: Column(
         children: [
           Text(
-            "choose Profile photo",
+            "사진을 선택하세요",
             style: TextStyle(fontSize: 20),
           ),
           SizedBox(height: 20),
