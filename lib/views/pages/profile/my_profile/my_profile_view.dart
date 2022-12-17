@@ -33,7 +33,7 @@ class MyProfileView extends ConsumerWidget {
                     width: double.infinity,
                     decoration: const BoxDecoration(
                         gradient: LinearGradient(
-                            colors: [Color.fromRGBO(35, 204, 81, 0.5), Color.fromRGBO(35, 204, 81, 0.7)],
+                            colors: [Color.fromRGBO(35, 204, 81, 0.6), Color.fromRGBO(35, 204, 81, 0.7)],
                             begin: Alignment.centerLeft,
                             end: Alignment.centerRight,
                             tileMode: TileMode.clamp),
@@ -64,7 +64,7 @@ class MyProfileView extends ConsumerWidget {
             _buildNickName(mpvm),
             SizedBox(height: 10),
             _buildIntro(mpvm),
-            SizedBox(height: 10),
+            SizedBox(height: 30),
             _ratedStar(),
             Container(
               height: 130,
@@ -92,7 +92,6 @@ class MyProfileView extends ConsumerWidget {
   Widget _buildIntro(ProfileUser mpvm) {
     return Container(
       alignment: Alignment.center,
-      padding: EdgeInsets.all(10),
       width: double.infinity,
       child: Expanded(
         child: mpvm.intro!.isEmpty
@@ -116,8 +115,6 @@ class MyProfileView extends ConsumerWidget {
 
   Widget _buildNickName(ProfileUser mpvm) {
     return Container(
-      height: 50,
-      padding: EdgeInsets.all(10),
       width: double.infinity,
       child: Center(
         child: Text(

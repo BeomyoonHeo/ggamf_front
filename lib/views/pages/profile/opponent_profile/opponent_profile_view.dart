@@ -33,11 +33,45 @@ class _OpponentProfileViewState extends ConsumerState<OpponentProfileView> {
         padding: const EdgeInsets.symmetric(horizontal: 20),
         child: ListView(
           children: [
-            SizedBox(height: 70),
-            _buildCircleAvatar(opvm),
-            SizedBox(height: 30),
+            SizedBox(
+              height: MediaQuery.of(context).size.width / 2 + 95,
+              child: Stack(
+                children: [
+                  Container(
+                    height: 250,
+                    width: double.infinity,
+                    decoration: const BoxDecoration(
+                        gradient: LinearGradient(
+                            colors: [Color.fromRGBO(35, 204, 81, 0.6), Color.fromRGBO(35, 204, 81, 0.7)],
+                            begin: Alignment.centerLeft,
+                            end: Alignment.centerRight,
+                            tileMode: TileMode.clamp),
+                        borderRadius: BorderRadius.only(bottomLeft: Radius.circular(30), bottomRight: Radius.circular(30))),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const SizedBox(),
+                      Align(
+                        alignment: Alignment.bottomCenter,
+                        child: CircleAvatar(
+                          radius: 60.0,
+                          child: ClipRRect(
+                            child: opvm.intro!.isEmpty
+                                ? Image.asset("assets/images/generic-avatar.svg")
+                                : Image.memory((Uri.parse(opvm.photo ?? '').data!.contentAsBytes())),
+                            borderRadius: BorderRadius.circular(100.0),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(height: 10),
             _nickName(opvm),
-            SizedBox(height: 20),
+            SizedBox(height: 10),
             _introduce(opvm),
             SizedBox(height: 30),
             _ratedStar(),
@@ -122,7 +156,7 @@ class _OpponentProfileViewState extends ConsumerState<OpponentProfileView> {
       child: Text("별점 주기", style: TextStyle(fontSize: 20)),
       style: ElevatedButton.styleFrom(
         foregroundColor: Colors.white,
-        backgroundColor: Colors.grey[800],
+        backgroundColor: Color.fromRGBO(35, 204, 81, 1),
         minimumSize: Size(150, 50),
       ),
     );
@@ -134,7 +168,7 @@ class _OpponentProfileViewState extends ConsumerState<OpponentProfileView> {
       child: Text("팔로우하기", style: TextStyle(fontSize: 20)),
       style: ElevatedButton.styleFrom(
         foregroundColor: Colors.white,
-        backgroundColor: Colors.grey[800],
+        backgroundColor: Color.fromRGBO(35, 204, 81, 1),
         minimumSize: Size(150, 50),
       ),
     );
@@ -145,7 +179,6 @@ class _OpponentProfileViewState extends ConsumerState<OpponentProfileView> {
       alignment: Alignment.center,
       padding: EdgeInsets.all(10),
       width: double.infinity,
-      height: 50,
       child: Expanded(
         child: opvm.intro!.isEmpty
             ? Text("자기소개가 없습니다")
@@ -160,13 +193,12 @@ class _OpponentProfileViewState extends ConsumerState<OpponentProfileView> {
 
   Widget _nickName(GetProfileUser opvm) {
     return Container(
-      height: 50,
-      padding: EdgeInsets.all(10),
+      height: 30,
       width: double.infinity,
       child: Center(
         child: Text(
           "${opvm.nickname}",
-          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+          style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
           textAlign: TextAlign.center,
         ),
       ),
