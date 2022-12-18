@@ -64,19 +64,11 @@ class _MyRecruitmentPartyListTabViewState extends ConsumerState<MyRecruitmentPar
           )
         : ListView.separated(
             itemCount: jplvm.length,
-            separatorBuilder: (context, index) => Divider(
-              height: 20,
-              color: Colors.white,
-            ),
+            separatorBuilder: (context, index) => Divider(height: 2, color: Colors.grey[800]),
             itemBuilder: (context, index) => Container(
-              padding: EdgeInsets.all(20),
+              padding: EdgeInsets.symmetric(vertical: 20),
               width: double.infinity,
               height: 150,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                color: Colors.white,
-                border: Border.all(width: 1),
-              ),
               child: InkWell(
                 onTap: () {
                   //Navigator.push(context, MaterialPageRoute(builder: (_) => ChattingView()));
@@ -89,18 +81,21 @@ class _MyRecruitmentPartyListTabViewState extends ConsumerState<MyRecruitmentPar
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           //Text("방 제목 : 롤 골드 자랭하실분 구합니다"),
-                          Text("${jplvm[index].roomName}", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-                          SizedBox(height: 10),
+                          Text("${jplvm[index].roomName}", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
                           Text("${jplvm[index].nickName}"),
-                          SizedBox(height: 10),
-                          Text("${jplvm[index].totalPeople} 명"),
+                          Row(
+                            children: [
+                              Icon(Icons.person),
+                              Text("${jplvm[index].totalPeople} 명"),
+                            ],
+                          ),
                         ],
                       ),
                     ),
                     SizedBox(width: 30),
                     SizedBox(
-                      width: 100,
-                      height: 100,
+                      width: 75,
+                      height: 75,
                       child: Image.memory(Uri.parse("${jplvm[index].gameLogo}").data!.contentAsBytes()),
                       //Image.asset("assets/images/lol.png"),
                     ),
@@ -118,19 +113,14 @@ class _MyRecruitmentPartyListTabViewState extends ConsumerState<MyRecruitmentPar
           )
         : ListView.separated(
             itemCount: mrplv.length,
-            separatorBuilder: (context, index) => const Divider(
-              height: 20,
-              color: Colors.white,
+            separatorBuilder: (context, index) => Divider(
+              height: 2,
+              color: Colors.grey[800],
             ),
             itemBuilder: (context, index) => Container(
-              padding: EdgeInsets.all(20),
+              padding: EdgeInsets.symmetric(vertical: 20),
               width: double.infinity,
               height: 150,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                color: Colors.white,
-                border: Border.all(width: 1),
-              ),
               child: InkWell(
                 onTap: () {
                   //Navigator.push(context, MaterialPageRoute(builder: (_) => ChattingView()));
@@ -144,17 +134,20 @@ class _MyRecruitmentPartyListTabViewState extends ConsumerState<MyRecruitmentPar
                         children: [
                           //Text("방 제목 : 롤 골드 자랭하실분 구합니다"),
                           Text(" ${mrplv[index].roomName}", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-                          SizedBox(height: 10),
                           Text("${mrplv[index].nickName}"),
-                          SizedBox(height: 10),
-                          Text("${mrplv[index].totalPeople} 명"),
+                          Row(
+                            children: [
+                              Icon(Icons.person),
+                              Text("${mrplv[index].totalPeople} 명"),
+                            ],
+                          ),
                         ],
                       ),
                     ),
                     SizedBox(width: 30),
                     SizedBox(
-                      width: 100,
-                      height: 100,
+                      width: 75,
+                      height: 75,
                       child: Image.memory(Uri.parse("${mrplv[index].gameLogo}").data!.contentAsBytes()),
                       //Image.asset("assets/images/lol.png"),
                     ),

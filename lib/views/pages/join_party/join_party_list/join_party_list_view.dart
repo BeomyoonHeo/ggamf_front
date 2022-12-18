@@ -94,15 +94,15 @@ class _JoinPartyListViewState extends State<JoinPartyListView> {
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
-                            "롤 골드 자랭하실분 구합니다",
-                            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                          ),
+                          Text("롤 골드 자랭하실분 구합니다", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
                           //Text("방 제목 : ${jplv[index].roomName}"),
-                          Text("리그 오브 레전드"),
-                          //Text("게임네임 : ${jplv[index].gameName} "),
                           Text("김한무"),
-                          //Text("방장이름 : ${jplv[index].nickName}"),
+                          Row(
+                            children: [
+                              Icon(Icons.person),
+                              Text("5명"),
+                            ],
+                          )
                         ],
                       ),
                     ),
