@@ -33,7 +33,7 @@ class ChatsPageProvider extends StateNotifier<List<Chat>> {
   }
 
   Future<void> createChat({required int id, required int totalPeople}) async {
-    _db
+    await _db
         .createChatRoom(
             roomId: id, ownerId: UserSession.user.uid, totalPeople: totalPeople)
         .then((value) => logger.d('방생성 완료!'));

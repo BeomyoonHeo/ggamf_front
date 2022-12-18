@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ggamf_front/domain/chats/model/chat_message.dart';
+import 'package:ggamf_front/utils/validator_util.dart';
 
 const String USER_COLLECTION = "Users";
 const String CHAT_COLLECTION = "Chats";
@@ -44,6 +45,7 @@ class DatabaseService {
       'members': members,
       'total_people': totalPeople
     };
+    logger.d('방생성 확인');
     await _db.collection(CHAT_COLLECTION).doc(roomId.toString()).set(roomInfo);
     await _db
         .collection(CHAT_COLLECTION)

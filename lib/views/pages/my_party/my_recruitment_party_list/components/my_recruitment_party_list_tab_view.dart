@@ -1,22 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ggamf_front/controller/party/party_controller.dart';
+import 'package:ggamf_front/domain/party/model/room.dart';
 import 'package:ggamf_front/views/pages/my_party/my_recruitment_party_list/joining_party_list_view_model.dart';
 import 'package:ggamf_front/views/pages/my_party/my_recruitment_party_list/my_recruitment_party_list_view_model.dart';
-
-import '../../../../../domain/party/model/my_room.dart';
 
 class MyRecruitmentPartyListTabView extends ConsumerStatefulWidget {
   const MyRecruitmentPartyListTabView({
     Key? key,
     required TabController tabController,
-    required List<MyRoom> myRoomList,
+    required List<Room> myRoomList,
   })  : _tabController = tabController,
         _myRoomList = myRoomList,
         super(key: key);
 
   final TabController _tabController;
-  final List<MyRoom> _myRoomList;
+  final List<Room> _myRoomList;
 
   @override
   ConsumerState<MyRecruitmentPartyListTabView> createState() =>
@@ -58,7 +57,7 @@ class _MyRecruitmentPartyListTabViewState
     );
   }
 
-  Widget _buildJoiningPartyListView(List<MyRoom> jplvm, WidgetRef ref) {
+  Widget _buildJoiningPartyListView(List<Room> jplvm, WidgetRef ref) {
     return jplvm.isEmpty
         ? Center(
             child: Text('파티창이 없습니다.'),
@@ -111,8 +110,7 @@ class _MyRecruitmentPartyListTabViewState
           );
   }
 
-  Widget _buildMyRecruitmentPartyListTabView(
-      List<MyRoom> mrplv, WidgetRef ref) {
+  Widget _buildMyRecruitmentPartyListTabView(List<Room> mrplv, WidgetRef ref) {
     final pc = ref.read(partyController);
     return mrplv.isEmpty
         ? const Center(
