@@ -118,10 +118,10 @@ class _ItemButtonState extends State<ItemButton> {
         child: Container(
           padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
           alignment: Alignment.center,
-          decoration: BoxDecoration(borderRadius: BorderRadius.circular(30), border: Border.all(width: 1)),
+          decoration: BoxDecoration(borderRadius: BorderRadius.circular(10), color: Color.fromRGBO(35, 204, 81, 1)),
           child: Text(
             widget.text,
-            style: const TextStyle(color: Colors.black),
+            style: const TextStyle(color: Colors.white, fontSize: 16),
           ),
         ),
       ),
