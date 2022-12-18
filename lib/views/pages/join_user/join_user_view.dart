@@ -70,7 +70,7 @@ class _JoinUserViewState extends ConsumerState<JoinUserView> {
       ),
       body: Container(
         width: double.infinity,
-        color: const Color(0xFFFFF1EE),
+        //color: const Color.fromRGBO(35, 204, 81, 1),
         child: Form(
           key: juc.formKey,
           child: Padding(
