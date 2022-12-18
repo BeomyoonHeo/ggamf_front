@@ -4,7 +4,7 @@ part 'game_code.g.dart';
 
 @JsonSerializable()
 class GameCodeList {
-  Map<String, List<GameCode>> data;
+  List<GameCode> data;
   GameCodeList({required this.data});
 
   factory GameCodeList.fromJson(Map<String, dynamic> json) => _$GameCodeListFromJson(json);

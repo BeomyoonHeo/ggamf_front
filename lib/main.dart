@@ -9,6 +9,7 @@ import 'package:ggamf_front/utils/page_enum.dart';
 import 'package:ggamf_front/views/common_components/common_pages.dart';
 import 'package:ggamf_front/views/pages/join_user/join_user_view.dart';
 import 'package:ggamf_front/views/pages/login_user/login_user_view.dart';
+import 'package:ggamf_front/views/pages/profile/my_profile/my_profile_view.dart';
 import 'package:ggamf_front/views/pages/splash_page.dart';
 
 void main() async {
@@ -60,6 +61,7 @@ class _MyAppState extends State<MyApp> {
         PageEnum.LOGIN.requestLocation: (context) => LoginUserView(),
         PageEnum.JOIN.requestLocation: (context) => const JoinUserView(),
         PageEnum.ALLPAGES.requestLocation: (context) => const AllPages(),
+        PageEnum.MYPROFILE.requestLocation: (context) => MyProfileView(),
       },
       theme: theme(),
     );

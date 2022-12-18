@@ -1,4 +1,4 @@
-const String baseUrl = 'http://192.168.50.17:8080';
+const String baseUrl = 'http://183.104.199.106:8080';
 
 const headers = {"Content-Type": "application/json; charset=utf-8"};
 
@@ -16,14 +16,10 @@ enum PageEnum {
   final String displayName;
 
   factory PageEnum.getByCode(int navigatorCode) {
-    return PageEnum.values.firstWhere(
-        (value) => value.navigatorCode == navigatorCode,
-        orElse: () => PageEnum.UNDEFINED);
+    return PageEnum.values.firstWhere((value) => value.navigatorCode == navigatorCode, orElse: () => PageEnum.UNDEFINED);
   }
 
   factory PageEnum.getByDisPlayName(String displayName) {
-    return PageEnum.values.firstWhere(
-        (value) => value.displayName == displayName,
-        orElse: () => PageEnum.UNDEFINED);
+    return PageEnum.values.firstWhere((value) => value.displayName == displayName, orElse: () => PageEnum.UNDEFINED);
   }
 }
