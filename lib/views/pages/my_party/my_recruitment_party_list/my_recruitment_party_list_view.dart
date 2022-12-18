@@ -53,6 +53,13 @@ class _MyRecruitmentPartyListViewState extends ConsumerState<MyRecruitmentPartyL
           ],
         ),
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(context, MaterialPageRoute(builder: (context) => CreatePartyView()));
+        },
+        child: Icon(FontAwesomeIcons.plus),
+        backgroundColor: Color.fromRGBO(35, 204, 81, 1),
+      ),
     );
   }
 
@@ -61,16 +68,16 @@ class _MyRecruitmentPartyListViewState extends ConsumerState<MyRecruitmentPartyL
       automaticallyImplyLeading: false,
       title: Text(textIndex[0]),
       actions: [
-        IconButton(
-          onPressed: () {
-            Navigator.push(context, MaterialPageRoute(builder: (context) => CreatePartyView()));
-          },
-          icon: Icon(
-            FontAwesomeIcons.userPlus,
-            color: Colors.black,
-            size: 25,
-          ),
-        ),
+        // IconButton(
+        //   onPressed: () {
+        //     Navigator.push(context, MaterialPageRoute(builder: (context) => CreatePartyView()));
+        //   },
+        //   icon: Icon(
+        //     FontAwesomeIcons.userPlus,
+        //     color: Colors.black,
+        //     size: 25,
+        //   ),
+        // ),
       ],
     );
   }
