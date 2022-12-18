@@ -28,16 +28,18 @@ class RecommendGgamfListViewModel extends StateNotifier<List<Ggamf>> {
     logger.d(UserSession.user.id);
     repo.getRecommendGgamfList(id: UserSession.user.id).then(
       (value) {
-        value.data['recommendUserList']?.forEach((_ggamf) {
-          recommendGgamfList.add(
-            Ggamf(
-              userId: _ggamf.userId,
-              photo: _ggamf.photo,
-              nickname: _ggamf.nickname,
-              intro: _ggamf.intro,
-            ),
-          );
-        });
+        if (value != null) {
+          value.data['recommendUserList']?.forEach((_ggamf) {
+            recommendGgamfList.add(
+              Ggamf(
+                userId: _ggamf.userId,
+                photo: _ggamf.photo,
+                nickname: _ggamf.nickname,
+                intro: _ggamf.intro,
+              ),
+            );
+          });
+        }
         state = recommendGgamfList;
       },
     );

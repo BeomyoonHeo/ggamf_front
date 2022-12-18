@@ -13,7 +13,7 @@ class _ProfileUserRepository implements ProfileUserRepository {
     this._dio, {
     this.baseUrl,
   }) {
-    baseUrl ??= 'http://183.104.199.106:8080';
+    baseUrl ??= 'http://172.29.96.1:8080';
   }
 
   final Dio _dio;

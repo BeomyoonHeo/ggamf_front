@@ -21,11 +21,11 @@ class PartyController {
   PartyController(this._ref);
   void enterParty({required int roomId}) {
     navigatorKey.currentState?.push(MaterialPageRoute(builder: (context) {
-      _ref.read(chatPageProvider.notifier).setChatId(24.toString());
+      _ref.read(chatPageProvider.notifier).setChatId(roomId.toString());
       return ChatPage(
           chat: _ref
               .read(chatsPageProvider)
-              .singleWhere((_chat) => _chat.id == 24.toString()));
+              .singleWhere((_chat) => _chat.id == roomId.toString()));
     }));
   }
 }
