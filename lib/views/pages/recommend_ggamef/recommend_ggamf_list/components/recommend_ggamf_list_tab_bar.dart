@@ -16,7 +16,7 @@ class RecommendGgamfListTabBar extends StatelessWidget {
     return Container(
       height: 45,
       decoration: BoxDecoration(
-        color: Colors.grey[300],
+        color: Color.fromRGBO(35, 204, 81, 0.4),
         borderRadius: BorderRadius.circular(
           25.0,
         ),
@@ -28,7 +28,7 @@ class RecommendGgamfListTabBar extends StatelessWidget {
           borderRadius: BorderRadius.circular(
             25.0,
           ),
-          color: Colors.black,
+          color: Color.fromRGBO(35, 204, 81, 0.8),
         ),
         labelColor: Colors.white,
         unselectedLabelColor: Colors.black,

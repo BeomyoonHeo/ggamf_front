@@ -19,12 +19,10 @@ class RecommendGgamfListTabView extends StatefulWidget {
   final TabController _tabController;
   final List<Ggamf> _ggamfList;
   @override
-  State<RecommendGgamfListTabView> createState() =>
-      _RecommendGgamfListTabViewState();
+  State<RecommendGgamfListTabView> createState() => _RecommendGgamfListTabViewState();
 }
 
-class _RecommendGgamfListTabViewState extends State<RecommendGgamfListTabView>
-    with SingleTickerProviderStateMixin<RecommendGgamfListTabView> {
+class _RecommendGgamfListTabViewState extends State<RecommendGgamfListTabView> with SingleTickerProviderStateMixin<RecommendGgamfListTabView> {
   late final TabController _innerTabController;
 
   final List<String> textIndex = [
@@ -85,7 +83,7 @@ class _RecommendGgamfListTabViewState extends State<RecommendGgamfListTabView>
             itemBuilder: (context, index) => ListTile(
                   visualDensity: const VisualDensity(horizontal: 3),
                   leading: CircleAvatar(
-                    backgroundImage: NetworkImage(ggamfList[index].photo ?? ''),
+                    backgroundImage: MemoryImage(Uri.parse("${ggamfList[index].photo}" ?? '').data!.contentAsBytes()),
                   ),
                   title: Text(ggamfList[index].nickname ?? ''),
                   subtitle: Text(ggamfList[index].intro ?? ''),
@@ -98,8 +96,7 @@ class _RecommendGgamfListTabViewState extends State<RecommendGgamfListTabView>
                             Navigator.pop(context);
                           }
 
-                          _showAlertDialog(context, '추천 껨프 삭제',
-                              '해당 껨프를 삭제하시겠습니까?', function);
+                          _showAlertDialog(context, '추천 껨프 삭제', '해당 껨프를 삭제하시겠습니까?', function);
                         },
                         icon: const Icon(Icons.delete),
                       ),
@@ -123,7 +120,7 @@ class _RecommendGgamfListTabViewState extends State<RecommendGgamfListTabView>
             itemBuilder: (context, index) => ListTile(
                   visualDensity: const VisualDensity(horizontal: 3),
                   leading: CircleAvatar(
-                    backgroundImage: NetworkImage(ggamfList[index].photo ?? ''),
+                    backgroundImage: MemoryImage(Uri.parse("${ggamfList[index].photo}" ?? '').data!.contentAsBytes()),
                   ),
                   title: Text(ggamfList[index].nickname ?? ''),
                   subtitle: Text(ggamfList[index].intro ?? ''),
@@ -138,8 +135,7 @@ class _RecommendGgamfListTabViewState extends State<RecommendGgamfListTabView>
                             Navigator.pop(context);
                           }
 
-                          _showAlertDialog(
-                              context, '껨프 추가', '해당 껨프를 추가하시겠습니까?', function);
+                          _showAlertDialog(context, '껨프 추가', '해당 껨프를 추가하시겠습니까?', function);
                         },
                       ),
                       IconButton(
@@ -149,8 +145,7 @@ class _RecommendGgamfListTabViewState extends State<RecommendGgamfListTabView>
                             Navigator.pop(context);
                           }
 
-                          _showAlertDialog(context, '껨프 요청 무시',
-                              '해당 껨프요청을 무시하시겠습니까?', function);
+                          _showAlertDialog(context, '껨프 요청 무시', '해당 껨프요청을 무시하시겠습니까?', function);
                         },
                         icon: const Icon(Icons.delete),
                       ),
@@ -188,8 +183,7 @@ class _RecommendGgamfListTabViewState extends State<RecommendGgamfListTabView>
                             Navigator.pop(context);
                           }
 
-                          _showAlertDialog(context, '껨프 요청 무시',
-                              '해당 껨프요청을 무시하시겠습니까?', function);
+                          _showAlertDialog(context, '껨프 요청 무시', '해당 껨프요청을 무시하시겠습니까?', function);
                         },
                         icon: const Icon(CupertinoIcons.xmark),
                       ),
@@ -203,15 +197,13 @@ class _RecommendGgamfListTabViewState extends State<RecommendGgamfListTabView>
             itemCount: ggamfList.length);
   }
 
-  Future<dynamic> _showAlertDialog(BuildContext context, String titleText,
-      String contentText, Function function) {
+  Future<dynamic> _showAlertDialog(BuildContext context, String titleText, String contentText, Function function) {
     return showDialog(
         context: context,
         builder: (context) {
           return AlertDialog(
             title: Text('${titleText}'),
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10.0)),
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
             content: Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
