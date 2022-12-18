@@ -20,8 +20,7 @@ class InputBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(
-          color: Colors.white, borderRadius: BorderRadius.circular(9)),
+      decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(9)),
       padding: const EdgeInsets.all(15),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -42,8 +41,7 @@ class InputBox extends StatelessWidget {
               validator: validator(),
               decoration: InputDecoration(
                 hintText: hintText,
-                hintStyle:
-                    const TextStyle(fontFamily: 'NanumSquare', fontSize: 15),
+                hintStyle: const TextStyle(fontFamily: 'NanumSquare', fontSize: 15),
                 filled: true,
                 fillColor: Colors.white,
                 border: const UnderlineInputBorder(

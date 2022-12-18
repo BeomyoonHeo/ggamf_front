@@ -18,25 +18,63 @@ class _OpponentProfileViewState extends ConsumerState<OpponentProfileView> {
   final List<String> _valueList = ['욕설', '비방', '광고', '괴롭힘', '기타'];
   var _selectedValue;
 
+  //final int userId;
+
+  //_OpponentProfileViewState(this.userId);
+
   @override
   Widget build(BuildContext context) {
     //opvm = opponentProfileViewModel
     final opvm = ref.watch(opponentProfileViewModel);
 
     return Scaffold(
-      appBar: _appbar(),
+      appBar: _appbar(opvm),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),
         child: ListView(
           children: [
-            SizedBox(height: 50),
-            _buildCircleAvatar(opvm),
-            SizedBox(height: 50),
+            SizedBox(
+              height: MediaQuery.of(context).size.width / 2 + 95,
+              child: Stack(
+                children: [
+                  Container(
+                    height: 250,
+                    width: double.infinity,
+                    decoration: const BoxDecoration(
+                        gradient: LinearGradient(
+                            colors: [Color.fromRGBO(35, 204, 81, 0.9), Color.fromRGBO(35, 204, 81, 1)],
+                            begin: Alignment.centerLeft,
+                            end: Alignment.centerRight,
+                            tileMode: TileMode.clamp),
+                        borderRadius: BorderRadius.only(bottomLeft: Radius.circular(30), bottomRight: Radius.circular(30))),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const SizedBox(),
+                      Align(
+                        alignment: Alignment.bottomCenter,
+                        child: CircleAvatar(
+                          radius: 60.0,
+                          child: ClipRRect(
+                            child: opvm.intro!.isEmpty
+                                ? Image.asset("assets/images/generic-avatar.svg")
+                                : Image.memory((Uri.parse(opvm.photo ?? '').data!.contentAsBytes())),
+                            borderRadius: BorderRadius.circular(100.0),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(height: 10),
             _nickName(opvm),
+            SizedBox(height: 10),
+            _introduce(opvm),
             SizedBox(height: 30),
             _ratedStar(),
-            SizedBox(height: 30),
-            _introduce(opvm),
             Container(
               height: 150,
               child: InkWell(
@@ -68,7 +106,7 @@ class _OpponentProfileViewState extends ConsumerState<OpponentProfileView> {
     );
   }
 
-  AppBar _appbar() {
+  AppBar _appbar(GetProfileUser opvm) {
     return AppBar(
       automaticallyImplyLeading: false,
       backgroundColor: Colors.white,
@@ -77,7 +115,7 @@ class _OpponentProfileViewState extends ConsumerState<OpponentProfileView> {
           BackButton(
             color: Colors.black,
           ),
-          Text("김겐지", style: TextStyle(color: Colors.black)),
+          Text("${opvm.nickname}", style: TextStyle(color: Colors.black)),
         ],
       ),
       actions: [
@@ -95,19 +133,15 @@ class _OpponentProfileViewState extends ConsumerState<OpponentProfileView> {
 
   Widget _ratedStar() {
     return Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10),
-        border: Border.all(width: 1),
-        color: Colors.white,
-      ),
+      padding: EdgeInsets.all(10),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text(
+          const Text(
             "평균별점",
-            style: TextStyle(fontSize: 15, color: Colors.black),
+            style: TextStyle(fontSize: 20),
           ),
-          SizedBox(width: 20),
+          const SizedBox(width: 20),
           _ratingBar(),
         ],
       ),
@@ -115,24 +149,26 @@ class _OpponentProfileViewState extends ConsumerState<OpponentProfileView> {
   }
 
   Widget _ratingStarButton() {
-    return OutlinedButton(
+    return ElevatedButton(
       onPressed: () {
         showDialog(context: context, builder: (_) => _ratingStar());
       },
       child: Text("별점 주기", style: TextStyle(fontSize: 20)),
-      style: OutlinedButton.styleFrom(
-        foregroundColor: Colors.black,
+      style: ElevatedButton.styleFrom(
+        foregroundColor: Colors.white,
+        backgroundColor: Color.fromRGBO(35, 204, 81, 1),
         minimumSize: Size(150, 50),
       ),
     );
   }
 
   Widget _followButton() {
-    return OutlinedButton(
+    return ElevatedButton(
       onPressed: () {},
       child: Text("팔로우하기", style: TextStyle(fontSize: 20)),
-      style: OutlinedButton.styleFrom(
-        foregroundColor: Colors.black,
+      style: ElevatedButton.styleFrom(
+        foregroundColor: Colors.white,
+        backgroundColor: Color.fromRGBO(35, 204, 81, 1),
         minimumSize: Size(150, 50),
       ),
     );
@@ -140,35 +176,31 @@ class _OpponentProfileViewState extends ConsumerState<OpponentProfileView> {
 
   Widget _introduce(GetProfileUser opvm) {
     return Container(
+      alignment: Alignment.center,
       padding: EdgeInsets.all(10),
       width: double.infinity,
-      decoration: BoxDecoration(
-        border: Border.all(width: 1),
-        borderRadius: BorderRadius.circular(10),
-        color: Colors.white,
-      ),
       child: Expanded(
-        child: Text(
-          "${opvm.intro}",
-          textAlign: TextAlign.center,
-          style: TextStyle(fontSize: 15, color: Colors.black),
-        ),
+        child: opvm.intro!.isEmpty
+            ? Text("자기소개가 없습니다")
+            : Text(
+                "${opvm.intro}",
+                textAlign: TextAlign.center,
+                style: TextStyle(fontSize: 15),
+              ),
       ),
     );
   }
 
   Widget _nickName(GetProfileUser opvm) {
     return Container(
-      padding: EdgeInsets.all(5),
-      decoration: BoxDecoration(
-        border: Border.all(width: 1),
-        borderRadius: BorderRadius.circular(10),
-        color: Colors.white,
-      ),
-      child: Text(
-        "${opvm.nickname}",
-        style: TextStyle(fontSize: 15, color: Colors.black),
-        textAlign: TextAlign.center,
+      height: 30,
+      width: double.infinity,
+      child: Center(
+        child: Text(
+          "${opvm.nickname}",
+          style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+          textAlign: TextAlign.center,
+        ),
       ),
     );
   }
@@ -203,11 +235,14 @@ class _OpponentProfileViewState extends ConsumerState<OpponentProfileView> {
       child: Container(
         padding: EdgeInsets.all(20),
         width: 350,
-        height: 250,
+        height: 240,
         child: Column(
           children: [
             SizedBox(height: 20),
-            Text("별점주기"),
+            Text(
+              "별점주기",
+              style: TextStyle(fontSize: 20),
+            ),
             SizedBox(height: 20),
             RatingBar.builder(
               initialRating: 3,
@@ -228,12 +263,24 @@ class _OpponentProfileViewState extends ConsumerState<OpponentProfileView> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                ElevatedButton(onPressed: () {}, child: Text("별점쾅!")),
                 ElevatedButton(
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                    child: Text("취소")),
+                  onPressed: () {},
+                  child: Text("별점주기", style: TextStyle(fontSize: 20)),
+                  style: ElevatedButton.styleFrom(
+                    foregroundColor: Colors.white,
+                    backgroundColor: Color.fromRGBO(35, 204, 81, 1),
+                  ),
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: Text("취소", style: TextStyle(fontSize: 20)),
+                  style: ElevatedButton.styleFrom(
+                    foregroundColor: Colors.white,
+                    backgroundColor: Color.fromRGBO(35, 204, 81, 1),
+                  ),
+                ),
               ],
             )
           ],
@@ -248,7 +295,7 @@ class _OpponentProfileViewState extends ConsumerState<OpponentProfileView> {
         padding: const EdgeInsets.all(15.0),
         child: Container(
           width: double.infinity,
-          height: 400,
+          height: 330,
           child: Column(
             children: [
               Text(
@@ -317,22 +364,20 @@ class _OpponentProfileViewState extends ConsumerState<OpponentProfileView> {
                 children: [
                   ElevatedButton(
                     onPressed: () {},
-                    child: Text("리포트하기"),
+                    child: Text("리포트하기", style: TextStyle(fontSize: 20)),
                     style: ElevatedButton.styleFrom(
-                      foregroundColor: Colors.black,
-                      backgroundColor: Colors.white,
-                      side: BorderSide(width: 1),
+                      foregroundColor: Colors.white,
+                      backgroundColor: Color.fromRGBO(35, 204, 81, 1),
                     ),
                   ),
                   ElevatedButton(
                     onPressed: () {
                       Navigator.pop(context);
                     },
-                    child: Text("취소"),
+                    child: Text("취소", style: TextStyle(fontSize: 20)),
                     style: ElevatedButton.styleFrom(
-                      foregroundColor: Colors.black,
-                      backgroundColor: Colors.white,
-                      side: BorderSide(width: 1),
+                      foregroundColor: Colors.white,
+                      backgroundColor: Color.fromRGBO(35, 204, 81, 1),
                     ),
                   ),
                 ],

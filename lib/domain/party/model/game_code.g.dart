@@ -7,13 +7,9 @@ part of 'game_code.dart';
 // **************************************************************************
 
 GameCodeList _$GameCodeListFromJson(Map<String, dynamic> json) => GameCodeList(
-      data: (json['data'] as Map<String, dynamic>).map(
-        (k, e) => MapEntry(
-            k,
-            (e as List<dynamic>)
-                .map((e) => GameCode.fromJson(e as Map<String, dynamic>))
-                .toList()),
-      ),
+      data: (json['data'] as List<dynamic>)
+          .map((e) => GameCode.fromJson(e as Map<String, dynamic>))
+          .toList(),
     );
 
 Map<String, dynamic> _$GameCodeListToJson(GameCodeList instance) =>

@@ -9,16 +9,13 @@ class CertificationNumberButton extends ConsumerStatefulWidget {
   String certificationText;
   bool showCertificationBar = false;
 
-  CertificationNumberButton({Key? key, required this.certificationText})
-      : super(key: key);
+  CertificationNumberButton({Key? key, required this.certificationText}) : super(key: key);
 
   @override
-  ConsumerState<CertificationNumberButton> createState() =>
-      _CertificationNumberButtonState();
+  ConsumerState<CertificationNumberButton> createState() => _CertificationNumberButtonState();
 }
 
-class _CertificationNumberButtonState
-    extends ConsumerState<CertificationNumberButton> {
+class _CertificationNumberButtonState extends ConsumerState<CertificationNumberButton> {
   final TextEditingController _credentialController = TextEditingController();
 
   String _verificationId = '';
@@ -54,13 +51,12 @@ class _CertificationNumberButtonState
                       child: InkWell(
                         borderRadius: BorderRadius.circular(30),
                         child: Container(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 15, vertical: 5),
+                          padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
                           decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(30),
-                            border: Border.all(color: Colors.black, width: 0.7),
+                            borderRadius: BorderRadius.circular(10),
+                            color: Color.fromRGBO(35, 204, 81, 1),
                           ),
-                          child: const Text("인증받기"),
+                          child: const Text("인증받기", style: TextStyle(color: Colors.white)),
                         ),
                         onTap: () async {
                           FocusScope.of(context).unfocus();
@@ -88,22 +84,17 @@ class _CertificationNumberButtonState
                         child: InkWell(
                           borderRadius: BorderRadius.circular(30),
                           child: Container(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 15, vertical: 5),
+                              padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(30),
-                                border:
-                                    Border.all(color: Colors.black, width: 0.5),
+                                border: Border.all(color: Colors.black, width: 0.5),
                               ),
                               child: const Text("입력하기")),
                           onTap: () async {
                             FocusScope.of(context).unfocus();
                             PhoneAuthCredential phoneAuthCredential =
-                                PhoneAuthProvider.credential(
-                                    verificationId: _verificationId,
-                                    smsCode: _credentialController.text);
-                            signInWithPhoneAuthCredential(
-                                phoneAuthCredential, juc);
+                                PhoneAuthProvider.credential(verificationId: _verificationId, smsCode: _credentialController.text);
+                            signInWithPhoneAuthCredential(phoneAuthCredential, juc);
                           },
                         ),
                       ),
@@ -114,8 +105,7 @@ class _CertificationNumberButtonState
                             controller: _credentialController,
                             autovalidateMode: AutovalidateMode.always,
                             maxLength: 6,
-                            decoration: const InputDecoration(
-                                hintText: '인증번호 6자리를 입력해주세요'),
+                            decoration: const InputDecoration(hintText: '인증번호 6자리를 입력해주세요'),
                           ),
                         ),
                       ),
@@ -149,11 +139,9 @@ class _CertificationNumberButtonState
     );
   }
 
-  void signInWithPhoneAuthCredential(
-      PhoneAuthCredential phoneAuthCredential, juc) async {
+  void signInWithPhoneAuthCredential(PhoneAuthCredential phoneAuthCredential, juc) async {
     try {
-      final authCredential =
-          await _auth.signInWithCredential(phoneAuthCredential);
+      final authCredential = await _auth.signInWithCredential(phoneAuthCredential);
       if (authCredential.user != null) {
         juc.authOk = true;
         widget.showCertificationBar = false;
@@ -166,11 +154,7 @@ class _CertificationNumberButtonState
       }
     } on FirebaseAuthException catch (e) {
       await Fluttertoast.showToast(
-          msg: e.message as String,
-          toastLength: Toast.LENGTH_SHORT,
-          timeInSecForIosWeb: 1,
-          backgroundColor: Colors.red,
-          fontSize: 16.0);
+          msg: e.message as String, toastLength: Toast.LENGTH_SHORT, timeInSecForIosWeb: 1, backgroundColor: Colors.red, fontSize: 16.0);
     }
   }
 }

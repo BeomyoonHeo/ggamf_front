@@ -11,7 +11,7 @@ import '../../../../utils/custom_intercepter.dart';
 
 final createPartyViewModel = StateNotifierProvider<CreatePartyViewModel, List<GameCode>?>((ref) {
   final cpc = ref.read(createPartyController);
-  return CreatePartyViewModel(null, ref);
+  return CreatePartyViewModel(null, ref)..getGameCode();
 });
 
 class CreatePartyViewModel extends StateNotifier<List<GameCode>?> {
@@ -28,7 +28,7 @@ class CreatePartyViewModel extends StateNotifier<List<GameCode>?> {
     repo.getGameCode(userId: UserSession.user.id).then(
       (value) {
         logger.d("코드밸류 확인 ${value}");
-        value.data['followers']?.forEach(
+        value.data.forEach(
           (_gameCode) {
             gameCodeList.add(
               GameCode(
@@ -37,6 +37,9 @@ class CreatePartyViewModel extends StateNotifier<List<GameCode>?> {
                 logo: _gameCode.logo,
               ),
             );
+            logger.d("아이디확인 : ${_gameCode.id}");
+            logger.d("게임네임확인 : ${_gameCode.gameName}");
+            logger.d("로고확인 : ${_gameCode.logo}");
           },
         );
       },
