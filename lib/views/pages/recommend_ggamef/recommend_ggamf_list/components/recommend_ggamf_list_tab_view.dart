@@ -169,7 +169,7 @@ class _RecommendGgamfListTabViewState extends State<RecommendGgamfListTabView> w
             itemBuilder: (context, index) => ListTile(
                   visualDensity: const VisualDensity(horizontal: 3),
                   leading: CircleAvatar(
-                    backgroundImage: NetworkImage(ggamfList[index].photo ?? ''),
+                    backgroundImage: MemoryImage(Uri.parse("${ggamfList[index].photo}" ?? '').data!.contentAsBytes()),
                   ),
                   title: Text(ggamfList[index].nickname ?? ''),
                   subtitle: Text(ggamfList[index].intro ?? ''),
