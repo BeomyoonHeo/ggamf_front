@@ -13,6 +13,7 @@ import '../service/database_service.dart';
 final chatsPageProvider =
     StateNotifierProvider<ChatsPageProvider, List<Chat>>((ref) {
   final dbService = ref.read(databaseService);
+
   return ChatsPageProvider(dbService, [])..getChats();
 });
 
@@ -25,7 +26,6 @@ class ChatsPageProvider extends StateNotifier<List<Chat>> {
   ChatsPageProvider(this._db, this.chats) : super([]) {
     getChats();
   }
-
   @override
   void dispose() {
     _chatsStream.cancel();

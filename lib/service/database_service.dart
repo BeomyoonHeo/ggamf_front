@@ -12,7 +12,6 @@ class DatabaseService {
   final FirebaseFirestore _db = FirebaseFirestore.instance;
 
   DatabaseService() {}
-
   Future<void> createUser(String _uid, String _nickName) async {
     try {
       await _db.collection(USER_COLLECTION).doc(_uid).set({

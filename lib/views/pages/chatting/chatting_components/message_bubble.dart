@@ -49,6 +49,12 @@ class TextMessageBubble extends StatelessWidget {
               color: Colors.white,
             ),
           ),
+          Text(
+            message.sentTime,
+            style: TextStyle(
+              color: Colors.white70,
+            ),
+          )
         ],
       ),
     );
@@ -111,6 +117,12 @@ class ImageMessageBubble extends StatelessWidget {
             ),
           ),
           SizedBox(height: height * 0.02),
+          Text(
+            message.sentTime,
+            style: TextStyle(
+              color: Colors.white70,
+            ),
+          ),
         ],
       ),
     );

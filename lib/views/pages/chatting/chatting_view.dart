@@ -20,8 +20,8 @@ class _ChatPageState extends ConsumerState<ChatPage> {
   late double _deviceHeight;
   late double _deviceWidth;
 
-  late ChatPageProvider _pageProvider;
   late GlobalKey<FormState> _messageFormState;
+  late final _pageProvider;
   late ScrollController _messageListViewController;
 
   @override
@@ -33,7 +33,6 @@ class _ChatPageState extends ConsumerState<ChatPage> {
 
   @override
   Widget build(BuildContext context) {
-    final cpp = ref.watch(chatPageProvider.notifier)..listenToMessages();
     _deviceWidth = MediaQuery.of(context).size.width;
     _deviceHeight = MediaQuery.of(context).size.height;
 
@@ -89,7 +88,10 @@ class _ChatPageState extends ConsumerState<ChatPage> {
                   deviceHeight: _deviceHeight,
                   isOwnMessage: _isOwnMessage,
                   message: _message,
-                  sender: widget.chat.memebers
+                  sender: this
+                      .widget
+                      .chat
+                      .memebers
                       .where((_m) => _m.uid == _message.senderID)
                       .first,
                 ),
@@ -98,7 +100,7 @@ class _ChatPageState extends ConsumerState<ChatPage> {
           ),
         );
       } else {
-        return const Align(
+        return Align(
           alignment: Alignment.center,
           child: Text(
             "인사를 나눠보세요!",
