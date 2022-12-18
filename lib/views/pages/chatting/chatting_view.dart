@@ -46,6 +46,7 @@ class _ChatPageState extends ConsumerState<ChatPage> {
   Widget _buildUI() {
     final _pageProviderWatcher = ref.watch(chatPageProvider);
     final _ggmafProvider = ref.read(ggamfProvider.notifier);
+    _messageListViewController.notifyListeners();
     return Builder(
       builder: (context) {
         return Scaffold(
@@ -85,6 +86,7 @@ class _ChatPageState extends ConsumerState<ChatPage> {
             ],
           ),
           body: SingleChildScrollView(
+            controller: _messageListViewController,
             padding: EdgeInsets.only(
                 bottom: MediaQuery.of(context).viewInsets.bottom),
             child: Container(
@@ -99,12 +101,7 @@ class _ChatPageState extends ConsumerState<ChatPage> {
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
                     _messagesListView(_pageProviderWatcher),
-                    BottomSheet(
-                      onClosing: () {},
-                      builder: (context) {
-                        return _sendMessageForm();
-                      },
-                    ),
+                    _sendMessageForm(),
                   ]),
             ),
           ),
@@ -189,6 +186,8 @@ class _ChatPageState extends ConsumerState<ChatPage> {
     return SizedBox(
       width: _deviceWidth * 0.50,
       child: CustomTextFormField(
+          modal: _sendMessageForm(),
+          controller: _messageListViewController,
           onsaved: (_value) {
             _pageProvider.message = _value;
           },

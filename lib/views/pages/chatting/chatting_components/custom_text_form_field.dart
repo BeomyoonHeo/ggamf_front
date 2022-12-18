@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:ggamf_front/main.dart';
 
 class CustomTextFormField extends StatelessWidget {
   final Function(String) onsaved;
   final String regEx;
   final String hintText;
   final bool obscureText;
+  Widget? modal;
   ScrollController? controller;
 
   CustomTextFormField({
@@ -14,6 +14,7 @@ class CustomTextFormField extends StatelessWidget {
     required this.regEx,
     required this.hintText,
     required this.obscureText,
+    this.modal,
     this.controller,
   });
 
@@ -28,7 +29,15 @@ class CustomTextFormField extends StatelessWidget {
         return RegExp(regEx).hasMatch(_value!) ? null : '값 입력 필요';
       },
       onTap: () {
-        scrollAnimate();
+        controller?.animateTo(120.0,
+            duration: Duration(milliseconds: 500), curve: Curves.ease);
+        // showBottomSheet(
+        //     context: context,
+        //     builder: (context) => Container(
+        //           padding: EdgeInsets.only(
+        //             bottom: MediaQuery.of(context).viewInsets.bottom,
+        //           ),
+        //         ));
       },
       decoration: InputDecoration(
         fillColor: Color.fromRGBO(30, 29, 37, 1.0),
@@ -40,15 +49,5 @@ class CustomTextFormField extends StatelessWidget {
         hintStyle: TextStyle(color: Colors.white54),
       ),
     );
-  }
-
-  void scrollAnimate() {
-    print("탭 클릭됨");
-    Future.delayed(Duration(milliseconds: 500), () {
-      controller?.animateTo(
-          MediaQuery.of(navigatorKey.currentState!.context).viewInsets.bottom,
-          duration: Duration(milliseconds: 100),
-          curve: Curves.easeIn);
-    });
   }
 }
