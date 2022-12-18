@@ -42,7 +42,7 @@ class _OpponentProfileViewState extends ConsumerState<OpponentProfileView> {
                     width: double.infinity,
                     decoration: const BoxDecoration(
                         gradient: LinearGradient(
-                            colors: [Color.fromRGBO(35, 204, 81, 0.6), Color.fromRGBO(35, 204, 81, 0.7)],
+                            colors: [Color.fromRGBO(35, 204, 81, 0.9), Color.fromRGBO(35, 204, 81, 1)],
                             begin: Alignment.centerLeft,
                             end: Alignment.centerRight,
                             tileMode: TileMode.clamp),
