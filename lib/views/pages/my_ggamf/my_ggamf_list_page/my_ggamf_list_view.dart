@@ -25,7 +25,7 @@ class MyGgamfListView extends ConsumerWidget {
           children: [
             _myprofile(mpvm),
             const SizedBox(height: 5),
-            Divider(height: 1.5, color: Colors.grey[600], endIndent: 8),
+            Divider(height: 1.5, color: Colors.grey[800], endIndent: 8),
             const SizedBox(height: 5),
             Container(
               padding: EdgeInsets.all(15),

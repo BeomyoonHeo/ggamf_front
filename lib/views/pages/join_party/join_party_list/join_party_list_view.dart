@@ -71,53 +71,57 @@ class _JoinPartyListViewState extends State<JoinPartyListView> {
 
   SliverChildBuilderDelegate _partyWindow(List<Room> jplv) {
     return SliverChildBuilderDelegate((context, index) {
-      return Container(
-        margin: const EdgeInsets.all(20),
-        padding: const EdgeInsets.all(20),
-        width: double.infinity,
-        height: 150,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10),
-          color: Colors.white,
-          border: Border.all(width: 1),
-        ),
-        child: InkWell(
-          onTap: () {
-            //Navigator.push(context, MaterialPageRoute(builder: (_) => ));
-          },
-          child: Row(
-            children: [
-              Expanded(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  crossAxisAlignment: CrossAxisAlignment.start,
+      return Padding(
+        padding: const EdgeInsets.only(left: 8.0),
+        child: Column(
+          children: [
+            Container(
+              margin: const EdgeInsets.symmetric(horizontal: 12),
+              width: double.infinity,
+              height: 150,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                color: Colors.white,
+              ),
+              child: InkWell(
+                onTap: () {
+                  //Navigator.push(context, MaterialPageRoute(builder: (_) => ));
+                },
+                child: Row(
                   children: [
-                    Text(
-                      "롤 골드 자랭하실분 구합니다",
-                      style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    Expanded(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "롤 골드 자랭하실분 구합니다",
+                            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                          ),
+                          //Text("방 제목 : ${jplv[index].roomName}"),
+                          Text("리그 오브 레전드"),
+                          //Text("게임네임 : ${jplv[index].gameName} "),
+                          Text("김한무"),
+                          //Text("방장이름 : ${jplv[index].nickName}"),
+                        ],
+                      ),
                     ),
-                    //Text("방 제목 : ${jplv[index].roomName}"),
-                    const SizedBox(height: 10),
-                    Text("리그 오브 레전드"),
-                    //Text("게임네임 : ${jplv[index].gameName} "),
-                    const SizedBox(height: 10),
-                    Text("김한무"),
-                    //Text("방장이름 : ${jplv[index].nickName}"),
+                    const SizedBox(width: 30),
+                    SizedBox(
+                      width: 75,
+                      height: 75,
+                      child: Image.asset("assets/images/lol.png"),
+                      //Image.memory(Uri.parse("${jplv[index].gameLogo}").data!.contentAsBytes()),
+                    ),
                   ],
                 ),
               ),
-              const SizedBox(width: 30),
-              SizedBox(
-                width: 75,
-                height: 75,
-                child: Image.asset("assets/images/lol.png"),
-                //Image.memory(Uri.parse("${jplv[index].gameLogo}").data!.contentAsBytes()),
-              ),
-            ],
-          ),
+            ),
+            Divider(height: 2, color: Colors.grey[800], endIndent: 8)
+          ],
         ),
       );
-    }, childCount: 3
+    }, childCount: 8
         //jplv.length,
         );
   }
