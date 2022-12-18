@@ -9,7 +9,6 @@ import 'package:retrofit/http.dart';
 
 import '../model/generate_room_party.dart';
 import '../model/join_room_party.dart';
-import '../model/my_room.dart';
 
 part 'room_repository.g.dart';
 
@@ -19,7 +18,7 @@ abstract class RoomRepository {
 
   // 파티방 상세보기
   @GET("/s/api/party/user/{userId}/detail/{roomId}")
-  Future<Room> detailRoom(
+  Future<SingleRoom> detailRoom(
       {@Path('roomId') required int roomId,
       @Path('userId') required int userId});
 
@@ -69,7 +68,7 @@ abstract class RoomRepository {
 
   //파티방 생성하기
   @POST("/s/api/party/user/{userId}/create/{gameCodeId}")
-  Future<Room> createRoom(
+  Future<SingleRoom> createRoom(
       {@Path('userId') required int userId,
       @Path('gameCodeId') required int gameCodeId,
       @Body() required GenerateRoomParty generateRoomParty});

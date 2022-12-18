@@ -9,10 +9,14 @@ import 'package:ggamf_front/utils/validator_util.dart';
 
 final chatPageProvider =
     StateNotifierProvider.autoDispose<ChatPageProvider, List<ChatMessage>>(
-        (ref) => ChatPageProvider('', ref));
+        (ref) {
+  return ChatPageProvider('', ref.keepAlive(), ref);
+});
 
 class ChatPageProvider extends StateNotifier<List<ChatMessage>> {
   List<ChatMessage>? messages;
+
+  KeepAliveLink keepAlive;
 
   String _chatId;
 
@@ -35,16 +39,17 @@ class ChatPageProvider extends StateNotifier<List<ChatMessage>> {
     logger.d('메세지 데이터 확인 : ${_chatId}');
   }
 
-  ChatPageProvider(this._chatId, this._ref) : super([]);
+  ChatPageProvider(this._chatId, this.keepAlive, this._ref) : super([]);
 
   @override
   void dispose() {
-    _messagesStream.cancel();
+    _messagesStream?.cancel();
     super.dispose();
   }
 
-  void listenToMessages() {
+  Future<void> listenToMessages() async {
     final _db = _ref.read(databaseService);
+
     try {
       logger.d('메세지 데이터 확인 : ${_chatId}');
       _messagesStream = _db.streamMessagesForChat(_chatId).listen((_snapshot) {
@@ -53,7 +58,7 @@ class ChatPageProvider extends StateNotifier<List<ChatMessage>> {
           logger.d('메세지 데이터 확인 : ${_m.data()}');
           return ChatMessage.fromJSON(_messageData);
         }).toList();
-        messages = _messsages;
+        state = _messsages;
       });
     } catch (e) {
       logger.d('메세지에서 에러 발생');
@@ -68,9 +73,10 @@ class ChatPageProvider extends StateNotifier<List<ChatMessage>> {
         content: _message!,
         type: MessageType.TEXT,
         senderID: UserSession.user.uid,
-        sentTime: Timestamp.fromDate(DateTime.now()).toString(),
+        sentTime: Timestamp.fromDate(DateTime.now()),
       );
       _db.addMessageToChat(_chatId, _messageToSend);
+      state = [...state, _messageToSend];
     }
   }
 }

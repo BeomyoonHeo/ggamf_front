@@ -36,7 +36,7 @@ class DatabaseService {
     Map<String, dynamic> messages = {
       'content': 'dummy',
       'sender_id': '${ownerId}',
-      'sent_time': '${DateTime.now().toString()}',
+      'sent_time': Timestamp.fromDate(DateTime.now()),
       'type': 'text',
     };
     List<String> members = [ownerId];

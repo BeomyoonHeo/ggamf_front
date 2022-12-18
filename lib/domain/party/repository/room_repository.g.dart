@@ -21,7 +21,7 @@ class _RoomRepository implements RoomRepository {
   String? baseUrl;
 
   @override
-  Future<Room> detailRoom({
+  Future<SingleRoom> detailRoom({
     required roomId,
     required userId,
   }) async {
@@ -29,8 +29,8 @@ class _RoomRepository implements RoomRepository {
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    final _result =
-        await _dio.fetch<Map<String, dynamic>>(_setStreamType<Room>(Options(
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<SingleRoom>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -42,7 +42,7 @@ class _RoomRepository implements RoomRepository {
               data: _data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = Room.fromJson(_result.data!);
+    final value = SingleRoom.fromJson(_result.data!);
     return value;
   }
 
@@ -252,7 +252,7 @@ class _RoomRepository implements RoomRepository {
   }
 
   @override
-  Future<Room> createRoom({
+  Future<SingleRoom> createRoom({
     required userId,
     required gameCodeId,
     required generateRoomParty,
@@ -262,8 +262,8 @@ class _RoomRepository implements RoomRepository {
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(generateRoomParty.toJson());
-    final _result =
-        await _dio.fetch<Map<String, dynamic>>(_setStreamType<Room>(Options(
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<SingleRoom>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
@@ -275,7 +275,7 @@ class _RoomRepository implements RoomRepository {
               data: _data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = Room.fromJson(_result.data!);
+    final value = SingleRoom.fromJson(_result.data!);
     return value;
   }
 

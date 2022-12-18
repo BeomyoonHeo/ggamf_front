@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ggamf_front/domain/party/repository/room_repository.dart';
 import 'package:ggamf_front/main.dart';
-import 'package:ggamf_front/provider/chats_page_provider.dart';
 import 'package:ggamf_front/utils/custom_intercepter.dart';
+import 'package:ggamf_front/views/pages/chatting/chatting_view.dart';
 
 import '../../provider/chat_provider.dart';
-import '../../views/pages/chatting/chatting_view.dart';
+import '../../provider/chats_page_provider.dart';
 
 final partyController = Provider((ref) => PartyController(ref));
 
@@ -21,7 +21,7 @@ class PartyController {
   PartyController(this._ref);
   void enterParty({required int roomId}) {
     navigatorKey.currentState?.push(MaterialPageRoute(builder: (context) {
-      _ref.read(chatPageProvider.notifier).setChatId(roomId.toString());
+      _ref.refresh(chatPageProvider.notifier).setChatId(roomId.toString());
       return ChatPage(
           chat: _ref
               .read(chatsPageProvider)

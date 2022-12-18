@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ggamf_front/core/theme.dart';
+import 'package:ggamf_front/domain/chats/model/chat_message.dart';
 import 'package:ggamf_front/domain/user/model/user.dart';
 import 'package:ggamf_front/domain/user/repository/user_repository.dart';
 import 'package:ggamf_front/utils/full_screen_util.dart';
@@ -11,9 +12,12 @@ import 'package:ggamf_front/views/pages/join_user/join_user_view.dart';
 import 'package:ggamf_front/views/pages/login_user/login_user_view.dart';
 import 'package:ggamf_front/views/pages/profile/my_profile/my_profile_view.dart';
 import 'package:ggamf_front/views/pages/splash_page.dart';
+import 'package:timeago/timeago.dart' as timeago;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  timeago.setLocaleMessages("kr", KrCustomMessages());
+  timeago.setDefaultLocale('kr');
   await SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
@@ -55,7 +59,8 @@ class _MyAppState extends State<MyApp> {
       debugShowCheckedModeBanner: false,
       navigatorKey: navigatorKey,
       initialRoute: UserSession.jwtToken != null
-          ? PageEnum.getByDisPlayName('login').requestLocation //PageEnum.ALLPAGES.requestLocation
+          ? PageEnum.getByDisPlayName('login')
+              .requestLocation //PageEnum.ALLPAGES.requestLocation
           : PageEnum.getByDisPlayName('login').requestLocation,
       routes: {
         PageEnum.LOGIN.requestLocation: (context) => LoginUserView(),

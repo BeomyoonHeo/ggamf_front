@@ -1,6 +1,5 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:ggamf_front/domain/party/model/generate_room_party.dart';
 import 'package:ggamf_front/domain/party/model/room.dart';
 import 'package:ggamf_front/domain/party/repository/room_repository.dart';
 import 'package:ggamf_front/domain/user/model/user.dart';
@@ -36,26 +35,7 @@ class MyRecruitmentPartyListViewModel extends StateNotifier<List<Room>> {
     });
   }
 
-  void _reinit() {
-    repo.findByMyIdRoom(userId: UserSession.user.id).then((value) {
-      List<Room> newMyRecruitmentPartyList = [];
-      value.data['rooms']?.forEach((_room) {
-        newMyRecruitmentPartyList.add(
-          Room(
-            id: _room.id,
-            nickName: _room.nickName,
-            roomName: _room.roomName,
-            totalPeople: _room.totalPeople,
-            gameName: _room.gameName,
-          ),
-        );
-      });
-      state = newMyRecruitmentPartyList;
-    });
-  }
-
-  void updateMyRecruitmentParty(GenerateRoomParty _party) {
-    _reinit();
-    //state = [...state, _party.createdParty()];
+  void updateMyRecruitmentParty(Room _party) {
+    state = [...state, _party];
   }
 }

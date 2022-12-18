@@ -7,7 +7,9 @@ import 'package:ggamf_front/domain/party/model/room.dart';
 import 'package:ggamf_front/domain/party/repository/room_repository.dart';
 import 'package:ggamf_front/domain/user/model/user.dart';
 import 'package:ggamf_front/main.dart';
+import 'package:ggamf_front/service/database_service.dart';
 import 'package:ggamf_front/utils/custom_intercepter.dart';
+import 'package:ggamf_front/views/pages/my_party/my_recruitment_party_list/my_recruitment_party_list_view_model.dart';
 
 final createPartyController = Provider((ref) {
   return CreatePartyController(ref);
@@ -45,9 +47,18 @@ class CreatePartyController {
       totalPeople: int.parse(totalPeopleController.text),
       userId: UserSession.user.id,
     );
-    Room room = await repo.createRoom(
+    SingleRoom room = await repo.createRoom(
         userId: UserSession.user.id,
         gameCodeId: _keyList[selectGameController.text],
         generateRoomParty: createRoomParty);
+    await _ref.read(databaseService).createChatRoom(
+        roomId: room.data.id,
+        ownerId: UserSession.user.uid,
+        totalPeople: room.data.totalPeople!);
+
+    _ref
+        .read(myRecruitmentPartyListViewModel.notifier)
+        .updateMyRecruitmentParty(room.data);
+    Navigator.pop(navigatorKey.currentState!.context);
   }
 }
