@@ -4,13 +4,10 @@ import 'package:ggamf_front/views/pages/login_user/components/text_field_contain
 class RoundedInputPasswordField extends StatefulWidget {
   final TextEditingController controller;
   final Function validator;
-  const RoundedInputPasswordField(
-      {Key? key, required this.controller, required this.validator})
-      : super(key: key);
+  const RoundedInputPasswordField({Key? key, required this.controller, required this.validator}) : super(key: key);
 
   @override
-  State<RoundedInputPasswordField> createState() =>
-      _RoundedInputPasswordFieldState();
+  State<RoundedInputPasswordField> createState() => _RoundedInputPasswordFieldState();
 }
 
 class _RoundedInputPasswordFieldState extends State<RoundedInputPasswordField> {
@@ -28,14 +25,14 @@ class _RoundedInputPasswordFieldState extends State<RoundedInputPasswordField> {
         validator: widget.validator(),
         decoration: InputDecoration(
             hintText: "비밀번호 입력",
-            icon: const Icon(Icons.lock),
+            icon: const Icon(Icons.lock, color: Color.fromRGBO(35, 204, 81, 1)),
             suffixIcon: IconButton(
               icon: visible,
               onPressed: () {
                 if (obscureText) {
-                  visible = const Icon(Icons.visibility_off);
+                  visible = const Icon(Icons.visibility_off, color: Color.fromRGBO(35, 204, 81, 1));
                 } else {
-                  visible = const Icon(Icons.visibility);
+                  visible = const Icon(Icons.visibility, color: Color.fromRGBO(35, 204, 81, 1));
                 }
                 obscureText = !obscureText;
                 setState(() {});
