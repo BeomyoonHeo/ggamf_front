@@ -28,7 +28,7 @@ class RecommendGgamfListTabBar extends StatelessWidget {
           borderRadius: BorderRadius.circular(
             25.0,
           ),
-          color: Color.fromRGBO(35, 204, 81, 0.8),
+          color: Color.fromRGBO(35, 204, 81, 1),
         ),
         labelColor: Colors.white,
         unselectedLabelColor: Colors.black,

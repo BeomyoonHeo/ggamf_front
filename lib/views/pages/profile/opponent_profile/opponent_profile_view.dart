@@ -265,7 +265,7 @@ class _OpponentProfileViewState extends ConsumerState<OpponentProfileView> {
               children: [
                 ElevatedButton(
                   onPressed: () {},
-                  child: Text("별점쾅!", style: TextStyle(fontSize: 20)),
+                  child: Text("별점주기", style: TextStyle(fontSize: 20)),
                   style: ElevatedButton.styleFrom(
                     foregroundColor: Colors.white,
                     backgroundColor: Color.fromRGBO(35, 204, 81, 1),
