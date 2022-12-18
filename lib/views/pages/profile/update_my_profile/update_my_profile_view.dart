@@ -8,6 +8,7 @@ import 'package:ggamf_front/controller/user/my_profile_controller.dart';
 import 'package:ggamf_front/domain/user/model/profile_user.dart';
 import 'package:ggamf_front/utils/validator_util.dart';
 import 'package:ggamf_front/views/pages/profile/my_profile/my_profile_view_model.dart';
+import 'package:ggamf_front/views/pages/profile/update_my_profile/update_my_profile_view_model.dart';
 import 'package:image_picker/image_picker.dart';
 
 import '../../../../core/color.dart';
@@ -39,17 +40,13 @@ class _UpdateMyProfileViewState extends ConsumerState<UpdateMyProfileView> {
     });
   }
 
-  final _nickname = TextEditingController();
-  final _email = TextEditingController();
-  final _password = TextEditingController();
-  final _introduce = TextEditingController();
-
   @override
   Widget build(BuildContext context) {
     //mpc = myProfileController
     final mpc = ref.read(myProfileController);
     //mpvm = myProfileViewModel
     final mpvm = ref.watch(myProfileViewModel);
+    final umpvm = ref.watch(updateMyProfileViewModel);
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -79,13 +76,13 @@ class _UpdateMyProfileViewState extends ConsumerState<UpdateMyProfileView> {
                 ),
               ),
               const SizedBox(height: 20),
-              _enterNickName(),
+              _enterNickName(mpc),
               const SizedBox(height: 30),
-              _enterPassword(),
+              _enterPassword(mpc),
               const SizedBox(height: 30),
-              _enterEmail(),
+              _enterEmail(mpc),
               const SizedBox(height: 30),
-              _enterIntroduce(),
+              _enterIntroduce(mpc),
               const SizedBox(height: 30),
               _updateProfileButton(mpc),
             ],
@@ -133,7 +130,7 @@ class _UpdateMyProfileViewState extends ConsumerState<UpdateMyProfileView> {
     );
   }
 
-  Container _enterEmail() {
+  Container _enterEmail(MyProfileController mpc) {
     return Container(
       padding: const EdgeInsets.all(5),
       width: double.infinity,
@@ -143,7 +140,7 @@ class _UpdateMyProfileViewState extends ConsumerState<UpdateMyProfileView> {
         color: Colors.white,
       ),
       child: TextFormField(
-        controller: _email,
+        controller: mpc.emailController,
         decoration: const InputDecoration(
           border: InputBorder.none,
           hintText: "이메일을 입력하세요",
@@ -153,7 +150,7 @@ class _UpdateMyProfileViewState extends ConsumerState<UpdateMyProfileView> {
     );
   }
 
-  Container _enterPassword() {
+  Container _enterPassword(MyProfileController mpc) {
     return Container(
       padding: const EdgeInsets.all(5),
       width: double.infinity,
@@ -163,7 +160,7 @@ class _UpdateMyProfileViewState extends ConsumerState<UpdateMyProfileView> {
         color: Colors.white,
       ),
       child: TextFormField(
-        controller: _password,
+        controller: mpc.passwordController,
         decoration: const InputDecoration(
           border: InputBorder.none,
           hintText: "비밀번호를 입력하세요",
@@ -186,33 +183,6 @@ class _UpdateMyProfileViewState extends ConsumerState<UpdateMyProfileView> {
     );
   }
 
-  // Widget _changePhoto() {
-  //   return Column(
-  //     children: [
-  //       Stack(
-  //         children: [
-  //           const CircleAvatar(
-  //             radius: 60,
-  //             backgroundImage: AssetImage("assets/images/20.jpg"),
-  //           ),
-  //           Positioned(
-  //               bottom: 0,
-  //               right: 0,
-  //               child: InkWell(
-  //                 onTap: () {
-  //                   showModalBottomSheet(context: context, builder: (builder) => _bottomSheet());
-  //                 },
-  //                 child: const Icon(
-  //                   Icons.camera_alt,
-  //                   size: 25,
-  //                 ),
-  //               ))
-  //         ],
-  //       ),
-  //     ],
-  //   );
-  // }
-
   Widget _updateProfileButton(MyProfileController mpc) {
     return ElevatedButton(
       onPressed: () async {},
@@ -225,7 +195,7 @@ class _UpdateMyProfileViewState extends ConsumerState<UpdateMyProfileView> {
     );
   }
 
-  Widget _enterIntroduce() {
+  Widget _enterIntroduce(MyProfileController mpc) {
     return Container(
       padding: const EdgeInsets.all(5),
       width: double.infinity,
@@ -235,7 +205,7 @@ class _UpdateMyProfileViewState extends ConsumerState<UpdateMyProfileView> {
         color: Colors.white,
       ),
       child: TextFormField(
-        controller: _introduce,
+        controller: mpc.introduceController,
         keyboardType: TextInputType.multiline,
         maxLines: 5,
         minLines: 1,
@@ -249,7 +219,7 @@ class _UpdateMyProfileViewState extends ConsumerState<UpdateMyProfileView> {
     );
   }
 
-  Widget _enterNickName() {
+  Widget _enterNickName(MyProfileController mpc) {
     return Container(
       padding: const EdgeInsets.all(5),
       width: double.infinity,
@@ -259,7 +229,7 @@ class _UpdateMyProfileViewState extends ConsumerState<UpdateMyProfileView> {
         color: Colors.white,
       ),
       child: TextFormField(
-        controller: _nickname,
+        controller: mpc.nicknameController,
         decoration: const InputDecoration(
           border: InputBorder.none,
           hintText: "닉네임을 입력하세요",
@@ -318,3 +288,29 @@ class _UpdateMyProfileViewState extends ConsumerState<UpdateMyProfileView> {
     });
   }
 }
+// Widget _changePhoto() {
+//   return Column(
+//     children: [
+//       Stack(
+//         children: [
+//           const CircleAvatar(
+//             radius: 60,
+//             backgroundImage: AssetImage("assets/images/20.jpg"),
+//           ),
+//           Positioned(
+//               bottom: 0,
+//               right: 0,
+//               child: InkWell(
+//                 onTap: () {
+//                   showModalBottomSheet(context: context, builder: (builder) => _bottomSheet());
+//                 },
+//                 child: const Icon(
+//                   Icons.camera_alt,
+//                   size: 25,
+//                 ),
+//               ))
+//         ],
+//       ),
+//     ],
+//   );
+// }

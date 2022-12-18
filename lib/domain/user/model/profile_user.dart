@@ -9,7 +9,7 @@ class ProfileUser {
   String? intro;
 
   ProfileUser({
-    required this.photo,
+    this.photo,
     required this.nickname,
     required this.intro,
   });
