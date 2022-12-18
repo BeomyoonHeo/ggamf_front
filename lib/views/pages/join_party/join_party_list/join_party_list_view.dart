@@ -160,19 +160,19 @@ class _JoinPartyListViewState extends State<JoinPartyListView> {
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.all(Radius.circular(10)),
             borderSide: BorderSide(
-              color: Colors.black,
+              color: Color.fromRGBO(35, 204, 81, 1),
             ),
           ),
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.all(Radius.circular(10)),
             borderSide: BorderSide(
-              color: Colors.black,
+              color: Color.fromRGBO(35, 204, 81, 1),
             ),
           ),
           filled: true,
           suffixIcon: Icon(
             Icons.search,
-            color: Colors.black,
+            color: Color.fromRGBO(35, 204, 81, 1),
           ),
         ),
       ),
