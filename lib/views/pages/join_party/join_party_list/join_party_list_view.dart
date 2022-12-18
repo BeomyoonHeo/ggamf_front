@@ -99,7 +99,7 @@ class _JoinPartyListViewState extends State<JoinPartyListView> {
                           Text("김한무"),
                           Row(
                             children: [
-                              Icon(Icons.person),
+                              Icon(Icons.person, color: Color.fromRGBO(35, 204, 81, 1)),
                               Text("5명"),
                             ],
                           )

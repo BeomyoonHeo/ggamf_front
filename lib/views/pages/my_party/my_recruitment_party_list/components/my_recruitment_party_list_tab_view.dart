@@ -85,7 +85,7 @@ class _MyRecruitmentPartyListTabViewState extends ConsumerState<MyRecruitmentPar
                           Text("${jplvm[index].nickName}"),
                           Row(
                             children: [
-                              Icon(Icons.person),
+                              Icon(Icons.person, color: Color.fromRGBO(35, 204, 81, 1)),
                               Text("${jplvm[index].totalPeople} 명"),
                             ],
                           ),
@@ -137,7 +137,7 @@ class _MyRecruitmentPartyListTabViewState extends ConsumerState<MyRecruitmentPar
                           Text("${mrplv[index].nickName}"),
                           Row(
                             children: [
-                              Icon(Icons.person),
+                              Icon(Icons.person, color: Color.fromRGBO(35, 204, 81, 1)),
                               Text("${mrplv[index].totalPeople} 명"),
                             ],
                           ),
