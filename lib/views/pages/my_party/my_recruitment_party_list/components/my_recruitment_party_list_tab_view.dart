@@ -66,7 +66,7 @@ class _MyRecruitmentPartyListTabViewState extends ConsumerState<MyRecruitmentPar
             itemCount: jplvm.length,
             separatorBuilder: (context, index) => Divider(height: 2, color: Colors.grey[800]),
             itemBuilder: (context, index) => Container(
-              padding: EdgeInsets.symmetric(vertical: 20),
+              padding: const EdgeInsets.symmetric(vertical: 20),
               width: double.infinity,
               height: 150,
               child: InkWell(
@@ -81,22 +81,22 @@ class _MyRecruitmentPartyListTabViewState extends ConsumerState<MyRecruitmentPar
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           //Text("방 제목 : 롤 골드 자랭하실분 구합니다"),
-                          Text("${jplvm[index].roomName}", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-                          Text("${jplvm[index].nickName}"),
+                          Text(jplvm[index].roomName, style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                          Text(jplvm[index].nickName),
                           Row(
                             children: [
-                              Icon(Icons.person, color: Color.fromRGBO(35, 204, 81, 1)),
+                              const Icon(Icons.person),
                               Text("${jplvm[index].totalPeople} 명"),
                             ],
                           ),
                         ],
                       ),
                     ),
-                    SizedBox(width: 30),
+                    const SizedBox(width: 30),
                     SizedBox(
                       width: 75,
                       height: 75,
-                      child: Image.memory(Uri.parse("${jplvm[index].gameLogo}").data!.contentAsBytes()),
+                      child: Image.memory(Uri.parse(jplvm[index].gameLogo).data!.contentAsBytes()),
                       //Image.asset("assets/images/lol.png"),
                     ),
                   ],
@@ -118,7 +118,7 @@ class _MyRecruitmentPartyListTabViewState extends ConsumerState<MyRecruitmentPar
               color: Colors.grey[800],
             ),
             itemBuilder: (context, index) => Container(
-              padding: EdgeInsets.symmetric(vertical: 20),
+              padding: const EdgeInsets.symmetric(vertical: 20),
               width: double.infinity,
               height: 150,
               child: InkWell(
@@ -133,18 +133,18 @@ class _MyRecruitmentPartyListTabViewState extends ConsumerState<MyRecruitmentPar
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           //Text("방 제목 : 롤 골드 자랭하실분 구합니다"),
-                          Text(" ${mrplv[index].roomName}", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                          Text(" ${mrplv[index].roomName}", style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
                           Text("${mrplv[index].nickName}"),
                           Row(
                             children: [
-                              Icon(Icons.person, color: Color.fromRGBO(35, 204, 81, 1)),
+                              const Icon(Icons.person),
                               Text("${mrplv[index].totalPeople} 명"),
                             ],
                           ),
                         ],
                       ),
                     ),
-                    SizedBox(width: 30),
+                    const SizedBox(width: 30),
                     SizedBox(
                       width: 75,
                       height: 75,

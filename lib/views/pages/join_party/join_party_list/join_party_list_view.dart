@@ -98,8 +98,8 @@ class _JoinPartyListViewState extends State<JoinPartyListView> {
                           //Text("방 제목 : ${jplv[index].roomName}"),
                           Text("김한무"),
                           Row(
-                            children: [
-                              Icon(Icons.person, color: Color.fromRGBO(35, 204, 81, 1)),
+                            children: const [
+                              Icon(Icons.person),
                               Text("5명"),
                             ],
                           )
