@@ -24,9 +24,10 @@ class LoginUserView extends StatelessWidget {
                 children: [
                   Column(
                     children: [
-                      SvgPicture.asset(
-                        'assets/icons/login_logo_icon.svg',
-                        height: 130,
+                      Image.asset(
+                        'assets/images/main_logo.png',
+                        height: 150,
+                        width: 150,
                       ),
                       const SizedBox(height: 10),
                       const Text(

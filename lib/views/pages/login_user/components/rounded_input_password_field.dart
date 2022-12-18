@@ -25,14 +25,14 @@ class _RoundedInputPasswordFieldState extends State<RoundedInputPasswordField> {
         validator: widget.validator(),
         decoration: InputDecoration(
             hintText: "비밀번호 입력",
-            icon: const Icon(Icons.lock, color: Color.fromRGBO(35, 204, 81, 1)),
+            icon: const Icon(Icons.lock),
             suffixIcon: IconButton(
               icon: visible,
               onPressed: () {
                 if (obscureText) {
-                  visible = const Icon(Icons.visibility_off, color: Color.fromRGBO(35, 204, 81, 1));
+                  visible = const Icon(Icons.visibility_off);
                 } else {
-                  visible = const Icon(Icons.visibility, color: Color.fromRGBO(35, 204, 81, 1));
+                  visible = const Icon(Icons.visibility);
                 }
                 obscureText = !obscureText;
                 setState(() {});
