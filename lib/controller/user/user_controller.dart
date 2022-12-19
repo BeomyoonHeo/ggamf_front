@@ -9,12 +9,19 @@ import 'package:ggamf_front/main.dart';
 import 'package:ggamf_front/utils/custom_intercepter.dart';
 import 'package:ggamf_front/utils/page_enum.dart';
 import 'package:ggamf_front/utils/validator_util.dart';
+import 'package:ggamf_front/views/pages/profile/withdrawal/withdrawal_view_model.dart';
 
-final userController = Provider((ref) => UserController());
+import '../../domain/user/model/user.dart';
+import '../../domain/user/model/withdraw_user.dart';
+
+final userController = Provider((ref) => UserController(ref));
 
 class UserController {
-  final userRepository =
-      UserRepository(Dio()..interceptors.add(LoginInterceptor()));
+  final Ref _ref;
+
+  UserController(this._ref);
+
+  final userRepository = UserRepository(Dio()..interceptors.add(LoginInterceptor()));
   login(String username, String password) async {
     final loginUser = LoginUser(loginId: username, password: password);
     try {
@@ -22,8 +29,7 @@ class UserController {
         Map<String, dynamic> response = value;
         logger.d('response 확인 : ${response}');
         Session().getInitSession().then(
-              (value) => Navigator.pushNamed(navigatorKey.currentState!.context,
-                  PageEnum.ALLPAGES.requestLocation),
+              (value) => Navigator.pushNamed(navigatorKey.currentState!.context, PageEnum.ALLPAGES.requestLocation),
             );
       }).onError((error, stackTrace) {
         logger.d(error);
@@ -33,5 +39,18 @@ class UserController {
       Fluttertoast.showToast(msg: e.code);
       return null;
     }
+  }
+
+  void withdrawUser(String state) {
+    final repo = UserRepository(Dio()
+      ..interceptors.add(CustomLogInterceptor())
+      ..interceptors.add(SignedInterceptor()));
+    WithdrawUser withdrawUser = WithdrawUser(
+      state: state,
+    );
+    repo.withdraw(userId: UserSession.user.id, withdrawUser: withdrawUser).then((value) async {
+      await UserSession.removeAuthentication();
+      Navigator.popAndPushNamed(navigatorKey.currentState!.context, PageEnum.LOGIN.requestLocation);
+    });
   }
 }

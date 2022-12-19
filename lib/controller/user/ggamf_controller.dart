@@ -5,8 +5,11 @@ import 'package:ggamf_front/domain/user/model/user.dart';
 import 'package:ggamf_front/domain/user/repository/user_repository.dart';
 import 'package:ggamf_front/provider/ggamf_provider.dart';
 import 'package:ggamf_front/utils/custom_intercepter.dart';
+import 'package:ggamf_front/views/pages/profile/withdrawal/withdrawal_view_model.dart';
 import 'package:ggamf_front/views/pages/recommend_ggamef/recommend_ggamf_list/receive_ggamf_list_view_model.dart';
 import 'package:ggamf_front/views/pages/recommend_ggamef/recommend_ggamf_list/send_ggamf_list_view_model.dart';
+
+import '../../domain/user/model/withdraw_user.dart';
 
 final ggamfController = Provider((ref) => GgamfController(ref));
 

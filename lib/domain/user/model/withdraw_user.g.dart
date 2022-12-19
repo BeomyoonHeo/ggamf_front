@@ -7,12 +7,10 @@ part of 'withdraw_user.dart';
 // **************************************************************************
 
 WithdrawUser _$WithdrawUserFromJson(Map<String, dynamic> json) => WithdrawUser(
-      id: json['id'] as int?,
-      state: json['state'] as String?,
+      state: json['state'] as String,
     );
 
 Map<String, dynamic> _$WithdrawUserToJson(WithdrawUser instance) =>
     <String, dynamic>{
-      'id': instance.id,
       'state': instance.state,
     };

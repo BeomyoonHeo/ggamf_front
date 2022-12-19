@@ -4,11 +4,9 @@ part 'withdraw_user.g.dart';
 
 @JsonSerializable()
 class WithdrawUser {
-  int? id;
-  String? state;
+  String state;
 
   WithdrawUser({
-    required this.id,
     required this.state,
   });
 

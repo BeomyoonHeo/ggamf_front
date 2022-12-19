@@ -129,39 +129,49 @@ class _RecommendGgamfListTabViewState extends State<RecommendGgamfListTabView> w
             child: Text('현재 추전껨프가 없습니다.'),
           )
         : ListView.separated(
-            itemBuilder: (context, index) => ListTile(
-                  visualDensity: const VisualDensity(horizontal: 3),
-                  leading: CircleAvatar(
-                    backgroundImage: MemoryImage(Uri.parse("${ggamfList[index].photo}" ?? '').data!.contentAsBytes()),
-                  ),
-                  title: Text(ggamfList[index].nickname ?? ''),
-                  subtitle: Text(ggamfList[index].intro ?? ''),
-                  trailing: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      IconButton(
-                        icon: const Icon(CupertinoIcons.person_badge_plus_fill),
-                        onPressed: () {
-                          function() {
-                            rgc.acceptReceiveGgamf(ggamfList[index].userId);
-                            Navigator.pop(context);
-                          }
+            itemBuilder: (context, index) => InkWell(
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (_) => OpponentProfileView(
+                                  ggamf: ggamfList[index],
+                                )));
+                  },
+                  child: ListTile(
+                    visualDensity: const VisualDensity(horizontal: 3),
+                    leading: CircleAvatar(
+                      backgroundImage: MemoryImage(Uri.parse("${ggamfList[index].photo}" ?? '').data!.contentAsBytes()),
+                    ),
+                    title: Text(ggamfList[index].nickname ?? ''),
+                    subtitle: Text(ggamfList[index].intro ?? ''),
+                    trailing: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        IconButton(
+                          icon: const Icon(CupertinoIcons.person_badge_plus_fill),
+                          onPressed: () {
+                            function() {
+                              rgc.acceptReceiveGgamf(ggamfList[index].userId);
+                              Navigator.pop(context);
+                            }
 
-                          _showAlertDialog(context, '껨프 추가', '해당 껨프를 추가하시겠습니까?', function);
-                        },
-                      ),
-                      IconButton(
-                        onPressed: () {
-                          function() {
-                            rgc.denyReceiveGgamf(ggamfList[index].userId);
-                            Navigator.pop(context);
-                          }
+                            _showAlertDialog(context, '껨프 추가', '해당 껨프를 추가하시겠습니까?', function);
+                          },
+                        ),
+                        IconButton(
+                          onPressed: () {
+                            function() {
+                              rgc.denyReceiveGgamf(ggamfList[index].userId);
+                              Navigator.pop(context);
+                            }
 
-                          _showAlertDialog(context, '껨프 요청 무시', '해당 껨프요청을 무시하시겠습니까?', function);
-                        },
-                        icon: const Icon(Icons.delete),
-                      ),
-                    ],
+                            _showAlertDialog(context, '껨프 요청 무시', '해당 껨프요청을 무시하시겠습니까?', function);
+                          },
+                          icon: const Icon(Icons.delete),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
             separatorBuilder: (context, index) => const Divider(
@@ -178,28 +188,38 @@ class _RecommendGgamfListTabViewState extends State<RecommendGgamfListTabView> w
             child: Text('현재 추전껨프가 없습니다.'),
           )
         : ListView.separated(
-            itemBuilder: (context, index) => ListTile(
-                  visualDensity: const VisualDensity(horizontal: 3),
-                  leading: CircleAvatar(
-                    backgroundImage: MemoryImage(Uri.parse("${ggamfList[index].photo}" ?? '').data!.contentAsBytes()),
-                  ),
-                  title: Text(ggamfList[index].nickname ?? ''),
-                  subtitle: Text(ggamfList[index].intro ?? ''),
-                  trailing: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      IconButton(
-                        onPressed: () {
-                          function() {
-                            rgc.cancelSendGgamf(ggamfList[index].userId);
-                            Navigator.pop(context);
-                          }
+            itemBuilder: (context, index) => InkWell(
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (_) => OpponentProfileView(
+                                  ggamf: ggamfList[index],
+                                )));
+                  },
+                  child: ListTile(
+                    visualDensity: const VisualDensity(horizontal: 3),
+                    leading: CircleAvatar(
+                      backgroundImage: MemoryImage(Uri.parse("${ggamfList[index].photo}" ?? '').data!.contentAsBytes()),
+                    ),
+                    title: Text(ggamfList[index].nickname ?? ''),
+                    subtitle: Text(ggamfList[index].intro ?? ''),
+                    trailing: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        IconButton(
+                          onPressed: () {
+                            function() {
+                              rgc.cancelSendGgamf(ggamfList[index].userId);
+                              Navigator.pop(context);
+                            }
 
-                          _showAlertDialog(context, '껨프 요청 무시', '해당 껨프요청을 무시하시겠습니까?', function);
-                        },
-                        icon: const Icon(CupertinoIcons.xmark),
-                      ),
-                    ],
+                            _showAlertDialog(context, '껨프 요청 무시', '해당 껨프요청을 무시하시겠습니까?', function);
+                          },
+                          icon: const Icon(CupertinoIcons.xmark),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
             separatorBuilder: (context, index) => const Divider(

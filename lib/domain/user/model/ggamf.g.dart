@@ -25,6 +25,7 @@ Ggamf _$GgamfFromJson(Map<String, dynamic> json) => Ggamf(
       nickname: json['nickname'] as String,
       photo: json['photo'] as String,
       intro: json['intro'] as String,
+      isFollowing: json['isFollowing'] as bool?,
     );
 
 Map<String, dynamic> _$GgamfToJson(Ggamf instance) => <String, dynamic>{
@@ -32,4 +33,5 @@ Map<String, dynamic> _$GgamfToJson(Ggamf instance) => <String, dynamic>{
       'nickname': instance.nickname,
       'photo': instance.photo,
       'intro': instance.intro,
+      'isFollowing': instance.isFollowing,
     };
