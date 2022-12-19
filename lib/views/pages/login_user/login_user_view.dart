@@ -24,14 +24,15 @@ class LoginUserView extends StatelessWidget {
                 children: [
                   Column(
                     children: [
-                      SvgPicture.asset(
-                        'assets/icons/login_logo_icon.svg',
-                        height: 130,
+                      Image.asset(
+                        'assets/images/main_logo.png',
+                        height: 150,
+                        width: 150,
                       ),
+                      const SizedBox(height: 10),
                       const Text(
-                        '매칭해줘! 껨프',
-                        style:
-                            TextStyle(fontFamily: 'NanumSquare', fontSize: 25),
+                        'GGAMF',
+                        style: TextStyle(fontFamily: 'NanumSquare', fontSize: 30, color: Color.fromRGBO(35, 204, 81, 1), fontWeight: FontWeight.bold),
                       ),
                       const SizedBox(height: 10),
                       LoginBox(
@@ -52,8 +53,7 @@ class LoginUserView extends StatelessWidget {
                     children: const [
                       SocialIcon(socialIcon: 'assets/icons/kakaotalk.svg'),
                       SocialIcon(socialIcon: 'assets/icons/google_plus.svg'),
-                      SocialIcon(
-                          socialIcon: 'assets/icons/apple_logo_black.svg'),
+                      SocialIcon(socialIcon: 'assets/icons/apple_logo_black.svg'),
                     ],
                   )
                 ],

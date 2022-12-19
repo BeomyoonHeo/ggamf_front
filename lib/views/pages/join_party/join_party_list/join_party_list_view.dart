@@ -18,16 +18,18 @@ class JoinPartyListView extends StatefulWidget {
 }
 
 class _JoinPartyListViewState extends State<JoinPartyListView> {
-  int tag = 2;
+  int tag = 1;
   List<String> options = [
+    '전체',
     '리그오브레전드',
+    '오버워치',
     '배틀그라운드',
     '로스트아크',
     '발로란트',
-    '오버워치',
     '스타크래프트',
     '기타',
   ];
+  final _searchText = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -70,46 +72,55 @@ class _JoinPartyListViewState extends State<JoinPartyListView> {
   SliverChildBuilderDelegate _partyWindow(List<Room> jplv) {
     return SliverChildBuilderDelegate(
       (context, index) {
-        return Container(
-          margin: const EdgeInsets.all(20),
-          padding: const EdgeInsets.all(20),
-          width: double.infinity,
-          height: 150,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10),
-            color: Colors.white,
-            border: Border.all(width: 1),
-          ),
-          child: InkWell(
-            onTap: () {
-              //Navigator.push(context, MaterialPageRoute(builder: (_) => ));
-            },
-            child: Row(
-              children: [
-                Expanded(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    crossAxisAlignment: CrossAxisAlignment.start,
+        return Padding(
+          padding: const EdgeInsets.only(left: 8.0),
+          child: Column(
+            children: [
+              Container(
+                margin: const EdgeInsets.symmetric(horizontal: 12),
+                width: double.infinity,
+                height: 150,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  color: Colors.white,
+                ),
+                child: InkWell(
+                  onTap: () {
+                    //Navigator.push(context, MaterialPageRoute(builder: (_) => ));
+                  },
+                  child: Row(
                     children: [
-                      //Text("방 제목 : 롤 골드 자랭하실분 구합니다"),
-                      Text("게임네임 : ${jplv[index].gameName} "),
-                      SizedBox(height: 10),
-                      Text("방 제목 : ${jplv[index].roomName}"),
-                      SizedBox(height: 10),
-                      Text("방장이름 : ${jplv[index].nickName}"),
+                      Expanded(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            //Text("롤 골드 자랭하실분 구합니다", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                            Text("${jplv[index].roomName}"),
+                            //Text("김한무"),
+                            Text("${jplv[index].nickName}"),
+                            Row(
+                              children: [
+                                Icon(Icons.person),
+                                Text("${jplv[index].totalPeople}"),
+                              ],
+                            )
+                          ],
+                        ),
+                      ),
+                      const SizedBox(width: 30),
+                      SizedBox(
+                        width: 75,
+                        height: 75,
+                        child: //Image.asset("assets/images/lol.png"),
+                            Image.memory(Uri.parse("${jplv[index].gameLogo}").data!.contentAsBytes()),
+                      ),
                     ],
                   ),
                 ),
-                SizedBox(width: 30),
-                SizedBox(
-                  width: 100,
-                  height: 100,
-                  child: Image.asset(
-                    "assets/images/lol.png",
-                  ),
-                ),
-              ],
-            ),
+              ),
+              Divider(height: 2, color: Colors.grey[800], endIndent: 8)
+            ],
           ),
         );
       },
@@ -133,39 +144,37 @@ class _JoinPartyListViewState extends State<JoinPartyListView> {
         borderWidth: 5,
         foregroundStyle: const TextStyle(fontSize: 13),
         selectedStyle: const C2ChipStyle(
-          borderStyle: BorderStyle.solid,
-          backgroundColor: Colors.black,
+          backgroundColor: Color.fromRGBO(35, 204, 81, 1),
           foregroundColor: Colors.white,
-          borderColor: Colors.black,
-          borderWidth: 2,
         ),
         color: Colors.white,
       ),
     );
   }
 
-  SizedBox _searchBar() {
+  Widget _searchBar() {
     return SizedBox(
       width: 200,
       height: 30,
       child: TextFormField(
-        decoration: InputDecoration(
+        controller: _searchText,
+        decoration: const InputDecoration(
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.all(Radius.circular(10)),
             borderSide: BorderSide(
-              color: Colors.black,
+              color: Color.fromRGBO(35, 204, 81, 1),
             ),
           ),
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.all(Radius.circular(10)),
             borderSide: BorderSide(
-              color: Colors.black,
+              color: Color.fromRGBO(35, 204, 81, 1),
             ),
           ),
           filled: true,
           suffixIcon: Icon(
             Icons.search,
-            color: Colors.black,
+            color: Color.fromRGBO(35, 204, 81, 1),
           ),
         ),
       ),
@@ -181,61 +190,61 @@ class _JoinPartyListViewState extends State<JoinPartyListView> {
     );
   }
 
-  Widget _enterParty() {
-    return Dialog(
-      child: Container(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10),
-        ),
-        padding: EdgeInsets.all(10),
-        width: double.infinity,
-        height: 150,
-        child: Row(
-          children: [
-            Expanded(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  SizedBox(
-                    child: Text("롤 바텀 모집중", style: TextStyle(fontSize: 20)),
-                    width: 150,
-                  ),
-                  SizedBox(height: 20),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text("방장이름"),
-                      SizedBox(width: 60),
-                      Text("2/5"),
-                    ],
-                  ),
-                  SizedBox(height: 10),
-                  ElevatedButton(
-                    onPressed: () {},
-                    child: Text(
-                      "입장",
-                      style: TextStyle(color: Colors.black),
-                    ),
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.white,
-                      side: BorderSide(
-                        width: 1,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            SizedBox(
-              width: 100,
-              height: 100,
-              child: Image.asset(
-                "assets/images/lol.png",
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
+  // Widget _enterParty() {
+  //   return Dialog(
+  //     child: Container(
+  //       decoration: BoxDecoration(
+  //         borderRadius: BorderRadius.circular(10),
+  //       ),
+  //       padding: EdgeInsets.all(10),
+  //       width: double.infinity,
+  //       height: 150,
+  //       child: Row(
+  //         children: [
+  //           Expanded(
+  //             child: Column(
+  //               mainAxisAlignment: MainAxisAlignment.center,
+  //               children: [
+  //                 SizedBox(
+  //                   child: Text("롤 바텀 모집중", style: TextStyle(fontSize: 20)),
+  //                   width: 150,
+  //                 ),
+  //                 SizedBox(height: 20),
+  //                 Row(
+  //                   mainAxisAlignment: MainAxisAlignment.center,
+  //                   children: [
+  //                     Text("방장이름"),
+  //                     SizedBox(width: 60),
+  //                     Text("2/5"),
+  //                   ],
+  //                 ),
+  //                 SizedBox(height: 10),
+  //                 ElevatedButton(
+  //                   onPressed: () {},
+  //                   child: Text(
+  //                     "입장",
+  //                     style: TextStyle(color: Colors.black),
+  //                   ),
+  //                   style: ElevatedButton.styleFrom(
+  //                     backgroundColor: Colors.white,
+  //                     side: BorderSide(
+  //                       width: 1,
+  //                     ),
+  //                   ),
+  //                 ),
+  //               ],
+  //             ),
+  //           ),
+  //           SizedBox(
+  //             width: 100,
+  //             height: 100,
+  //             child: Image.asset(
+  //               "assets/images/lol.png",
+  //             ),
+  //           ),
+  //         ],
+  //       ),
+  //     ),
+  //   );
+  // }
 }

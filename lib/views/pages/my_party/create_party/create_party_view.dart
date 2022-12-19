@@ -60,66 +60,19 @@ class _CreatePartyViewState extends ConsumerState<CreatePartyView> {
     );
   }
 
-  Widget _partyNumber(CreatePartyController cpc) {
-    return Row(
-      children: [
-        DropdownButton(
-          value: _selectedNum,
-          items: _numList.map((String item) {
-            return DropdownMenuItem<String>(
-              child: Text('$item'),
-              value: item,
-            );
-          }).toList(),
-          onChanged: (dynamic value) {
-            setState(
-              () {
-                if (value == '인원선택') {
-                  _selectedNum = value;
-                } else {
-                  cpc.totalPeopleController.text = value;
-                }
-              },
-            );
-          },
-        ),
-        SizedBox(
-          width: 150,
-          height: 40,
-          child: TextFormField(
-            controller: cpc.totalPeopleController,
-            decoration: InputDecoration(),
-            enabled: _enableTextField,
-          ),
-        ),
-      ],
-    );
-  }
-
-  Container _recruitmentButton(CreatePartyController cpc) {
-    return Container(
-      padding: EdgeInsets.all(20),
-      width: double.infinity,
-      height: 80,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(20),
-        border: Border.all(width: 1),
+  Widget _recruitmentButton(CreatePartyController cpc) {
+    return ElevatedButton(
+      onPressed: () {
+        cpc.requestCreateRoom();
+      },
+      child: Text(
+        "모집 시작!",
+        style: TextStyle(fontSize: 20),
       ),
-      child: Container(
-        width: double.infinity,
-        height: 40,
-        child: TextButton(
-          onPressed: () {
-            cpc.requestCreateRoom();
-          },
-          child: Text(
-            "모집 시작!",
-            style: TextStyle(fontSize: 20),
-          ),
-          style: TextButton.styleFrom(
-            foregroundColor: Colors.black,
-          ),
-        ),
+      style: ElevatedButton.styleFrom(
+        foregroundColor: Colors.white,
+        backgroundColor: Color.fromRGBO(35, 204, 81, 1),
+        minimumSize: const Size(150, 50),
       ),
     );
   }
@@ -130,8 +83,9 @@ class _CreatePartyViewState extends ConsumerState<CreatePartyView> {
       width: double.infinity,
       height: 100,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(20),
         border: Border.all(width: 1),
+        borderRadius: BorderRadius.circular(5),
+        color: Colors.white,
       ),
       child: TextFormField(
         controller: cpc.partyNameController,
@@ -152,8 +106,9 @@ class _CreatePartyViewState extends ConsumerState<CreatePartyView> {
       width: double.infinity,
       height: 100,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(20),
         border: Border.all(width: 1),
+        borderRadius: BorderRadius.circular(5),
+        color: Colors.white,
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -198,18 +153,69 @@ class _CreatePartyViewState extends ConsumerState<CreatePartyView> {
     );
   }
 
+  Widget _partyNumber(CreatePartyController cpc) {
+    return Container(
+      padding: EdgeInsets.all(10),
+      height: 80,
+      width: double.infinity,
+      decoration: BoxDecoration(
+        border: Border.all(width: 1),
+        borderRadius: BorderRadius.circular(5),
+        color: Colors.white,
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          DropdownButton(
+            value: _selectedNum,
+            items: _numList.map((String item) {
+              return DropdownMenuItem<String>(
+                child: Text('$item'),
+                value: item,
+              );
+            }).toList(),
+            onChanged: (dynamic value) {
+              setState(
+                () {
+                  if (value == '인원선택') {
+                    _selectedNum = value;
+                  } else {
+                    cpc.totalPeopleController.text = value;
+                  }
+                },
+              );
+            },
+          ),
+          SizedBox(
+            width: 150,
+            height: 40,
+            child: TextFormField(
+              controller: cpc.totalPeopleController,
+              decoration: InputDecoration(),
+              enabled: _enableTextField,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
   Container _title() {
     return Container(
       width: double.infinity,
       height: 100,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(20),
-        color: Colors.amber,
+        borderRadius: BorderRadius.only(
+          bottomLeft: Radius.circular(30),
+          bottomRight: Radius.circular(30),
+        ),
+        gradient: LinearGradient(
+            colors: [Color.fromRGBO(35, 204, 81, 0.8), Color.fromRGBO(35, 204, 81, 1)],
+            begin: Alignment.centerLeft,
+            end: Alignment.centerRight,
+            tileMode: TileMode.clamp),
       ),
-      child: Text(
-        "Create the Party",
-        style: TextStyle(fontSize: 30),
-      ),
+      child: Text("Create the Party", style: TextStyle(fontSize: 30, color: Colors.white)),
       alignment: Alignment.center,
     );
   }

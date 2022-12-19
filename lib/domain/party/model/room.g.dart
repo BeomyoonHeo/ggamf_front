@@ -26,7 +26,8 @@ Room _$RoomFromJson(Map<String, dynamic> json) => Room(
       roomName: json['roomName'] as String,
       gameName: json['gameName'] as String,
       gameLogo: json['gameLogo'] as String,
-      active: json['active'] as bool,
+      totalPeople: json['totalPeople'] as int,
+      uid: json['uid'] as String,
     );
 
 Map<String, dynamic> _$RoomToJson(Room instance) => <String, dynamic>{
@@ -35,5 +36,6 @@ Map<String, dynamic> _$RoomToJson(Room instance) => <String, dynamic>{
       'roomName': instance.roomName,
       'gameName': instance.gameName,
       'gameLogo': instance.gameLogo,
-      'active': instance.active,
+      'totalPeople': instance.totalPeople,
+      'uid': instance.uid,
     };

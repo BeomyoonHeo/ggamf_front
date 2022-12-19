@@ -18,7 +18,8 @@ class Room {
   String roomName;
   String gameName;
   String gameLogo;
-  bool active;
+  int totalPeople;
+  String uid;
 
   Room({
     required this.id,
@@ -26,7 +27,8 @@ class Room {
     required this.roomName,
     required this.gameName,
     required this.gameLogo,
-    required this.active,
+    required this.totalPeople,
+    required this.uid,
   });
 
   factory Room.fromJson(Map<String, dynamic> json) => _$RoomFromJson(json);

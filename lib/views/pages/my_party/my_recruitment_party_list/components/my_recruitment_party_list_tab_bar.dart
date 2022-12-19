@@ -21,7 +21,7 @@ class _MyRecruitmentPartyListTabBarState extends State<MyRecruitmentPartyListTab
     return Container(
       height: 45,
       decoration: BoxDecoration(
-        color: Colors.grey[300],
+        color: Color.fromRGBO(35, 204, 81, 0.4),
         borderRadius: BorderRadius.circular(
           25.0,
         ),
@@ -33,7 +33,7 @@ class _MyRecruitmentPartyListTabBarState extends State<MyRecruitmentPartyListTab
           borderRadius: BorderRadius.circular(
             25.0,
           ),
-          color: Colors.black,
+          color: Color.fromRGBO(35, 204, 81, 1),
         ),
         labelColor: Colors.white,
         unselectedLabelColor: Colors.black,

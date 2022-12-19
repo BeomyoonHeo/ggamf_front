@@ -14,8 +14,7 @@ class ConfirmJoinUserButton extends ConsumerWidget {
     final juc = ref.read(joinUserController);
     final jvm = ref.watch(joinUserViewModel);
     return Container(
-      decoration: BoxDecoration(
-          color: Colors.white, borderRadius: BorderRadius.circular(9)),
+      decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(9)),
       padding: const EdgeInsets.all(15),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -24,9 +23,7 @@ class ConfirmJoinUserButton extends ConsumerWidget {
             child: InkWell(
               borderRadius: BorderRadius.circular(30),
               onTap: () {
-                if (juc.formKey.currentState!.validate() &&
-                    juc.authOk &&
-                    juc.isAgree) {
+                if (juc.formKey.currentState!.validate() && juc.authOk && juc.isAgree) {
                   juc.requestJoin();
                 }
                 logger.d('벨리데이션 : ${juc.formKey.currentState!.validate()}');
@@ -35,11 +32,11 @@ class ConfirmJoinUserButton extends ConsumerWidget {
               },
               child: Container(
                   decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(30),
-                      border: Border.all(width: 0.7)),
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-                  child: const Text('회원가입')),
+                    borderRadius: BorderRadius.circular(10),
+                    color: Color.fromRGBO(35, 204, 81, 1),
+                  ),
+                  padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                  child: const Text('회원가입', style: TextStyle(fontSize: 20, color: Colors.white))),
             ),
           )
         ],

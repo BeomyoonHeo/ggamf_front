@@ -1,6 +1,8 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:ggamf_front/controller/user/my_profile_controller.dart';
 import 'package:ggamf_front/domain/user/model/profile_user.dart';
 import 'package:ggamf_front/main.dart';
@@ -20,18 +22,52 @@ class MyProfileView extends ConsumerWidget {
       appBar: _appBar(),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),
-        child: ListView(
+        child: Column(
           children: [
-            SizedBox(height: 30),
-            _buildCircleAvatar(mpvm),
-            SizedBox(height: 30),
+            SizedBox(
+              height: MediaQuery.of(context).size.width / 2 + 95,
+              child: Stack(
+                children: [
+                  Container(
+                    height: 250,
+                    width: double.infinity,
+                    decoration: const BoxDecoration(
+                        gradient: LinearGradient(
+                            colors: [Color.fromRGBO(35, 204, 81, 0.8), Color.fromRGBO(35, 204, 81, 1)],
+                            begin: Alignment.centerLeft,
+                            end: Alignment.centerRight,
+                            tileMode: TileMode.clamp),
+                        borderRadius: BorderRadius.only(bottomLeft: Radius.circular(30), bottomRight: Radius.circular(30))),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const SizedBox(),
+                      Align(
+                        alignment: Alignment.bottomCenter,
+                        child: CircleAvatar(
+                          radius: 60.0,
+                          child: ClipRRect(
+                            child: mpvm.intro!.isEmpty
+                                ? Image.asset("assets/images/generic-avatar.svg")
+                                : Image.memory((Uri.parse(mpvm.photo ?? '').data!.contentAsBytes())),
+                            borderRadius: BorderRadius.circular(100.0),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(height: 10),
             _buildNickName(mpvm),
             SizedBox(height: 10),
-            _ratedStar(),
-            SizedBox(height: 10),
             _buildIntro(mpvm),
+            SizedBox(height: 30),
+            _ratedStar(),
             Container(
-              height: 150,
+              height: 130,
               child: InkWell(
                 onTap: () async {
                   await showDialog(context: context, builder: (_) => _imageDialog());
@@ -39,6 +75,7 @@ class MyProfileView extends ConsumerWidget {
                 child: Image.asset("assets/images/cart1.png"),
               ),
             ),
+            SizedBox(height: 20),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
@@ -52,32 +89,17 @@ class MyProfileView extends ConsumerWidget {
     );
   }
 
-  Container _buildIntro(ProfileUser mpvm) {
+  Widget _buildIntro(ProfileUser mpvm) {
     return Container(
-      padding: EdgeInsets.all(10),
+      alignment: Alignment.center,
       width: double.infinity,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(5),
-        gradient: LinearGradient(
-            colors: [Color.fromRGBO(202, 73, 245, 0.5), Color.fromRGBO(202, 73, 245, 0.7)],
-            begin: Alignment.centerLeft,
-            end: Alignment.centerRight,
-            tileMode: TileMode.clamp),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.purple.withOpacity(0.2),
-            spreadRadius: 5,
-            blurRadius: 7,
-          ),
-        ],
-      ),
       child: Expanded(
         child: mpvm.intro!.isEmpty
             ? Text("자기소개가 없습니다")
             : Text(
                 "${mpvm.intro}",
                 textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 15, color: Colors.white),
+                style: TextStyle(fontSize: 15),
               ),
       ),
     );
@@ -87,34 +109,17 @@ class MyProfileView extends ConsumerWidget {
     return AppBar(
       automaticallyImplyLeading: false,
       backgroundColor: Colors.white,
-      title: Text("내 프로필"),
+      title: const Text("내 프로필"),
     );
   }
 
   Widget _buildNickName(ProfileUser mpvm) {
     return Container(
-      height: 50,
-      padding: EdgeInsets.all(10),
       width: double.infinity,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(5),
-        gradient: LinearGradient(
-            colors: [Color.fromRGBO(202, 73, 245, 0.5), Color.fromRGBO(202, 73, 245, 0.7)],
-            begin: Alignment.centerLeft,
-            end: Alignment.centerRight,
-            tileMode: TileMode.clamp),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.purple.withOpacity(0.2),
-            spreadRadius: 5,
-            blurRadius: 7,
-          ),
-        ],
-      ),
       child: Center(
         child: Text(
           "${mpvm.nickname}",
-          style: TextStyle(fontSize: 20, color: Colors.white, fontWeight: FontWeight.bold),
+          style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
           textAlign: TextAlign.center,
         ),
       ),
@@ -131,43 +136,44 @@ class MyProfileView extends ConsumerWidget {
   }
 
   Widget _withdrawal() {
-    return ElevatedButton(
-      onPressed: () {
+    return InkWell(
+      onTap: () {
         Navigator.push(
           navigatorKey.currentState!.context,
           MaterialPageRoute(builder: (context) => WithdrawalView()),
         );
       },
-      child: Text("탈퇴", style: TextStyle(fontSize: 20, color: Colors.white)),
-      style: ElevatedButton.styleFrom(
-        foregroundColor: Colors.black,
-        minimumSize: Size(150, 50),
-        backgroundColor: Color.fromRGBO(202, 73, 245, 0.8),
+      child: Column(
+        children: [
+          Icon(
+            CupertinoIcons.exclamationmark_triangle,
+            size: 30,
+          ),
+          Text("회원 탈퇴", style: TextStyle(fontSize: 18, color: Colors.black)),
+        ],
       ),
     );
   }
 
   Widget _updataProfile() {
-    return ElevatedButton(
-      onPressed: () async {
+    return InkWell(
+      onTap: () {
         Navigator.push(
           navigatorKey.currentState!.context,
           MaterialPageRoute(builder: (context) => UpdateMyProfileView()),
         );
       },
-      child: Text("프로필 수정", style: TextStyle(fontSize: 20, color: Colors.white)),
-      style: ElevatedButton.styleFrom(
-        foregroundColor: Colors.black,
-        minimumSize: Size(150, 50),
-        backgroundColor: Color.fromRGBO(202, 73, 245, 0.8),
+      child: Column(
+        children: [
+          Icon(
+            CupertinoIcons.pen,
+            size: 30,
+          ),
+          Text("프로필 수정", style: TextStyle(fontSize: 18, color: Colors.black)),
+        ],
       ),
     );
   }
-
-//   Widget _nickName(MyProfileViewModel mpvm) {
-//     return
-//   }
-// }
 
   Widget _imageDialog() {
     return Dialog(
@@ -184,29 +190,14 @@ class MyProfileView extends ConsumerWidget {
   Widget _ratedStar() {
     return Container(
       padding: EdgeInsets.all(10),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(5),
-        gradient: LinearGradient(
-            colors: [Color.fromRGBO(202, 73, 245, 0.5), Color.fromRGBO(202, 73, 245, 0.7)],
-            begin: Alignment.centerLeft,
-            end: Alignment.centerRight,
-            tileMode: TileMode.clamp),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.purple.withOpacity(0.2),
-            spreadRadius: 5,
-            blurRadius: 7,
-          ),
-        ],
-      ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text(
+          const Text(
             "평균별점",
-            style: TextStyle(fontSize: 15, color: Colors.white),
+            style: TextStyle(fontSize: 20),
           ),
-          SizedBox(width: 20),
+          const SizedBox(width: 20),
           _ratingBar(),
         ],
       ),
@@ -216,7 +207,7 @@ class MyProfileView extends ConsumerWidget {
   Widget _ratingBar() {
     return RatingBarIndicator(
       rating: 1,
-      itemBuilder: (context, index) => Icon(
+      itemBuilder: (context, index) => const Icon(
         Icons.star,
         color: Colors.amber,
       ),
