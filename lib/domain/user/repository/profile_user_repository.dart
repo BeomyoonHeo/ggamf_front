@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:ggamf_front/domain/user/model/profile_user.dart';
+import 'package:ggamf_front/domain/user/model/update_user.dart';
 import 'package:ggamf_front/domain/user/model/withdraw_user.dart';
 import 'package:retrofit/http.dart';
 
@@ -17,7 +18,7 @@ abstract class ProfileUserRepository {
 
   //유저 정보 수정하기
   @PUT("/s/api/user/{userId}/update")
-  Future<ProfileUser> putUserProfile({@Path('userId') required int userId, @Body() required ProfileUser profileUser});
+  Future<UpdateUser> putUserProfile({@Path('userId') required int userId, @Body() required UpdateUser updateUser});
 
   //탈퇴하기
   @PUT("/s/api/user/{userId}/withdraw")
