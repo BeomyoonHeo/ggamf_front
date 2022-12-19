@@ -18,10 +18,12 @@ class MyRecruitmentPartyListTabView extends ConsumerStatefulWidget {
   final List<Room> _myRoomList;
 
   @override
-  ConsumerState<MyRecruitmentPartyListTabView> createState() => _MyRecruitmentPartyListTabViewState();
+  ConsumerState<MyRecruitmentPartyListTabView> createState() =>
+      _MyRecruitmentPartyListTabViewState();
 }
 
-class _MyRecruitmentPartyListTabViewState extends ConsumerState<MyRecruitmentPartyListTabView>
+class _MyRecruitmentPartyListTabViewState
+    extends ConsumerState<MyRecruitmentPartyListTabView>
     with SingleTickerProviderStateMixin<MyRecruitmentPartyListTabView> {
   late final TabController _innerTabController;
 
@@ -56,19 +58,23 @@ class _MyRecruitmentPartyListTabViewState extends ConsumerState<MyRecruitmentPar
   }
 
   Widget _buildJoiningPartyListView(List<Room> jplvm, WidgetRef ref) {
+    final pc = ref.read(partyController);
     return jplvm.isEmpty
         ? Center(
             child: Text('파티창이 없습니다.'),
           )
         : ListView.separated(
             itemCount: jplvm.length,
-            separatorBuilder: (context, index) => Divider(height: 2, color: Colors.grey[800]),
+            separatorBuilder: (context, index) =>
+                Divider(height: 2, color: Colors.grey[800]),
             itemBuilder: (context, index) => Container(
               padding: const EdgeInsets.symmetric(vertical: 20),
               width: double.infinity,
               height: 150,
               child: InkWell(
-                onTap: () {},
+                onTap: () {
+                  pc.enterParty(roomId: jplvm[index].id);
+                },
                 child: Row(
                   children: [
                     Expanded(
@@ -77,7 +83,9 @@ class _MyRecruitmentPartyListTabViewState extends ConsumerState<MyRecruitmentPar
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           //Text("방 제목 : 롤 골드 자랭하실분 구합니다"),
-                          Text(jplvm[index].roomName, style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                          Text(jplvm[index].roomName,
+                              style: const TextStyle(
+                                  fontSize: 18, fontWeight: FontWeight.bold)),
                           Text(jplvm[index].nickName!),
                           Row(
                             children: [
@@ -92,7 +100,9 @@ class _MyRecruitmentPartyListTabViewState extends ConsumerState<MyRecruitmentPar
                     SizedBox(
                       width: 75,
                       height: 75,
-                      child: Image.memory(Uri.parse(jplvm[index].gameLogo!).data!.contentAsBytes()),
+                      child: Image.memory(Uri.parse(jplvm[index].gameLogo!)
+                          .data!
+                          .contentAsBytes()),
                       //Image.asset("assets/images/lol.png"),
                     ),
                   ],
@@ -131,7 +141,9 @@ class _MyRecruitmentPartyListTabViewState extends ConsumerState<MyRecruitmentPar
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           //Text("방 제목 : 롤 골드 자랭하실분 구합니다"),
-                          Text(" ${mrplv[index].roomName}", style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                          Text(" ${mrplv[index].roomName}",
+                              style: const TextStyle(
+                                  fontSize: 20, fontWeight: FontWeight.bold)),
                           Text("${mrplv[index].nickName}"),
                           Row(
                             children: [
