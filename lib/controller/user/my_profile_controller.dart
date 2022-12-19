@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:ggamf_front/domain/user/model/update_user.dart';
 import 'package:ggamf_front/domain/user/model/user.dart';
+import 'package:ggamf_front/domain/user/model/withdraw_user.dart';
 import 'package:ggamf_front/domain/user/repository/profile_user_repository.dart';
 import 'package:ggamf_front/main.dart';
 import 'package:ggamf_front/utils/custom_intercepter.dart';
@@ -59,8 +60,4 @@ class MyProfileController {
       Fluttertoast.showToast(msg: '입력양식이 맞지 않습니다.');
     });
   }
-  // void findById(int id) async {
-  //   logger.d("로그찍기5");
-  //   ProfileUser profileUser = await repo.getUserProfile(userId: 3);
-  // }
 }

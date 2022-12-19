@@ -1,18 +1,23 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:ggamf_front/controller/user/ggamf_controller.dart';
+import 'package:ggamf_front/controller/user/user_controller.dart';
 
-class WithdrawalView extends StatefulWidget {
+class WithdrawalView extends ConsumerStatefulWidget {
   const WithdrawalView({Key? key}) : super(key: key);
 
   @override
-  State<WithdrawalView> createState() => _WithdrawalViewState();
+  ConsumerState<WithdrawalView> createState() => _WithdrawalViewState();
 }
 
-class _WithdrawalViewState extends State<WithdrawalView> {
+class _WithdrawalViewState extends ConsumerState<WithdrawalView> {
   bool _isChecked = false;
 
   @override
   Widget build(BuildContext context) {
+    final uc = ref.read(userController);
+
     return Scaffold(
       appBar: _appBar(),
       body: Padding(
@@ -89,7 +94,9 @@ class _WithdrawalViewState extends State<WithdrawalView> {
                                 height: 35,
                                 width: 100,
                                 child: ElevatedButton(
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    uc.withdrawUser("WITHDRAW");
+                                  },
                                   child: Text(
                                     "예",
                                     style: TextStyle(color: Colors.black),

@@ -14,7 +14,9 @@ class UpdateMyProfileViewModel extends StateNotifier<UpdateUser> {
   final Ref _ref;
   UpdateMyProfileViewModel(super.state, this._ref);
 
-  Dio dio = Dio()..interceptors.add(CustomLogInterceptor());
+  final dio = Dio()
+    ..interceptors.add(CustomLogInterceptor())
+    ..interceptors.add(SignedInterceptor());
 
   Future<void> updateMyProfile(UpdateUser updateUser) async {
     ProfileUserRepository restApi = await ProfileUserRepository(dio);
