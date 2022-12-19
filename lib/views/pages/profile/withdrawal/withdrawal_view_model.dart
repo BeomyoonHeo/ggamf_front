@@ -12,10 +12,11 @@ class WithdrawalViewModel extends StateNotifier<WithdrawUser> {
   final Ref _ref;
   WithdrawalViewModel(super.state, this._ref);
 
-  Dio dio = Dio()..interceptors.add(CustomLogInterceptor());
+  final dio = Dio()
+    ..interceptors.add(CustomLogInterceptor())
+    ..interceptors.add(SignedInterceptor());
 
-  void withdraw(WithdrawUser withdrawUser) {
-    ProfileUserRepository restApi = ProfileUserRepository(dio);
-    //restApi.withdrawUser(userId: 1, withdrawUser: withdrawUser).then((value) => state = WithdrawUser(id: 1, state: "30일"));
+  Future<void> withdrawUser(WithdrawUser withdrawUser) async {
+    GgamfRepository ggamfRepository = await GgamfRepository(dio);
   }
 }

@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:ggamf_front/domain/user/model/ggamf.dart';
 import 'package:ggamf_front/domain/user/model/join_user.dart';
 import 'package:ggamf_front/domain/user/model/login_user.dart';
@@ -78,6 +79,10 @@ abstract class GgamfRepository {
   //겜프 취소하기
   @DELETE('/s/api/ggamf/user/{userId}/unfollow/{friendId}')
   Future<dynamic> deleteGgamf({@Path('userId') required int userId, @Path('friendId') required int friendId});
+
+  //회원 탈퇴
+  @PUT('/s/api/{userId}/withdraw')
+  Future<dynamic> withdraw({@Path('userId') required int userId});
 }
 
 @RestApi(baseUrl: baseUrl)

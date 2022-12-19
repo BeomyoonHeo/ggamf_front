@@ -10,11 +10,13 @@ import 'package:ggamf_front/utils/custom_intercepter.dart';
 import 'package:ggamf_front/utils/page_enum.dart';
 import 'package:ggamf_front/utils/validator_util.dart';
 
+import '../../domain/user/model/user.dart';
+import '../../domain/user/model/withdraw_user.dart';
+
 final userController = Provider((ref) => UserController());
 
 class UserController {
-  final userRepository =
-      UserRepository(Dio()..interceptors.add(LoginInterceptor()));
+  final userRepository = UserRepository(Dio()..interceptors.add(LoginInterceptor()));
   login(String username, String password) async {
     final loginUser = LoginUser(loginId: username, password: password);
     try {
@@ -22,8 +24,7 @@ class UserController {
         Map<String, dynamic> response = value;
         logger.d('response 확인 : ${response}');
         Session().getInitSession().then(
-              (value) => Navigator.pushNamed(navigatorKey.currentState!.context,
-                  PageEnum.ALLPAGES.requestLocation),
+              (value) => Navigator.pushNamed(navigatorKey.currentState!.context, PageEnum.ALLPAGES.requestLocation),
             );
       }).onError((error, stackTrace) {
         logger.d(error);
