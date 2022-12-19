@@ -18,7 +18,6 @@ class RoomList {
 class SingleRoom {
   Room data;
   SingleRoom({required this.data});
-
   factory SingleRoom.fromJson(Map<String, dynamic> json) =>
       _$SingleRoomFromJson(json);
 

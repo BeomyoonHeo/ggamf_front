@@ -27,4 +27,6 @@ class MyProfileViewModel extends StateNotifier<ProfileUser> {
       state = profileUser!;
     });
   }
+
+  void updateInit() {}
 }

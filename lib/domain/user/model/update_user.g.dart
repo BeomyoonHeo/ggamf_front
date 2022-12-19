@@ -7,7 +7,6 @@ part of 'update_user.dart';
 // **************************************************************************
 
 UpdateUser _$UpdateUserFromJson(Map<String, dynamic> json) => UpdateUser(
-      id: json['id'] as int?,
       photo: json['photo'] as String?,
       nickname: json['nickname'] as String?,
       intro: json['intro'] as String?,
@@ -18,7 +17,6 @@ UpdateUser _$UpdateUserFromJson(Map<String, dynamic> json) => UpdateUser(
 
 Map<String, dynamic> _$UpdateUserToJson(UpdateUser instance) =>
     <String, dynamic>{
-      'id': instance.id,
       'photo': instance.photo,
       'nickname': instance.nickname,
       'intro': instance.intro,

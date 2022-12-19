@@ -4,7 +4,6 @@ part 'update_user.g.dart';
 
 @JsonSerializable()
 class UpdateUser {
-  int? id;
   String? photo;
   String? nickname;
   String? intro;
@@ -13,8 +12,7 @@ class UpdateUser {
   String? email;
 
   UpdateUser({
-    this.id,
-    required this.photo,
+    this.photo,
     required this.nickname,
     required this.intro,
     this.password,

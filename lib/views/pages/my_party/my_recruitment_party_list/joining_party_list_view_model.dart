@@ -34,6 +34,7 @@ class JoiningPartyListViewModel extends StateNotifier<List<Room>> {
             roomName: _room.roomName,
             totalPeople: _room.totalPeople,
             gameName: _room.gameName,
+            gameLogo: _room.gameLogo,
           ),
         );
         // logger.d("데이터 확인1 : ${_myRoom.nickName}");
