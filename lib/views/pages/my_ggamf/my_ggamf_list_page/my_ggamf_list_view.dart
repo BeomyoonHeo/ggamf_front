@@ -6,6 +6,8 @@ import 'package:ggamf_front/provider/ggamf_provider.dart';
 import 'package:ggamf_front/views/pages/profile/my_profile/my_profile_view_model.dart';
 import 'package:ggamf_front/views/pages/profile/opponent_profile/opponent_profile_view.dart';
 
+import '../../../../utils/validator_util.dart';
+
 class MyGgamfListView extends ConsumerWidget {
   const MyGgamfListView({Key? key}) : super(key: key);
 
@@ -14,6 +16,7 @@ class MyGgamfListView extends ConsumerWidget {
     //mglv = myGgamfListViewModel
     final gp = ref.watch(ggamfProvider);
     final mpvm = ref.watch(myProfileViewModel);
+    logger.d("길이보기: ${gp.length}");
     return Scaffold(
       appBar: _appBar(),
       backgroundColor: Colors.white,
@@ -28,9 +31,8 @@ class MyGgamfListView extends ConsumerWidget {
             const SizedBox(height: 5),
             Container(
               padding: EdgeInsets.all(15),
-              child: Text("내 껨프 3",
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-              //Text("내 껨프 ${gp.length}", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+              child: //const Text("내 껨프 3", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                  Text("내 껨프 ${gp.length}", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
             ),
             _buildMyGgamfList(gp),
           ],
@@ -59,8 +61,7 @@ class MyGgamfListView extends ConsumerWidget {
                   radius: 30,
                 ) ??
                 CircleAvatar(
-                  backgroundImage:
-                      NetworkImage('https://picsum.photos/250/250'),
+                  backgroundImage: NetworkImage('https://picsum.photos/250/250'),
                   radius: 30,
                 ),
             const SizedBox(width: 20),
@@ -87,32 +88,25 @@ class MyGgamfListView extends ConsumerWidget {
         //   :
         Expanded(
       child: ListView.separated(
-        itemCount: 3,
+        itemCount: mglv.length,
+        //mglv.length,
         separatorBuilder: (context, index) => const Divider(
           height: 10,
           color: Colors.white,
         ),
-        //mglv.length,
+
         itemBuilder: (context, index) => ListTile(
-          visualDensity: VisualDensity(horizontal: 3),
-          leading: _profileImage(),
-          //CircleAvatar(
-          //   backgroundImage: MemoryImage(Uri.parse(mglv[index].photo ?? '').data!.contentAsBytes()),
-          //   radius: 30,
-          // ),
-          title: Text(
-            "김겐지",
-            style: TextStyle(fontSize: 20),
-          ), //
-          subtitle: Text(
-            "안녕하세요 잘가세요",
-            style: TextStyle(fontSize: 15),
-          ),
-          onTap: () {
-            Navigator.push(context,
-                MaterialPageRoute(builder: (_) => OpponentProfileView()));
-          },
-        ),
+            visualDensity: VisualDensity(horizontal: 3),
+            leading: //_profileImage(),
+                CircleAvatar(
+              backgroundImage: MemoryImage(Uri.parse(mglv[index].photo ?? '').data!.contentAsBytes()),
+              radius: 30,
+            ),
+            title: Text(mglv[index].nickname, style: TextStyle(fontSize: 20)),
+            subtitle: Text(mglv[index].intro, style: TextStyle(fontSize: 15)),
+            onTap: () {
+              Navigator.push(context, MaterialPageRoute(builder: (_) => OpponentProfileView(ggamf: mglv[index])));
+            }),
         //     Container(
         //   padding: EdgeInsets.all(10),
         //   decoration: BoxDecoration(
@@ -157,8 +151,7 @@ class MyGgamfListView extends ConsumerWidget {
           Text(
             //"${mglv[index].nickname}",
             "김겐지",
-            style: TextStyle(
-                fontSize: 25, color: Colors.white, fontWeight: FontWeight.w600),
+            style: TextStyle(fontSize: 25, color: Colors.white, fontWeight: FontWeight.w600),
           ),
           SizedBox(height: 10),
           Text(
@@ -187,8 +180,7 @@ AppBar _appBar() {
     backgroundColor: Colors.white,
     title: Text(
       "내 껨프",
-      style: TextStyle(
-          color: Colors.black, fontFamily: 'NanumSquare', fontSize: 25),
+      style: TextStyle(color: Colors.black, fontFamily: 'NanumSquare', fontSize: 25),
     ),
     elevation: 0,
   );

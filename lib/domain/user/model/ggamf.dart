@@ -7,8 +7,7 @@ class GgamfList {
   Map<String, List<Ggamf>> data;
   GgamfList({required this.data});
 
-  factory GgamfList.fromJson(Map<String, dynamic> json) =>
-      _$GgamfListFromJson(json);
+  factory GgamfList.fromJson(Map<String, dynamic> json) => _$GgamfListFromJson(json);
   Map<String, dynamic> toJson() => _$GgamfListToJson(this);
 }
 
@@ -18,12 +17,14 @@ class Ggamf {
   String nickname;
   String photo;
   String intro;
+  bool? isFollowing;
 
   Ggamf({
     required this.userId,
     required this.nickname,
     required this.photo,
     required this.intro,
+    this.isFollowing,
   });
 
   factory Ggamf.fromJson(Map<String, dynamic> json) => _$GgamfFromJson(json);

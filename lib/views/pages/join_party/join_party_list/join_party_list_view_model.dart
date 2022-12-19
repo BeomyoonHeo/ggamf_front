@@ -38,8 +38,15 @@ class JoinPartyListViewModel extends StateNotifier<List<Room>> {
     });
   }
 
+  void findAllRoomByCategory(String category) {
+    state = state.where((_Room) => _Room.gameName != category).toList();
+    //전체 파티방 목록보기
+    RoomRepository restApi = RoomRepository(Dio());
+    restApi.findAllRoom(userId: 1).then((value) => value.data.isEmpty ? null : state = value.data as List<Room>);
+  }
+
   void findAllRoomByKeyword(String keyword) {
-    state = state.where((_Room) => _Room.gameName != keyword).toList();
+    state = state.where((_Room) => _Room.roomName != keyword).toList();
     //전체 파티방 목록보기
     RoomRepository restApi = RoomRepository(Dio());
     restApi.findAllRoom(userId: 1).then((value) => value.data.isEmpty ? null : state = value.data as List<Room>);

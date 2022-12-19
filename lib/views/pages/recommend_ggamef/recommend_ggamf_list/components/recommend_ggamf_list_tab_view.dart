@@ -7,6 +7,8 @@ import 'package:ggamf_front/views/pages/recommend_ggamef/recommend_ggamf_list/co
 import 'package:ggamf_front/views/pages/recommend_ggamef/recommend_ggamf_list/receive_ggamf_list_view_model.dart';
 import 'package:ggamf_front/views/pages/recommend_ggamef/recommend_ggamf_list/send_ggamf_list_view_model.dart';
 
+import '../../../profile/opponent_profile/opponent_profile_view.dart';
+
 class RecommendGgamfListTabView extends StatefulWidget {
   const RecommendGgamfListTabView({
     Key? key,
@@ -80,27 +82,37 @@ class _RecommendGgamfListTabViewState extends State<RecommendGgamfListTabView> w
             child: Text('현재 추전껨프가 없습니다.'),
           )
         : ListView.separated(
-            itemBuilder: (context, index) => ListTile(
-                  visualDensity: const VisualDensity(horizontal: 3),
-                  leading: CircleAvatar(
-                    backgroundImage: MemoryImage(Uri.parse("${ggamfList[index].photo}" ?? '').data!.contentAsBytes()),
-                  ),
-                  title: Text(ggamfList[index].nickname ?? ''),
-                  subtitle: Text(ggamfList[index].intro ?? ''),
-                  trailing: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      IconButton(
-                        onPressed: () {
-                          function() {
-                            Navigator.pop(context);
-                          }
+            itemBuilder: (context, index) => InkWell(
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (_) => OpponentProfileView(
+                                  ggamf: ggamfList[index],
+                                )));
+                  },
+                  child: ListTile(
+                    visualDensity: const VisualDensity(horizontal: 3),
+                    leading: CircleAvatar(
+                      backgroundImage: MemoryImage(Uri.parse(ggamfList[index].photo ?? '').data!.contentAsBytes()),
+                    ),
+                    title: Text(ggamfList[index].nickname ?? ''),
+                    subtitle: Text(ggamfList[index].intro ?? ''),
+                    trailing: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        IconButton(
+                          onPressed: () {
+                            function() {
+                              Navigator.pop(context);
+                            }
 
-                          _showAlertDialog(context, '추천 껨프 삭제', '해당 껨프를 삭제하시겠습니까?', function);
-                        },
-                        icon: const Icon(Icons.delete),
-                      ),
-                    ],
+                            _showAlertDialog(context, '추천 껨프 삭제', '해당 껨프를 삭제하시겠습니까?', function);
+                          },
+                          icon: const Icon(Icons.delete),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
             separatorBuilder: (context, index) => const Divider(
@@ -216,12 +228,20 @@ class _RecommendGgamfListTabViewState extends State<RecommendGgamfListTabView> w
                 onPressed: () {
                   Navigator.pop(context);
                 },
+                style: ElevatedButton.styleFrom(
+                  foregroundColor: Colors.white,
+                  backgroundColor: const Color.fromRGBO(35, 204, 81, 1),
+                ),
                 child: Text('취소'),
               ),
               ElevatedButton(
                 onPressed: () {
                   function();
                 },
+                style: ElevatedButton.styleFrom(
+                  foregroundColor: Colors.white,
+                  backgroundColor: const Color.fromRGBO(35, 204, 81, 1),
+                ),
                 child: Text('확인'),
               ),
             ],
