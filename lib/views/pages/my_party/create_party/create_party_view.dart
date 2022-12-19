@@ -23,7 +23,7 @@ class _CreatePartyViewState extends ConsumerState<CreatePartyView> {
     '기타': 5
   };
   String _selectedValue = '게임선택';
-  List<String> _numList = ['인원선택', '2', '3', '4', '5', '6', '7', '8'];
+  final List<String> _numList = ['인원선택', '2', '3', '4', '5', '6', '7', '8'];
   var _selectedNum = '인원선택';
 
   bool _enableTextField = false;
@@ -48,8 +48,8 @@ class _CreatePartyViewState extends ConsumerState<CreatePartyView> {
     if (_valueList.isEmpty) {
       _keyList.forEach((key, value) {
         _valueList.add(DropdownMenuItem(
-          child: Text('${key}'),
           value: key,
+          child: Text('${key}'),
         ));
       });
     }
@@ -79,21 +79,21 @@ class _CreatePartyViewState extends ConsumerState<CreatePartyView> {
       onPressed: () {
         cpc.requestCreateRoom();
       },
-      child: Text(
-        "모집 시작!",
-        style: TextStyle(fontSize: 20),
-      ),
       style: ElevatedButton.styleFrom(
         foregroundColor: Colors.white,
-        backgroundColor: Color.fromRGBO(35, 204, 81, 1),
+        backgroundColor: const Color.fromRGBO(35, 204, 81, 1),
         minimumSize: const Size(150, 50),
+      ),
+      child: const Text(
+        "모집 시작!",
+        style: TextStyle(fontSize: 20),
       ),
     );
   }
 
   Container _partyName(CreatePartyController cpc) {
     return Container(
-      padding: EdgeInsets.all(20),
+      padding: const EdgeInsets.all(20),
       width: double.infinity,
       height: 100,
       decoration: BoxDecoration(
@@ -104,7 +104,7 @@ class _CreatePartyViewState extends ConsumerState<CreatePartyView> {
       child: TextFormField(
         controller: cpc.partyNameController,
         maxLength: 30,
-        decoration: InputDecoration(
+        decoration: const InputDecoration(
           hintText: '파티 방 제목을 입력하세요',
         ),
       ),
@@ -156,7 +156,7 @@ class _CreatePartyViewState extends ConsumerState<CreatePartyView> {
             height: 40,
             child: TextFormField(
               controller: cpc.selectGameController,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 hintText: '기타 선택시 입력창',
               ),
               enabled: _enableTextField,
@@ -169,7 +169,7 @@ class _CreatePartyViewState extends ConsumerState<CreatePartyView> {
 
   Widget _partyNumber(CreatePartyController cpc) {
     return Container(
-      padding: EdgeInsets.all(10),
+      padding: const EdgeInsets.all(10),
       height: 80,
       width: double.infinity,
       decoration: BoxDecoration(
@@ -184,8 +184,8 @@ class _CreatePartyViewState extends ConsumerState<CreatePartyView> {
             value: _selectedNum,
             items: _numList.map((String item) {
               return DropdownMenuItem<String>(
-                child: Text('$item'),
                 value: item,
+                child: Text('${item}'),
               );
             }).toList(),
             onChanged: (dynamic value) {
@@ -205,7 +205,7 @@ class _CreatePartyViewState extends ConsumerState<CreatePartyView> {
             height: 40,
             child: TextFormField(
               controller: cpc.totalPeopleController,
-              decoration: InputDecoration(),
+              decoration: const InputDecoration(),
               enabled: _enableTextField,
             ),
           ),
@@ -232,9 +232,9 @@ class _CreatePartyViewState extends ConsumerState<CreatePartyView> {
             end: Alignment.centerRight,
             tileMode: TileMode.clamp),
       ),
-      child: Text("Create the Party",
-          style: TextStyle(fontSize: 30, color: Colors.white)),
       alignment: Alignment.center,
+      child: const Text("Create the Party",
+          style: TextStyle(fontSize: 30, color: Colors.white)),
     );
   }
 
@@ -243,7 +243,7 @@ class _CreatePartyViewState extends ConsumerState<CreatePartyView> {
       automaticallyImplyLeading: false,
       backgroundColor: Colors.white,
       title: Row(
-        children: [
+        children: const [
           BackButton(color: Colors.black),
           Text(
             "파티 생성",

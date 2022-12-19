@@ -4,14 +4,13 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ggamf_front/core/theme.dart';
 import 'package:ggamf_front/domain/chats/model/chat_message.dart';
 import 'package:ggamf_front/domain/user/model/user.dart';
-import 'package:ggamf_front/domain/user/repository/user_repository.dart';
 import 'package:ggamf_front/utils/full_screen_util.dart';
 import 'package:ggamf_front/utils/page_enum.dart';
 import 'package:ggamf_front/views/common_components/common_pages.dart';
+import 'package:ggamf_front/views/pages/administrator/administrator_view.dart';
 import 'package:ggamf_front/views/pages/join_user/join_user_view.dart';
 import 'package:ggamf_front/views/pages/login_user/login_user_view.dart';
 import 'package:ggamf_front/views/pages/profile/my_profile/my_profile_view.dart';
-import 'package:ggamf_front/views/pages/splash_page.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
 void main() async {
@@ -23,16 +22,17 @@ void main() async {
     DeviceOrientation.portraitDown,
   ]); //세로화면 고정
   SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);
-  Session().getInitSession().then(
-        (value) => runApp(
-          SplashPage(
-            key: UniqueKey(),
-            onInitializationComplete: () {
-              runApp(const ProviderScope(child: MyApp()));
-            },
-          ),
-        ),
-      );
+  runApp(const ProviderScope(child: AdministratorView()));
+  // Session().getInitSession().then(
+  //       (value) => runApp(
+  //         SplashPage(
+  //           key: UniqueKey(),
+  //           onInitializationComplete: () {
+  //             runApp(const ProviderScope(child: AdministratorView()));
+  //           },
+  //         ),
+  //       ),
+  //     );
 }
 
 // 페이지 context를 global로 가지고 있을 NavigatorKey 적용
