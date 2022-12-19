@@ -216,12 +216,20 @@ class _RecommendGgamfListTabViewState extends State<RecommendGgamfListTabView> w
                 onPressed: () {
                   Navigator.pop(context);
                 },
+                style: ElevatedButton.styleFrom(
+                  foregroundColor: Colors.white,
+                  backgroundColor: const Color.fromRGBO(35, 204, 81, 1),
+                ),
                 child: Text('취소'),
               ),
               ElevatedButton(
                 onPressed: () {
                   function();
                 },
+                style: ElevatedButton.styleFrom(
+                  foregroundColor: Colors.white,
+                  backgroundColor: const Color.fromRGBO(35, 204, 81, 1),
+                ),
                 child: Text('확인'),
               ),
             ],

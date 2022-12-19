@@ -153,24 +153,24 @@ class _OpponentProfileViewState extends ConsumerState<OpponentProfileView> {
       onPressed: () {
         showDialog(context: context, builder: (_) => _ratingStar());
       },
-      child: Text("별점 주기", style: TextStyle(fontSize: 20)),
       style: ElevatedButton.styleFrom(
         foregroundColor: Colors.white,
-        backgroundColor: Color.fromRGBO(35, 204, 81, 1),
-        minimumSize: Size(150, 50),
+        backgroundColor: const Color.fromRGBO(35, 204, 81, 1),
+        minimumSize: const Size(150, 50),
       ),
+      child: const Text("별점 주기", style: TextStyle(fontSize: 20)),
     );
   }
 
   Widget _followButton() {
     return ElevatedButton(
       onPressed: () {},
-      child: Text("팔로우하기", style: TextStyle(fontSize: 20)),
       style: ElevatedButton.styleFrom(
         foregroundColor: Colors.white,
-        backgroundColor: Color.fromRGBO(35, 204, 81, 1),
-        minimumSize: Size(150, 50),
+        backgroundColor: const Color.fromRGBO(35, 204, 81, 1),
+        minimumSize: const Size(150, 50),
       ),
+      child: const Text("팔로우하기", style: TextStyle(fontSize: 20)),
     );
   }
 
