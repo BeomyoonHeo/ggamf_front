@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ggamf_front/domain/user/model/join_user.dart';
 import 'package:ggamf_front/main.dart';
+import 'package:ggamf_front/service/database_service.dart';
 import 'package:ggamf_front/utils/custom_intercepter.dart';
 import 'package:ggamf_front/utils/page_enum.dart';
 import 'package:ggamf_front/views/pages/join_user/join_user_view_model.dart';
@@ -81,7 +82,7 @@ class JoinUserController {
     if (uid != null) {
       joinUser.uid = uid;
       await joinUserRepository.insert(joinUser: joinUser);
-
+      await _ref.read(databaseService).createUser(uid, joinUser.nickname);
       Navigator.popAndPushNamed(
           navigatorKey.currentState!.context, PageEnum.LOGIN.requestLocation);
     }

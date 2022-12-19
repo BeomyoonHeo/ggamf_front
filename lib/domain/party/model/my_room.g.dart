@@ -23,15 +23,13 @@ Map<String, dynamic> _$MyRoomListToJson(MyRoomList instance) =>
 
 MyRoom _$MyRoomFromJson(Map<String, dynamic> json) => MyRoom(
       id: json['id'] as int,
-      nickName: json['nickName'] as String,
       roomName: json['roomName'] as String,
-      totalPeople: json['totalPeople'] as int,
       gameLogo: json['gameLogo'] as String,
+      totalPeople: json['totalPeople'] as int?,
     );
 
 Map<String, dynamic> _$MyRoomToJson(MyRoom instance) => <String, dynamic>{
       'id': instance.id,
-      'nickName': instance.nickName,
       'roomName': instance.roomName,
       'totalPeople': instance.totalPeople,
       'gameLogo': instance.gameLogo,

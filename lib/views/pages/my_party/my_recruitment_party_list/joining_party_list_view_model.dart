@@ -1,17 +1,19 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:ggamf_front/domain/party/model/room.dart';
 import 'package:ggamf_front/domain/party/repository/room_repository.dart';
 import 'package:ggamf_front/domain/user/model/user.dart';
-import 'package:ggamf_front/utils/validator_util.dart';
+import 'package:ggamf_front/provider/chats_page_provider.dart';
 
-import '../../../../domain/party/model/my_room.dart';
 import '../../../../utils/custom_intercepter.dart';
 
-final joiningPartyListViewModel = StateNotifierProvider.autoDispose<JoiningPartyListViewModel, List<MyRoom>>((ref) {
+final joiningPartyListViewModel =
+    StateNotifierProvider.autoDispose<JoiningPartyListViewModel, List<Room>>(
+        (ref) {
   return JoiningPartyListViewModel([], ref)..init();
 });
 
-class JoiningPartyListViewModel extends StateNotifier<List<MyRoom>> {
+class JoiningPartyListViewModel extends StateNotifier<List<Room>> {
   final Ref _ref;
   JoiningPartyListViewModel(super.state, this._ref);
 
@@ -19,18 +21,19 @@ class JoiningPartyListViewModel extends StateNotifier<List<MyRoom>> {
     ..interceptors.add(CustomLogInterceptor())
     ..interceptors.add(SignedInterceptor()));
 
-  List<MyRoom> joiningPartyList = [];
+  List<Room> joiningPartyList = [];
 
-  void init() {
+  void init() async {
+    await _ref.watch(chatsPageProvider.notifier).getChats();
     repo.findJoinRooms(userId: UserSession.user.id).then((value) {
-      value.data['rooms']?.forEach((_myRoom) {
+      value.data['rooms']?.forEach((_room) {
         joiningPartyList.add(
-          MyRoom(
-            id: _myRoom.id,
-            nickName: _myRoom.nickName,
-            roomName: _myRoom.roomName,
-            totalPeople: _myRoom.totalPeople,
-            gameLogo: _myRoom.gameLogo,
+          Room(
+            id: _room.id,
+            nickName: _room.nickName,
+            roomName: _room.roomName,
+            totalPeople: _room.totalPeople,
+            gameName: _room.gameName,
           ),
         );
         // logger.d("데이터 확인1 : ${_myRoom.nickName}");

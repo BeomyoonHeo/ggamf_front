@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ggamf_front/domain/chats/model/chat_message.dart';
+import 'package:ggamf_front/utils/validator_util.dart';
 
 const String USER_COLLECTION = "Users";
 const String CHAT_COLLECTION = "Chats";
@@ -12,15 +13,11 @@ class DatabaseService {
   final FirebaseFirestore _db = FirebaseFirestore.instance;
 
   DatabaseService() {}
-
-  Future<void> createUser(
-      String _uid, String _email, String _name, String _imageURL) async {
+  Future<void> createUser(String _uid, String _nickName) async {
     try {
       await _db.collection(USER_COLLECTION).doc(_uid).set({
-        'email': _email,
-        'image': _imageURL,
-        'last_active': DateTime.now(),
-        'name': _name,
+        'uid': _uid,
+        'nickName': _nickName,
       });
     } catch (e) {
       print(e);
@@ -30,6 +27,31 @@ class DatabaseService {
   //firestore의 collection아이디를 가지고 온다.
   Future<DocumentSnapshot> getUser(String _uid) {
     return _db.collection(USER_COLLECTION).doc(_uid).get();
+  }
+
+  Future<void> createChatRoom(
+      {required int roomId,
+      required String ownerId,
+      required int totalPeople}) async {
+    Map<String, dynamic> messages = {
+      'content': 'dummy',
+      'sender_id': '${ownerId}',
+      'sent_time': Timestamp.fromDate(DateTime.now()),
+      'type': 'text',
+    };
+    List<String> members = [ownerId];
+    Map<String, dynamic> roomInfo = {
+      'id': roomId,
+      'members': members,
+      'total_people': totalPeople
+    };
+    logger.d('방생성 확인');
+    await _db.collection(CHAT_COLLECTION).doc(roomId.toString()).set(roomInfo);
+    await _db
+        .collection(CHAT_COLLECTION)
+        .doc(roomId.toString())
+        .collection(MESSAGES_COLLECTION)
+        .add(messages);
   }
 
   //Chats 컬렉션에 있는 members중에 같은 uid를 가지고 있는 데이터를 가지고 온다.

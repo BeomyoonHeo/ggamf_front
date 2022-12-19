@@ -29,29 +29,20 @@ class GgamfProvider extends StateNotifier<List<Ggamf>> {
   void showMyGgamf() {
     repo.myGgamfList(userId: UserSession.user.id).then(
       (value) {
-        logger.d('내껨프 벨류 확인 : ${value.data}');
-        value.data['followers']?.forEach((_ggamf) {
-          myGgamIdList[_ggamf.userId] = _ggamf;
-          myGgamfList.add(
-            Ggamf(
-              userId: _ggamf.userId,
-              photo: _ggamf.photo,
-              nickname: _ggamf.nickname,
-              intro: _ggamf.intro,
-            ),
-          );
-        });
-        value.data['followings']?.forEach((_ggamf) {
-          myGgamIdList[_ggamf.userId] = _ggamf;
-          myGgamfList.add(
-            Ggamf(
-              userId: _ggamf.userId,
-              photo: _ggamf.photo,
-              nickname: _ggamf.nickname,
-              intro: _ggamf.intro,
-            ),
-          );
-        });
+        if (value.data != null) {
+          logger.d('내껨프 벨류 확인 : ${value.data}');
+          value.data['friendList']?.forEach((_ggamf) {
+            myGgamIdList[_ggamf.userId] = _ggamf;
+            myGgamfList.add(
+              Ggamf(
+                userId: _ggamf.userId,
+                photo: _ggamf.photo,
+                nickname: _ggamf.nickname,
+                intro: _ggamf.intro,
+              ),
+            );
+          });
+        }
         state = myGgamfList;
       },
     );

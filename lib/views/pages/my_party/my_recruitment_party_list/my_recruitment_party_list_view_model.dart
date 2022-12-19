@@ -1,43 +1,41 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:ggamf_front/domain/party/model/generate_room_party.dart';
+import 'package:ggamf_front/domain/party/model/room.dart';
 import 'package:ggamf_front/domain/party/repository/room_repository.dart';
 import 'package:ggamf_front/domain/user/model/user.dart';
 
-import '../../../../domain/party/model/my_room.dart';
 import '../../../../utils/custom_intercepter.dart';
 
-final myRecruitmentPartyListViewModel = StateNotifierProvider.autoDispose<MyRecruitmentPartyListViewModel, List<MyRoom>>((ref) {
+final myRecruitmentPartyListViewModel = StateNotifierProvider.autoDispose<
+    MyRecruitmentPartyListViewModel, List<Room>>((ref) {
   return MyRecruitmentPartyListViewModel([])..init();
 });
 
-class MyRecruitmentPartyListViewModel extends StateNotifier<List<MyRoom>> {
+class MyRecruitmentPartyListViewModel extends StateNotifier<List<Room>> {
   MyRecruitmentPartyListViewModel(super.state);
   RoomRepository repo = RoomRepository(Dio()
     ..interceptors.add(CustomLogInterceptor())
     ..interceptors.add(SignedInterceptor()));
 
-  List<MyRoom> myRecruitmentPartyList = [];
+  List<Room> myRecruitmentPartyList = [];
 
   void init() {
     repo.findByMyIdRoom(userId: UserSession.user.id).then((value) {
-      value.data['rooms']?.forEach((_myRoom) {
+      value.data['rooms']?.forEach((_room) {
         myRecruitmentPartyList.add(
-          MyRoom(
-            id: _myRoom.id,
-            nickName: _myRoom.nickName,
-            roomName: _myRoom.roomName,
-            totalPeople: _myRoom.totalPeople,
-            gameLogo: _myRoom.gameLogo,
-          ),
+          Room(
+              id: _room.id,
+              gameName: _room.gameName,
+              nickName: _room.nickName,
+              roomName: _room.roomName,
+              totalPeople: _room.totalPeople ?? 0),
         );
       });
       state = myRecruitmentPartyList;
     });
   }
 
-  void updateMyRecruitmentParty(GenerateRoomParty _party) {
-    init();
-    //state = [...state, _party.createdParty()];
+  void updateMyRecruitmentParty(Room _party) {
+    state = [...state, _party];
   }
 }

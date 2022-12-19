@@ -13,7 +13,7 @@ class _JoinUserRepository implements JoinUserRepository {
     this._dio, {
     this.baseUrl,
   }) {
-    baseUrl ??= 'http://183.104.199.106:8080';
+    baseUrl ??= 'http://192.168.50.7:8080';
   }
 
   final Dio _dio;
