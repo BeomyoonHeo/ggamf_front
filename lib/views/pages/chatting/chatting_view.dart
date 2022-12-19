@@ -120,19 +120,14 @@ class _ChatPageState extends ConsumerState<ChatPage> {
             itemBuilder: (context, index) {
               ChatMessage _message = messages[index];
               bool _isOwnMessage = _message.senderID == UserSession.user.uid;
-              return Container(
-                child: CustomChatListViewTile(
-                  width: _deviceWidth * 0.5,
-                  deviceHeight: _deviceHeight,
-                  isOwnMessage: _isOwnMessage,
-                  message: _message,
-                  sender: this
-                      .widget
-                      .chat
-                      .memebers
-                      .where((_m) => _m.uid == _message.senderID)
-                      .first,
-                ),
+              return CustomChatListViewTile(
+                width: _deviceWidth * 0.5,
+                deviceHeight: _deviceHeight,
+                isOwnMessage: _isOwnMessage,
+                message: _message,
+                sender: widget.chat.memebers
+                    .where((_m) => _m.uid == _message.senderID)
+                    .first,
               );
             },
           ),
@@ -186,7 +181,6 @@ class _ChatPageState extends ConsumerState<ChatPage> {
     return SizedBox(
       width: _deviceWidth * 0.50,
       child: CustomTextFormField(
-          modal: _sendMessageForm(),
           controller: _messageListViewController,
           onsaved: (_value) {
             _pageProvider.message = _value;
