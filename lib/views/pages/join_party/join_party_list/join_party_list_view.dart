@@ -70,60 +70,62 @@ class _JoinPartyListViewState extends State<JoinPartyListView> {
   }
 
   SliverChildBuilderDelegate _partyWindow(List<Room> jplv) {
-    return SliverChildBuilderDelegate((context, index) {
-      return Padding(
-        padding: const EdgeInsets.only(left: 8.0),
-        child: Column(
-          children: [
-            Container(
-              margin: const EdgeInsets.symmetric(horizontal: 12),
-              width: double.infinity,
-              height: 150,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                color: Colors.white,
-              ),
-              child: InkWell(
-                onTap: () {
-                  //Navigator.push(context, MaterialPageRoute(builder: (_) => ));
-                },
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text("롤 골드 자랭하실분 구합니다", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-                          //Text("방 제목 : ${jplv[index].roomName}"),
-                          Text("김한무"),
-                          Row(
-                            children: const [
-                              Icon(Icons.person),
-                              Text("5명"),
-                            ],
-                          )
-                        ],
+    return SliverChildBuilderDelegate(
+      (context, index) {
+        return Padding(
+          padding: const EdgeInsets.only(left: 8.0),
+          child: Column(
+            children: [
+              Container(
+                margin: const EdgeInsets.symmetric(horizontal: 12),
+                width: double.infinity,
+                height: 150,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  color: Colors.white,
+                ),
+                child: InkWell(
+                  onTap: () {
+                    //Navigator.push(context, MaterialPageRoute(builder: (_) => ));
+                  },
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            //Text("롤 골드 자랭하실분 구합니다", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                            Text("${jplv[index].roomName}"),
+                            //Text("김한무"),
+                            Text("${jplv[index].nickName}"),
+                            Row(
+                              children: [
+                                Icon(Icons.person),
+                                Text("${jplv[index].totalPeople}"),
+                              ],
+                            )
+                          ],
+                        ),
                       ),
-                    ),
-                    const SizedBox(width: 30),
-                    SizedBox(
-                      width: 75,
-                      height: 75,
-                      child: Image.asset("assets/images/lol.png"),
-                      //Image.memory(Uri.parse("${jplv[index].gameLogo}").data!.contentAsBytes()),
-                    ),
-                  ],
+                      const SizedBox(width: 30),
+                      SizedBox(
+                        width: 75,
+                        height: 75,
+                        child: //Image.asset("assets/images/lol.png"),
+                            Image.memory(Uri.parse("${jplv[index].gameLogo}").data!.contentAsBytes()),
+                      ),
+                    ],
+                  ),
                 ),
               ),
-            ),
-            Divider(height: 2, color: Colors.grey[800], endIndent: 8)
-          ],
-        ),
-      );
-    }, childCount: 8
-        //jplv.length,
+              Divider(height: 2, color: Colors.grey[800], endIndent: 8)
+            ],
+          ),
         );
+      },
+      childCount: jplv.length,
+    );
   }
 
   ChipsChoice<int> _gameCategory() {

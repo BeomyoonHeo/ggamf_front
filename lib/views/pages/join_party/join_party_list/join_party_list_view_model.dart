@@ -6,9 +6,7 @@ import 'package:ggamf_front/domain/user/model/user.dart';
 import 'package:ggamf_front/utils/validator_util.dart';
 import '../../../../utils/custom_intercepter.dart';
 
-final joinPartyListViewModel =
-    StateNotifierProvider.autoDispose<JoinPartyListViewModel, List<Room>>(
-        (ref) {
+final joinPartyListViewModel = StateNotifierProvider.autoDispose<JoinPartyListViewModel, List<Room>>((ref) {
   return JoinPartyListViewModel([])..init();
 });
 
@@ -24,7 +22,7 @@ class JoinPartyListViewModel extends StateNotifier<List<Room>> {
   void init() {
     repo.findAllRoom(userId: UserSession.user.id).then((value) {
       value.data['rooms']?.forEach((_Room) {
-        logger.d("룸밸류 확인 ${value}");
+        //logger.d("룸밸류 확인 ${value}");
         joinPartyList.add(
           Room(
             id: _Room.id,
@@ -32,6 +30,7 @@ class JoinPartyListViewModel extends StateNotifier<List<Room>> {
             roomName: _Room.roomName,
             gameName: _Room.gameName,
             totalPeople: _Room.totalPeople,
+            gameLogo: _Room.gameLogo,
           ),
         );
       });
@@ -39,15 +38,10 @@ class JoinPartyListViewModel extends StateNotifier<List<Room>> {
     });
   }
 
-  // void findAllRoomByGameCode(int gameCode) {
-  //   state = state.where((_Room) => _Room. != ).toList();
-  // }
-
   void findAllRoomByKeyword(String keyword) {
     state = state.where((_Room) => _Room.gameName != keyword).toList();
     //전체 파티방 목록보기
     RoomRepository restApi = RoomRepository(Dio());
-    restApi.findAllRoom(userId: 1).then((value) =>
-        value.data.isEmpty ? null : state = value.data as List<Room>);
+    restApi.findAllRoom(userId: 1).then((value) => value.data.isEmpty ? null : state = value.data as List<Room>);
   }
 }
