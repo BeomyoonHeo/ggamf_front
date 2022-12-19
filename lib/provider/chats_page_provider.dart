@@ -6,18 +6,19 @@ import 'package:ggamf_front/domain/chats/model/chat.dart';
 import 'package:ggamf_front/domain/chats/model/chat_message.dart';
 import 'package:ggamf_front/domain/user/model/chat_user.dart';
 import 'package:ggamf_front/domain/user/model/user.dart';
+import 'package:ggamf_front/utils/validator_util.dart';
 
 import '../service/database_service.dart';
 
 final chatsPageProvider =
     StateNotifierProvider<ChatsPageProvider, List<Chat>>((ref) {
   final dbService = ref.read(databaseService);
-  return ChatsPageProvider(dbService, []);
+
+  return ChatsPageProvider(dbService, [])..getChats();
 });
 
 class ChatsPageProvider extends StateNotifier<List<Chat>> {
   late DatabaseService _db;
-
   List<Chat>? chats;
 
   late StreamSubscription _chatsStream; // StreamSubscription으로 Stream을 제어함
@@ -31,26 +32,34 @@ class ChatsPageProvider extends StateNotifier<List<Chat>> {
     super.dispose();
   }
 
-  void getChats() async {
+  Future<void> createChat({required int id, required int totalPeople}) async {
+    await _db
+        .createChatRoom(
+            roomId: id, ownerId: UserSession.user.uid, totalPeople: totalPeople)
+        .then((value) => logger.d('방생성 완료!'));
+  }
+
+  Future<void> getChats() async {
     try {
       _chatsStream =
           _db.getChatsForUser(UserSession.user.uid).listen((_snapshot) async {
-        chats = await Future.wait(
+        state = await Future.wait(
           _snapshot.docs.map(
             (_d) async {
+              logger.d('_userSnapshot.id = ${_d.data()}');
               Map<String, dynamic> _chatData =
                   _d.data() as Map<String, dynamic>;
-              print('_userSnapshot.id = ${_chatData}');
               List<ChatUser> _members = [];
               //firebase에서 가져온 member collection을 전부 ChatUser로 치환하여 Object로 반환
               for (var _uid in _chatData['members']) {
-                DocumentSnapshot _userSnapshot = await _db.getUser(_uid);
-                Map<String, dynamic> _userData =
-                    _userSnapshot.data() as Map<String, dynamic>;
-                _userData['uid'] = _userSnapshot.id;
-                _members.add(ChatUser.fromJSON(_userData));
+                DocumentSnapshot _userSnapshot =
+                    await _db.getUser(_uid); // 실제 db에서 유저 데이터 가져 옴
+                Map<String, dynamic> _userData = _userSnapshot.data() as Map<
+                    String, dynamic>; // 가져온 유저 데이터를 <String, dynamic> 형태로 변환
+                _members.add(
+                  ChatUser.fromJson(_userData),
+                );
               }
-
               List<ChatMessage> _messages = [];
               //채팅방에 뿌릴 메세지 데이터를 List로 받는다.
               QuerySnapshot _chatMessage =
@@ -62,22 +71,22 @@ class ChatsPageProvider extends StateNotifier<List<Chat>> {
                 ChatMessage _message = ChatMessage.fromJSON(_messageData);
                 _messages.add(_message);
               }
-
               return Chat(
-                uid: _d.id,
-                currentUserUid: UserSession.user.uid,
-                activity: _chatData['is_activity'],
-                group: _chatData['is_group'],
+                id: _d.id,
+                totalPeople: _chatData['total_people'],
                 memebers: _members,
                 messages: _messages,
               );
             },
           ).toList(),
         ); // 데이터가 실시간으로 변하는 것을 감지하겠다 -> listen 메서드가 붙어있는 것을
+        state.forEach((element) {
+          logger.d('데이터 확인 : ${element.id}');
+        });
       });
     } catch (e) {
       print("Error getting chats.");
-      print(e);
+      logger.d(e);
     }
   }
 }

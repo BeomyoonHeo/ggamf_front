@@ -28,10 +28,9 @@ class JoinPartyListViewModel extends StateNotifier<List<Room>> {
             id: _Room.id,
             nickName: _Room.nickName,
             roomName: _Room.roomName,
-            gameLogo: _Room.gameLogo,
             gameName: _Room.gameName,
             totalPeople: _Room.totalPeople,
-            uid: _Room.uid,
+            gameLogo: _Room.gameLogo,
           ),
         );
       });

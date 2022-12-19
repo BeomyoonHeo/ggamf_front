@@ -19,11 +19,12 @@ class Ggamf {
   String photo;
   String intro;
 
-  Ggamf(
-      {required this.userId,
-      required this.nickname,
-      required this.photo,
-      required this.intro});
+  Ggamf({
+    required this.userId,
+    required this.nickname,
+    required this.photo,
+    required this.intro,
+  });
 
   factory Ggamf.fromJson(Map<String, dynamic> json) => _$GgamfFromJson(json);
   Map<String, dynamic> toJson() => _$GgamfToJson(this);

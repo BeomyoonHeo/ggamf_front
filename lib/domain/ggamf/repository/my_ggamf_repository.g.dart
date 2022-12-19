@@ -30,18 +30,19 @@ class _MyGgamfRepository implements MyGgamfRepository {
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(followGgamf.toJson());
-    final _result = await _dio.fetch<Map<String, dynamic>>(_setStreamType<Ggamf>(Options(
+    final _result =
+        await _dio.fetch<Map<String, dynamic>>(_setStreamType<Ggamf>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
     )
-        .compose(
-          _dio.options,
-          '/s/api/ggamf/follow/${followingId}',
-          queryParameters: queryParameters,
-          data: _data,
-        )
-        .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+            .compose(
+              _dio.options,
+              '/s/api/ggamf/follow/${followingId}',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = Ggamf.fromJson(_result.data!);
     return value;
   }
@@ -57,24 +58,27 @@ class _MyGgamfRepository implements MyGgamfRepository {
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(reportGgamf.toJson());
-    final _result = await _dio.fetch<Map<String, dynamic>>(_setStreamType<ReportGgamf>(Options(
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<ReportGgamf>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
     )
-        .compose(
-          _dio.options,
-          '/s/api/ggamf/user/${userId}/report/${badUserId}',
-          queryParameters: queryParameters,
-          data: _data,
-        )
-        .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+            .compose(
+              _dio.options,
+              '/s/api/ggamf/user/${userId}/report/${badUserId}',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = ReportGgamf.fromJson(_result.data!);
     return value;
   }
 
   RequestOptions _setStreamType<T>(RequestOptions requestOptions) {
-    if (T != dynamic && !(requestOptions.responseType == ResponseType.bytes || requestOptions.responseType == ResponseType.stream)) {
+    if (T != dynamic &&
+        !(requestOptions.responseType == ResponseType.bytes ||
+            requestOptions.responseType == ResponseType.stream)) {
       if (T == String) {
         requestOptions.responseType = ResponseType.plain;
       } else {

@@ -1,5 +1,4 @@
 const String baseUrl = 'http://192.168.0.187:8080';
-
 const headers = {"Content-Type": "application/json; charset=utf-8"};
 
 enum PageEnum {

@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ggamf_front/domain/chats/model/chat.dart';
 import 'package:ggamf_front/domain/chats/model/chat_message.dart';
+import 'package:ggamf_front/domain/user/model/ggamf.dart';
 import 'package:ggamf_front/domain/user/model/user.dart';
 import 'package:ggamf_front/provider/chat_provider.dart';
+import 'package:ggamf_front/provider/ggamf_provider.dart';
 import 'package:ggamf_front/views/pages/chatting/chatting_components/custom_text_form_field.dart';
 import 'package:ggamf_front/views/pages/chatting/chatting_components/custom_view_tiles.dart';
 
@@ -20,12 +22,15 @@ class _ChatPageState extends ConsumerState<ChatPage> {
   late double _deviceHeight;
   late double _deviceWidth;
 
-  late ChatPageProvider _pageProvider;
   late GlobalKey<FormState> _messageFormState;
+  late final _pageProvider = ref.read(chatPageProvider.notifier);
   late ScrollController _messageListViewController;
 
   @override
   void initState() {
+    Future.delayed(Duration.zero, () async {
+      await _pageProvider.listenToMessages();
+    });
     super.initState();
     _messageFormState = GlobalKey<FormState>();
     _messageListViewController = ScrollController();
@@ -33,38 +38,71 @@ class _ChatPageState extends ConsumerState<ChatPage> {
 
   @override
   Widget build(BuildContext context) {
-    final cpp = ref.watch(chatPageProvider);
     _deviceWidth = MediaQuery.of(context).size.width;
     _deviceHeight = MediaQuery.of(context).size.height;
-
     return _buildUI();
   }
 
   Widget _buildUI() {
+    final _pageProviderWatcher = ref.watch(chatPageProvider);
+    final _ggmafProvider = ref.read(ggamfProvider.notifier);
+    _messageListViewController.notifyListeners();
     return Builder(
       builder: (context) {
-        _pageProvider = ref.watch(chatPageProvider);
         return Scaffold(
           appBar: AppBar(
             automaticallyImplyLeading: false,
             title: const Text('채팅'),
+            actions: [
+              InkWell(
+                onTap: () {
+                  _showAlertDialog(
+                      context: context,
+                      titleText: '내 껨프 초대하기',
+                      contentText: '',
+                      ggafList: _ggmafProvider.myGgamfList,
+                      function: () {});
+                },
+                child: Container(
+                  padding: EdgeInsets.symmetric(horizontal: 5),
+                  alignment: Alignment.center,
+                  child: Text(
+                    '껨프초대',
+                    style: TextStyle(color: Colors.black),
+                  ),
+                ),
+              ),
+              InkWell(
+                onTap: () {},
+                child: Container(
+                  padding: EdgeInsets.symmetric(horizontal: 5),
+                  alignment: Alignment.center,
+                  child: Text(
+                    '파티 나가기',
+                    style: TextStyle(color: Colors.black),
+                  ),
+                ),
+              )
+            ],
           ),
           body: SingleChildScrollView(
+            controller: _messageListViewController,
+            padding: EdgeInsets.only(
+                bottom: MediaQuery.of(context).viewInsets.bottom),
             child: Container(
               padding: EdgeInsets.symmetric(
                 horizontal: _deviceWidth * 0.03,
-                vertical: _deviceHeight * 0.02,
+                vertical: _deviceHeight * 0.01,
               ),
-              height: _deviceHeight * 0.98,
+              height: _deviceHeight * 0.90,
               width: _deviceWidth * 0.97,
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  _messagesListView(),
-                  _sendMessageForm(),
-                ],
-              ),
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    _messagesListView(_pageProviderWatcher),
+                    _sendMessageForm(),
+                  ]),
             ),
           ),
         );
@@ -72,29 +110,24 @@ class _ChatPageState extends ConsumerState<ChatPage> {
     );
   }
 
-  Widget _messagesListView() {
-    if (_pageProvider.messages != null) {
-      if (_pageProvider.messages!.length != 0) {
+  Widget _messagesListView(List<ChatMessage> messages) {
+    if (messages != null) {
+      if (messages.length != 0) {
         return Container(
-          height: _deviceHeight * 0.74,
+          height: _deviceHeight * 0.80,
           child: ListView.builder(
-            itemCount: _pageProvider.messages!.length,
+            itemCount: messages.length,
             itemBuilder: (context, index) {
-              ChatMessage _message = _pageProvider.messages![index];
+              ChatMessage _message = messages[index];
               bool _isOwnMessage = _message.senderID == UserSession.user.uid;
-              return Container(
-                child: CustomChatListViewTile(
-                  width: _deviceWidth * 0.8,
-                  deviceHeight: _deviceHeight,
-                  isOwnMessage: _isOwnMessage,
-                  message: _message,
-                  sender: this
-                      .widget
-                      .chat
-                      .memebers
-                      .where((_m) => _m.uid == _message.senderID)
-                      .first,
-                ),
+              return CustomChatListViewTile(
+                width: _deviceWidth * 0.5,
+                deviceHeight: _deviceHeight,
+                isOwnMessage: _isOwnMessage,
+                message: _message,
+                sender: widget.chat.memebers
+                    .where((_m) => _m.uid == _message.senderID)
+                    .first,
               );
             },
           ),
@@ -104,12 +137,12 @@ class _ChatPageState extends ConsumerState<ChatPage> {
           alignment: Alignment.center,
           child: Text(
             "인사를 나눠보세요!",
-            style: TextStyle(color: Colors.white),
+            style: TextStyle(color: Colors.black87),
           ),
         );
       }
     } else {
-      return Center(
+      return const Center(
         child: CircularProgressIndicator(
           color: Colors.white,
         ),
@@ -126,7 +159,7 @@ class _ChatPageState extends ConsumerState<ChatPage> {
       ),
       margin: EdgeInsets.symmetric(
         horizontal: _deviceWidth * 0.04,
-        vertical: _deviceHeight * 0.001,
+        vertical: _deviceHeight * 0.01,
       ),
       child: Form(
         key: _messageFormState,
@@ -146,8 +179,9 @@ class _ChatPageState extends ConsumerState<ChatPage> {
 
   Widget _messageTextField() {
     return SizedBox(
-      width: _deviceWidth * 0.65,
+      width: _deviceWidth * 0.50,
       child: CustomTextFormField(
+          controller: _messageListViewController,
           onsaved: (_value) {
             _pageProvider.message = _value;
           },
@@ -195,5 +229,54 @@ class _ChatPageState extends ConsumerState<ChatPage> {
         child: Icon(Icons.camera_enhance),
       ),
     );
+  }
+
+  Future<dynamic> _showAlertDialog({
+    required BuildContext context,
+    required String titleText,
+    String? contentText,
+    List<Ggamf>? ggafList,
+    required Function function,
+  }) {
+    return showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: Text('${titleText}'),
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10.0)),
+            content: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                ggafList == null || ggafList.isEmpty
+                    ? Text('${contentText}')
+                    : ggafList.map((_ggmaf) {
+                        return Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Checkbox(value: false, onChanged: (_bool) {}),
+                            Text('${_ggmaf.nickname}'),
+                          ],
+                        );
+                      }) as Row,
+              ],
+            ),
+            actions: [
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: Text('취소'),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  function();
+                },
+                child: Text('확인'),
+              ),
+            ],
+          );
+        });
   }
 }

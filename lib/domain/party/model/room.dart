@@ -1,3 +1,5 @@
+import 'package:ggamf_front/domain/party/model/generate_room_party.dart';
+import 'package:ggamf_front/domain/user/model/user.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'room.g.dart';
@@ -12,23 +14,36 @@ class RoomList {
 }
 
 @JsonSerializable()
+class SingleRoom {
+  Room data;
+  SingleRoom({required this.data});
+
+  factory SingleRoom.fromJson(Map<String, dynamic> json) => _$SingleRoomFromJson(json);
+
+  Map<String, dynamic> toJson() => _$SingleRoomToJson(this);
+
+  GenerateRoomParty toGenerateRoomParty(int codeId) {
+    return GenerateRoomParty(
+        gameName: data.gameName, roomName: data.roomName, totalPeople: data.totalPeople, userId: UserSession.user.id, gameCodeId: codeId);
+  }
+}
+
+@JsonSerializable()
 class Room {
   int id;
-  String nickName;
   String roomName;
   String gameName;
-  String gameLogo;
+  String? nickName;
+  String? gameLogo;
   int totalPeople;
-  String uid;
 
   Room({
     required this.id,
-    required this.nickName,
     required this.roomName,
     required this.gameName,
-    required this.gameLogo,
     required this.totalPeople,
-    required this.uid,
+    required this.nickName,
+    this.gameLogo,
   });
 
   factory Room.fromJson(Map<String, dynamic> json) => _$RoomFromJson(json);
