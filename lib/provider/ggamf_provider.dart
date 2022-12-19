@@ -7,9 +7,7 @@ import 'package:ggamf_front/utils/custom_intercepter.dart';
 
 import '../utils/validator_util.dart';
 
-final ggamfProvider =
-    StateNotifierProvider.autoDispose<GgamfProvider, List<Ggamf>>(
-        (ref) => GgamfProvider([], ref)..showMyGgamf());
+final ggamfProvider = StateNotifierProvider.autoDispose<GgamfProvider, List<Ggamf>>((ref) => GgamfProvider([], ref)..showMyGgamf());
 
 class GgamfProvider extends StateNotifier<List<Ggamf>> {
   final Ref _ref;

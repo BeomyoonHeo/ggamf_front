@@ -5,10 +5,12 @@ import 'package:ggamf_front/controller/user/opponent_profile_controller.dart';
 import 'package:ggamf_front/domain/user/model/get_profile_user.dart';
 import 'package:ggamf_front/domain/user/model/profile_user.dart';
 
+import '../../../../domain/user/model/ggamf.dart';
 import 'opponent_profile_view_model.dart';
 
 class OpponentProfileView extends ConsumerStatefulWidget {
-  const OpponentProfileView({Key? key}) : super(key: key);
+  final Ggamf ggamf;
+  const OpponentProfileView({Key? key, required this.ggamf}) : super(key: key);
 
   @override
   ConsumerState createState() => _OpponentProfileViewState();
@@ -57,7 +59,7 @@ class _OpponentProfileViewState extends ConsumerState<OpponentProfileView> {
                         child: CircleAvatar(
                           radius: 60.0,
                           child: ClipRRect(
-                            child: opvm.intro!.isEmpty
+                            child: widget.ggamf.photo!.isEmpty
                                 ? Image.asset("assets/images/generic-avatar.svg")
                                 : Image.memory((Uri.parse(opvm.photo ?? '').data!.contentAsBytes())),
                             borderRadius: BorderRadius.circular(100.0),
@@ -115,7 +117,7 @@ class _OpponentProfileViewState extends ConsumerState<OpponentProfileView> {
           BackButton(
             color: Colors.black,
           ),
-          Text("${opvm.nickname}", style: TextStyle(color: Colors.black)),
+          Text("${widget.ggamf.nickname}", style: TextStyle(color: Colors.black)),
         ],
       ),
       actions: [
@@ -180,10 +182,10 @@ class _OpponentProfileViewState extends ConsumerState<OpponentProfileView> {
       padding: EdgeInsets.all(10),
       width: double.infinity,
       child: Expanded(
-        child: opvm.intro!.isEmpty
+        child: widget.ggamf.intro!.isEmpty
             ? Text("자기소개가 없습니다")
             : Text(
-                "${opvm.intro}",
+                "${widget.ggamf.intro}",
                 textAlign: TextAlign.center,
                 style: TextStyle(fontSize: 15),
               ),
@@ -197,7 +199,7 @@ class _OpponentProfileViewState extends ConsumerState<OpponentProfileView> {
       width: double.infinity,
       child: Center(
         child: Text(
-          "${opvm.nickname}",
+          "${widget.ggamf.nickname}",
           style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
           textAlign: TextAlign.center,
         ),

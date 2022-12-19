@@ -42,7 +42,6 @@ class _JoinPartyListViewState extends State<JoinPartyListView> {
   Widget _sliverAppbar() {
     return Consumer(builder: (BuildContext context, WidgetRef ref, Widget? child) {
       final jplv = ref.watch(joinPartyListViewModel);
-      logger.d("길이보기: ${jplv.length}");
       return CustomScrollView(
         slivers: [
           SliverAppBar(
@@ -95,10 +94,16 @@ class _JoinPartyListViewState extends State<JoinPartyListView> {
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            //Text("롤 골드 자랭하실분 구합니다", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-                            Text("${jplv[index].roomName}"),
-                            //Text("김한무"),
-                            Text("${jplv[index].nickName}"),
+                            Text("${jplv[index].roomName}", style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                            Row(
+                              children: [
+                                Text("${jplv[index].gameName}"),
+                                SizedBox(width: 5),
+                                Text("·"),
+                                SizedBox(width: 5),
+                                Text("${jplv[index].nickName}"),
+                              ],
+                            ),
                             Row(
                               children: [
                                 Icon(Icons.person),
