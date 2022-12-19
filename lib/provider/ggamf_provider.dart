@@ -4,12 +4,11 @@ import 'package:ggamf_front/domain/user/model/ggamf.dart';
 import 'package:ggamf_front/domain/user/model/user.dart';
 import 'package:ggamf_front/domain/user/repository/user_repository.dart';
 import 'package:ggamf_front/utils/custom_intercepter.dart';
+import 'package:ggamf_front/views/pages/recommend_ggamef/recommend_ggamf_list/recommend_ggamf_list_view_model.dart';
 
 import '../utils/validator_util.dart';
 
-final ggamfProvider =
-    StateNotifierProvider.autoDispose<GgamfProvider, List<Ggamf>>(
-        (ref) => GgamfProvider([], ref)..showMyGgamf());
+final ggamfProvider = StateNotifierProvider.autoDispose<GgamfProvider, List<Ggamf>>((ref) => GgamfProvider([], ref)..showMyGgamf());
 
 class GgamfProvider extends StateNotifier<List<Ggamf>> {
   final Ref _ref;
@@ -23,7 +22,21 @@ class GgamfProvider extends StateNotifier<List<Ggamf>> {
   Map<int, Ggamf> sendGgamfIdList = {};
 
   void addMyGgamf(Ggamf _ggamf) {
+    myGgamIdList[_ggamf.userId] = _ggamf;
     state = [...state, _ggamf];
+  }
+
+  void deleteGgamf(int id) {
+    state = state.where((_ggamf) {
+      if (_ggamf.userId != id) {
+        return true;
+      }
+      return false;
+    }).toList();
+  }
+
+  void requestGgamf(int id) {
+    _ref.read(recommendGgamfListViewModel.notifier).deleteRecommendGgamf(id);
   }
 
   void showMyGgamf() {

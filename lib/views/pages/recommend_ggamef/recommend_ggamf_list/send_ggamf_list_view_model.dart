@@ -7,8 +7,7 @@ import 'package:ggamf_front/provider/ggamf_provider.dart';
 import 'package:ggamf_front/utils/custom_intercepter.dart';
 
 final sendGgamfListViewModel =
-    StateNotifierProvider.autoDispose<SendGgamfListViewModel, List<Ggamf>>(
-        (ref) => SendGgamfListViewModel([], ref)..init());
+    StateNotifierProvider.autoDispose<SendGgamfListViewModel, List<Ggamf>>((ref) => SendGgamfListViewModel([], ref)..init());
 
 class SendGgamfListViewModel extends StateNotifier<List<Ggamf>> {
   final Ref _ref;
@@ -37,6 +36,11 @@ class SendGgamfListViewModel extends StateNotifier<List<Ggamf>> {
         state = sendGgamfList;
       },
     );
+  }
+
+  addSendGgamf(Ggamf ggamf) {
+    final sendList = _ref.read(ggamfProvider.notifier).sendGgamfIdList;
+    state = [...state, ggamf];
   }
 
   cancelSendGgamf(int id) {

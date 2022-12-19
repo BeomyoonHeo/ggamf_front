@@ -56,12 +56,7 @@ class _ChatPageState extends ConsumerState<ChatPage> {
             actions: [
               InkWell(
                 onTap: () {
-                  _showAlertDialog(
-                      context: context,
-                      titleText: '내 껨프 초대하기',
-                      contentText: '',
-                      ggafList: _ggmafProvider.myGgamfList,
-                      function: () {});
+                  _showAlertDialog(context: context, titleText: '내 껨프 초대하기', contentText: '', ggafList: _ggmafProvider.myGgamfList, function: () {});
                 },
                 child: Container(
                   padding: EdgeInsets.symmetric(horizontal: 5),
@@ -72,23 +67,25 @@ class _ChatPageState extends ConsumerState<ChatPage> {
                   ),
                 ),
               ),
-              InkWell(
-                onTap: () {},
-                child: Container(
-                  padding: EdgeInsets.symmetric(horizontal: 5),
-                  alignment: Alignment.center,
-                  child: Text(
-                    '파티 나가기',
-                    style: TextStyle(color: Colors.black),
-                  ),
-                ),
-              )
+              const SizedBox(width: 10),
+              IconButton(onPressed: () {}, icon: const Icon(Icons.exit_to_app_outlined, color: Colors.black)),
+              const SizedBox(width: 10),
+              // InkWell(
+              //   onTap: () {},
+              //   child: Container(
+              //     padding: EdgeInsets.symmetric(horizontal: 5),
+              //     alignment: Alignment.center,
+              //     child: Text(
+              //       '파티 나가기',
+              //       style: TextStyle(color: Colors.black),
+              //     ),
+              //   ),
+              // ),
             ],
           ),
           body: SingleChildScrollView(
             controller: _messageListViewController,
-            padding: EdgeInsets.only(
-                bottom: MediaQuery.of(context).viewInsets.bottom),
+            padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
             child: Container(
               padding: EdgeInsets.symmetric(
                 horizontal: _deviceWidth * 0.03,
@@ -96,13 +93,10 @@ class _ChatPageState extends ConsumerState<ChatPage> {
               ),
               height: _deviceHeight * 0.90,
               width: _deviceWidth * 0.97,
-              child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    _messagesListView(_pageProviderWatcher),
-                    _sendMessageForm(),
-                  ]),
+              child: Column(mainAxisAlignment: MainAxisAlignment.spaceBetween, crossAxisAlignment: CrossAxisAlignment.end, children: [
+                _messagesListView(_pageProviderWatcher),
+                _sendMessageForm(),
+              ]),
             ),
           ),
         );
@@ -125,9 +119,7 @@ class _ChatPageState extends ConsumerState<ChatPage> {
                 deviceHeight: _deviceHeight,
                 isOwnMessage: _isOwnMessage,
                 message: _message,
-                sender: widget.chat.memebers
-                    .where((_m) => _m.uid == _message.senderID)
-                    .first,
+                sender: widget.chat.memebers.where((_m) => _m.uid == _message.senderID).first,
               );
             },
           ),
@@ -243,8 +235,7 @@ class _ChatPageState extends ConsumerState<ChatPage> {
         builder: (context) {
           return AlertDialog(
             title: Text('${titleText}'),
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10.0)),
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
             content: Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -267,12 +258,20 @@ class _ChatPageState extends ConsumerState<ChatPage> {
                 onPressed: () {
                   Navigator.pop(context);
                 },
+                style: ElevatedButton.styleFrom(
+                  foregroundColor: Colors.white,
+                  backgroundColor: const Color.fromRGBO(35, 204, 81, 1),
+                ),
                 child: Text('취소'),
               ),
               ElevatedButton(
                 onPressed: () {
                   function();
                 },
+                style: ElevatedButton.styleFrom(
+                  foregroundColor: Colors.white,
+                  backgroundColor: const Color.fromRGBO(35, 204, 81, 1),
+                ),
                 child: Text('확인'),
               ),
             ],

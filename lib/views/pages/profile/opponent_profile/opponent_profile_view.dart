@@ -1,14 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:ggamf_front/controller/user/ggamf_controller.dart';
 import 'package:ggamf_front/controller/user/opponent_profile_controller.dart';
 import 'package:ggamf_front/domain/user/model/get_profile_user.dart';
 import 'package:ggamf_front/domain/user/model/profile_user.dart';
+import 'package:ggamf_front/provider/ggamf_provider.dart';
 
+import '../../../../domain/user/model/ggamf.dart';
 import 'opponent_profile_view_model.dart';
 
 class OpponentProfileView extends ConsumerStatefulWidget {
-  const OpponentProfileView({Key? key}) : super(key: key);
+  final Ggamf ggamf;
+  const OpponentProfileView({Key? key, required this.ggamf}) : super(key: key);
 
   @override
   ConsumerState createState() => _OpponentProfileViewState();
@@ -17,7 +21,6 @@ class OpponentProfileView extends ConsumerStatefulWidget {
 class _OpponentProfileViewState extends ConsumerState<OpponentProfileView> {
   final List<String> _valueList = ['욕설', '비방', '광고', '괴롭힘', '기타'];
   var _selectedValue;
-
   //final int userId;
 
   //_OpponentProfileViewState(this.userId);
@@ -25,10 +28,11 @@ class _OpponentProfileViewState extends ConsumerState<OpponentProfileView> {
   @override
   Widget build(BuildContext context) {
     //opvm = opponentProfileViewModel
-    final opvm = ref.watch(opponentProfileViewModel);
+    final gc = ref.read(ggamfController);
+    final opvm = ref.watch(ggamfProvider.notifier);
 
     return Scaffold(
-      appBar: _appbar(opvm),
+      appBar: _appbar(),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),
         child: ListView(
@@ -57,9 +61,9 @@ class _OpponentProfileViewState extends ConsumerState<OpponentProfileView> {
                         child: CircleAvatar(
                           radius: 60.0,
                           child: ClipRRect(
-                            child: opvm.intro!.isEmpty
+                            child: widget.ggamf.photo!.isEmpty
                                 ? Image.asset("assets/images/generic-avatar.svg")
-                                : Image.memory((Uri.parse(opvm.photo ?? '').data!.contentAsBytes())),
+                                : Image.memory((Uri.parse(widget.ggamf.photo ?? '').data!.contentAsBytes())),
                             borderRadius: BorderRadius.circular(100.0),
                           ),
                         ),
@@ -70,9 +74,9 @@ class _OpponentProfileViewState extends ConsumerState<OpponentProfileView> {
               ),
             ),
             SizedBox(height: 10),
-            _nickName(opvm),
+            _nickName(),
             SizedBox(height: 10),
-            _introduce(opvm),
+            _introduce(),
             SizedBox(height: 30),
             _ratedStar(),
             Container(
@@ -87,7 +91,7 @@ class _OpponentProfileViewState extends ConsumerState<OpponentProfileView> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                _followButton(),
+                _followButton(opvm, gc),
                 _ratingStarButton(),
               ],
             ),
@@ -106,7 +110,7 @@ class _OpponentProfileViewState extends ConsumerState<OpponentProfileView> {
     );
   }
 
-  AppBar _appbar(GetProfileUser opvm) {
+  AppBar _appbar() {
     return AppBar(
       automaticallyImplyLeading: false,
       backgroundColor: Colors.white,
@@ -115,7 +119,7 @@ class _OpponentProfileViewState extends ConsumerState<OpponentProfileView> {
           BackButton(
             color: Colors.black,
           ),
-          Text("${opvm.nickname}", style: TextStyle(color: Colors.black)),
+          Text("${widget.ggamf.nickname}", style: TextStyle(color: Colors.black)),
         ],
       ),
       actions: [
@@ -153,37 +157,55 @@ class _OpponentProfileViewState extends ConsumerState<OpponentProfileView> {
       onPressed: () {
         showDialog(context: context, builder: (_) => _ratingStar());
       },
-      child: Text("별점 주기", style: TextStyle(fontSize: 20)),
       style: ElevatedButton.styleFrom(
         foregroundColor: Colors.white,
-        backgroundColor: Color.fromRGBO(35, 204, 81, 1),
-        minimumSize: Size(150, 50),
+        backgroundColor: const Color.fromRGBO(35, 204, 81, 1),
+        minimumSize: const Size(150, 50),
       ),
+      child: const Text("별점 주기", style: TextStyle(fontSize: 20)),
     );
   }
 
-  Widget _followButton() {
+  Widget _followButton(opvm, gc) {
     return ElevatedButton(
-      onPressed: () {},
-      child: Text("팔로우하기", style: TextStyle(fontSize: 20)),
-      style: ElevatedButton.styleFrom(
-        foregroundColor: Colors.white,
-        backgroundColor: Color.fromRGBO(35, 204, 81, 1),
-        minimumSize: Size(150, 50),
-      ),
-    );
+        onPressed: () {
+          setState(
+            () {
+              if (opvm.myGgamIdList[widget.ggamf.userId] != null) {
+                gc.deleteGgamf(widget.ggamf.userId);
+                opvm.myGgamIdList.remove(widget.ggamf.userId);
+              } else if (opvm.sendGgamfIdList[widget.ggamf.userId] != null) {
+                gc.cancelSendGgamf(widget.ggamf.userId);
+                opvm.sendGgamfIdList.remove(widget.ggamf.userId);
+              } else {
+                gc.requestGgamf(widget.ggamf);
+                opvm.sendGgamfIdList[widget.ggamf.userId] = widget.ggamf;
+              }
+            },
+          );
+        },
+        style: ElevatedButton.styleFrom(
+          foregroundColor: Colors.white,
+          backgroundColor: Color.fromRGBO(35, 204, 81, 1),
+          minimumSize: Size(150, 50),
+        ),
+        child: opvm.myGgamIdList[widget.ggamf.userId] != null
+            ? const Text("팔로우취소", style: TextStyle(fontSize: 20))
+            : opvm.sendGgamfIdList[widget.ggamf.userId] != null
+                ? const Text("팔로우 요청 중", style: TextStyle(fontSize: 20))
+                : const Text("팔로우하기", style: TextStyle(fontSize: 20)));
   }
 
-  Widget _introduce(GetProfileUser opvm) {
+  Widget _introduce() {
     return Container(
       alignment: Alignment.center,
       padding: EdgeInsets.all(10),
       width: double.infinity,
       child: Expanded(
-        child: opvm.intro!.isEmpty
+        child: widget.ggamf.intro!.isEmpty
             ? Text("자기소개가 없습니다")
             : Text(
-                "${opvm.intro}",
+                "${widget.ggamf.intro}",
                 textAlign: TextAlign.center,
                 style: TextStyle(fontSize: 15),
               ),
@@ -191,13 +213,13 @@ class _OpponentProfileViewState extends ConsumerState<OpponentProfileView> {
     );
   }
 
-  Widget _nickName(GetProfileUser opvm) {
+  Widget _nickName() {
     return Container(
       height: 30,
       width: double.infinity,
       child: Center(
         child: Text(
-          "${opvm.nickname}",
+          "${widget.ggamf.nickname}",
           style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
           textAlign: TextAlign.center,
         ),

@@ -111,7 +111,7 @@ class _UpdateMyProfileViewState extends ConsumerState<UpdateMyProfileView> {
               CircleAvatar(
                 radius: 60.0,
                 child: ClipRRect(
-                  child: mpvm.intro!.isEmpty
+                  child: mpvm.photo!.isEmpty
                       ? Image.asset("assets/images/generic-avatar.svg")
                       : Image.memory((Uri.parse(mpvm.photo ?? '').data!.contentAsBytes())),
                   borderRadius: BorderRadius.circular(100.0),

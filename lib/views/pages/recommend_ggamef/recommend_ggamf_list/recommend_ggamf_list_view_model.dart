@@ -42,4 +42,8 @@ class RecommendGgamfListViewModel extends StateNotifier<List<Ggamf>> {
       },
     );
   }
+
+  void deleteRecommendGgamf(int id) {
+    state = state.where((_ggamf) => _ggamf.userId != id).toList();
+  }
 }

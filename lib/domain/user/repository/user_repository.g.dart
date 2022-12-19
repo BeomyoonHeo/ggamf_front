@@ -277,7 +277,7 @@ class _GgamfRepository implements GgamfRepository {
     )
         .compose(
           _dio.options,
-          '/s/api/ggamf/${id}/follow/${followUserId}',
+          '/s/api/ggamf/user/${id}/follow/${followUserId}',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -303,6 +303,31 @@ class _GgamfRepository implements GgamfRepository {
         .compose(
           _dio.options,
           '/s/api/ggamf/user/${id}/accept/${followUserId}',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = _result.data;
+    return value;
+  }
+
+  @override
+  Future<dynamic> deleteGgamf({
+    required userId,
+    required friendId,
+  }) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch(_setStreamType<dynamic>(Options(
+      method: 'DELETE',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          '/s/api/ggamf/user/${userId}/unfollow/${friendId}',
           queryParameters: queryParameters,
           data: _data,
         )

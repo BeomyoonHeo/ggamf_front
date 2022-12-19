@@ -5,6 +5,8 @@ import 'package:ggamf_front/domain/user/model/user.dart';
 import 'package:ggamf_front/domain/user/repository/user_repository.dart';
 import 'package:ggamf_front/utils/custom_intercepter.dart';
 
+import '../../../../utils/validator_util.dart';
+
 final myProfileViewModel = StateNotifierProvider.autoDispose<MyProfileViewModel, ProfileUser>((ref) {
   return MyProfileViewModel(ProfileUser(intro: null, nickname: null, photo: null), ref)..init();
 });
@@ -22,6 +24,7 @@ class MyProfileViewModel extends StateNotifier<ProfileUser> {
     ProfileUserRepository restApi = ProfileUserRepository(dio);
     restApi.getUserProfile(userId: UserSession.user.id).then((value) {
       ProfileUser? profileUser;
+      logger.d("내프로필 밸류확인 : ${value}");
       Map<String, dynamic> data = value;
       data.forEach((key, value) => key == 'data' ? profileUser = ProfileUser.fromJson(value) : '');
       state = profileUser!;
