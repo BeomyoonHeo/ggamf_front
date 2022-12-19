@@ -23,6 +23,11 @@ void main() async {
     DeviceOrientation.portraitDown,
   ]); //세로화면 고정
   SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);
+
+  //관리자 페이지 로딩
+  // runApp(const ProviderScope(child: AdministratorView()));
+
+  //일반 유저 페이지 로딩
   Session().getInitSession().then(
         (value) => runApp(
           SplashPage(

@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ggamf_front/core/theme.dart';
 import 'package:ggamf_front/main.dart';
+import 'package:intl/intl.dart';
 
 class Report {
   final reporter;
@@ -35,7 +36,8 @@ void insertReport() {
             reportedReason: reportedReasonDetailList[i % 3],
             reportedReasonDetail: '무엇인가 저질럿습니다. : ${i + 1}',
             maliciousUserNickname: '악성 유저 닉네임 ${i + 1}',
-            reportedDate: DateTime.now(),
+            reportedDate:
+                DateFormat('yyyy-MM-dd – kk:mm').format(DateTime.now()),
             reportState: '${i + 1}일 정지',
             reportedCount: i + 1),
       );
@@ -47,7 +49,7 @@ void insertReport() {
       );
       reportListCell.add(
         DataCell(
-          Text(reportList[i].reportedDate.toString()),
+          Text('${reportList[i].reportedDate}'),
         ),
       );
       reportListCell.add(
@@ -61,12 +63,14 @@ void insertReport() {
         ),
       );
       reportListCell.add(
-        DataCell(Text(reportList[i].reportState), showEditIcon: true, onTap: () {
+        DataCell(Text(reportList[i].reportState), showEditIcon: true,
+            onTap: () {
           showDialog(
               context: navigatorKey.currentState!.context,
               builder: (context) {
                 return AlertDialog(
-                  icon: Row(mainAxisAlignment: MainAxisAlignment.end, children: [
+                  icon:
+                      Row(mainAxisAlignment: MainAxisAlignment.end, children: [
                     IconButton(
                       onPressed: () {
                         Navigator.pop(context);
@@ -89,7 +93,8 @@ void insertReport() {
                     const SizedBox(width: 10),
                     _buildActionsButton('영구정지'),
                   ],
-                  insetPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+                  insetPadding:
+                      const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
                   content: Container(
                     width: 700,
                     height: 700,
@@ -102,10 +107,14 @@ void insertReport() {
                         _buildReasonDetailContainer(i),
                         const SizedBox(height: 10),
                         Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 20, vertical: 20),
                           decoration: BoxDecoration(border: Border.all()),
                           child: Row(
-                            children: [Text('해당유저 신고 카운트는 ${reportList[i].reportedCount}번 입니다.')],
+                            children: [
+                              Text(
+                                  '해당유저 신고 카운트는 ${reportList[i].reportedCount}번 입니다.')
+                            ],
                           ),
                         ),
                       ],
@@ -176,7 +185,8 @@ Container _buildReportReasonContainer(int index) {
     child: Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
-        Text('신고 사유 : ${reportList[index].reportedReason}', style: theme().textTheme.displayLarge),
+        Text('신고 사유 : ${reportList[index].reportedReason}',
+            style: theme().textTheme.displayLarge),
       ],
     ),
   );

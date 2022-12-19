@@ -3,10 +3,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ggamf_front/domain/party/model/room.dart';
 import 'package:ggamf_front/domain/party/repository/room_repository.dart';
 import 'package:ggamf_front/domain/user/model/user.dart';
-import 'package:ggamf_front/utils/validator_util.dart';
+
 import '../../../../utils/custom_intercepter.dart';
 
-final joinPartyListViewModel = StateNotifierProvider.autoDispose<JoinPartyListViewModel, List<Room>>((ref) {
+final joinPartyListViewModel =
+    StateNotifierProvider.autoDispose<JoinPartyListViewModel, List<Room>>(
+        (ref) {
   return JoinPartyListViewModel([])..init();
 });
 
@@ -49,6 +51,7 @@ class JoinPartyListViewModel extends StateNotifier<List<Room>> {
     state = state.where((_Room) => _Room.roomName != keyword).toList();
     //전체 파티방 목록보기
     RoomRepository restApi = RoomRepository(Dio());
-    restApi.findAllRoom(userId: 1).then((value) => value.data.isEmpty ? null : state = value.data as List<Room>);
+    restApi.findAllRoom(userId: 1).then((value) =>
+        value.data.isEmpty ? null : state = value.data as List<Room>);
   }
 }

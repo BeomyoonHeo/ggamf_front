@@ -56,7 +56,12 @@ class _ChatPageState extends ConsumerState<ChatPage> {
             actions: [
               InkWell(
                 onTap: () {
-                  _showAlertDialog(context: context, titleText: '내 껨프 초대하기', contentText: '', ggafList: _ggmafProvider.myGgamfList, function: () {});
+                  _showAlertDialog(
+                      context: context,
+                      titleText: '내 껨프 초대하기',
+                      contentText: '',
+                      ggafList: _ggmafProvider.myGgamfList,
+                      function: () {});
                 },
                 child: Container(
                   padding: EdgeInsets.symmetric(horizontal: 5),
@@ -68,7 +73,10 @@ class _ChatPageState extends ConsumerState<ChatPage> {
                 ),
               ),
               const SizedBox(width: 10),
-              IconButton(onPressed: () {}, icon: const Icon(Icons.exit_to_app_outlined, color: Colors.black)),
+              IconButton(
+                  onPressed: () {},
+                  icon: const Icon(Icons.exit_to_app_outlined,
+                      color: Colors.black)),
               const SizedBox(width: 10),
               // InkWell(
               //   onTap: () {},
@@ -85,7 +93,8 @@ class _ChatPageState extends ConsumerState<ChatPage> {
           ),
           body: SingleChildScrollView(
             controller: _messageListViewController,
-            padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+            padding: EdgeInsets.only(
+                bottom: MediaQuery.of(context).viewInsets.bottom),
             child: Container(
               padding: EdgeInsets.symmetric(
                 horizontal: _deviceWidth * 0.03,
@@ -93,10 +102,13 @@ class _ChatPageState extends ConsumerState<ChatPage> {
               ),
               height: _deviceHeight * 0.90,
               width: _deviceWidth * 0.97,
-              child: Column(mainAxisAlignment: MainAxisAlignment.spaceBetween, crossAxisAlignment: CrossAxisAlignment.end, children: [
-                _messagesListView(_pageProviderWatcher),
-                _sendMessageForm(),
-              ]),
+              child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    _messagesListView(_pageProviderWatcher),
+                    _sendMessageForm(),
+                  ]),
             ),
           ),
         );
@@ -119,7 +131,9 @@ class _ChatPageState extends ConsumerState<ChatPage> {
                 deviceHeight: _deviceHeight,
                 isOwnMessage: _isOwnMessage,
                 message: _message,
-                sender: widget.chat.memebers.where((_m) => _m.uid == _message.senderID).first,
+                sender: widget.chat.memebers
+                    .where((_m) => _m.uid == _message.senderID)
+                    .first,
               );
             },
           ),
@@ -230,28 +244,41 @@ class _ChatPageState extends ConsumerState<ChatPage> {
     List<Ggamf>? ggafList,
     required Function function,
   }) {
+    List<Widget> ggamfListWidget = [];
+    Map<int, bool> checkList = {};
+    if (ggafList != null && ggafList.isNotEmpty) {
+      for (var ggamf in ggafList) {
+        checkList[ggamf.userId] = false;
+        ggamfListWidget.add(
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              Checkbox(
+                  value: checkList[ggamf.userId],
+                  onChanged: (value) {
+                    setState(() {
+                      checkList[ggamf.userId] = !checkList[ggamf.userId]!;
+                    });
+                  }),
+              Text('${ggamf.nickname}'),
+            ],
+          ),
+        );
+      }
+    }
     return showDialog(
         context: context,
         builder: (context) {
           return AlertDialog(
             title: Text('${titleText}'),
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10.0)),
             content: Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                ggafList == null || ggafList.isEmpty
-                    ? Text('${contentText}')
-                    : ggafList.map((_ggmaf) {
-                        return Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Checkbox(value: false, onChanged: (_bool) {}),
-                            Text('${_ggmaf.nickname}'),
-                          ],
-                        );
-                      }) as Row,
-              ],
+              children: ggamfListWidget.isEmpty
+                  ? [Text('${contentText}')]
+                  : ggamfListWidget,
             ),
             actions: [
               ElevatedButton(

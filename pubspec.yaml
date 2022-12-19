@@ -52,7 +52,7 @@ dependencies:
   #관리자 페이지 구성에 필요한 라이브러리
   data_table_2: ^2.3.8
   mime_type: ^1.0.0
-  #  image_picker_web: ^3.0.0+1
+  image_picker_web: ^3.0.0+1
 
   #firebase사용시 필요 라이브러리
   firebase_auth: ^4.1.4

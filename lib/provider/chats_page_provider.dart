@@ -14,7 +14,7 @@ final chatsPageProvider =
     StateNotifierProvider<ChatsPageProvider, List<Chat>>((ref) {
   final dbService = ref.read(databaseService);
 
-  return ChatsPageProvider(dbService, [])..getChats();
+  return ChatsPageProvider(dbService, []);
 });
 
 class ChatsPageProvider extends StateNotifier<List<Chat>> {
@@ -54,6 +54,7 @@ class ChatsPageProvider extends StateNotifier<List<Chat>> {
               for (var _uid in _chatData['members']) {
                 DocumentSnapshot _userSnapshot =
                     await _db.getUser(_uid); // 실제 db에서 유저 데이터 가져 옴
+                logger.d('_uid= ${_userSnapshot.data()}');
                 Map<String, dynamic> _userData = _userSnapshot.data() as Map<
                     String, dynamic>; // 가져온 유저 데이터를 <String, dynamic> 형태로 변환
                 _members.add(

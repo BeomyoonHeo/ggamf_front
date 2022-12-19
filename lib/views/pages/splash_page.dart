@@ -1,6 +1,5 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 
 class SplashPage extends StatefulWidget {
   final VoidCallback onInitializationComplete;
@@ -23,17 +22,22 @@ class _SplashPageState extends State<SplashPage> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: '껨프',
       theme: ThemeData(
-        backgroundColor: const Color.fromRGBO(36, 35, 49, 1.0),
-        scaffoldBackgroundColor: const Color.fromRGBO(36, 35, 49, 1.0),
+        backgroundColor: Colors.white,
+        scaffoldBackgroundColor: Colors.white,
       ),
       home: Scaffold(
         body: Center(
           child: Container(
             height: 200,
             width: 200,
-            child: SvgPicture.asset('assets/icons/login_logo_icon.svg'),
+            child: Image.asset(
+              'assets/images/main_logo.png',
+              height: 150,
+              width: 150,
+            ),
           ),
         ),
       ),
