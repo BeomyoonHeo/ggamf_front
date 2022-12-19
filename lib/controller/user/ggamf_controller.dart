@@ -1,5 +1,3 @@
-import 'dart:html';
-
 import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ggamf_front/domain/user/model/ggamf.dart';
@@ -55,16 +53,6 @@ class GgamfController {
   void deleteGgamf(int friendId) {
     repo.deleteGgamf(userId: UserSession.user.id, friendId: friendId).then((value) {
       ref.read(ggamfProvider.notifier).deleteGgamf(friendId);
-    });
-  }
-
-  void withdrawUser(String state) {
-    WithdrawUser withdrawUser = WithdrawUser(
-      id: UserSession.user.id,
-      state: state,
-    );
-    repo.withdraw(userId: UserSession.user.id).then((value) {
-      ref.read(withdrawalViewModel.notifier).withdrawUser(withdrawUser);
     });
   }
 }

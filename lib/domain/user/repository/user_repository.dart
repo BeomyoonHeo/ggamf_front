@@ -5,6 +5,7 @@ import 'package:ggamf_front/domain/user/model/join_user.dart';
 import 'package:ggamf_front/domain/user/model/login_user.dart';
 import 'package:ggamf_front/domain/user/model/update_user.dart';
 import 'package:ggamf_front/domain/user/model/user.dart';
+import 'package:ggamf_front/domain/user/model/withdraw_user.dart';
 import 'package:ggamf_front/utils/validator_util.dart';
 import 'package:jwt_decode/jwt_decode.dart';
 import 'package:retrofit/http.dart';
@@ -17,11 +18,17 @@ part 'user_repository.g.dart';
 abstract class UserRepository {
   factory UserRepository(Dio dio) = _UserRepository;
 
+  //회원가입
   @POST('/s/api/join')
   Future<dynamic> insert({@Body() required JoinUser joinUser});
 
+  //로그인
   @POST('/login')
   Future<dynamic> login({@Body() required LoginUser loginUser});
+
+  //회원 탈퇴
+  @PUT('/s/api/user/{userId}/withdraw')
+  Future<dynamic> withdraw({@Path('userId') required int userId, @Body() required WithdrawUser withdrawUser});
 }
 
 class Session {
@@ -79,10 +86,6 @@ abstract class GgamfRepository {
   //겜프 취소하기
   @DELETE('/s/api/ggamf/user/{userId}/unfollow/{friendId}')
   Future<dynamic> deleteGgamf({@Path('userId') required int userId, @Path('friendId') required int friendId});
-
-  //회원 탈퇴
-  @PUT('/s/api/{userId}/withdraw')
-  Future<dynamic> withdraw({@Path('userId') required int userId});
 }
 
 @RestApi(baseUrl: baseUrl)

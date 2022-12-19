@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ggamf_front/controller/user/ggamf_controller.dart';
+import 'package:ggamf_front/controller/user/user_controller.dart';
 
 class WithdrawalView extends ConsumerStatefulWidget {
   const WithdrawalView({Key? key}) : super(key: key);
@@ -15,7 +16,7 @@ class _WithdrawalViewState extends ConsumerState<WithdrawalView> {
 
   @override
   Widget build(BuildContext context) {
-    final gc = ref.read(ggamfController);
+    final uc = ref.read(userController);
 
     return Scaffold(
       appBar: _appBar(),
@@ -94,7 +95,7 @@ class _WithdrawalViewState extends ConsumerState<WithdrawalView> {
                                 width: 100,
                                 child: ElevatedButton(
                                   onPressed: () {
-                                    gc.withdrawUser("WITHDRAW");
+                                    uc.withdrawUser("WITHDRAW");
                                   },
                                   child: Text(
                                     "예",
