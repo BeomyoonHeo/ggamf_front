@@ -83,7 +83,7 @@ class _RoomRepository implements RoomRepository {
     )
             .compose(
               _dio.options,
-              '/s/api/party/user/${userId}/list',
+              '/s/api/party/user/${userId}/notpaginglist',
               queryParameters: queryParameters,
               data: _data,
             )
