@@ -18,28 +18,23 @@ abstract class RoomRepository {
 
   // 파티방 상세보기
   @GET("/s/api/party/user/{userId}/detail/{roomId}")
-  Future<SingleRoom> detailRoom(
-      {@Path('roomId') required int roomId,
-      @Path('userId') required int userId});
+  Future<SingleRoom> detailRoom({@Path('roomId') required int roomId, @Path('userId') required int userId});
 
   // 나의 모집 파티 목록
   @GET("/s/api/party/user/{userId}/myrooms")
   Future<RoomList> findByMyIdRoom({@Path('userId') required int userId});
+
   // 전체 파티방 목록 보기
-  @GET("/s/api/party/user/{userId}/list")
-  Future<RoomList> findAllRoom({@Path('userId') required int userId});
+  @GET("/s/api/party/user/{userId}/notpaginglist")
+  Future<RoomList2> findAllRoom({@Path('userId') required int userId});
 
   //전체 파티방 목록보기(게임코드)
   @GET("/s/api/party/user/{userId}/list")
-  Future<RoomList> findAllRoomByGameCode(
-      {@Path('userId') required int userId,
-      @Query("gameCode") required int gameCode});
+  Future<RoomList2> findAllRoomByGameCode({@Path('userId') required int userId, @Query("gameCode") required int gameCode});
 
   //전체 파티방 목록보기(키워드)
   @GET("/s/api/party/user/{userId}/list")
-  Future<RoomList> findAllRoomByKeyword(
-      {@Path('userId') required int userId,
-      @Query("keyword") required String keyword});
+  Future<RoomList2> findAllRoomByKeyword({@Path('userId') required int userId, @Query("keyword") required String keyword});
 
   // 참가중인 파티방 목록 보기
   @GET("/s/api/party/user/{userId}/joins")
@@ -48,30 +43,22 @@ abstract class RoomRepository {
   //파티원 추방(방장)
   @PUT("/s/api/party/user/{userId}/kick/{roomId}")
   Future<KickUserParty> kickUser(
-      {@Path('userId') required int userId,
-      @Path('roomId') required int roomId,
-      @Body() required KickUserParty kickUserParty});
+      {@Path('userId') required int userId, @Path('roomId') required int roomId, @Body() required KickUserParty kickUserParty});
 
   //파티방 종료(방장)
   @PUT("/s/api/party/user/{userId}/end/{roomId}")
   Future<EndRoomParty> endRoom(
-      {@Path('userId') required int userId,
-      @Path('roomId') required int roomId,
-      @Body() required EndRoomParty endRoomParty});
+      {@Path('userId') required int userId, @Path('roomId') required int roomId, @Body() required EndRoomParty endRoomParty});
 
   //파티방 나가기
   @PUT("/s/api/party/user/{userId}/exit/{roomId}")
   Future<ExitRoomParty> exitRoom(
-      {@Path('userId') required int userId,
-      @Path('roomId') required int roomId,
-      @Body() required ExitRoomParty exitRoomParty});
+      {@Path('userId') required int userId, @Path('roomId') required int roomId, @Body() required ExitRoomParty exitRoomParty});
 
   //파티방 생성하기
   @POST("/s/api/party/user/{userId}/create/{gameCodeId}")
   Future<SingleRoom> createRoom(
-      {@Path('userId') required int userId,
-      @Path('gameCodeId') required int gameCodeId,
-      @Body() required GenerateRoomParty generateRoomParty});
+      {@Path('userId') required int userId, @Path('gameCodeId') required int gameCodeId, @Body() required GenerateRoomParty generateRoomParty});
 
   //파티방 생성하기 게임코드전달
   @GET("/s/api/party/user/{userId}/create")
@@ -80,7 +67,5 @@ abstract class RoomRepository {
   //파티방 참여하기
   @POST("/s/api/party/user/{userId}/join/{roomId}")
   Future<JoinRoomParty> joinRoom(
-      {@Path('userId') required int userId,
-      @Path('roomId') required int roomId,
-      @Body() required JoinRoomParty joinRoomParty});
+      {@Path('userId') required int userId, @Path('roomId') required int roomId, @Body() required JoinRoomParty joinRoomParty});
 }

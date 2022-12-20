@@ -6,8 +6,7 @@ import 'package:ggamf_front/domain/user/model/user.dart';
 
 import '../../../../utils/custom_intercepter.dart';
 
-final myRecruitmentPartyListViewModel = StateNotifierProvider.autoDispose<
-    MyRecruitmentPartyListViewModel, List<Room>>((ref) {
+final myRecruitmentPartyListViewModel = StateNotifierProvider.autoDispose<MyRecruitmentPartyListViewModel, List<Room>>((ref) {
   return MyRecruitmentPartyListViewModel([])..init();
 });
 
@@ -23,12 +22,7 @@ class MyRecruitmentPartyListViewModel extends StateNotifier<List<Room>> {
     repo.findByMyIdRoom(userId: UserSession.user.id).then((value) {
       value.data['rooms']?.forEach((_room) {
         myRecruitmentPartyList.add(
-          Room(
-              id: _room.id,
-              gameName: _room.gameName,
-              nickName: _room.nickName,
-              roomName: _room.roomName,
-              totalPeople: _room.totalPeople ?? 0),
+          Room(id: _room.id, gameName: _room.gameName, nickName: _room.nickName, roomName: _room.roomName, totalPeople: _room.totalPeople ?? 0),
         );
       });
       state = myRecruitmentPartyList;

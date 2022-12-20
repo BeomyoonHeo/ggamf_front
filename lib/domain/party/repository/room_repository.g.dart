@@ -13,7 +13,7 @@ class _RoomRepository implements RoomRepository {
     this._dio, {
     this.baseUrl,
   }) {
-    baseUrl ??= 'http://211.193.110.20:8080';
+    baseUrl ??= 'http://192.168.0.187:8080';
   }
 
   final Dio _dio;
@@ -70,30 +70,30 @@ class _RoomRepository implements RoomRepository {
   }
 
   @override
-  Future<RoomList> findAllRoom({required userId}) async {
+  Future<RoomList2> findAllRoom({required userId}) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    final _result =
-        await _dio.fetch<Map<String, dynamic>>(_setStreamType<RoomList>(Options(
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<RoomList2>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
     )
             .compose(
               _dio.options,
-              '/s/api/party/user/${userId}/list',
+              '/s/api/party/user/${userId}/notpaginglist',
               queryParameters: queryParameters,
               data: _data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = RoomList.fromJson(_result.data!);
+    final value = RoomList2.fromJson(_result.data!);
     return value;
   }
 
   @override
-  Future<RoomList> findAllRoomByGameCode({
+  Future<RoomList2> findAllRoomByGameCode({
     required userId,
     required gameCode,
   }) async {
@@ -101,8 +101,8 @@ class _RoomRepository implements RoomRepository {
     final queryParameters = <String, dynamic>{r'gameCode': gameCode};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    final _result =
-        await _dio.fetch<Map<String, dynamic>>(_setStreamType<RoomList>(Options(
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<RoomList2>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -114,12 +114,12 @@ class _RoomRepository implements RoomRepository {
               data: _data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = RoomList.fromJson(_result.data!);
+    final value = RoomList2.fromJson(_result.data!);
     return value;
   }
 
   @override
-  Future<RoomList> findAllRoomByKeyword({
+  Future<RoomList2> findAllRoomByKeyword({
     required userId,
     required keyword,
   }) async {
@@ -127,8 +127,8 @@ class _RoomRepository implements RoomRepository {
     final queryParameters = <String, dynamic>{r'keyword': keyword};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    final _result =
-        await _dio.fetch<Map<String, dynamic>>(_setStreamType<RoomList>(Options(
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<RoomList2>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -140,7 +140,7 @@ class _RoomRepository implements RoomRepository {
               data: _data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = RoomList.fromJson(_result.data!);
+    final value = RoomList2.fromJson(_result.data!);
     return value;
   }
 

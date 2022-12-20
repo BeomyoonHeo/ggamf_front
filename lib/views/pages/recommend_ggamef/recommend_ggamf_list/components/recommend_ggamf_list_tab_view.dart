@@ -214,7 +214,7 @@ class _RecommendGgamfListTabViewState extends State<RecommendGgamfListTabView> w
                               Navigator.pop(context);
                             }
 
-                            _showAlertDialog(context, '껨프 요청 무시', '해당 껨프요청을 무시하시겠습니까?', function);
+                            _showAlertDialog(context, '껨프 요청 삭제', '해당 껨프요청을 삭제하시겠습니까?', function);
                           },
                           icon: const Icon(CupertinoIcons.xmark),
                         ),
