@@ -7,7 +7,9 @@ import 'package:ggamf_front/provider/chats_page_provider.dart';
 
 import '../../../../utils/custom_intercepter.dart';
 
-final joiningPartyListViewModel = StateNotifierProvider.autoDispose<JoiningPartyListViewModel, List<Room>>((ref) {
+final joiningPartyListViewModel =
+    StateNotifierProvider.autoDispose<JoiningPartyListViewModel, List<Room>>(
+        (ref) {
   return JoiningPartyListViewModel([], ref)..init();
 });
 
