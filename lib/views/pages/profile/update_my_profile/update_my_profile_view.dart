@@ -4,10 +4,12 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:ggamf_front/controller/user/my_profile_controller.dart';
 import 'package:ggamf_front/domain/user/model/profile_user.dart';
 import 'package:ggamf_front/utils/validator_util.dart';
 import 'package:ggamf_front/views/pages/join_user/components/input_phonenumber_widget.dart';
+import 'package:ggamf_front/views/pages/profile/dummy_profile/dummy_profile_view.dart';
 import 'package:ggamf_front/views/pages/profile/my_profile/my_profile_view_model.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -78,16 +80,6 @@ class _UpdateMyProfileViewState extends ConsumerState<UpdateMyProfileView> {
               _enterPassword(mpc),
               const SizedBox(height: 20),
               _enterEmail(mpc),
-              const SizedBox(height: 20),
-              Container(
-                  padding: const EdgeInsets.all(5),
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                    border: Border.all(width: 1),
-                    borderRadius: BorderRadius.circular(5),
-                    color: Colors.white,
-                  ),
-                  child: InputPhoneNumberWidget(controller: mpc.phoneNumberController)),
               const SizedBox(height: 20),
               _enterIntroduce(mpc),
               const SizedBox(height: 20),
@@ -168,6 +160,7 @@ class _UpdateMyProfileViewState extends ConsumerState<UpdateMyProfileView> {
       ),
       child: TextFormField(
         controller: mpc.passwordController,
+        obscureText: true,
         decoration: const InputDecoration(
           border: InputBorder.none,
           hintText: "비밀번호를 입력하세요",
@@ -193,7 +186,10 @@ class _UpdateMyProfileViewState extends ConsumerState<UpdateMyProfileView> {
   Widget _updateProfileButton(MyProfileController mpc) {
     return ElevatedButton(
       onPressed: () async {
-        mpc.updateMyProfile();
+        //mpc.updateMyProfile();
+        //Navigator.pop(context);
+        Navigator.push(context, MaterialPageRoute(builder: (_) => DummyProfileView()));
+        Fluttertoast.showToast(msg: "수정완료");
       },
       style: ElevatedButton.styleFrom(
         foregroundColor: Colors.white,

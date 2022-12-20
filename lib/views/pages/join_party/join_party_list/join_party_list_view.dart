@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:ggamf_front/controller/party/party_controller.dart';
 import 'package:ggamf_front/domain/party/model/room.dart';
 import 'package:ggamf_front/utils/validator_util.dart';
 import 'package:ggamf_front/views/pages/chatting/chatting_view.dart';
@@ -42,6 +43,7 @@ class _JoinPartyListViewState extends State<JoinPartyListView> {
   Widget _sliverAppbar() {
     return Consumer(builder: (BuildContext context, WidgetRef ref, Widget? child) {
       final jplv = ref.watch(joinPartyListViewModel);
+      final pc = ref.read(partyController);
       return CustomScrollView(
         slivers: [
           SliverAppBar(
@@ -61,14 +63,14 @@ class _JoinPartyListViewState extends State<JoinPartyListView> {
             ),
           ),
           SliverList(
-            delegate: _partyWindow(jplv),
+            delegate: _partyWindow(jplv, pc),
           ),
         ],
       );
     });
   }
 
-  SliverChildBuilderDelegate _partyWindow(List<Room> jplv) {
+  SliverChildBuilderDelegate _partyWindow(List<Room> jplv, pc) {
     return SliverChildBuilderDelegate(
       (context, index) {
         return Padding(
@@ -86,6 +88,7 @@ class _JoinPartyListViewState extends State<JoinPartyListView> {
                 child: InkWell(
                   onTap: () {
                     //Navigator.push(context, MaterialPageRoute(builder: (_) => ));
+                    pc.enterParty(roomId: jplv[index].id);
                   },
                   child: Row(
                     children: [
@@ -107,7 +110,13 @@ class _JoinPartyListViewState extends State<JoinPartyListView> {
                             Row(
                               children: [
                                 Icon(Icons.person),
-                                Text("${jplv[index].totalPeople}"),
+                                Row(
+                                  children: [
+                                    Text("${jplv[index].count}"),
+                                    Text(("/")),
+                                    Text("${jplv[index].totalPeople}"),
+                                  ],
+                                ),
                               ],
                             )
                           ],

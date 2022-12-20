@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:ggamf_front/controller/user/ggamf_controller.dart';
 import 'package:ggamf_front/controller/user/opponent_profile_controller.dart';
 import 'package:ggamf_front/domain/user/model/get_profile_user.dart';
@@ -286,7 +287,10 @@ class _OpponentProfileViewState extends ConsumerState<OpponentProfileView> {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pop(context);
+                    Fluttertoast.showToast(msg: "별점주기 완료");
+                  },
                   child: Text("별점주기", style: TextStyle(fontSize: 20)),
                   style: ElevatedButton.styleFrom(
                     foregroundColor: Colors.white,
@@ -385,7 +389,10 @@ class _OpponentProfileViewState extends ConsumerState<OpponentProfileView> {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.pop(context);
+                      Fluttertoast.showToast(msg: "신고완료");
+                    },
                     child: Text("리포트하기", style: TextStyle(fontSize: 20)),
                     style: ElevatedButton.styleFrom(
                       foregroundColor: Colors.white,

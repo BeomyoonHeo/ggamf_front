@@ -30,14 +30,14 @@ class _WithdrawalViewState extends ConsumerState<WithdrawalView> {
               style: TextStyle(
                 fontSize: 32,
                 fontWeight: FontWeight.bold,
-                decoration: TextDecoration.underline,
+                fontStyle: FontStyle.italic,
               ),
             ),
             SizedBox(height: 20),
             Container(
               padding: EdgeInsets.all(10),
               decoration: BoxDecoration(
-                border: Border.all(width: 1),
+                border: Border.all(width: 1, color: Color.fromRGBO(35, 204, 81, 1)),
               ),
               child: Column(
                 children: [
@@ -64,10 +64,9 @@ class _WithdrawalViewState extends ConsumerState<WithdrawalView> {
             SizedBox(height: 20),
             ElevatedButton(
               style: ElevatedButton.styleFrom(
-                foregroundColor: Colors.black,
-                minimumSize: Size(150, 50),
-                backgroundColor: Colors.white,
-                side: BorderSide(width: 1),
+                foregroundColor: Colors.white,
+                backgroundColor: const Color.fromRGBO(35, 204, 81, 1),
+                minimumSize: const Size(150, 50),
               ),
               onPressed: () {
                 showDialog(
@@ -99,13 +98,10 @@ class _WithdrawalViewState extends ConsumerState<WithdrawalView> {
                                   },
                                   child: Text(
                                     "예",
-                                    style: TextStyle(color: Colors.black),
                                   ),
                                   style: ElevatedButton.styleFrom(
-                                    backgroundColor: Colors.white,
-                                    side: BorderSide(
-                                      width: 1,
-                                    ),
+                                    foregroundColor: Colors.white,
+                                    backgroundColor: const Color.fromRGBO(35, 204, 81, 1),
                                   ),
                                 ),
                               ),
@@ -118,13 +114,10 @@ class _WithdrawalViewState extends ConsumerState<WithdrawalView> {
                                   },
                                   child: Text(
                                     "아니오",
-                                    style: TextStyle(color: Colors.black),
                                   ),
                                   style: ElevatedButton.styleFrom(
-                                    backgroundColor: Colors.white,
-                                    side: BorderSide(
-                                      width: 1,
-                                    ),
+                                    foregroundColor: Colors.white,
+                                    backgroundColor: const Color.fromRGBO(35, 204, 81, 1),
                                   ),
                                 ),
                               )
