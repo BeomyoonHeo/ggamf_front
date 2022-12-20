@@ -107,7 +107,13 @@ class _JoinPartyListViewState extends State<JoinPartyListView> {
                             Row(
                               children: [
                                 Icon(Icons.person),
-                                Text("${jplv[index].totalPeople}"),
+                                Row(
+                                  children: [
+                                    Text("${jplv[index].count}"),
+                                    Text(("/")),
+                                    Text("${jplv[index].totalPeople}"),
+                                  ],
+                                ),
                               ],
                             )
                           ],
