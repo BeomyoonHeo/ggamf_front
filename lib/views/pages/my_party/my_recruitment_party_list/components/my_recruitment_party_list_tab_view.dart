@@ -56,6 +56,7 @@ class _MyRecruitmentPartyListTabViewState extends ConsumerState<MyRecruitmentPar
   }
 
   Widget _buildJoiningPartyListView(List<Room> jplvm, WidgetRef ref) {
+    final pc = ref.read(partyController);
     return jplvm.isEmpty
         ? Center(
             child: Text('파티창이 없습니다.'),
@@ -68,7 +69,9 @@ class _MyRecruitmentPartyListTabViewState extends ConsumerState<MyRecruitmentPar
               width: double.infinity,
               height: 150,
               child: InkWell(
-                onTap: () {},
+                onTap: () {
+                  pc.enterParty(roomId: jplvm[index].id);
+                },
                 child: Row(
                   children: [
                     Expanded(

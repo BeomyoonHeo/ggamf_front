@@ -1,14 +1,9 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:ggamf_front/controller/party/create_party_controller.dart';
 import 'package:ggamf_front/domain/party/model/game_code.dart';
 import 'package:ggamf_front/utils/validator_util.dart';
-import 'package:ggamf_front/views/pages/chatting/chatting_view.dart';
 import 'package:ggamf_front/views/pages/my_party/create_party/create_party_view_model.dart';
-import 'package:ggamf_front/views/pages/my_party/my_recruitment_party_list/my_recruitment_party_list_view.dart';
 
 class CreatePartyView extends ConsumerStatefulWidget {
   const CreatePartyView({Key? key}) : super(key: key);
@@ -19,12 +14,31 @@ class CreatePartyView extends ConsumerStatefulWidget {
 
 class _CreatePartyViewState extends ConsumerState<CreatePartyView> {
   List<DropdownMenuItem> _valueList = [];
-  final Map<String, dynamic> _keyList = {'게임선택': 0, '리그 오브 레전드': 1, '오버워치': 2, '로스트아크': 3, '발로란트': 4, '기타': 5};
+  final Map<String, dynamic> _keyList = {
+    '게임선택': 0,
+    '리그 오브 레전드': 1,
+    '오버워치': 2,
+    '로스트아크': 3,
+    '발로란트': 4,
+    '기타': 5
+  };
   String _selectedValue = '게임선택';
-  List<String> _numList = ['인원선택', '2', '3', '4', '5', '6', '7', '8'];
+  final List<String> _numList = ['인원선택', '2', '3', '4', '5', '6', '7', '8'];
   var _selectedNum = '인원선택';
 
   bool _enableTextField = false;
+
+  @override
+  void initState() {
+    ref.refresh(createPartyController);
+    super.initState();
+  }
+
+  @override
+  void didChangeDependencies() {
+    ref.invalidate(createPartyController);
+    super.didChangeDependencies();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -34,8 +48,8 @@ class _CreatePartyViewState extends ConsumerState<CreatePartyView> {
     if (_valueList.isEmpty) {
       _keyList.forEach((key, value) {
         _valueList.add(DropdownMenuItem(
-          child: Text('${key}'),
           value: key,
+          child: Text('${key}'),
         ));
       });
     }
@@ -46,13 +60,13 @@ class _CreatePartyViewState extends ConsumerState<CreatePartyView> {
         child: ListView(
           children: [
             _title(),
-            SizedBox(height: 40),
+            const SizedBox(height: 40),
             _selectGame(cpc, cpv),
-            SizedBox(height: 40),
+            const SizedBox(height: 40),
             _partyName(cpc),
-            SizedBox(height: 40),
+            const SizedBox(height: 40),
             _partyNumber(cpc),
-            SizedBox(height: 70),
+            const SizedBox(height: 70),
             _recruitmentButton(cpc),
           ],
         ),
@@ -65,21 +79,21 @@ class _CreatePartyViewState extends ConsumerState<CreatePartyView> {
       onPressed: () {
         cpc.requestCreateRoom();
       },
-      child: Text(
-        "모집 시작!",
-        style: TextStyle(fontSize: 20),
-      ),
       style: ElevatedButton.styleFrom(
         foregroundColor: Colors.white,
-        backgroundColor: Color.fromRGBO(35, 204, 81, 1),
+        backgroundColor: const Color.fromRGBO(35, 204, 81, 1),
         minimumSize: const Size(150, 50),
+      ),
+      child: const Text(
+        "모집 시작!",
+        style: TextStyle(fontSize: 20),
       ),
     );
   }
 
   Container _partyName(CreatePartyController cpc) {
     return Container(
-      padding: EdgeInsets.all(20),
+      padding: const EdgeInsets.all(20),
       width: double.infinity,
       height: 100,
       decoration: BoxDecoration(
@@ -90,7 +104,7 @@ class _CreatePartyViewState extends ConsumerState<CreatePartyView> {
       child: TextFormField(
         controller: cpc.partyNameController,
         maxLength: 30,
-        decoration: InputDecoration(
+        decoration: const InputDecoration(
           hintText: '파티 방 제목을 입력하세요',
         ),
       ),
@@ -142,7 +156,7 @@ class _CreatePartyViewState extends ConsumerState<CreatePartyView> {
             height: 40,
             child: TextFormField(
               controller: cpc.selectGameController,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 hintText: '기타 선택시 입력창',
               ),
               enabled: _enableTextField,
@@ -155,7 +169,7 @@ class _CreatePartyViewState extends ConsumerState<CreatePartyView> {
 
   Widget _partyNumber(CreatePartyController cpc) {
     return Container(
-      padding: EdgeInsets.all(10),
+      padding: const EdgeInsets.all(10),
       height: 80,
       width: double.infinity,
       decoration: BoxDecoration(
@@ -170,8 +184,8 @@ class _CreatePartyViewState extends ConsumerState<CreatePartyView> {
             value: _selectedNum,
             items: _numList.map((String item) {
               return DropdownMenuItem<String>(
-                child: Text('$item'),
                 value: item,
+                child: Text('${item}'),
               );
             }).toList(),
             onChanged: (dynamic value) {
@@ -191,7 +205,7 @@ class _CreatePartyViewState extends ConsumerState<CreatePartyView> {
             height: 40,
             child: TextFormField(
               controller: cpc.totalPeopleController,
-              decoration: InputDecoration(),
+              decoration: const InputDecoration(),
               enabled: _enableTextField,
             ),
           ),
@@ -204,19 +218,23 @@ class _CreatePartyViewState extends ConsumerState<CreatePartyView> {
     return Container(
       width: double.infinity,
       height: 100,
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         borderRadius: BorderRadius.only(
           bottomLeft: Radius.circular(30),
           bottomRight: Radius.circular(30),
         ),
         gradient: LinearGradient(
-            colors: [Color.fromRGBO(35, 204, 81, 0.8), Color.fromRGBO(35, 204, 81, 1)],
+            colors: [
+              Color.fromRGBO(35, 204, 81, 0.8),
+              Color.fromRGBO(35, 204, 81, 1)
+            ],
             begin: Alignment.centerLeft,
             end: Alignment.centerRight,
             tileMode: TileMode.clamp),
       ),
-      child: Text("Create the Party", style: TextStyle(fontSize: 30, color: Colors.white)),
       alignment: Alignment.center,
+      child: const Text("Create the Party",
+          style: TextStyle(fontSize: 30, color: Colors.white)),
     );
   }
 
@@ -225,7 +243,7 @@ class _CreatePartyViewState extends ConsumerState<CreatePartyView> {
       automaticallyImplyLeading: false,
       backgroundColor: Colors.white,
       title: Row(
-        children: [
+        children: const [
           BackButton(color: Colors.black),
           Text(
             "파티 생성",

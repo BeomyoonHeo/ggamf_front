@@ -69,7 +69,7 @@ class _ChatPageState extends ConsumerState<ChatPage> {
               ),
               const SizedBox(width: 10),
               IconButton(onPressed: () {}, icon: const Icon(Icons.exit_to_app_outlined, color: Colors.black)),
-              const SizedBox(width: 10),
+
               // InkWell(
               //   onTap: () {},
               //   child: Container(
@@ -230,6 +230,28 @@ class _ChatPageState extends ConsumerState<ChatPage> {
     List<Ggamf>? ggafList,
     required Function function,
   }) {
+    List<Widget> ggamfListWidget = [];
+    Map<int, bool> checkList = {};
+    if (ggafList != null && ggafList.isNotEmpty) {
+      for (var ggamf in ggafList) {
+        checkList[ggamf.userId] = false;
+        ggamfListWidget.add(
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              Checkbox(
+                  value: checkList[ggamf.userId],
+                  onChanged: (value) {
+                    setState(() {
+                      checkList[ggamf.userId] = !checkList[ggamf.userId]!;
+                    });
+                  }),
+              Text('${ggamf.nickname}'),
+            ],
+          ),
+        );
+      }
+    }
     return showDialog(
         context: context,
         builder: (context) {
@@ -239,19 +261,7 @@ class _ChatPageState extends ConsumerState<ChatPage> {
             content: Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                ggafList == null || ggafList.isEmpty
-                    ? Text('${contentText}')
-                    : ggafList.map((_ggmaf) {
-                        return Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Checkbox(value: false, onChanged: (_bool) {}),
-                            Text('${_ggmaf.nickname}'),
-                          ],
-                        );
-                      }) as Row,
-              ],
+              children: ggamfListWidget.isEmpty ? [Text('${contentText}')] : ggamfListWidget,
             ),
             actions: [
               ElevatedButton(
