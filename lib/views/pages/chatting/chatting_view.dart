@@ -52,7 +52,14 @@ class _ChatPageState extends ConsumerState<ChatPage> {
         return Scaffold(
           appBar: AppBar(
             automaticallyImplyLeading: false,
-            title: const Text('채팅'),
+            title: Row(
+              children: const [
+                BackButton(
+                  color: Colors.black,
+                ),
+                Text('채팅'),
+              ],
+            ),
             actions: [
               InkWell(
                 onTap: () {

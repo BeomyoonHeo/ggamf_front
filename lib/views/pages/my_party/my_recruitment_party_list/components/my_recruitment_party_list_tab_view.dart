@@ -81,7 +81,15 @@ class _MyRecruitmentPartyListTabViewState extends ConsumerState<MyRecruitmentPar
                         children: [
                           //Text("방 제목 : 롤 골드 자랭하실분 구합니다"),
                           Text(jplvm[index].roomName, style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-                          Text(jplvm[index].nickName!),
+                          Row(
+                            children: [
+                              Text("${jplvm[index].gameName}"),
+                              SizedBox(width: 5),
+                              Text("·"),
+                              SizedBox(width: 5),
+                              Text("${jplvm[index].nickName}"),
+                            ],
+                          ),
                           Row(
                             children: [
                               const Icon(Icons.person),
@@ -135,7 +143,15 @@ class _MyRecruitmentPartyListTabViewState extends ConsumerState<MyRecruitmentPar
                         children: [
                           //Text("방 제목 : 롤 골드 자랭하실분 구합니다"),
                           Text(" ${mrplv[index].roomName}", style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-                          Text("${mrplv[index].nickName}"),
+                          Row(
+                            children: [
+                              Text("${mrplv[index].gameName}"),
+                              SizedBox(width: 5),
+                              Text("·"),
+                              SizedBox(width: 5),
+                              Text("${mrplv[index].nickName}"),
+                            ],
+                          ),
                           Row(
                             children: [
                               const Icon(Icons.person),
