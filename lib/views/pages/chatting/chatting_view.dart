@@ -24,6 +24,7 @@ class _ChatPageState extends ConsumerState<ChatPage> {
 
   late GlobalKey<FormState> _messageFormState;
   late final _pageProvider = ref.read(chatPageProvider.notifier);
+  late AutoDisposeStateNotifierProvider<GgamfProvider, List<Ggamf>> _ggmafProvider;
   late ScrollController _messageListViewController;
 
   @override
@@ -31,6 +32,7 @@ class _ChatPageState extends ConsumerState<ChatPage> {
     Future.delayed(Duration.zero, () async {
       await _pageProvider.listenToMessages();
     });
+    _ggmafProvider = ref.read(ggamfProvider.notifier);
     super.initState();
     _messageFormState = GlobalKey<FormState>();
     _messageListViewController = ScrollController();
@@ -45,7 +47,6 @@ class _ChatPageState extends ConsumerState<ChatPage> {
 
   Widget _buildUI() {
     final _pageProviderWatcher = ref.watch(chatPageProvider);
-    final _ggmafProvider = ref.read(ggamfProvider.notifier);
     _messageListViewController.notifyListeners();
     return Builder(
       builder: (context) {
@@ -65,10 +66,8 @@ class _ChatPageState extends ConsumerState<ChatPage> {
                 onTap: () {
                   _showAlertDialog(
                       context: context,
-                      titleText: '내 껨프 초대하기',
-                      contentText: '',
-                      ggafList: _ggmafProvider.myGgamfList,
-                      function: () {});
+                      titleText: '내 껨프 초대',
+                      ggafList: _ggmafProvider.myGgamfList);
                 },
                 child: Container(
                   padding: EdgeInsets.symmetric(horizontal: 5),
@@ -84,18 +83,6 @@ class _ChatPageState extends ConsumerState<ChatPage> {
                   onPressed: () {},
                   icon: const Icon(Icons.exit_to_app_outlined,
                       color: Colors.black)),
-
-              // InkWell(
-              //   onTap: () {},
-              //   child: Container(
-              //     padding: EdgeInsets.symmetric(horizontal: 5),
-              //     alignment: Alignment.center,
-              //     child: Text(
-              //       '파티 나가기',
-              //       style: TextStyle(color: Colors.black),
-              //     ),
-              //   ),
-              // ),
             ],
           ),
           body: SingleChildScrollView(
@@ -249,28 +236,29 @@ class _ChatPageState extends ConsumerState<ChatPage> {
     required String titleText,
     String? contentText,
     List<Ggamf>? ggafList,
-    required Function function,
   }) {
     List<Widget> ggamfListWidget = [];
     Map<int, bool> checkList = {};
     if (ggafList != null && ggafList.isNotEmpty) {
       for (var ggamf in ggafList) {
         checkList[ggamf.userId] = false;
-        ggamfListWidget.add(
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              Checkbox(
-                  value: checkList[ggamf.userId],
-                  onChanged: (value) {
-                    setState(() {
-                      checkList[ggamf.userId] = !checkList[ggamf.userId]!;
-                    });
-                  }),
-              Text('${ggamf.nickname}'),
-            ],
-          ),
-        );
+        ggamfListWidget.add(StatefulBuilder(
+          builder: (context, setState) {
+            return Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Checkbox(
+                    value: checkList[ggamf.userId],
+                    onChanged: (value) {
+                      setState(() {
+                        checkList[ggamf.userId] = !checkList[ggamf.userId]!;
+                      });
+                    }),
+                Text('${ggamf.nickname}'),
+              ],
+            );
+          },
+        ));
       }
     }
     return showDialog(
@@ -300,7 +288,7 @@ class _ChatPageState extends ConsumerState<ChatPage> {
               ),
               ElevatedButton(
                 onPressed: () {
-                  function();
+                  _ggmafProvider
                 },
                 style: ElevatedButton.styleFrom(
                   foregroundColor: Colors.white,
