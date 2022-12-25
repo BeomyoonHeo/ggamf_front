@@ -8,7 +8,9 @@ import 'package:ggamf_front/views/pages/recommend_ggamef/recommend_ggamf_list/re
 
 import '../utils/validator_util.dart';
 
-final ggamfProvider = StateNotifierProvider.autoDispose<GgamfProvider, List<Ggamf>>((ref) => GgamfProvider([], ref)..showMyGgamf());
+final ggamfProvider =
+    StateNotifierProvider.autoDispose<GgamfProvider, List<Ggamf>>(
+        (ref) => GgamfProvider([], ref)..showMyGgamf());
 
 class GgamfProvider extends StateNotifier<List<Ggamf>> {
   final Ref _ref;
@@ -18,17 +20,22 @@ class GgamfProvider extends StateNotifier<List<Ggamf>> {
     ..interceptors.add(SignedInterceptor()));
 
   List<Ggamf> myGgamfList = [];
-  Map<int, Ggamf> myGgamIdList = {};
-  Map<int, Ggamf> sendGgamfIdList = {};
+  Map<int, Ggamf> _myGgamIdList = {};
+  Map<int, Ggamf> _sendGgamfIdList = {};
+
+  Map<int, Ggamf> get myGgamfIdList => _myGgamIdList;
+
+  Map<int, Ggamf> get sendGgamfIdList => _sendGgamfIdList;
 
   void addMyGgamf(Ggamf _ggamf) {
-    myGgamIdList[_ggamf.userId] = _ggamf;
+    _myGgamIdList[_ggamf.userId] = _ggamf;
     state = [...state, _ggamf];
   }
 
   void deleteGgamf(int id) {
     state = state.where((_ggamf) {
       if (_ggamf.userId != id) {
+        _myGgamIdList.remove(_ggamf.userId);
         return true;
       }
       return false;
@@ -45,7 +52,7 @@ class GgamfProvider extends StateNotifier<List<Ggamf>> {
         if (value.data != null) {
           logger.d('내껨프 벨류 확인 : ${value.data}');
           value.data['friendList']?.forEach((_ggamf) {
-            myGgamIdList[_ggamf.userId] = _ggamf;
+            _myGgamIdList[_ggamf.userId] = _ggamf;
             myGgamfList.add(
               Ggamf(
                 userId: _ggamf.userId,

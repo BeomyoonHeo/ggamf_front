@@ -43,7 +43,7 @@ class ChatPageProvider extends StateNotifier<List<ChatMessage>> {
 
   @override
   void dispose() {
-    _messagesStream?.cancel();
+    _messagesStream.cancel();
     super.dispose();
   }
 
